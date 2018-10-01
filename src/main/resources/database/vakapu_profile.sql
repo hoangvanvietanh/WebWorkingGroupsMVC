@@ -32,7 +32,7 @@ CREATE TABLE `profile` (
   `descripe` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`email`),
   CONSTRAINT `profile_fk1` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
