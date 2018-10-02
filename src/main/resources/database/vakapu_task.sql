@@ -16,35 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `profile`
+-- Table structure for table `task`
 --
 
-DROP TABLE IF EXISTS `profile`;
+DROP TABLE IF EXISTS `task`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `profile` (
-  `email` varchar(150) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  `summary` varchar(1000) DEFAULT NULL,
-  `skill` varchar(1000) DEFAULT NULL,
-  `experience` varchar(3000) DEFAULT NULL,
-  `education` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`email`)
+CREATE TABLE `task` (
+  `idtask` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(145) DEFAULT NULL,
+  `completed` tinyint(1) DEFAULT '0',
+  `description` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`idtask`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `profile`
+-- Dumping data for table `task`
 --
 
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh','male','1998-07-10','0903026389','Ho Chi Minh','Nothing','Nothing','Nothing','Nothing');
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+LOCK TABLES `task` WRITE;
+/*!40000 ALTER TABLE `task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-02 13:41:01
+-- Dump completed on 2018-10-02 13:41:02

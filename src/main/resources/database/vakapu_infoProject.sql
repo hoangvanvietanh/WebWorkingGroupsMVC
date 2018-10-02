@@ -16,35 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `profile`
+-- Table structure for table `infoProject`
 --
 
-DROP TABLE IF EXISTS `profile`;
+DROP TABLE IF EXISTS `infoProject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `profile` (
-  `email` varchar(150) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  `summary` varchar(1000) DEFAULT NULL,
-  `skill` varchar(1000) DEFAULT NULL,
-  `experience` varchar(3000) DEFAULT NULL,
-  `education` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`email`)
+CREATE TABLE `infoProject` (
+  `idproject` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `owner` varchar(100) DEFAULT NULL,
+  `description` varchar(450) DEFAULT NULL,
+  `visibility` varchar(45) DEFAULT NULL,
+  `idtask` int(11) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idproject`),
+  KEY `fk_project_1_idx` (`idtask`),
+  CONSTRAINT `fk_infoProject_1` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_project_1` FOREIGN KEY (`idtask`) REFERENCES `task` (`idtask`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `profile`
+-- Dumping data for table `infoProject`
 --
 
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh','male','1998-07-10','0903026389','Ho Chi Minh','Nothing','Nothing','Nothing','Nothing');
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+LOCK TABLES `infoProject` WRITE;
+/*!40000 ALTER TABLE `infoProject` DISABLE KEYS */;
+/*!40000 ALTER TABLE `infoProject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

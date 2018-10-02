@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	5.7.23-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,18 +21,20 @@
 
 DROP TABLE IF EXISTS `profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile` (
-  `email` varchar(100) NOT NULL,
-  `name` varchar(145) DEFAULT NULL,
+  `email` varchar(150) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
   `gender` varchar(45) DEFAULT NULL,
-  `birthdate` date DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(245) DEFAULT NULL,
-  `descripe` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`email`),
-  CONSTRAINT `profile_fk1` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `address` varchar(300) DEFAULT NULL,
+  `summary` varchar(1000) DEFAULT NULL,
+  `skill` varchar(1000) DEFAULT NULL,
+  `experience` varchar(3000) DEFAULT NULL,
+  `education` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +43,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh','male','1998-07-10','0903026389','Ho Chi Minh','Nothing','Nothing','Nothing','Nothing');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-01 21:19:03
+-- Dump completed on 2018-10-02 13:41:01
