@@ -36,7 +36,8 @@
 						<div class="form-group">
 							<label for="reg_username" class="sr-only">Email address</label> <input
 								type="text" class="form-control" name="emailSignUp"
-								placeholder="Your email address" />
+								placeholder="Your email address" /> <input type="hidden"
+								name="${_csrf.parameterName}" value="${_csrf.token}" />
 						</div>
 					</div>
 					<button type="submit" class="login-button">
@@ -45,7 +46,8 @@
 				</div>
 				<div class="etc-login-form">
 					<p>
-						already have an account? <a href="<spring:url value='/login'/>">login here</a>
+						already have an account? <a href="<spring:url value='/login'/>">login
+							here</a>
 					</p>
 				</div>
 			</form>

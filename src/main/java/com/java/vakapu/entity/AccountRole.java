@@ -11,20 +11,16 @@ public class AccountRole {
 
 	@Id
 	@Column(name = "id")
-	private long id;
+	private int id;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "email")
+	@Column(name = "role")
 	private String role;
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getEmail() {
@@ -43,4 +39,7 @@ public class AccountRole {
 		this.role = role;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 }

@@ -27,22 +27,22 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 	private AccountRoleDao roleDao;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account account = accountDao.findByEmail(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Account account = accountDao.findByEmail(email);
 		if (account == null) {
-			throw new UsernameNotFoundException(username + " not found!");
+			throw new UsernameNotFoundException(email + " not found!");
 		}
 		
 		// TODO: get user permission here
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
-		List<AccountRole> roles = roleDao.findRoles(username);
-		
-		for (AccountRole accountRole : roles) {
-			GrantedAuthority authority = new SimpleGrantedAuthority(accountRole.getRole());
-			
-			authorities.add(authority);
-		}
+//		List<AccountRole> roles = roleDao.findRoles(email);
+//		
+//		for (AccountRole accountRole : roles) {
+//			GrantedAuthority authority = new SimpleGrantedAuthority(accountRole.getRole());
+//			
+//			authorities.add(authority);
+//		}
 		
 		UserDetails user = new User(account.getEmail(),
 				account.getPassword(), authorities);

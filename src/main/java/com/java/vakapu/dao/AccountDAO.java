@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,20 +32,15 @@ public class AccountDAO {
 	public Account findByEmail(String email)
 	{
 		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		String sql="from account a where a.email=:email ";
-		Query<Account> query=session.createQuery(sql);
-		query.setParameter("email", email);
-		session.getTransaction().commit();
-		Account result= query.getSingleResult();
-		return result;
+		return session.find(Account.class, email);
 	}
 	
 	public Account createAccount(Account account)
 	{
-		Session session=(Session) sessionFactory.openSession().beginTransaction();
+		Session session= sessionFactory.openSession();
+		Transaction tran = session.beginTransaction();
 		session.save(account);
-		session.getTransaction().commit();
+		tran.commit();
 		session.close();
 		return account;
 	}

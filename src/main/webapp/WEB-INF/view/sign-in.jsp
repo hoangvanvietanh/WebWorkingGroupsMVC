@@ -25,35 +25,43 @@
 </head>
 <body>
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
-		<div class="logo">Register</div>
+		<div class="logo">Login</div>
 		<!-- Main Form -->
 		<div class="login-form-1">
-			<form id="register-form" class="text-left" action="create-password"
+			<c:url value="/handleLogin" var="loginUrl" />
+			<form id="login-form" class="text-left" action="${loginUrl}"
 				method="post">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 					<div class="login-group">
 						<div class="form-group">
-							<label for="reg_password" class="sr-only">Password</label> <input
-								type="password" class="form-control" name="pass"
-								placeholder="password">
+							<label for="email" class="sr-only">Email</label><br> <input
+								type="text" class="form-control" placeholder="email"
+								name="email" />
 						</div>
 						<div class="form-group">
-							<label for="reg_password_confirm" class="sr-only">Password
-								Confirm</label> <input type="password" class="form-control"
-								name="re_pass" placeholder="confirm password"> <input
-								type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
+							<label for="lg_password" class="sr-only">Password</label> <input
+								type="password" name="password" class="form-control"
+								placeholder="password" />
+						</div>
+						<div class="form-group login-group-checkbox">
+							<input type="checkbox" id="lg_remember" name="lg_remember">
+							<label for="lg_remember">remember</label> <input type="hidden"
+								name="${_csrf.parameterName}" value="${_csrf.token}" />
 						</div>
 					</div>
+
 					<button type="submit" class="login-button">
 						<i class="fa fa-chevron-right">Go</i>
 					</button>
 				</div>
 				<div class="etc-login-form">
 					<p>
-						already have an account? <a href="<spring:url value='/login'/>">login
-							here</a>
+						Forgot your password? <a href="#">click here</a>
+					</p>
+					<p>
+						New user? <a href="<spring:url value='/sign-up'/>">create new
+							account</a>
 					</p>
 				</div>
 			</form>
@@ -63,6 +71,7 @@
 
 	<br>
 	<div>${message}</div>
-	<script src="<spring:url value='/resources/js/app.js' />"></script>
+	<script
+		src="<spring:url value='/resources/js/jquery.validate.min.js' />"></script>
 </body>
 </html>
