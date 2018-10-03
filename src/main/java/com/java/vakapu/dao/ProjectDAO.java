@@ -7,9 +7,11 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.java.vakapu.entity.Account;
 import com.java.vakapu.entity.Project;
 
 @Repository
@@ -29,6 +31,16 @@ public class ProjectDAO {
 		return sessionFactory.openSession().find(Project.class, id);
 	}
 	
+	public Project findByEmail(String email) {
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		String sql="from account a where a.email=:email ";
+		Query<Project> query=session.createQuery(sql);
+		query.setParameter("email", email);
+		session.getTransaction().commit();
+		Project result= query.getSingleResult();
+		return result;
+	}
 	
 	public Project create(Project project) {
 		Session session = sessionFactory.openSession();
