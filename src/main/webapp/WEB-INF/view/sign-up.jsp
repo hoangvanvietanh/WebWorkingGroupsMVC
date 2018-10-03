@@ -35,8 +35,8 @@
 					<div class="login-group">
 						<div class="form-group">
 							<label for="reg_username" class="sr-only">Email address</label> <input
-								type="text" class="form-control" name="email"
-								placeholder="username" />
+								type="text" class="form-control" name="emailSignUp"
+								placeholder="Your email address" />
 						</div>
 					</div>
 					<button type="submit" class="login-button">
