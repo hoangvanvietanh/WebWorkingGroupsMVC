@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.vakapu.entity.Account;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.EmailServices;
 
 @Controller
 @RequestMapping("/test")
@@ -20,14 +21,18 @@ public class TestController {
 	@Autowired
 	private AccountServices ac;
 	
+	@Autowired
+	private EmailServices emai;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
-		List<Account> acs = ac.findAll();
-		for(Account a:acs)
-		{
-			System.out.println("email la:" + a.getEmail() + "status: " +a.getStatus() );
-		}
-		
+//		List<Account> acs = ac.findAll();
+//		emai.sendSimpleMessage();
+//		for(Account a:acs)
+//		{
+//			System.out.println("email la:" + a.getEmail() + "status: " +a.getStatus() );
+//		}
+//		
 		return "test";
 	}
 }
