@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project`
+-- Table structure for table `account_roles`
 --
 
-DROP TABLE IF EXISTS `project`;
+DROP TABLE IF EXISTS `account_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `project` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  `infoproject_idproject` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_project_1_idx` (`email`),
-  KEY `fk_project_1_idx1` (`idproject`),
-  KEY `FKpfud5s2t7bdu2xv1o2qsxq2fr` (`infoproject_idproject`),
-  CONSTRAINT `FKpfud5s2t7bdu2xv1o2qsxq2fr` FOREIGN KEY (`infoproject_idproject`) REFERENCES `infoProject` (`idproject`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `account_roles` (
+  `id` int(11) NOT NULL,
+  `email` varchar(145) DEFAULT NULL,
+  `role` varchar(145) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project`
+-- Dumping data for table `account_roles`
 --
 
-LOCK TABLES `project` WRITE;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+LOCK TABLES `account_roles` WRITE;
+/*!40000 ALTER TABLE `account_roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
