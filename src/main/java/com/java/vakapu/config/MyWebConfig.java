@@ -61,8 +61,8 @@ public class MyWebConfig implements WebMvcConfigurer {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/vakapu");
-		dataSource.setUsername("vakapu");
-		dataSource.setPassword("12345");
+		dataSource.setUsername("root");
+		dataSource.setPassword("374438");
 		return dataSource;
 	}
 
