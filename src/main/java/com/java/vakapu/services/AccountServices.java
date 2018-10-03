@@ -12,10 +12,30 @@ import com.java.vakapu.entity.Account;
 public class AccountServices {
 
 	@Autowired
-	AccountDAO account;
+	AccountDAO accountDAO;
 	
 	public List<Account> findAll()
 	{
-		return account.findAll();
+		return accountDAO.findAll();
+	}
+	
+	public Account findByEmail(String email)
+	{
+		return accountDAO.findEmail(email);
+	}
+	
+	public Account createAccount(Account account)
+	{
+		return accountDAO.create(account);
+	}
+	
+	public Account createDelete(Account account)
+	{
+		return accountDAO.delete(account);
+	}
+	
+	public Account updateAccount(Account account)
+	{
+		return accountDAO.update(account);
 	}
 }
