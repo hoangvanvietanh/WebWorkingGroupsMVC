@@ -1,7 +1,4 @@
-*.iml
-example/.idea
-.classpath
-.project
-*/.settings
-*/target
-/target/
+/.classpath
+/target
+/bin
+/.settings

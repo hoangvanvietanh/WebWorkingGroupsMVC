@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -24,7 +26,6 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement
 @ComponentScan({ "com.java.vakapu" })
 public class MyWebConfig implements WebMvcConfigurer {
-	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -61,8 +62,8 @@ public class MyWebConfig implements WebMvcConfigurer {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/vakapu");
-		dataSource.setUsername("vakapu");
-		dataSource.setPassword("12345");
+		dataSource.setUsername("root");
+		dataSource.setPassword("374438");
 		return dataSource;
 	}
 
@@ -71,5 +72,24 @@ public class MyWebConfig implements WebMvcConfigurer {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(s);
 		return txManager;
+	}
+	
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+	    mailSender.setHost("smtp.gmail.com");
+	   // mailSender.setPort(587);
+	     
+	    mailSender.setUsername("vakapuWeb@gmail.com");
+	    mailSender.setPassword("0903026389");
+	     
+	    Properties props = mailSender.getJavaMailProperties();
+	  //  props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+	    props.put("mail.smtp.port", "587");
+	    props.put("mail.smtp.starttls.enable", "true");
+	 //   props.put("mail.debug", "true");
+	     
+	    return mailSender;
 	}
 }
