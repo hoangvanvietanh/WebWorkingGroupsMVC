@@ -1,8 +1,11 @@
 package com.java.vakapu.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,16 +13,17 @@ import javax.persistence.Table;
 public class AccountRole {
 
 	@Id
+	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "role")
-	private String role;
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Account role;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -31,11 +35,11 @@ public class AccountRole {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public Account getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Account role) {
 		this.role = role;
 	}
 
