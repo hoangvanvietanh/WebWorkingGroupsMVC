@@ -6,7 +6,6 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +22,7 @@ public class ProfileDAO {
 	}
 	
 	public List<Profile> findAll(){
-		Session session = getSession();
-		TypedQuery<Profile> query = session.createQuery("FROM profile", Profile.class);
+		TypedQuery<Profile> query = getSession().createQuery("FROM Profile", Profile.class);
 		List<Profile> contact = query.getResultList();
 		return contact;
 	}
@@ -34,20 +32,17 @@ public class ProfileDAO {
 	}
 	
 	public Profile create(Profile profile) {
-		Session session = getSession();
-		session.save(profile);
+		getSession().save(profile);
 		return profile;
 	}
 	
 	public Profile delete(Profile profile) {
-		Session session = getSession();
-		session.delete(profile);
+		getSession().delete(profile);
 		return profile;
 	}
 	
 	public Profile update(Profile profile) {
-		Session session = getSession();
-		session.update(profile);
+		getSession().update(profile);
 		return profile;
 	}
 }

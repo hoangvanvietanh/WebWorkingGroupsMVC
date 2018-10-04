@@ -6,7 +6,6 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +22,7 @@ public class TaskDAO {
 	}
 	
 	public List<Task> findAll(){
-		Session session = getSession();
-		TypedQuery<Task> query = session.createQuery("FROM Task", Task.class);
+		TypedQuery<Task> query = getSession().createQuery("FROM Task", Task.class);
 		List<Task> contact = query.getResultList();
 		return contact;
 	}
@@ -34,20 +32,17 @@ public class TaskDAO {
 	}
 	
 	public Task create(Task task) {
-		Session session = getSession();
-		session.save(task);
+		getSession().save(task);
 		return task;
 	}
 	
 	public Task delete(Task task) {
-		Session session = getSession();
-		session.delete(task);
+		getSession().delete(task);
 		return task;
 	}
 	
 	public Task update(Task task) {
-		Session session = getSession();
-		session.update(task);
+		getSession().update(task);
 		return task;
 	}
 }

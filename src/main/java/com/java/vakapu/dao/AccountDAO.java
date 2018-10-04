@@ -23,8 +23,7 @@ public class AccountDAO {
 	
 	public List<Account> findAll()
 	{
-		Session session = getSession();
-		TypedQuery<Account> query = session.createQuery("FROM Account", Account.class);
+		TypedQuery<Account> query = getSession().createQuery("FROM Account", Account.class);
 		List<Account> account = query.getResultList();
 		return account;
 	}
@@ -36,21 +35,18 @@ public class AccountDAO {
 	
 	public Account createAccount(Account account)
 	{
-		Session session = getSession();
-		session.save(account);
+		getSession().save(account);
 		return account;
 	}
 	
 	public Account updateAccount(Account account)
 	{
-		Session session = getSession();
-		session.update(account);
+		getSession().update(account);
 		return account;
 	}
 	
 	public void deleteAccount(Account account)
 	{
-		Session session = getSession();
-		session.delete(account);
+		getSession().delete(account);
 	}
 }

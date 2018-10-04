@@ -23,8 +23,7 @@ public class InfoProjectDAO {
 	}
 	
 	public List<InfoProject> findAll(){
-		Session session = getSession();
-		TypedQuery<InfoProject> query = session.createQuery("FROM infoproject", InfoProject.class);
+		TypedQuery<InfoProject> query = getSession().createQuery("FROM infoproject", InfoProject.class);
 		List<InfoProject> contact = query.getResultList();
 		return contact;
 	}
@@ -34,20 +33,17 @@ public class InfoProjectDAO {
 	}
 	
 	public InfoProject create(InfoProject infoproject) {
-		Session session = getSession();
-		session.save(infoproject);
+		getSession().save(infoproject);
 		return infoproject;
 	}
 	
 	public InfoProject delete(InfoProject infoproject) {
-		Session session = getSession();
-		session.delete(infoproject);
+		getSession().delete(infoproject);
 		return infoproject;
 	}
 	
 	public InfoProject update(InfoProject infoproject) {
-		Session session = getSession();
-		session.update(infoproject);
+		getSession().update(infoproject);
 		return infoproject;
 	}
 	

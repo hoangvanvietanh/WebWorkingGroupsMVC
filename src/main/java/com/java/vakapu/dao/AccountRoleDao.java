@@ -22,16 +22,14 @@ public class AccountRoleDao {
 	}
 	
 	public List<AccountRole> findRoles(String email) {
-		Session session = getSession();
-		TypedQuery<AccountRole> query= session.createQuery("from account_roles", AccountRole.class);
+		TypedQuery<AccountRole> query= getSession().createQuery("from account_roles", AccountRole.class);
 		List<AccountRole> result = query.getResultList();
 		return result;
 	}
 	
 	public List<AccountRole> findByEmail(String email)
 	{
-		Session session = getSession();
-		TypedQuery<AccountRole> query=session.createQuery("from account_roles a where a.email=:email", AccountRole.class);
+		TypedQuery<AccountRole> query=getSession().createQuery("from account_roles a where a.email=:email", AccountRole.class);
 		List<AccountRole> result=query.getResultList();
 		return result;
 	}
@@ -44,15 +42,13 @@ public class AccountRoleDao {
 	}
 	public AccountRole updateRole(AccountRole role)
 	{
-		Session session = getSession();
-		session.update(role);
+		getSession().update(role);
 		return role;
 	}
 	
 	public void deleteRole(AccountRole role)
 	{
-		Session session = getSession();
-		session.delete(role);
+		getSession().delete(role);
 	}
 
 }
