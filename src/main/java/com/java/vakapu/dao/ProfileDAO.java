@@ -18,41 +18,36 @@ public class ProfileDAO {
 	@Autowired
 	public SessionFactory sessionFactory;
 	
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 	public List<Profile> findAll(){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		TypedQuery<Profile> query = session.createQuery("FROM profile", Profile.class);
 		List<Profile> contact = query.getResultList();
 		return contact;
 	}
 	
 	public Profile find(int id) {
-		return sessionFactory.openSession().find(Profile.class, id);
+		return getSession().find(Profile.class, id);
 	}
 	
 	public Profile create(Profile profile) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.save(profile);
-		tran.commit();
-		session.close();
 		return profile;
 	}
 	
 	public Profile delete(Profile profile) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.delete(profile);
-		tran.commit();
-		session.close();
 		return profile;
 	}
 	
 	public Profile update(Profile profile) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.update(profile);
-		tran.commit();
-		session.close();
 		return profile;
 	}
 }

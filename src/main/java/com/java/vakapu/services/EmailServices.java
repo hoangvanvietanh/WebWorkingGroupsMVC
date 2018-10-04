@@ -19,7 +19,7 @@ public class EmailServices {
 		message.setFrom("vakapuWeb@gmail.com");
 		message.setTo(email);
 		message.setSubject("Active your account");
-		message.setText("This is your code: "+ code);
+		message.setText( "http://localhost:8080/time-is-gold/sign-up/create-password" +"\n" + "This is your code: "+ code);
 		emailSender.send(message);
 		System.out.println("Sending text done!");
     }

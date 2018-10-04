@@ -18,41 +18,36 @@ public class TaskDAO {
 	@Autowired
 	public SessionFactory sessionFactory;
 	
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 	public List<Task> findAll(){
-		Session session = sessionFactory.openSession();
-		TypedQuery<Task> query = session.createQuery("FROM task", Task.class);
+		Session session = getSession();
+		TypedQuery<Task> query = session.createQuery("FROM Task", Task.class);
 		List<Task> contact = query.getResultList();
 		return contact;
 	}
 	
 	public Task find(int id) {
-		return sessionFactory.openSession().find(Task.class, id);
+		return getSession().find(Task.class, id);
 	}
 	
 	public Task create(Task task) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.save(task);
-		tran.commit();
-		session.close();
 		return task;
 	}
 	
 	public Task delete(Task task) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.delete(task);
-		tran.commit();
-		session.close();
 		return task;
 	}
 	
 	public Task update(Task task) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.update(task);
-		tran.commit();
-		session.close();
 		return task;
 	}
 }

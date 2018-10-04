@@ -21,14 +21,14 @@ import com.java.vakapu.entity.AccountRole;
 public class UserDetailsServiceImpl  implements UserDetailsService {
 
 	@Autowired
-	private AccountDAO accountDao;
+	private AccountServices accountServices;
 	
-	@Autowired
-	private AccountRoleDao roleDao;
+//	@Autowired
+//	private AccountRoleDao roleDao;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Account account = accountDao.findByEmail(email);
+		Account account = accountServices.findByEmail(email);
 		if (account == null) {
 			throw new UsernameNotFoundException(email + " not found!");
 		}

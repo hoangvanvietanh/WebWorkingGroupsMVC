@@ -20,21 +20,24 @@ public class ProjectDAO {
 	@Autowired
 	public SessionFactory sessionFactory;
 	
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 	public List<Project> findAll(){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		TypedQuery<Project> query = session.createQuery("FROM project", Project.class);
 		List<Project> contact = query.getResultList();
 		return contact;
 	}
 	
 	public Project find(int id) {
-		return sessionFactory.openSession().find(Project.class, id);
+		return getSession().find(Project.class, id);
 	}
 	
 	public Project findByEmail(String email) {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		String sql="from account a where a.email=:email ";
+		Session session = getSession();
+		String sql="from Account a where a.email=:email ";
 		Query<Project> query=session.createQuery(sql);
 		query.setParameter("email", email);
 		session.getTransaction().commit();
@@ -43,29 +46,20 @@ public class ProjectDAO {
 	}
 	
 	public Project create(Project project) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.save(project);
-		tran.commit();
-		session.close();
 		return project;
 	}
 	
 	public Project delete(Project project) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.delete(project);
-		tran.commit();
-		session.close();
 		return project;
 	}
 	
 	public Project update(Project project) {
-		Session session = sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.update(project);
-		tran.commit();
-		session.close();
 		return project;
 	}
 }

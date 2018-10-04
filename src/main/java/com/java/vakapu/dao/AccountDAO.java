@@ -6,8 +6,6 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,46 +17,40 @@ public class AccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 	public List<Account> findAll()
 	{
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = getSession();
 		TypedQuery<Account> query = session.createQuery("FROM Account", Account.class);
-		session.getTransaction().commit();
 		List<Account> account = query.getResultList();
 		return account;
 	}
 	
 	public Account findByEmail(String email)
 	{
-		Session session=sessionFactory.openSession();
-		return session.find(Account.class, email);
+		return getSession().find(Account.class, email);
 	}
 	
 	public Account createAccount(Account account)
 	{
-		Session session= sessionFactory.openSession();
-		Transaction tran = session.beginTransaction();
+		Session session = getSession();
 		session.save(account);
-		tran.commit();
-		session.close();
 		return account;
 	}
 	
 	public Account updateAccount(Account account)
 	{
-		Session session=(Session) sessionFactory.openSession().beginTransaction();
+		Session session = getSession();
 		session.update(account);
-		session.getTransaction().commit();
-		session.close();
 		return account;
 	}
 	
 	public void deleteAccount(Account account)
 	{
-		Session session=(Session) sessionFactory.openSession().beginTransaction();
+		Session session = getSession();
 		session.delete(account);
-		session.getTransaction().commit();
-		session.close();
 	}
 }

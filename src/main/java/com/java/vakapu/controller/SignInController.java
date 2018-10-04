@@ -27,6 +27,7 @@ public class SignInController {
 		if (authenticationTrustResolver.isAnonymous(authentication)) {
 			return "sign-in";
 		}
+		
 		return "redirect:/project";
 	}
 	
