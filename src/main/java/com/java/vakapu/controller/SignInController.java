@@ -28,7 +28,7 @@ public class SignInController {
 			return "sign-in";
 		}
 		
-		return "redirect:/project";
+		return "redirect:/profile";
 	}
 	
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)

@@ -20,7 +20,7 @@ public class Profile {
 	private String gender;
 	
 	@Column(name="birthdate")
-	private String birthday;
+	private String birthdate;
 	
 	@Column(name="phone")
 	private String phone;
@@ -39,6 +39,27 @@ public class Profile {
 	
 	@Column(name="education")
 	private String education;
+
+	@Column(name="avatar")
+	private String avartar;
+	
+	
+	
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getAvartar() {
+		return avartar;
+	}
+
+	public void setAvartar(String avartar) {
+		this.avartar = avartar;
+	}
 
 	public String getEmail() {
 		return email;
@@ -62,14 +83,6 @@ public class Profile {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
 	}
 
 	public String getPhone() {

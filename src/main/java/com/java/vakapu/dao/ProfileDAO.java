@@ -27,8 +27,8 @@ public class ProfileDAO {
 		return contact;
 	}
 	
-	public Profile find(int id) {
-		return getSession().find(Profile.class, id);
+	public Profile find(String email) {
+		return getSession().find(Profile.class, email);
 	}
 	
 	public Profile create(Profile profile) {
