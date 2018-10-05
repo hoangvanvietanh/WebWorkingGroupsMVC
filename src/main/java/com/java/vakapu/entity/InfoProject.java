@@ -48,20 +48,12 @@ public class InfoProject {
 	}
 
 	public String getStartDate() {
-<<<<<<< HEAD
-		return statDate;
-=======
 		return startDate;
->>>>>>> branch 'master' of https://github.com/hoangvanvietanh/WebWorkingGroupsMVC.git
 	}
-
-<<<<<<< HEAD
-	public void setStartDate(String statDate) {
-		this.statDate = statDate;
-=======
+	
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
->>>>>>> branch 'master' of https://github.com/hoangvanvietanh/WebWorkingGroupsMVC.git
+
 	}
 
 	public String getEndDate() {

@@ -1,5 +1,6 @@
 package com.java.vakapu.model;
 
+import com.java.vakapu.entity.InfoProject;
 import com.java.vakapu.entity.Profile;
 import com.java.vakapu.entity.Project;
 import com.java.vakapu.entity.Task;
@@ -14,7 +15,7 @@ public class TaskModel {
 	
 	private String description;
 	
-	private Project idproject;
+	private InfoProject idproject;
 	
 	public void fromTask(Task task)
 	{
@@ -22,7 +23,7 @@ public class TaskModel {
 		this.setName(task.getName());
 		this.setCompleted(task.getCompleted());
 		this.setDescription(task.getDescription());
-		this.setIdproject(task.getProject());
+		this.setIdproject(task.getIdProject());
 	}
 	
 	public Task toTask()
@@ -32,7 +33,7 @@ public class TaskModel {
 		task.setName(this.getName());
 		task.setCompleted(this.getCompleted());
 		task.setDescription(this.getDescription());
-		task.setProject(this.getIdproject());
+		task.setIdProject(this.getIdproject());
 		return task;
 	}
 
@@ -68,11 +69,11 @@ public class TaskModel {
 		this.description = description;
 	}
 
-	public Project getIdproject() {
+	public InfoProject getIdproject() {
 		return idproject;
 	}
 
-	public void setIdproject(Project idproject) {
+	public void setIdproject(InfoProject idproject) {
 		this.idproject = idproject;
 	}
 	

@@ -56,17 +56,5 @@ public class Project {
 	public void setInfoproject(InfoProject infoproject) {
 		this.infoproject = infoproject;
 	}
-<<<<<<< HEAD
-=======
-
-
-	
-	
-	
-
-	
->>>>>>> branch 'master' of https://github.com/hoangvanvietanh/WebWorkingGroupsMVC.git
-	
-	
 }
 
