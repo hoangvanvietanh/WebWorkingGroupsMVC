@@ -47,11 +47,11 @@ public class InfoProject {
 		this.name = name;
 	}
 
-	public String getStatDate() {
+	public String getStartDate() {
 		return statDate;
 	}
 
-	public void setStatDate(String statDate) {
+	public void setStartDate(String statDate) {
 		this.statDate = statDate;
 	}
 
