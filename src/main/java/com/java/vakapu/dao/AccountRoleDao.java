@@ -22,22 +22,23 @@ public class AccountRoleDao {
 	}
 	
 	public List<AccountRole> findAllRoles() {
-		TypedQuery<AccountRole> query= getSession().createQuery("select a.role from account_roles a", AccountRole.class);
+		TypedQuery<AccountRole> query= getSession().createQuery("FROM AccountRole", AccountRole.class);
 		List<AccountRole> result = query.getResultList();
 		return result;
 	}
 	
 	public List<AccountRole> findByEmail(String email)
 	{
-		TypedQuery<AccountRole> query=getSession().createQuery("from account_roles a where a.email=:email", AccountRole.class);
+		TypedQuery<AccountRole> query=getSession().createQuery("from AccountRole a where a.email=:email",AccountRole.class);
+		query.setParameter("email", email);
 		List<AccountRole> result=query.getResultList();
 		return result;
 	}
 	
 	public AccountRole createRole(AccountRole role)
 	{
-		int id=(int) getSession().save(role);
-		role.setId(id);
+		getSession().save(role);
+		
 		return role;
 	}
 	public AccountRole updateRole(AccountRole role)

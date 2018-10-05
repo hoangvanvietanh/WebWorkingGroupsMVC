@@ -26,19 +26,16 @@ public class AccountRoleService {
 		return roleDao.findByEmail(email);
 	}
 	
-	@Transactional
 	public AccountRole createRole(AccountRole role)
 	{
 		return roleDao.createRole(role);
 	}
 	
-	@Transactional
 	public AccountRole updateRole(AccountRole role)
 	{
 		return roleDao.updateRole(role);
 	}
 	
-	@Transactional
 	public void deleteRole(AccountRole role)
 	{
 		roleDao.deleteRole(role);
