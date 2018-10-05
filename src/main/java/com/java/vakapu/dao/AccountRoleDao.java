@@ -21,8 +21,8 @@ public class AccountRoleDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List<AccountRole> findRoles(String email) {
-		TypedQuery<AccountRole> query= getSession().createQuery("from account_roles", AccountRole.class);
+	public List<AccountRole> findAllRoles() {
+		TypedQuery<AccountRole> query= getSession().createQuery("select a.role from account_roles a", AccountRole.class);
 		List<AccountRole> result = query.getResultList();
 		return result;
 	}
