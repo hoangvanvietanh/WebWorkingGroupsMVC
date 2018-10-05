@@ -86,7 +86,7 @@ public class ProfileController {
 	public void downloadAvatar(HttpServletResponse response, @PathVariable("email") String email) throws IOException {
 
 		System.out.println("Email la:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + email);
-		Profile profile = profileServices.findByEmail(email);
+		Profile profile = profileServices.findByEmail(email+".com");
 		if (profile == null) {
 			return;
 		}

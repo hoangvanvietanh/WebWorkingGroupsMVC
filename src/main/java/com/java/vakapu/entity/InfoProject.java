@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="infoProject")
+@Table(name="infoproject")
 public class InfoProject {
 
 	@Id
@@ -17,7 +17,7 @@ public class InfoProject {
 	private String name;
 	
 	@Column(name="startDate")
-	private String statDate;
+	private String startDate;
 	
 	@Column(name="endDate")
 	private String endDate;
@@ -47,12 +47,12 @@ public class InfoProject {
 		this.name = name;
 	}
 
-	public String getStatDate() {
-		return statDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStatDate(String statDate) {
-		this.statDate = statDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
 	public String getEndDate() {

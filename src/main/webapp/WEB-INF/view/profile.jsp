@@ -32,10 +32,9 @@
 	float: right;
 	width: 200px;
 	height: 500px;
-	background: rgba(192,192,192,0.3);
+	background: rgba(192, 192, 192, 0.3);
 	padding-top: 15px;
 	overflow: auto;
-	
 }
 
 }
@@ -175,7 +174,7 @@ body {
 						<div style="float: left; padding-left: 100px">
 							<h4 class="blue">
 								<span style="padding-left: 50px"></span>
-								<button class="button" type="submit">{Save}</button>
+
 							</h4>
 
 							<div class="profile-user-info">
@@ -261,8 +260,15 @@ body {
 							</div>
 						</div>
 					</div>
+					<button class="button" type="submit">{Save}</button>
 				</form:form>
 			</div>
+		</div>
+		<div class="etc-login-form">
+			<p>
+				New Project? <a href="<spring:url value='/project'/>">create new
+					project</a>
+			</p>
 		</div>
 	</div>
 	<script type="text/javascript">

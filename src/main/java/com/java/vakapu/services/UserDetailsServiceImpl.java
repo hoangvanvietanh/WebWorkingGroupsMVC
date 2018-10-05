@@ -12,18 +12,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.java.vakapu.dao.AccountRoleDao;
+
 import com.java.vakapu.entity.Account;
-import com.java.vakapu.entity.AccountRole;
 
 @Service
 public class UserDetailsServiceImpl  implements UserDetailsService {
 
 	@Autowired
 	private AccountServices accountServices;
-	
-	@Autowired
-	private AccountRoleService roleService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -35,13 +31,13 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 		// TODO: get user permission here
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
-		List<AccountRole> roles = roleService.findByEmail(email);
-		
-		for (AccountRole accountRole : roles) {
-			GrantedAuthority authority = new SimpleGrantedAuthority(String.valueOf(accountRole.getRole()));
-			
-			authorities.add(authority);
-		}
+////		List<AccountRole> roles = roleService.findByEmail(email);
+////		
+////		for (AccountRole accountRole : roles) {
+////			GrantedAuthority authority = new SimpleGrantedAuthority(String.valueOf(accountRole.getRole()));
+////			
+////			authorities.add(authority);
+////		}
 		
 		UserDetails user = new User(account.getEmail(),
 				account.getPassword(), authorities);
