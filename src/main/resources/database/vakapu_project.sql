@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
@@ -26,13 +26,11 @@ CREATE TABLE `project` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) DEFAULT NULL,
   `role` varchar(100) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
   `infoproject_idproject` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_project_1_idx` (`email`),
-  KEY `fk_project_1_idx1` (`idproject`),
   KEY `FKpfud5s2t7bdu2xv1o2qsxq2fr` (`infoproject_idproject`),
-  CONSTRAINT `FKpfud5s2t7bdu2xv1o2qsxq2fr` FOREIGN KEY (`infoproject_idproject`) REFERENCES `infoProject` (`idproject`)
+  CONSTRAINT `FKpfud5s2t7bdu2xv1o2qsxq2fr` FOREIGN KEY (`infoproject_idproject`) REFERENCES `infoproject` (`idproject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-04  5:32:52
+-- Dump completed on 2018-10-05 19:31:13

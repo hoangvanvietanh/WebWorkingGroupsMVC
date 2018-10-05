@@ -3,6 +3,7 @@ package com.java.vakapu.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -55,6 +56,16 @@ public class Project {
 	public void setInfoproject(InfoProject infoproject) {
 		this.infoproject = infoproject;
 	}
+<<<<<<< HEAD
+=======
+
+
+	
+	
+	
+
+	
+>>>>>>> branch 'master' of https://github.com/hoangvanvietanh/WebWorkingGroupsMVC.git
 	
 	
 }

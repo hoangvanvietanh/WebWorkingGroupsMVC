@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `email` varchar(150) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `status` varchar(45) DEFAULT 'Not Active',
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +35,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('hoangvanvietanh@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq',NULL),('k11giadinh@gmail.com','$2a$10$dkDAIontHRCNwQqIxOnq..rWGV8vh3WrdjpX9RhWq9Dw0ghwnN6Dq',NULL);
+INSERT INTO `account` VALUES ('hoangvanvietanh@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq'),('k11giadinh@gmail.com','$2a$10$dkDAIontHRCNwQqIxOnq..rWGV8vh3WrdjpX9RhWq9Dw0ghwnN6Dq');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-04  5:32:52
+-- Dump completed on 2018-10-05 19:31:13

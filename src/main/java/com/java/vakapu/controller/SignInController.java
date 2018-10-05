@@ -14,25 +14,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class SignInController {
 	@Autowired
-    private AuthenticationTrustResolver authenticationTrustResolver;
-	
+	private AuthenticationTrustResolver authenticationTrustResolver;
+
 	@GetMapping
 	public String index() {
 		return "redirect:/sign-in";
 	}
-	
+
 	@GetMapping(value = "/sign-in")
 	public String login(ModelMap model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authenticationTrustResolver.isAnonymous(authentication)) {
 			return "sign-in";
 		}
-		
+
 		return "redirect:/profile";
 	}
-	
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutPage() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			SecurityContextHolder.getContext().setAuthentication(null);
+		}
+		return "redirect:/sign-in";
+	}
+
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model) {
-        return "denied";
-    }
+	public String accessDeniedPage(ModelMap model) {
+		return "denied";
+	}
 }

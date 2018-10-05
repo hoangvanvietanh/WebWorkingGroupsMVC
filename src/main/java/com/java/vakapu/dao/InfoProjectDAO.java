@@ -23,7 +23,7 @@ public class InfoProjectDAO {
 	}
 	
 	public List<InfoProject> findAll(){
-		TypedQuery<InfoProject> query = getSession().createQuery("FROM infoproject", InfoProject.class);
+		TypedQuery<InfoProject> query = getSession().createQuery("FROM InfoProject", InfoProject.class);
 		List<InfoProject> contact = query.getResultList();
 		return contact;
 	}

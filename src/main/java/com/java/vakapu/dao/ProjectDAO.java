@@ -22,7 +22,7 @@ public class ProjectDAO {
 	}
 	
 	public List<Project> findAll(){
-		TypedQuery<Project> query = getSession().createQuery("FROM project", Project.class);
+		TypedQuery<Project> query = getSession().createQuery("FROM Project", Project.class);
 		List<Project> contact = query.getResultList();
 		return contact;
 	}
@@ -33,7 +33,7 @@ public class ProjectDAO {
 	
 	public Project findByEmail(String email) {
 		@SuppressWarnings("unchecked")
-		TypedQuery<Project> query=getSession().createQuery("from Account a where a.email=:email");
+		TypedQuery<Project> query=getSession().createQuery("from Project a where a.email=:email");
 		query.setParameter("email", email);
 		Project result= query.getSingleResult();
 		return result;

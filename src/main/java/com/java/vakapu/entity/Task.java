@@ -26,7 +26,7 @@ public class Task {
 	
 	@ManyToOne
 	@JoinColumn(name="idproject")
-	private Project project;
+	private InfoProject idProject;
 
 	public int getId() {
 		return id;
@@ -60,13 +60,17 @@ public class Task {
 		this.description = description;
 	}
 
-	public Project getProject() {
-		return project;
+	public InfoProject getIdProject() {
+		return idProject;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setIdProject(InfoProject idProject) {
+		this.idProject = idProject;
 	}
+
+	
+
+	
 	
 	
 }

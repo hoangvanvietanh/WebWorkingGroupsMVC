@@ -16,36 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `profile`
+-- Table structure for table `infoproject`
 --
 
-DROP TABLE IF EXISTS `profile`;
+DROP TABLE IF EXISTS `infoproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `profile` (
-  `email` varchar(150) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  `summary` varchar(1000) DEFAULT NULL,
-  `skill` varchar(1000) DEFAULT NULL,
-  `experience` varchar(3000) DEFAULT NULL,
-  `education` varchar(1000) DEFAULT NULL,
-  `birthdate` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`email`)
+CREATE TABLE `infoproject` (
+  `idproject` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `owner` varchar(100) DEFAULT NULL,
+  `description` varchar(450) DEFAULT NULL,
+  `visibility` varchar(45) DEFAULT NULL,
+  `idtask` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idproject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `profile`
+-- Dumping data for table `infoproject`
 --
 
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh','male','1998-07-10','0903026389','Ho Chi Minh','Nothing','Nothing','Nothing','Nothing',NULL);
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+LOCK TABLES `infoproject` WRITE;
+/*!40000 ALTER TABLE `infoproject` DISABLE KEYS */;
+/*!40000 ALTER TABLE `infoproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
