@@ -24,7 +24,7 @@ public class InfoProjectModel {
 	
 	public void fromInfoProject(InfoProject infoproject)
 	{
-		this.setIdproject(infoproject.getId());
+		this.setIdproject(infoproject.getIdproject());
 		this.setName(infoproject.getName());
 		this.setStartDate(infoproject.getStartDate());
 		this.setEndDate(infoproject.getEndDate());
@@ -36,7 +36,7 @@ public class InfoProjectModel {
 	public InfoProject toInfoProject()
 	{
 		InfoProject infoproject= new InfoProject();
-		infoproject.setId(this.getIdproject());
+		infoproject.setIdproject(this.getIdproject());
 		infoproject.setName(this.getName());
 		infoproject.setStartDate(this.getStartDate());
 		infoproject.setEndDate(this.getEndDate());

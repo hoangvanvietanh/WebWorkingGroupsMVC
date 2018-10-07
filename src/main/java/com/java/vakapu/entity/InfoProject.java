@@ -11,7 +11,7 @@ public class InfoProject {
 
 	@Id
 	@Column(name="idproject")
-	private int id;
+	private int idproject;
 	
 	@Column(name="name")
 	private String name;
@@ -31,12 +31,16 @@ public class InfoProject {
 	@Column(name="visibility")
 	private String visibility;
 
-	public int getId() {
-		return id;
+
+
+	
+
+	public int getIdproject() {
+		return idproject;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdproject(int idproject) {
+		this.idproject = idproject;
 	}
 
 	public String getName() {
