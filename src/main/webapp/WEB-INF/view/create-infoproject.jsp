@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="center">
-		<form:form modelAttribute="create">
+		<form:form modelAttribute="createInfo">
 			<form:errors path="*" cssClass="error-box" />
 			<div class="input-group">
 				<label>ID Project</label>
@@ -43,6 +43,10 @@
 			<div class="input-group">
 				<label>Visibility</label>
 				<form:input path="visibility" />
+			</div>
+			<div class="input-group">
+				<label>Status</label>
+				<form:input path="status"/>
 			</div>
 			<form:button name="action" value="save">Save</form:button>
 			<button type="button"

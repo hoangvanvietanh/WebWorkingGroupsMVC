@@ -11,6 +11,8 @@ public class InfoProjectModel {
 	
 	private String startDate;
 	
+	private String status;
+	
 	private String endDate;
 	
 	private String owner;
@@ -27,6 +29,7 @@ public class InfoProjectModel {
 		this.setIdproject(infoproject.getIdproject());
 		this.setName(infoproject.getName());
 		this.setStartDate(infoproject.getStartDate());
+		this.setStatus(infoproject.getStatus());
 		this.setEndDate(infoproject.getEndDate());
 		this.setOwner(infoproject.getOwner());
 		this.setDescription(infoproject.getDescription());
@@ -39,6 +42,7 @@ public class InfoProjectModel {
 		infoproject.setIdproject(this.getIdproject());
 		infoproject.setName(this.getName());
 		infoproject.setStartDate(this.getStartDate());
+		infoproject.setStatus(this.getStatus());
 		infoproject.setEndDate(this.getEndDate());
 		infoproject.setOwner(this.getOwner());
 		infoproject.setDescription(this.getDescription());
@@ -69,6 +73,15 @@ public class InfoProjectModel {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getEndDate() {

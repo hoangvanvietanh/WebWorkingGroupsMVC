@@ -23,7 +23,7 @@ public class Project {
 	private String role;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private InfoProject infoproject;
+	private InfoProject idproject;
 
 	public int getId() {
 		return id;
@@ -49,12 +49,14 @@ public class Project {
 		this.role = role;
 	}
 
-	public InfoProject getInfoproject() {
-		return infoproject;
+	public InfoProject getIdproject() {
+		return idproject;
 	}
 
-	public void setInfoproject(InfoProject infoproject) {
-		this.infoproject = infoproject;
+	public void setIdproject(InfoProject idproject) {
+		this.idproject = idproject;
 	}
+
+	
 }
 

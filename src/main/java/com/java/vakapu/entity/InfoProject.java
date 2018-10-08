@@ -19,6 +19,10 @@ public class InfoProject {
 	@Column(name="startDate")
 	private String startDate;
 	
+
+	@Column(name="status")
+	private String status;
+	
 	@Column(name="endDate")
 	private String endDate;
 	
@@ -60,6 +64,14 @@ public class InfoProject {
 
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public String getEndDate() {
 		return endDate;
 	}

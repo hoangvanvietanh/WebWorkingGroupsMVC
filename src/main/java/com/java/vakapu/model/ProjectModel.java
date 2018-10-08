@@ -7,7 +7,7 @@ public class ProjectModel {
 	private int id;
 	private String email;
 	private String role;
-	private InfoProject infoProject;
+	private InfoProject idproject;
 	
 	public Project toProject()
 	{
@@ -15,7 +15,7 @@ public class ProjectModel {
 		pro.setId(this.getId());
 		pro.setEmail(this.getEmail());
 		pro.setRole(this.getRole());
-		pro.setInfoproject(this.getInfoProject());
+		pro.setIdproject(this.getIdproject());
 		return pro;
 	}
 	
@@ -24,7 +24,7 @@ public class ProjectModel {
 		this.setId(pro.getId());
 		this.setEmail(pro.getEmail());
 		this.setRole(pro.getRole());
-		this.setInfoProject(pro.getInfoproject());
+		this.setIdproject(pro.getIdproject());
 	}
 	
 	public int getId() {
@@ -45,12 +45,15 @@ public class ProjectModel {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public InfoProject getInfoProject() {
-		return infoProject;
+
+	public InfoProject getIdproject() {
+		return idproject;
 	}
-	public void setInfoProject(InfoProject infoProject) {
-		this.infoProject = infoProject;
+
+	public void setIdproject(InfoProject idproject) {
+		this.idproject = idproject;
 	}
+	
 	
 	
 	
