@@ -94,7 +94,7 @@ body {
 					<ul>
 
 						<li><a href="#0">My Account</a></li>
-						<li><a href="#0">Edit Account</a></li>
+						<li><a href="account">Edit Account</a></li>
 						<li><a href="logout">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -119,8 +119,8 @@ body {
 
 					<ul>
 						<li><a href="#0">All Comments</a></li>
-						<li><a href="#0">Edit Comment</a></li>
-						<li><a href="#0">Delete Comment</a></li>
+						<li><a href="#0">Edit Comments</a></li>
+						<li><a href="#0">Delete Comments</a></li>
 					</ul></li>
 			</ul>
 
@@ -143,9 +143,9 @@ body {
 				<li class="has-children users"><a href="#0">My team</a>
 
 					<ul>
-						<li><a href="#0">All Memeber</a></li>
-						<li><a href="#0">Edit Memeber</a></li>
-						<li><a href="#0">Add Memeber</a></li>
+						<li><a href="#0">All Member</a></li>
+						<li><a href="#0">Edit Member</a></li>
+						<li><a href="#0">Add Member</a></li>
 					</ul></li>
 			</ul>
 
