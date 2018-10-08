@@ -16,32 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `infoproject`
+-- Table structure for table `project_user`
 --
 
-DROP TABLE IF EXISTS `infoproject`;
+DROP TABLE IF EXISTS `project_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `infoproject` (
-  `idproject` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `endDate` datetime DEFAULT NULL,
-  `owner` varchar(100) DEFAULT NULL,
-  `description` varchar(450) DEFAULT NULL,
-  `visibility` varchar(45) DEFAULT NULL,
-  `idtask` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idproject`)
+CREATE TABLE `project_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) DEFAULT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  `infoproject_idproject` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_project_1_idx` (`email`),
+  KEY `FKpfud5s2t7bdu2xv1o2qsxq2fr` (`infoproject_idproject`),
+  CONSTRAINT `FKpfud5s2t7bdu2xv1o2qsxq2fr` FOREIGN KEY (`infoproject_idproject`) REFERENCES `project` (`idproject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `infoproject`
+-- Dumping data for table `project_user`
 --
 
-LOCK TABLES `infoproject` WRITE;
-/*!40000 ALTER TABLE `infoproject` DISABLE KEYS */;
-/*!40000 ALTER TABLE `infoproject` ENABLE KEYS */;
+LOCK TABLES `project_user` WRITE;
+/*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-05 19:31:12
+-- Dump completed on 2018-10-08 21:16:16
