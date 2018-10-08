@@ -1,60 +1,117 @@
 package com.java.vakapu.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="project")
 public class Project {
-	
+
 	@Id
-	@Column(name="id")
-	private int id;
+	@Column(name="idproject")
+	private int idproject;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="name")
+	private String name;
 	
-	@Column(name="role")
-	private String role;
+	@Column(name="startDate")
+	private String startDate;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private InfoProject infoproject;
 
-	public int getId() {
-		return id;
+	@Column(name="status")
+	private String status;
+	
+	@Column(name="endDate")
+	private String endDate;
+	
+	@Column(name="owner")
+	private String owner;
+	
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="visibility")
+	private String visibility;
+
+	@Column(name="action")
+	private String action;
+
+	
+
+	public int getIdproject() {
+		return idproject;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdproject(int idproject) {
+		this.idproject = idproject;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getName() {
+		return name;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getRole() {
-		return role;
+	public String getStartDate() {
+		return startDate;
+	}
+	
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public String getStatus() {
+		return status;
 	}
 
-	public InfoProject getInfoproject() {
-		return infoproject;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public void setInfoproject(InfoProject infoproject) {
-		this.infoproject = infoproject;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(String visibility) {
+		this.visibility = visibility;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+	
+	
 }
-

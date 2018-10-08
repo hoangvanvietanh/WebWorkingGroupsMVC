@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>M-TODO</title>
+<title>Project Information</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -45,27 +45,30 @@
 </head>
 <body>
 <div>
-	<button type="button" onclick="window.location.href='<spring:url value="/inforproject/create/" />' ">Create</button>
+	<button type="button" onclick="window.location.href='<spring:url value="/project/createProject/" />' ">Create</button>
 </div>
 	<table class="table">
 		<tr>
 			<th>ID Project</th>
-			<th>Email</th>
+			<th>Name</th>
+			<th>Status</th>
 			<th>Start Date</th>
 			<th>End Date</th>
 			<th>Owner</th>
 			<th>Desciption</th>
 			<th>Visibility</th>
+			<th>Action</th>
 		</tr>
 	<c:forEach var="project" items="${listInfo}">
 		<tr>
 			<td>${project.idproject }</td>
 			<td>${project.name}</td>
+			<td>${project.status }</td>
 			<td>${project.startDate }</td>
 			<td>${project.endDate }</td>
 			<td>${project.owner }</td>
 			<td>${project.description }</td>
-			
+			<td>${project.visibility }</td>
 	</c:forEach>
 	</table>
 </body>
