@@ -57,10 +57,10 @@
 				</div>
 				<div class="etc-login-form">
 					<p>
-						Forgot your password? <a href="#">click here</a>
+						Forgot your password? <a href="<spring:url value='/forgot-password'/>" > click here</a>
 					</p>
 					<p>
-						New user? <a href="<spring:url value='/sign-up'/>">create new
+						New user? <a href="<spring:url value='/sign-up'/>"> create new
 							account</a>
 					</p>
 				</div>
