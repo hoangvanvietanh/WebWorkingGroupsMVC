@@ -23,10 +23,12 @@ public class Task {
 	
 	@Column(name="description")
 	private String description;
+	@Column(name="owner")
+	private String owner;
 	
 	@ManyToOne
 	@JoinColumn(name="idproject")
-	private InfoProject idProject;
+	private Project idProject;
 
 	public int getId() {
 		return id;
@@ -60,14 +62,23 @@ public class Task {
 		this.description = description;
 	}
 
-	public InfoProject getIdProject() {
+	public Project getIdProject() {
 		return idProject;
 	}
 
-	public void setIdProject(InfoProject idProject) {
+	public void setIdProject(Project idProject) {
 		this.idProject = idProject;
 	}
 
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	
+	
 	
 
 	

@@ -14,71 +14,66 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import com.java.vakapu.entity.InfoProject;
 import com.java.vakapu.entity.Project;
-import com.java.vakapu.model.InfoProjectModel;
+
+import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.model.ProjectModel;
-import com.java.vakapu.services.InfoProjectServices;
+
+import com.java.vakapu.model.ProjectUserModel;
+import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.ProjectServices;
 
+import com.java.vakapu.services.ProjectUserServices;
+
 @Controller
-@RequestMapping("/infoproject")
+@RequestMapping("/project")
 public class ProjectController {
 
 	@Autowired
-	private ProjectServices proServices;
+	private AccountServices accountServices;
 	
 	@Autowired
-	private InfoProjectServices infoServices;
+	private ProjectUserServices userServices;
+	
+	@Autowired
+	private ProjectServices proServices;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getInfoProject(Model model)
 	{
-		List<InfoProject> result= infoServices.findAll();
+		List<Project> result= proServices.findAll();
 		model.addAttribute("listInfo",result);
 		return "home-project";
 	}
 	
-	@RequestMapping(value="/createInfo",method=RequestMethod.GET)
+	@RequestMapping(value="/createProject",method=RequestMethod.GET)
 	public String createInfoGet(Model model) throws ParseException
 	{
-		InfoProjectModel info=new InfoProjectModel();
-		model.addAttribute("createInfo", info);
-		return "create-infoproject";
+		ProjectModel pro=new ProjectModel();
+		model.addAttribute("createProject", pro);
+		return "create-project";
 	}
 	
-	@RequestMapping(value="/createInfo",method=RequestMethod.POST)
-	public String createInfoPost(@ModelAttribute("createInfo") InfoProjectModel infoModel,
+	@RequestMapping(value="/createProject",method=RequestMethod.POST)
+	public String createInfoPost(@ModelAttribute("createProject") ProjectModel proModel,
 			BindingResult result,Model model) throws ParseException
 	{
-		InfoProject info=infoModel.toInfoProject();
-		infoServices.createInfoProject(info);
+		
 		if(result.hasErrors())
 		{
 			return "create-project";
 		}
-		return "project";
-	}
-	
-	@RequestMapping(value="/createProject",method=RequestMethod.GET)
-	public String createProjectGet(Model model) throws ParseException
-	{
-		ProjectModel pro=new ProjectModel();
-		model.addAttribute("createPro", pro);
-		return "project";
-	}
-	
-	@RequestMapping(value="/createProject",method=RequestMethod.POST)
-	public String createProjectPost(@ModelAttribute("createPro") ProjectModel proModel,
-			BindingResult result,Model model) throws ParseException
-	{
 		Project project=proModel.toProject();
+		String currentUser= accountServices.getEmailUser();
+		project.setOwner(currentUser);
 		proServices.createProject(project);
-		if(result.hasErrors())
-		{
-			return "project";
-		}
-		return "redirect:/infoproject";
+		
+//		ProjectUserModel user=new ProjectUserModel();
+//		model.addAttribute("createPro", user);
+		
+		return "redirect:/project";
 	}
+	
+
 	
 }

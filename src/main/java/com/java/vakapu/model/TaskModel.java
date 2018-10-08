@@ -1,8 +1,8 @@
 package com.java.vakapu.model;
 
-import com.java.vakapu.entity.InfoProject;
-import com.java.vakapu.entity.Profile;
 import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.entity.Task;
 
 public class TaskModel {
@@ -15,7 +15,9 @@ public class TaskModel {
 	
 	private String description;
 	
-	private InfoProject idproject;
+	private Project idproject;
+	
+	private String owner;
 	
 	public void fromTask(Task task)
 	{
@@ -24,6 +26,7 @@ public class TaskModel {
 		this.setCompleted(task.getCompleted());
 		this.setDescription(task.getDescription());
 		this.setIdproject(task.getIdProject());
+		this.setOwner(task.getOwner());
 	}
 	
 	public Task toTask()
@@ -34,6 +37,7 @@ public class TaskModel {
 		task.setCompleted(this.getCompleted());
 		task.setDescription(this.getDescription());
 		task.setIdProject(this.getIdproject());
+		task.setOwner(this.getOwner());
 		return task;
 	}
 
@@ -69,13 +73,22 @@ public class TaskModel {
 		this.description = description;
 	}
 
-	public InfoProject getIdproject() {
+	public Project getIdproject() {
 		return idproject;
 	}
 
-	public void setIdproject(InfoProject idproject) {
+	public void setIdproject(Project idproject) {
 		this.idproject = idproject;
 	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	
 	
 	
 }

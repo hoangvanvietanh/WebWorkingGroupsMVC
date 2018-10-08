@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.java.vakapu.entity.Project;
 
+
 @Repository
 public class ProjectDAO {
 
@@ -31,26 +32,19 @@ public class ProjectDAO {
 		return getSession().find(Project.class, id);
 	}
 	
-	public Project findByEmail(String email) {
-		@SuppressWarnings("unchecked")
-		TypedQuery<Project> query=getSession().createQuery("from Project a where a.email=:email");
-		query.setParameter("email", email);
-		Project result= query.getSingleResult();
-		return result;
+	public Project create(Project Project) {
+		getSession().save(Project);
+		return Project;
 	}
 	
-	public Project create(Project project) {
-		getSession().save(project);
-		return project;
+	public Project delete(Project Project) {
+		getSession().delete(Project);
+		return Project;
 	}
 	
-	public Project delete(Project project) {
-		getSession().delete(project);
-		return project;
+	public Project update(Project Project) {
+		getSession().update(Project);
+		return Project;
 	}
 	
-	public Project update(Project project) {
-		getSession().update(project);
-		return project;
-	}
 }

@@ -2,49 +2,43 @@ package com.java.vakapu.services;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.java.vakapu.dao.ProjectDAO;
 import com.java.vakapu.entity.Project;
 
-
 @Service
+@Transactional
 public class ProjectServices {
 
 	@Autowired
-	private ProjectServices proServices;
+	private ProjectDAO projectDao;
 	
 	public List<Project> findAll()
 	{
-		return proServices.findAll();
+		return projectDao.findAll();
 	}
 	
-	@Transactional
-	public Project findByEmail(String email)
+	public Project find(int id)
 	{
-		return proServices.findByEmail(email);
+		return projectDao.find(id);
 	}
 	
-	@Transactional
 	public Project createProject(Project project)
 	{
-		return proServices.createProject(project);
+		return projectDao.create(project);
 	}
 	
-	@Transactional
 	public Project updateProject(Project project)
 	{
-		return proServices.updateProject(project);
-	}
-		
-	@Transactional
-	public void deleteProject(Project project)
-	{
-		proServices.deleteProject(project);
+		return projectDao.update(project);
 	}
 	
+	public void deleteProject(Project project)
+	{
+		projectDao.delete(project);
+	}
 	
 }

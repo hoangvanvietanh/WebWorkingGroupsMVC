@@ -9,12 +9,12 @@
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create</title>
+<title>Create Project</title>
 
 </head>
 <body>
 	<div class="center">
-		<form:form modelAttribute="createInfo">
+		<form:form modelAttribute="createProject" method="post">
 			<form:errors path="*" cssClass="error-box" />
 			<div class="input-group">
 				<label>ID Project</label>
@@ -36,10 +36,7 @@
 				<label>End Date</label>
 				<form:input path="endDate" type="date" />
 			</div>
-			<div class="input-group">
-				<label>Owner</label>
-				<form:input path="owner" />
-			</div>
+			
 			<div class="input-group">
 				<label>Visibility</label>
 				<form:input path="visibility" />
@@ -50,7 +47,7 @@
 			</div>
 			<form:button name="action" value="save">Save</form:button>
 			<button type="button"
-				onclick="window.location.href='<spring:url value="/infoproject" />'">Cancel</button>
+				onclick="window.location.href='<spring:url value="/project" />'">Cancel</button>
 		</form:form>
 	</div>
 

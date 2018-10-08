@@ -45,7 +45,7 @@
 </head>
 <body>
 <div>
-	<button type="button" onclick="window.location.href='<spring:url value="/inforproject/create/" />' ">Create</button>
+	<button type="button" onclick="window.location.href='<spring:url value="/project/createProject/" />' ">Create</button>
 </div>
 	<table class="table">
 		<tr>
@@ -57,6 +57,7 @@
 			<th>Owner</th>
 			<th>Desciption</th>
 			<th>Visibility</th>
+			<th>Action</th>
 		</tr>
 	<c:forEach var="project" items="${listInfo}">
 		<tr>
@@ -67,42 +68,7 @@
 			<td>${project.endDate }</td>
 			<td>${project.owner }</td>
 			<td>${project.description }</td>
-			<c:if test="${project.status eq 'New' }">
-				<form:form action="infoproject/start?email=${project.email }" method="post">
-					<input type="hidden" name="email" value="${project.email }">
-					<td><button class="input" type="submit">Start</button></td>
-				</form:form>
-			</c:if>
-			<c:if test="${project.status eq 'New'}">
-				<form:form action="infoproject/cancel?email=${project.email }" method="post">
-					<input type="hidden" name="email" value="${project.email }">
-					<td><button class="input" type="submit">Cancel</button>
-				</form:form>
-			</c:if>
-			<c:if test="${project.status eq 'In-progress' }">
-				<form:form action="infoproject/end?email=${project.email }" method="post">
-					<input type="hidden" name="email" value="${project.email }">
-					<td><button class="input" type="submit">End</button></td>
-				</form:form>
-			</c:if>			
-			<c:if test="${project.status eq 'New' or project.status eq 'In-progress' or project.status eq 'Done'or project.status eq 'Canceled'}">
-						<form:form action="infoproject/view?email=${project.email }" method="post">
-						<input type="hidden" name="email" value="${project.email}">
-						<td><button class="input" type="submit">View</button></td>
-						</form:form>
-					</c:if> 
-					<c:if test="${project.status eq 'New'}">
-						<form:form action="infoproject/update?email=${project.email }" method="get">
-						<input type="hidden" name="email" value="${project.email}">
-						<td><button class="input" type="submit">Update</button></td>
-						</form:form>
-					</c:if> 
-					<c:if test="${project.status eq 'New' or project.status eq 'Cancel' or project.status eq 'Done' or project.status eq 'Canceled'}">
-						<form:form action="infoproject/delete?email=${project.email }" method="post">
-						<input type="hidden" name="email" value="${project.email}">
-							<td><button class="input" type="submit">Delete</button></td>
-						</form:form>
-					</c:if>
+			<td>${project.visibility }</td>
 	</c:forEach>
 	</table>
 </body>
