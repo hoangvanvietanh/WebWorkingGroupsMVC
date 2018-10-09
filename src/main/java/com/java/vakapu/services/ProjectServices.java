@@ -26,6 +26,11 @@ public class ProjectServices {
 		return projectDao.find(id);
 	}
 	
+	public Project findProjectNull(String name)
+	{
+		return projectDao.findNullProject(name);
+	}
+	
 	public Project createProject(Project project)
 	{
 		return projectDao.create(project);

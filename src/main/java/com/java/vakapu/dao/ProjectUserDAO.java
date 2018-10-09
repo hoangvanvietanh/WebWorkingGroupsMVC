@@ -31,11 +31,19 @@ public class ProjectUserDAO {
 		return getSession().find(ProjectUser.class, id);
 	}
 	
-	public ProjectUser findByEmail(String email) {
+	public List<ProjectUser> findByEmail(String email) {
 		@SuppressWarnings("unchecked")
 		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.email=:email");
 		query.setParameter("email", email);
-		ProjectUser result= query.getSingleResult();
+		List<ProjectUser> result= query.getResultList();
+		return result;
+	}
+	
+	public List<ProjectUser> findById(int id) {
+		@SuppressWarnings("unchecked")
+		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.idproject.id=:id");
+		query.setParameter("id", id);
+		List<ProjectUser> result= query.getResultList();
 		return result;
 	}
 	

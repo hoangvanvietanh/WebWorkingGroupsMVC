@@ -14,6 +14,7 @@ import com.java.vakapu.entity.ProjectUser;
 
 
 @Service
+@Transactional
 public class ProjectUserServices {
 
 	@Autowired
@@ -24,25 +25,26 @@ public class ProjectUserServices {
 		return userDao.findAll();
 	}
 	
-	@Transactional
-	public ProjectUser findByEmail(String email)
+	public List<ProjectUser> findByEmail(String email)
 	{
 		return userDao.findByEmail(email);
 	}
+
+	public List<ProjectUser> findByID( int id)
+	{
+		return userDao.findById(id);
+	}
 	
-	@Transactional
 	public ProjectUser createProjectUser(ProjectUser project)
 	{
 		return userDao.create(project);
 	}
-	
-	@Transactional
+
 	public ProjectUser updateProjectUser(ProjectUser project)
 	{
 		return userDao.update(project);
 	}
-		
-	@Transactional
+
 	public void deleteProjectUser(ProjectUser project)
 	{
 		userDao.delete(project);

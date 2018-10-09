@@ -140,11 +140,11 @@ body {
 						<li><a href="#0">Edit Image</a></li>
 					</ul></li>
 
-				<li class="has-children users"><a href="#0">My team</a>
+				<li class="has-children users"><a href="#0">Project</a>
 
 					<ul>
-						<li><a href="#0">All Member</a></li>
-						<li><a href="#0">Edit Member</a></li>
+						<li><a href="myProject">My Project</a></li>
+						<li><a href="#0">My Team Project</a></li>
 						<li><a href="#0">Add Member</a></li>
 					</ul></li>
 			</ul>

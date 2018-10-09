@@ -6,10 +6,12 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.ProjectUser;
 
 
 @Repository
@@ -27,6 +29,15 @@ public class ProjectDAO {
 		List<Project> contact = query.getResultList();
 		return contact;
 	}
+	
+	public Project findNullProject(String name) {
+		@SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery("select a from Project a where a.name=:name");
+		query.setParameter("name", name);
+		Project pro = (Project) query.getSingleResult();
+		return pro;
+	}
+	
 	
 	public Project find(int id) {
 		return getSession().find(Project.class, id);
