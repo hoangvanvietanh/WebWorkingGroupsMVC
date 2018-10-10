@@ -69,6 +69,43 @@
 			<td>${project.owner }</td>
 			<td>${project.description }</td>
 			<td>${project.visibility }</td>
+			<td><c:if test="${project.status eq 'New' }">
+				<form:form action="project/start?idproject=${project.idproject }" method="post">
+					<input type="hidden" name="idproject" value="${project.idproject }">
+					<td><button class="input" type="submit">Start</button></td>
+				</form:form>
+			</c:if>
+			<c:if test="${project.status eq 'New'}">
+				<form:form action="project/cancel?idproject=${project.idproject }" method="post">
+					<input type="hidden" name="idproject" value="${project.idproject }">
+					<td><button class="input" type="submit">Cancel</button>
+				</form:form>
+			</c:if>
+			<c:if test="${project.status eq 'In-progress' }">
+				<form:form action="project/end?idproject=${project.idproject }" method="post">
+					<input type="hidden" name="idproject" value="${project.idproject }">
+					<td><button class="input" type="submit">End</button></td>
+				</form:form>
+			</c:if>			
+			<c:if test="${project.status eq 'New' or project.status eq 'In-progress' or project.status eq 'Done'or project.status eq 'Canceled'}">
+						<form:form action="project/view?idproject=${project.idproject }" method="post">
+						<input type="hidden" name="idproject" value="${project.idproject}">
+						<td><button class="input" type="submit">View</button></td>
+						</form:form>
+					</c:if> 
+					<c:if test="${project.status eq 'New'}">
+						<form:form action="project/update?idproject=${project.idproject }" method="get">
+						<input type="hidden" name="idproject" value="${project.idproject}">
+						<td><button class="input" type="submit">Update</button></td>
+						</form:form>
+					</c:if> 
+					<c:if test="${project.status eq 'New' or project.status eq 'Cancel' or project.status eq 'Done' or project.status eq 'Canceled'}">
+						<form:form action="project/delete?idproject=${project.idproject }" method="post">
+						<input type="hidden" name="idproject" value="${project.idproject}">
+							<td><button class="input" type="submit">Delete</button></td>
+						</form:form>
+					</c:if>
+			</td>
 	</c:forEach>
 	</table>
 </body>

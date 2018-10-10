@@ -28,14 +28,6 @@
 				<label>Description</label>
 				<form:textarea path="description" rows="3" />
 			</div>
-			<div class="input-group">
-				<label>Start Date</label>
-				<form:input path="startDate" type="date" />
-			</div>
-			<div class ="input-group">
-				<label>End Date</label>
-				<form:input path="endDate" type="date" />
-			</div>
 			
 			<div class="input-group">
 				<label>Visibility</label>
