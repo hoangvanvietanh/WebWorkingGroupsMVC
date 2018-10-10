@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class Project {
 
 	@Id
+	@GeneratedValue
 	@Column(name="idproject")
 	private int idproject;
 	

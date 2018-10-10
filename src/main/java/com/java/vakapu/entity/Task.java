@@ -8,27 +8,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="task")
+@Table(name = "task")
 public class Task {
-	
+
 	@Id
-	@Column(name="idtask")
+	@Column(name = "idtask")
 	private int id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="completed")
+
+	@Column(name = "completed")
 	private String completed;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-	@Column(name="owner")
+	@Column(name = "owner")
 	private String owner;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idproject")
-	private Project idProject;
+	@JoinColumn(name = "idproject")
+	private Project project;
 
 	public int getId() {
 		return id;
@@ -62,12 +62,12 @@ public class Task {
 		this.description = description;
 	}
 
-	public Project getIdProject() {
-		return idProject;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setIdProject(Project idProject) {
-		this.idProject = idProject;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getOwner() {
@@ -77,11 +77,5 @@ public class Task {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
-	
-	
 
-	
-	
-	
 }

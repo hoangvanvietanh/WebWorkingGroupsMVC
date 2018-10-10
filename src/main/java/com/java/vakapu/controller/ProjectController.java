@@ -53,7 +53,7 @@ public class ProjectController {
 		model.addAttribute("createProject", pro);
 		return "create-project";
 	}
-	
+							
 	@RequestMapping(value="/createProject",method=RequestMethod.POST)
 	public String createInfoPost(@ModelAttribute("createProject") ProjectModel proModel,
 			BindingResult result,Model model) throws ParseException
@@ -66,6 +66,7 @@ public class ProjectController {
 		Project project=proModel.toProject();
 		String currentUser= accountServices.getEmailUser();
 		project.setOwner(currentUser);
+		project.setStatus("New");
 		proServices.createProject(project);
 		
 //		ProjectUserModel user=new ProjectUserModel();

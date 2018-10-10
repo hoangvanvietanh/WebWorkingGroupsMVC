@@ -1,12 +1,10 @@
 package com.java.vakapu.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +21,9 @@ public class ProjectUser {
 	@Column(name="role")
 	private String role;
 	
-	@OneToOne()
-	private Project idproject;
+	@ManyToOne
+	@JoinColumn(name="idproject")
+	private Project project;
 
 	public int getId() {
 		return id;
@@ -50,15 +49,13 @@ public class ProjectUser {
 		this.role = role;
 	}
 
-	public Project getIdproject() {
-		return idproject;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setIdproject(Project idproject) {
-		this.idproject = idproject;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
-	
-	
 }
 

@@ -1,42 +1,38 @@
 package com.java.vakapu.model;
 
 import com.java.vakapu.entity.Project;
-import com.java.vakapu.entity.Profile;
-import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.entity.Task;
 
 public class TaskModel {
 
 	private int idtask;
-	
+
 	private String name;
-	
+
 	private String completed;
-	
+
 	private String description;
-	
-	private Project idproject;
-	
+
+	private Project project;
+
 	private String owner;
-	
-	public void fromTask(Task task)
-	{
+
+	public void fromTask(Task task) {
 		this.setIdtask(task.getId());
 		this.setName(task.getName());
 		this.setCompleted(task.getCompleted());
 		this.setDescription(task.getDescription());
-		this.setIdproject(task.getIdProject());
+		this.setProject(task.getProject());
 		this.setOwner(task.getOwner());
 	}
-	
-	public Task toTask()
-	{
-		Task task= new Task();
+
+	public Task toTask() {
+		Task task = new Task();
 		task.setId(this.getIdtask());
 		task.setName(this.getName());
 		task.setCompleted(this.getCompleted());
 		task.setDescription(this.getDescription());
-		task.setIdProject(this.getIdproject());
+		task.setProject(this.getProject());
 		task.setOwner(this.getOwner());
 		return task;
 	}
@@ -73,12 +69,12 @@ public class TaskModel {
 		this.description = description;
 	}
 
-	public Project getIdproject() {
-		return idproject;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setIdproject(Project idproject) {
-		this.idproject = idproject;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getOwner() {
@@ -88,7 +84,5 @@ public class TaskModel {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
-	
-	
+
 }

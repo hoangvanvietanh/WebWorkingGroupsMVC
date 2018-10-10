@@ -58,7 +58,7 @@ public class MyProjectController {
 		int id = project.getIdproject();
 		
 		ProjectUser proUser = new ProjectUser();
-		proUser.setIdproject(project);
+		proUser.setProject(project);
 		proUser.setEmail(currentUser);
 		proUser.setRole("Administator");
 		proUserServices.createProjectUser(proUser);
