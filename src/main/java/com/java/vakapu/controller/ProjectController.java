@@ -97,6 +97,15 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.POST)
+	public String updatePost(@ModelAttribute("project") ProjectModel proM,
+			BindingResult result,Model model)
+	{
+		Project pro=proM.toProject();
+		proServices.updateProject(pro);
+		return "redirect:/project";
+	}
+	
+	@RequestMapping(value="/start",method=RequestMethod.POST)
 	public String updatePost(@RequestParam(name="idproject") int idproject,@ModelAttribute("project") ProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
@@ -165,10 +174,11 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 
-	@RequestMapping(value="delete",method=RequestMethod.POST)
-	public void deletePost(@RequestParam(name="idproject") int idproject, Model model) throws ParseException
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	public String deletePost(@RequestParam(name="idproject") int idproject, Model model) throws ParseException
 	{
 		Project pro=proServices.find(idproject);
 		proServices.deleteProject(pro);
+		return "redirect:/project";
 	}
 }
