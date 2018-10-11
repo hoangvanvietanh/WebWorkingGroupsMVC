@@ -45,7 +45,7 @@
 <body>
 
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
       <th scope="col">ID Project</th>
       <th scope="col">Name</th>
@@ -61,7 +61,7 @@
   <tbody>
    <c:forEach var="project" items="${listInfo}">
 		<tr>
-			<td>${project.idproject }</td>
+			<td scope="row">${project.idproject }</td>
 			<td>${project.name}</td>
 			<td>${project.status }</td>
 			<td>${project.startDate }</td>
@@ -99,7 +99,7 @@
 						<td><button class="input" type="submit">Update</button></td>
 						</form:form>
 					</c:if> 
-					<c:if test="${project.status eq 'New' or project.status eq 'Cancel' or project.status eq 'Done' or project.status eq 'Canceled'}">
+					<c:if test="${project.status eq 'New' or project.status eq 'In-progress' or project.status eq 'Done' or project.status eq 'Cancel'}">
 						<form:form action="project/delete?idproject=${project.idproject }" method="post">
 						<input type="hidden" name="idproject" value="${project.idproject}">
 							<td><button class="input" type="submit">Delete</button></td>

@@ -22,7 +22,7 @@ input,div {
 </head>
 <body>
 
-<form:form modelAttribute="createProject" method="post">
+<form:form modelAttribute="project" method="post">
 			<form:errors path="*" cssClass="error-box" />
   
   <div class="form-group">

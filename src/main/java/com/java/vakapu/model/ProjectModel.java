@@ -1,6 +1,11 @@
 package com.java.vakapu.model;
 
 import com.java.vakapu.entity.Project;
+
+import java.util.Date;
+
+
+
 import com.java.vakapu.entity.Profile;
 
 public class ProjectModel {
@@ -26,11 +31,13 @@ public class ProjectModel {
 	private int idtask;
 	
 	
-	public void fromProject(Project project)
+	public void fromProject(Project project) 
 	{
 		this.setIdproject(project.getIdproject());
 		this.setName(project.getName());
-		this.setStartDate(project.getStartDate());
+		
+		this.setStartDate(this.getStartDate());
+		
 		this.setStatus(project.getStatus());
 		this.setEndDate(project.getEndDate());
 		this.setOwner(project.getOwner());
@@ -39,7 +46,7 @@ public class ProjectModel {
 		this.setAction(project.getAction());
 	}
 	
-	public Project toProject()
+	public Project toProject() 
 	{
 		Project project= new Project();
 		project.setIdproject(this.getIdproject());
@@ -71,6 +78,8 @@ public class ProjectModel {
 		this.name = name;
 	}
 
+	
+
 	public String getStartDate() {
 		return startDate;
 	}
@@ -78,7 +87,6 @@ public class ProjectModel {
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	
 
 	public String getStatus() {
 		return status;
