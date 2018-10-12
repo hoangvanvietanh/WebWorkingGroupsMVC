@@ -414,70 +414,66 @@ h3+.btn-round, h5+.btn-round {
 	min-height: 100vh;
 }
 
-.radio-group {
-	margin: auto;
-	display: flex;
+*, *:before, *:after {
+	box-sizing: border-box;
 }
 
-@media ( max-width : 48em) {
-	.radio-group {
-		flex-direction: column;
-		align-items: flex-start;
-		text-align: left;
-	}
-}
-
-.radio-group-label {
-	display: block;
-	width: 100%;
-	margin: 10px 0;
-}
-
-.radio-label {
-	position: relative;
-	display: inline-block;
-	margin: 10px;
-}
-
-@media ( max-width : 48em) {
-	.radio-label {
-		display: block;
-		margin: 10px 0;
-	}
-}
-
-.radio-label input {
-	opacity: 0;
+.options {
 	position: absolute;
-}
-
-.radio-label .inner-label {
-	position: relative;
-	display: inline-block;
-	padding-left: 40px;
-}
-
-.radio-label .inner-label:before {
-	content: '';
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	border-bottom: 1px dashed rgba(0, 0, 0, 0.25);
-	width: 30px;
-	transition: border-bottom 0.5s ease;
-}
-
-.radio-label input:focus ~ .inner-label:before {
-	border-bottom: 1px solid rgba(255, 255, 255, 0.75);
-}
-
-.radio-label input:checked ~ .inner-label:after {
-	content: '\2713';
+	left: -28px;
+	right: -37px;
+	top: 50%;
+	transform: translateY(-50%);
 	color: black;
+	padding: 48px;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+}
+
+.options input {
+	display: none;
+}
+
+.options>label {
+	display: inline-block;
+	position: relative;
+	margin-right: 16px;
+	padding-left: 24px;
+	cursor: pointer;
+}
+
+.options>label:before {
+	content: "";
+	display: block;
 	position: absolute;
-	font-size: 12px;
-	left: 12px;
-	top: 1px;
+	width: 16px;
+	height: 16px;
+	left: 0;
+	top: 50%;
+	margin-top: -8px;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+.options>label:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 50%;
+	left: 8px;
+	margin-top: 0;
+	background: black;
+	border-radius: 4px;
+	transition: .2s ease-in-out;
+}
+
+.options :checked+label:after {
+	height: 8px;
+	width: 8px;
+	margin-top: -4px;
+	left: 4px;
 }
 </style>
 </head>
@@ -509,6 +505,79 @@ h3+.btn-round, h5+.btn-round {
 
 							<div class="content-list-body row filter-list-1538991000867">
 								<c:forEach var="project" items="${project}">
+								<c:if test="${project.visibility ne 'team' }">
+									<div class="col-lg-6">
+										<div class="card card-project">
+
+											<div class="progress">
+												<div class="progress-bar bg-danger" role="progressbar"
+													style="width: 70%" aria-valuenow="60" aria-valuemin="0"
+													aria-valuemax="100"></div>
+											</div>
+
+											<div class="card-body">
+												<div class="dropdown card-options">
+													<button class="btn-options" type="button"
+														id="project-dropdown-button-1" data-toggle="dropdown"
+														aria-haspopup="true" aria-expanded="false">
+														<i class="material-icons">more_vert</i>
+													</button>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="#">Edit</a> <a
+															class="dropdown-item" href="#">Share</a>
+													</div>
+												</div>
+												<div class="card-title">
+													<a href="showMyProject?id=${project.idproject}">
+														<h5 class="H5-filter-by-text">${project.name}</h5>
+													</a>
+												</div>
+												<ul class="avatars">
+													<li><a href="#0"><img
+															style="width: 25px; height: 25px" alt="Avatar"
+															src="/time-is-gold/profile/avatar/${project.owner}"></a></li>
+												</ul>
+												<div class="card-meta d-flex justify-content-between">
+													<div class="d-flex align-items-center">
+														<i class="material-icons mr-1">playlist_add_check</i> <span
+															class="text-small">6/10</span>
+													</div>
+													<span class="text-small SPAN-filter-by-text"
+														data-filter-by="text">Due 4 days</span>
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+									</c:if>
+								</c:forEach>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="projects" role="tabpanel"
+						aria-labelledby="tasks-tab" data-filter-list="content-list-body"
+						aria-expanded="true">
+						<div class="content-list">
+							<div class="row content-list-head">
+								<div class="col-auto">
+									<h3>Team Projects</h3>
+									<button class="btn btn-round" data-toggle="modal"
+										data-target="#project-add-modal">
+										<i class="material-icons">add</i>
+									</button>
+								</div>
+							</div>
+							<!--end of content list head-->
+							
+							<div class="content-list-body row filter-list-1538991000867">
+								<c:forEach var="project" items="${project}">
+								<c:if test="${project.visibility eq 'team' }">
 									<div class="col-lg-6">
 										<div class="card card-project">
 
@@ -532,13 +601,13 @@ h3+.btn-round, h5+.btn-round {
 												</div>
 												<div class="card-title">
 													<a href="#">
-														<h5 class="H5-filter-by-text">${project.idproject.name}</h5>
+														<h5 class="H5-filter-by-text">${project.name}</h5>
 													</a>
 												</div>
 												<ul class="avatars">
 													<li><a href="#0"><img
 															style="width: 25px; height: 25px" alt="Avatar"
-															src="/time-is-gold/profile/avatar/${project.email}"></a></li>
+															src="/time-is-gold/profile/avatar/${project.owner}"></a></li>
 												</ul>
 												<div class="card-meta d-flex justify-content-between">
 													<div class="d-flex align-items-center">
@@ -553,6 +622,7 @@ h3+.btn-round, h5+.btn-round {
 										</div>
 
 									</div>
+									</c:if>
 								</c:forEach>
 							</div>
 
@@ -560,10 +630,12 @@ h3+.btn-round, h5+.btn-round {
 					</div>
 
 				</div>
-				
-				<form:form modelAttribute="projectCreate" action="myProject/createProject" method="post" class="modal fade" id="project-add-modal" tabindex="-1"
-					role="dialog" aria-labelledby="project-add-modal"
-					style="display: none;" aria-hidden="true">
+
+				<form:form modelAttribute="projectCreate"
+					action="myProject/createProject" method="post" class="modal fade"
+					id="project-add-modal" tabindex="-1" role="dialog"
+					aria-labelledby="project-add-modal" style="display: none;"
+					aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -582,33 +654,52 @@ h3+.btn-round, h5+.btn-round {
 										aria-expanded="true">
 										<h6>General Details</h6>
 										<div class="form-group row align-items-center">
-											<label class="col-3">Name</label> <form:input
-												class="form-control col" type="text"
-												placeholder="Project name" path="name"/>
+											<label class="col-3">Name</label>
+											<form:input class="form-control col" type="text"
+												placeholder="Project name" path="name" />
 										</div>
 										<div class="form-group row">
 											<label class="col-3">Description</label>
 											<form:textarea class="form-control col" rows="3"
-												placeholder="Project description" path="description"/>
+												placeholder="Project description" path="description" />
 										</div>
 										<hr>
 										<h6>Timeline</h6>
 										<div class="form-group row align-items-center">
-											<label class="col-3">Start Date</label> <form:input
-												class="form-control col" type="date"
-												placeholder="Project start" path="startDate"/>
+											<label class="col-3">Start Date</label>
+											<form:input class="form-control col" type="date"
+												placeholder="Project start" path="startDate" />
 										</div>
 										<div class="form-group row align-items-center">
-											<label class="col-3">Due Date</label> <form:input
-												class="form-control col" type="date"
-												placeholder="Project due" path="endDate"/>
+											<label class="col-3">Due Date</label>
+											<form:input class="form-control col" type="date"
+												placeholder="Project due" path="endDate" />
 										</div>
 										<div class="alert alert-warning text-small" role="alert">
 											<span>You can change due dates at any time.</span>
 										</div>
 										<hr>
-										<h6>Visibility</h6>
-										
+										<h6><form:label path="visibility"/>Visibility</h6>
+										<div class="row">
+											<div class="col">
+												<div class="options">
+													<form:radiobutton path="visibility" id="private" value="private"
+														/> <label for="private">Just Me</label>
+												</div>
+											</div>
+											<div class="col">
+												<div class="options">
+													<form:radiobutton path="visibility" id="team" value="team"/>
+													<label for="team">My Team</label>
+												</div>
+											</div>
+											<div class="col">
+												<div class="options">
+													<form:radiobutton path="visibility" id="public" value="public"/>
+													<label for="public">Public</label>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -30,12 +30,10 @@ public class ProjectDAO {
 		return contact;
 	}
 	
-	public Project findNullProject(String name) {
-		@SuppressWarnings("rawtypes")
-		Query query = getSession().createQuery("select a from Project a where a.name=:name");
-		query.setParameter("name", name);
-		Project pro = (Project) query.getSingleResult();
-		return pro;
+	public List<Project> findByEmail(String email) {
+		TypedQuery<Project> query = getSession().createQuery("select a from Project a where a.owner=:email",Project.class);
+		query.setParameter("email", email);
+		return query.getResultList();
 	}
 	
 	

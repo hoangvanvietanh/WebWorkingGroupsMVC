@@ -1,0 +1,25 @@
+
+.content-list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+ .content-list-head > div:first-child {
+    margin-bottom: 3/2;
+  }
+
+.content-list-head {
+    margin-bottom: 1.5rem;
+}
+.content-list-head h3, .content-list-head h5 {
+  margin: 0;
+  display: inline-block;
+}
+.content-list-head > [class*=col] {
+  display: flex;
+  align-items: center;
+}
+
+.content-list + .content-list {
+  margin-top: 1;
+}

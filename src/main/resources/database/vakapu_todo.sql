@@ -16,37 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `profile`
+-- Table structure for table `todo`
 --
 
-DROP TABLE IF EXISTS `profile`;
+DROP TABLE IF EXISTS `todo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `profile` (
-  `email` varchar(150) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  `summary` varchar(1000) DEFAULT NULL,
-  `skill` varchar(1000) DEFAULT NULL,
-  `experience` varchar(3000) DEFAULT NULL,
-  `education` varchar(1000) DEFAULT NULL,
-  `birthdate` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `todo` (
+  `idtodo` int(11) NOT NULL AUTO_INCREMENT,
+  `todo` varchar(245) DEFAULT NULL,
+  `completed` tinyint(4) DEFAULT NULL,
+  `task` int(11) DEFAULT NULL,
+  `note` varchar(455) DEFAULT NULL,
+  `titlenote` varchar(145) DEFAULT NULL,
+  PRIMARY KEY (`idtodo`),
+  KEY `fk_todo_1_idx` (`task`),
+  CONSTRAINT `fk_todo_1` FOREIGN KEY (`task`) REFERENCES `task` (`idtask`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `profile`
+-- Dumping data for table `todo`
 --
 
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg');
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+LOCK TABLES `todo` WRITE;
+/*!40000 ALTER TABLE `todo` DISABLE KEYS */;
+INSERT INTO `todo` VALUES (1,'Hello Viet Anh',1,1,'Nothing','TEst note'),(2,'Go to school',0,1,'Hello','Viet Anh'),(3,'',NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `todo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 21:18:19
+-- Dump completed on 2018-10-12 21:18:20

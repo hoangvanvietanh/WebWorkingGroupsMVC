@@ -26,9 +26,9 @@ public class ProjectServices {
 		return projectDao.find(id);
 	}
 	
-	public Project findProjectNull(String name)
+	public List<Project> findByEmail(String email)
 	{
-		return projectDao.findNullProject(name);
+		return projectDao.findByEmail(email);
 	}
 	
 	public Project createProject(Project project)

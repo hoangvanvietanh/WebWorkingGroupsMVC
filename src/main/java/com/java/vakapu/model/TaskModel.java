@@ -15,9 +15,13 @@ public class TaskModel {
 	
 	private String description;
 	
-	private Project idproject;
+	private Project project;
 	
 	private String owner;
+	
+	private String startDate;
+	
+	private String endDate;
 	
 	public void fromTask(Task task)
 	{
@@ -25,8 +29,10 @@ public class TaskModel {
 		this.setName(task.getName());
 		this.setCompleted(task.getCompleted());
 		this.setDescription(task.getDescription());
-		this.setIdproject(task.getIdProject());
+		this.setProject(task.getProject());
 		this.setOwner(task.getOwner());
+		this.setStartDate(task.getStartDate());
+		this.setEndDate(task.getEndDate());
 	}
 	
 	public Task toTask()
@@ -36,8 +42,10 @@ public class TaskModel {
 		task.setName(this.getName());
 		task.setCompleted(this.getCompleted());
 		task.setDescription(this.getDescription());
-		task.setIdProject(this.getIdproject());
+		task.setProject(this.getProject());
 		task.setOwner(this.getOwner());
+		task.setStartDate(this.startDate);
+		task.setEndDate(this.endDate);
 		return task;
 	}
 
@@ -73,20 +81,36 @@ public class TaskModel {
 		this.description = description;
 	}
 
-	public Project getIdproject() {
-		return idproject;
-	}
-
-	public void setIdproject(Project idproject) {
-		this.idproject = idproject;
-	}
-
 	public String getOwner() {
 		return owner;
 	}
 
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	
 	

@@ -34,10 +34,14 @@ public class MyProjectController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getInfoProject(Model model) {
-		List<ProjectUser> project = proUserServices.findByEmail(accountServices.getEmailUser());
+		List<Project> project = proServices.findByEmail(accountServices.getEmailUser());
 		ProjectModel proModel = new ProjectModel();
 		model.addAttribute("projectCreate", proModel);
 		model.addAttribute("project", project);
+		for(Project p: project)
+		{
+			p.getVisibility();
+		}
 		return "myproject";
 	}
 	
@@ -48,28 +52,11 @@ public class MyProjectController {
 		if (result.hasErrors()) {
 			return "create-project";
 		}
-		String currentUser = accountServices.getEmailUser();
-		Project projectNull = new Project();
-		projectNull.setName("null");
-		proServices.createProject(projectNull);
+		Project project = proModel.toProject();	
+		project.setOwner(accountServices.getEmailUser());
+		proServices.createProject(project);
 		
-		Project project =  proServices.findProjectNull("null");
-		System.out.println("Id la:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+project.getIdproject());
-		int id = project.getIdproject();
-		
-		ProjectUser proUser = new ProjectUser();
-		proUser.setIdproject(project);
-		proUser.setEmail(currentUser);
-		proUser.setRole("Administator");
-		proUserServices.createProjectUser(proUser);
-		
-		
-		project = proModel.toProject();	
-		project.setOwner(currentUser);
-		project.setIdproject(id);
-		proServices.updateProject(project);
-		
-		return "redirect:/profile";
+		return "redirect:/myProject";
 	}
 
 }

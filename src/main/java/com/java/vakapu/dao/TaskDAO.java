@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.java.vakapu.entity.Project;
 import com.java.vakapu.entity.Task;
 
 @Repository
@@ -26,7 +27,11 @@ public class TaskDAO {
 		List<Task> contact = query.getResultList();
 		return contact;
 	}
-	
+	public List<Task> findByIdProject(int id) {
+		TypedQuery<Task> query = getSession().createQuery("select a from Task a where a.project.idproject=:id",Task.class);
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
 	public Task find(int id) {
 		return getSession().find(Task.class, id);
 	}

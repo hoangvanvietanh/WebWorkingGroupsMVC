@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	5.7.23-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,17 +21,17 @@
 
 DROP TABLE IF EXISTS `project_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) DEFAULT NULL,
   `role` varchar(100) DEFAULT NULL,
-  `infoproject_idproject` int(11) DEFAULT NULL,
+  `idproject_idproject` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_project_1_idx` (`email`),
-  KEY `FKpfud5s2t7bdu2xv1o2qsxq2fr` (`infoproject_idproject`),
-  CONSTRAINT `FKpfud5s2t7bdu2xv1o2qsxq2fr` FOREIGN KEY (`infoproject_idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK1u4qxnikrb7vrewgkj8asb0mr` (`idproject_idproject`),
+  CONSTRAINT `FK1u4qxnikrb7vrewgkj8asb0mr` FOREIGN KEY (`idproject_idproject`) REFERENCES `project` (`idproject`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `project_user` (
 
 LOCK TABLES `project_user` WRITE;
 /*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
+INSERT INTO `project_user` VALUES (2,'hoangvanvietanh@gmail.com','Administator',9);
 /*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-08 21:16:16
+-- Dump completed on 2018-10-12 21:18:20

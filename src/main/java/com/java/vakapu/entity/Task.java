@@ -23,12 +23,19 @@ public class Task {
 	
 	@Column(name="description")
 	private String description;
+	
 	@Column(name="owner")
 	private String owner;
 	
+	@Column(name="startDate")
+	private String startDate;
+	
+	@Column(name="endDate")
+	private String endDate;	
+	
 	@ManyToOne
 	@JoinColumn(name="idproject")
-	private Project idProject;
+	private Project project;
 
 	public int getId() {
 		return id;
@@ -62,12 +69,14 @@ public class Task {
 		this.description = description;
 	}
 
-	public Project getIdProject() {
-		return idProject;
+	
+
+	public Project getProject() {
+		return project;
 	}
 
-	public void setIdProject(Project idProject) {
-		this.idProject = idProject;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getOwner() {
@@ -76,6 +85,22 @@ public class Task {
 
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	
 	
