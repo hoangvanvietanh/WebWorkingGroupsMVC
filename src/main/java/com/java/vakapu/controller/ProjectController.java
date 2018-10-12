@@ -97,10 +97,40 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.POST)
-	public String updatePost(@ModelAttribute("project") ProjectModel proM,
+	public String updatePost(@ModelAttribute("project") ProjectModel proM,@RequestParam(name="status") String status,
 			BindingResult result,Model model)
 	{
+		if(result.hasErrors())
+		{
+			return "update-project";
+		}
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local=LocalDateTime.now();
+		String time=date.format(local);
+		
 		Project pro=proM.toProject();
+		if(status.equals("In-progress"))
+		{
+			pro.setStartDate(time);
+			return "redirect:/project/update-project";	
+		}
+		else if(status.equals("cancel"))
+		{
+			pro.setEndDate(time);
+			return "redirect:/project/update-project";	
+		}
+		else if(status.equals("Done"))
+		{
+			pro.setEndDate(time);
+			return "redirect:/project/update-project";	
+		}
+		else if(status.equals("New"))
+		{
+			pro.setStartDate(null);
+			pro.setEndDate(null);
+			return "redirect:/project/update-project";	
+		}
+		
 		proServices.updateProject(pro);
 		return "redirect:/project";
 	}

@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- 
+<title>Create New Project</title>
 <style>
 input,div {
 	width: 50%;
