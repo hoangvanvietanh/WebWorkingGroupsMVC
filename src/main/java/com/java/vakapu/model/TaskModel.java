@@ -1,30 +1,27 @@
 package com.java.vakapu.model;
 
 import com.java.vakapu.entity.Project;
-import com.java.vakapu.entity.Profile;
-import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.entity.Task;
 
 public class TaskModel {
 
 	private int idtask;
-	
+
 	private String name;
-	
+
 	private String completed;
-	
+
 	private String description;
-	
+
 	private Project project;
-	
+
 	private String owner;
 	
 	private String startDate;
 	
 	private String endDate;
-	
-	public void fromTask(Task task)
-	{
+
+	public void fromTask(Task task) {
 		this.setIdtask(task.getId());
 		this.setName(task.getName());
 		this.setCompleted(task.getCompleted());
@@ -34,10 +31,9 @@ public class TaskModel {
 		this.setStartDate(task.getStartDate());
 		this.setEndDate(task.getEndDate());
 	}
-	
-	public Task toTask()
-	{
-		Task task= new Task();
+
+	public Task toTask() {
+		Task task = new Task();
 		task.setId(this.getIdtask());
 		task.setName(this.getName());
 		task.setCompleted(this.getCompleted());
@@ -112,7 +108,5 @@ public class TaskModel {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
-	
 	
 }

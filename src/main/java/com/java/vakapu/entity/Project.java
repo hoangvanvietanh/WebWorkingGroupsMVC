@@ -1,5 +1,7 @@
 package com.java.vakapu.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 public class Project {
 
 	@Id
+	@GeneratedValue
 	@Column(name="idproject")
 	private int idproject;
 	
@@ -57,14 +60,15 @@ public class Project {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 
 	public String getStartDate() {
 		return startDate;
 	}
-	
+
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
-
 	}
 
 	public String getStatus() {

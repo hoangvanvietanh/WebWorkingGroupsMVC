@@ -266,7 +266,7 @@ body {
 		</div>
 		<div class="etc-login-form">
 			<p>
-				New Project? <a href="<spring:url value='/project/createProject'/>">create new
+				New Project? <a href="<spring:url value='/project/create'/>">create new
 					project</a>
 			</p>
 		</div>
