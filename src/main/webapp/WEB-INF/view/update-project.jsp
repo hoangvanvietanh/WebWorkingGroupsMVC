@@ -15,7 +15,11 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Update Project</title>
-<title></title>
+<style>
+input {
+	width:50%;
+}
+</style>
 </head>
 <body>
 	<form:form modelAttribute="project" method="post">
@@ -64,8 +68,8 @@
   			</div>
   			
   
-  <button type="submit" class="btn btn-primary" onclick="window.location.href='<spring:url href="project/update" />' ">Update</button>
-  <button type="button" class="btn btn-primary" onclick="window.location.href='<spring:url href="/project" />'">Cancel</button>
+  <button type="submit" class="btn btn-primary" onclick="window.location.href='<spring:url value="project/update" />'">Update</button>
+  <button type="button" class="btn btn-primary" onclick="window.location.href='<spring:url value="project" />'">Cancel</button>
 
 		
 		

@@ -59,7 +59,9 @@
     </tr>
   </thead>
   <tbody>
+  <%int i =0; %>
    <c:forEach var="project" items="${listInfo}">
+   <%i++; %>>
 		<tr>
 			<td scope="row">${project.idproject }</td>
 			<td>${project.name}</td>
@@ -71,11 +73,11 @@
 			<td>${project.visibility }</td>
 			<td>
 				<p>
-  					<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  					<a class="btn btn-primary" data-toggle="collapse" href="#<%=i %>" role="button" aria-expanded="false" aria-controls="collapseExample">
    						Action
   					</a>
   				</p>
-  					<div class="collapse" id="collapseExample">
+  					<div class="collapse" id="<%=i %>">
   						<div class="card card-body">
 			
        							<c:if test="${project.status eq 'New' }">

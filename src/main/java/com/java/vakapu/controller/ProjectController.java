@@ -96,13 +96,13 @@ public class ProjectController {
 		
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.POST)
+	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String updatePost(@ModelAttribute("project") ProjectModel proM,@RequestParam(name="status") String status,
 			BindingResult result,Model model)
 	{
 		if(result.hasErrors())
 		{
-			return "update-project";
+			return "redirect:/project";
 		}
 		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
