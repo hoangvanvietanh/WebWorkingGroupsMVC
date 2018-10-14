@@ -31,29 +31,21 @@ input {
       				<form:input type="text" class="form-control" path="name"/>
    				</div>
    			</div>
-   			<!-- 
-    			<div class="form-group col-md-6">
-      				<label for="status">Status</label>
-     			 	<form:select path="status" class="form-control" >
-        				<option selected>New</option>
-        				<option>In-progress</option>
-        				<option>Cancel</option>
-        				<option>Done</option>
-      				</form:select>
+   			 
+    			<div type="hidden" class="form-group col-md-6">
+     			 	<form:input type="hidden"  path="status" class="form-control" />
     			</div>
   			</div>
   			 
-  			<div class="form-row">
+  			<div  class="form-row">
   				<div class="form-group col-md-6">
-    				<label for="startDate">Start Date</label>
-    				<form:input type="date" class="form-control" path="startDate"/>
+    				<form:input type="hidden" class="form-control" path="startDate"/>
   				</div>
   				<div class="form-group col-md-6">
-    				<label for="endDate" width="40%">End Date</label>
-    				<form:input type="date" class="form-control" path="endDate"/>
+    				<form:input type="hidden" class="form-control" path="endDate"/>
   				</div>
   			</div>
-  			-->
+  			
   			<div class="form-row">
     			<div class="form-group col-md-6">
       				<label for="owner">Owner</label>
@@ -74,7 +66,7 @@ input {
   			</div>
   			
  
-  <button type="submit" class="btn btn-primary" onclick="window.location.href='<spring:url value="/project/update" />'">Update</button>
+  <form:button class="btn btn-primary" action="update" method="post">Update</form:button>
   <button type="button" class="btn btn-primary" onclick="window.location.href='<spring:url value="/project" />'">Cancel</button>
 
 		

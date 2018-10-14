@@ -24,21 +24,26 @@
 <title>Forgot Password</title>
 </head>
 <body>
-
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
-		<div class="logo">Forgot Password</div>
+		<div class="logo">Create New Password</div>
 		<!-- Main Form -->
 		<div class="login-form-1">
-			<form id="register-form" class="text-left" action="forgot-password"
+			<form id="register-form" class="text-left" action="change-password"
 				method="post">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 					<div class="login-group">
 						<div class="form-group">
-							<label for="reg_username" class="sr-only">Email address</label> <input
-								type="text" class="form-control" name="emailSignUp"
-								placeholder="Your email address" /> <input type="hidden"
-								name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<label for="reg_password" class="sr-only">Password</label> <input
+								type="password" class="form-control" name="pass"
+								placeholder="password">
+						</div>
+						<div class="form-group">
+							<label for="reg_password_confirm" class="sr-only">Password
+								Confirm</label> <input type="password" class="form-control"
+								name="re_pass" placeholder="confirm password"> <input
+								type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 						</div>
 					</div>
 					<button type="submit" class="login-button">

@@ -49,33 +49,62 @@ public class ForgotPasswordController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String handleCreate(@ModelAttribute("email") String emailSignUp, BindingResult result, ModelMap model,
+	public String handleCreate(@ModelAttribute("emailSignUp") String emailSignUp, BindingResult result, ModelMap model,
 			RedirectAttributes redirectAttributes) throws ParseException {
 		if (result.hasErrors()) {
-			return "sign-up";
-		}
-		// System.out.println(email);
+			return "redirect:/forgot-password";
+		}	
+		
 		model.put("email", emailSignUp);
-		List<Account> accountAll = accountServices.findAll();
-		for (Account u : accountAll) {
-			if (u.getEmail().equals(emailSignUp)) {
-				RandomPassword random = new RandomPassword();
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				String code = random.getCode();
-				model.addAttribute("code", code);
-				Account acc= accountServices.findByEmail(emailSignUp);
-				emailServices.sendSimpleMessage(emailSignUp, code);
-				acc.setPassword(passwordEncoder.encode(code));
-				accountServices.updateAccount(acc);
-				return "redirect:/sign-in";
+		List<Account> account=accountServices.findAll();
+		for(Account a:account)
+		{
+			if(a.getEmail().equals(emailSignUp))
+			{
+				return "change-password";
 			}
 		}
-		return "redirect:/forgot-password";
+		model.addAttribute("message", "Email is not exist");
+		return "/denied";
+		
+	
 	}
 
-
-	@RequestMapping(value = "/authentication", method = RequestMethod.GET)
-	public String checkCode(@ModelAttribute("email") String email, Model model) {
+	@RequestMapping(value="/change-password",method=RequestMethod.GET)
+	public String changePasswordGet(@ModelAttribute("emailSignUp") String emailSignUp,BindingResult result, ModelMap model)
+	{
+		
+		if(result.hasErrors())
+		{
+			return"change-password";
+		}
+		model.put("email", emailSignUp);
+		System.out.println(emailSignUp);
+		return "redirect:/forgot-password/change-password";
+		
+		
+	}
+	
+	@RequestMapping(value="/change-password",method=RequestMethod.POST)
+	public String changePasswordPost(@ModelAttribute("emailSignUp") String emailSignUp, @ModelAttribute("pass") String pass, 
+			@ModelAttribute("re_pass") String rePass,BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/forgot-password/change-password";
+		}
+		
+		if(pass.equals(rePass))
+		{
+			model.put("email",emailSignUp);
+			Account acc=accountServices.findByEmail(emailSignUp);
+			BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+			acc.setPassword(passwordEncoder.encode(pass));
+			acc.setStatus("active");
+			accountServices.updateAccount(acc);
+		}
+		
 		
 		return "redirect:/sign-in";
 	}
