@@ -26,13 +26,15 @@ input {
 		<form:errors path="*" cssClass="error-box"></form:errors>
 	
   			<div class="form-row">
-    			<div class="form-group col-md-6">
+    			<div class="form-group" width="50%">
       				<label for="name">Project name</label>
       				<form:input type="text" class="form-control" path="name"/>
    				</div>
+   			</div>
+   			<!-- 
     			<div class="form-group col-md-6">
       				<label for="status">Status</label>
-     			 	<form:select path="status" class="form-control">
+     			 	<form:select path="status" class="form-control" >
         				<option selected>New</option>
         				<option>In-progress</option>
         				<option>Cancel</option>
@@ -40,14 +42,18 @@ input {
       				</form:select>
     			</div>
   			</div>
-  			<div class="form-group">
-    			<label for="startDate">Start Date</label>
-    			<form:input type="type" class="form-control" path="startDate"/>
+  			 
+  			<div class="form-row">
+  				<div class="form-group col-md-6">
+    				<label for="startDate">Start Date</label>
+    				<form:input type="date" class="form-control" path="startDate"/>
+  				</div>
+  				<div class="form-group col-md-6">
+    				<label for="endDate" width="40%">End Date</label>
+    				<form:input type="date" class="form-control" path="endDate"/>
+  				</div>
   			</div>
-  			<div class="form-group">
-    			<label for="endDate">End Date</label>
-    			<form:input type="type" class="form-control" path="endDate"/>
-  			</div>
+  			-->
   			<div class="form-row">
     			<div class="form-group col-md-6">
       				<label for="owner">Owner</label>
@@ -67,14 +73,15 @@ input {
     			</div>
   			</div>
   			
-  
-  <button type="submit" class="btn btn-primary" onclick="window.location.href='<spring:url value="project/update" />'">Update</button>
-  <button type="button" class="btn btn-primary" onclick="window.location.href='<spring:url value="project" />'">Cancel</button>
+ 
+  <button type="submit" class="btn btn-primary" onclick="window.location.href='<spring:url value="/project/update" />'">Update</button>
+  <button type="button" class="btn btn-primary" onclick="window.location.href='<spring:url value="/project" />'">Cancel</button>
 
 		
 		
 		
 	</form:form>
+	
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -16,7 +16,7 @@ public class Project {
 	@Id
 	@GeneratedValue
 	@Column(name="idproject")
-	private int idproject;
+	private int idProject;
 	
 	@Column(name="name")
 	private String name;
@@ -45,12 +45,14 @@ public class Project {
 
 	
 
-	public int getIdproject() {
-		return idproject;
+	
+
+	public int getIdProject() {
+		return idProject;
 	}
 
-	public void setIdproject(int idproject) {
-		this.idproject = idproject;
+	public void setIdProject(int idProject) {
+		this.idProject = idProject;
 	}
 
 	public String getName() {

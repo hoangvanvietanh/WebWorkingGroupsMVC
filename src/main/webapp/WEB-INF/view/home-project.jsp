@@ -61,7 +61,7 @@
   <tbody>
   <%int i =0; %>
    <c:forEach var="project" items="${listInfo}">
-   <%i++; %>>
+   <%i++; %>
 		<tr>
 			<td scope="row">${project.idproject }</td>
 			<td>${project.name}</td>
@@ -124,9 +124,11 @@
 			
 			
 	</c:forEach>
+	<button type="button" onclick="window.location.href='<spring:url value="/project/create/" />' ">Create</button>
 	<div>
+	
 </div>
-<button type="button" onclick="window.location.href='<spring:url value="/project/create/" />' ">Create</button>
+
 </table>
 
 

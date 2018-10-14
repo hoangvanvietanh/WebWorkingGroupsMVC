@@ -26,6 +26,7 @@ import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.ProjectServices;
 
 import com.java.vakapu.services.ProjectUserServices;
+import com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx.Binding;
 
 @Controller
 @RequestMapping("/project")
@@ -77,7 +78,7 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.GET)
+	@RequestMapping(value="/update",method=RequestMethod.GET)
 	public String updateGet(@ModelAttribute("project") ProjectModel proM, @RequestParam(name="idproject") int idproject,
 			BindingResult result,Model model) throws ParseException
 	{
@@ -97,40 +98,14 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String updatePost(@ModelAttribute("project") ProjectModel proM,@RequestParam(name="status") String status,
-			BindingResult result,Model model)
+	public String updatePost(@ModelAttribute("project") ProjectModel proM,BindingResult result,Model model)
 	{
+		
 		if(result.hasErrors())
 		{
-			return "redirect:/project";
+			return "update-project";
 		}
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime local=LocalDateTime.now();
-		String time=date.format(local);
-		
 		Project pro=proM.toProject();
-		if(status.equals("In-progress"))
-		{
-			pro.setStartDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("cancel"))
-		{
-			pro.setEndDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("Done"))
-		{
-			pro.setEndDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("New"))
-		{
-			pro.setStartDate(null);
-			pro.setEndDate(null);
-			return "redirect:/project/update-project";	
-		}
-		
 		proServices.updateProject(pro);
 		return "redirect:/project";
 	}
