@@ -61,9 +61,9 @@
   <tbody>
   <%int i =0; %>
    <c:forEach var="project" items="${listInfo}">
-   <%i++; %>>
+   <%i++; %>
 		<tr>
-			<td scope="row">${project.idproject }</td>
+			<td scope="row">${project.idProject }</td>
 			<td>${project.name}</td>
 			<td>${project.status }</td>
 			<td>${project.startDate }</td>
@@ -81,38 +81,38 @@
   						<div class="card card-body">
 			
        							<c:if test="${project.status eq 'New' }">
-									<form:form action="project/start?idproject=${project.idproject }" method="post">
-										<input type="hidden" name="idproject" value="${project.idproject }">
+									<form:form action="project/start?idProject=${project.idProject }" method="post">
+										<input type="hidden" name="idProject" value="${project.idProject }">
 										<button class="input" type="submit">Start</button>
 									</form:form>
 								</c:if>
 								<c:if test="${project.status eq 'New'}">
-									<form:form action="project/cancel?idproject=${project.idproject }" method="post">
-										<input type="hidden" name="idproject" value="${project.idproject }">
+									<form:form action="project/cancel?idProject=${project.idProject }" method="post">
+										<input type="hidden" name="idProject" value="${project.idProject }">
 										<button class="input" type="submit">Cancel</button>
 									</form:form>
 								</c:if>
 								<c:if test="${project.status eq 'In-progress' }">
-									<form:form action="project/end?idproject=${project.idproject }" method="post">
-										<input type="hidden" name="idproject" value="${project.idproject }">
+									<form:form action="project/end?idProject=${project.idProject }" method="post">
+										<input type="hidden" name="idProject" value="${project.idProject }">
 										<button class="input" type="submit">End</button>
 									</form:form>
 								</c:if>			
 								<c:if test="${project.status eq 'New' or project.status eq 'In-progress' or project.status eq 'Done'or project.status eq 'Canceled'}">
-									<form:form action="project/view?idproject=${project.idproject }" method="post">
-										<input type="hidden" name="idproject" value="${project.idproject}">
+									<form:form action="project/view?idProject=${project.idProject }" method="post">
+										<input type="hidden" name="idProject" value="${project.idProject}">
 										<button class="input" type="submit">View</button>
 									</form:form>
 								</c:if> 
 								<c:if test="${project.status eq 'New'}">
-									<form:form action="project/update?idproject=${project.idproject }" method="get">
-										<input type="hidden" name="idproject" value="${project.idproject}">
+									<form:form action="project/update?idProject=${project.idProject }" method="get">
+										<input type="hidden" name="idProject" value="${project.idProject}">
 										<button class="input" type="submit">Update</button>
 									</form:form>
 								</c:if> 
 								<c:if test="${project.status eq 'New' or project.status eq 'In-progress' or project.status eq 'Done' or project.status eq 'Cancel'}">
-									<form:form action="project/delete?idproject=${project.idproject }" method="post">
-										<input type="hidden" name="idproject" value="${project.idproject}">
+									<form:form action="project/delete?idProject=${project.idProject }" method="post">
+										<input type="hidden" name="idProject" value="${project.idProject}">
 										<button class="input" type="submit">Delete</button>
 									</form:form>
 								</c:if>
@@ -124,9 +124,11 @@
 			
 			
 	</c:forEach>
+	<button type="button" onclick="window.location.href='<spring:url value="/project/create/" />' ">Create</button>
 	<div>
+	
 </div>
-<button type="button" onclick="window.location.href='<spring:url value="/project/create/" />' ">Create</button>
+
 </table>
 
 

@@ -4,13 +4,12 @@ import com.java.vakapu.entity.Project;
 
 import java.util.Date;
 
-
-
+import com.google.protobuf.TextFormat.ParseException;
 import com.java.vakapu.entity.Profile;
 
 public class ProjectModel {
 
-	private int idproject;
+	private int idProject;
 	
 	private String name;
 	
@@ -33,7 +32,7 @@ public class ProjectModel {
 	
 	public void fromProject(Project project) 
 	{
-		this.setIdproject(project.getIdproject());
+		this.setIdProject(project.getIdProject());;
 		this.setName(project.getName());
 		
 		this.setStartDate(this.getStartDate());
@@ -49,7 +48,7 @@ public class ProjectModel {
 	public Project toProject() 
 	{
 		Project project= new Project();
-		project.setIdproject(this.getIdproject());
+		project.setIdProject(this.getIdProject());;
 		project.setName(this.getName());
 		project.setStartDate(this.getStartDate());
 		project.setStatus(this.getStatus());
@@ -62,12 +61,14 @@ public class ProjectModel {
 		return project;
 	}
 
-	public int getIdproject() {
-		return idproject;
+
+
+	public int getIdProject() {
+		return idProject;
 	}
 
-	public void setIdproject(int idproject) {
-		this.idproject = idproject;
+	public void setIdProject(int idProject) {
+		this.idProject = idProject;
 	}
 
 	public String getName() {

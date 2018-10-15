@@ -27,6 +27,7 @@ import com.java.vakapu.services.ProjectServices;
 
 import com.java.vakapu.services.ProjectUserServices;
 
+
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
@@ -77,8 +78,8 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.GET)
-	public String updateGet(@ModelAttribute("project") ProjectModel proM, @RequestParam(name="idproject") int idproject,
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public String updateGet(@ModelAttribute("project") ProjectModel proM, @RequestParam(name="idProject") int idproject,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -97,46 +98,20 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String updatePost(@ModelAttribute("project") ProjectModel proM,@RequestParam(name="status") String status,
-			BindingResult result,Model model)
+	public String updatePost(@ModelAttribute("project") ProjectModel proM,BindingResult result,Model model)
 	{
+		
 		if(result.hasErrors())
 		{
-			return "redirect:/project";
+			return "update-project";
 		}
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime local=LocalDateTime.now();
-		String time=date.format(local);
-		
 		Project pro=proM.toProject();
-		if(status.equals("In-progress"))
-		{
-			pro.setStartDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("cancel"))
-		{
-			pro.setEndDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("Done"))
-		{
-			pro.setEndDate(time);
-			return "redirect:/project/update-project";	
-		}
-		else if(status.equals("New"))
-		{
-			pro.setStartDate(null);
-			pro.setEndDate(null);
-			return "redirect:/project/update-project";	
-		}
-		
 		proServices.updateProject(pro);
 		return "redirect:/project";
 	}
 	
 	@RequestMapping(value="/start",method=RequestMethod.POST)
-	public String updatePost(@RequestParam(name="idproject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String updatePost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -153,7 +128,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="end",method=RequestMethod.POST)
-	public String endPost(@RequestParam(name="idproject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String endPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -173,7 +148,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="view",method=RequestMethod.POST)
-	public String viewGet(@ModelAttribute("idproject") int idproject, Model model) throws ParseException
+	public String viewGet(@ModelAttribute("idProject") int idproject, Model model) throws ParseException
 	{
 		Project c=proServices.find(idproject);
 		ProjectModel proModel=new ProjectModel();
@@ -185,7 +160,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/cancel",method=RequestMethod.POST)
-	public String cancelPost(@RequestParam(name="idproject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String cancelPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -205,7 +180,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
-	public String deletePost(@RequestParam(name="idproject") int idproject, Model model) throws ParseException
+	public String deletePost(@RequestParam(name="idProject") int idproject, Model model) throws ParseException
 	{
 		Project pro=proServices.find(idproject);
 		proServices.deleteProject(pro);
