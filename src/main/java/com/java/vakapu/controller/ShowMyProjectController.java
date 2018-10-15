@@ -54,7 +54,7 @@ public class ShowMyProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("proModel", proModel);
 		model.addAttribute("task", task);
-		return "showmyproject";
+		return "manage-project";
 	}
 	
 	@RequestMapping(value = "/createTask", method = RequestMethod.POST)

@@ -28,7 +28,7 @@ public class SignInController {
 			return "sign-in";
 		}
 
-		return "redirect:/profile";
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

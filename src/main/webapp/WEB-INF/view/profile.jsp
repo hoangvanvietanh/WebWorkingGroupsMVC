@@ -143,7 +143,7 @@ body {
 				<li class="has-children users"><a href="#0">Project</a>
 
 					<ul>
-						<li><a href="myProject">My Project</a></li>
+						<li><a href="manage">My Project</a></li>
 						<li><a href="#0">My Team Project</a></li>
 						<li><a href="#0">Add Member</a></li>
 					</ul></li>
@@ -266,8 +266,8 @@ body {
 		</div>
 		<div class="etc-login-form">
 			<p>
-				New Project? <a href="<spring:url value='/project/create'/>">create new
-					project</a>
+				New Project? <a href="<spring:url value='/project/create'/>">create
+					new project</a>
 			</p>
 		</div>
 	</div>

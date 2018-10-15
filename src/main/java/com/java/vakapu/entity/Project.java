@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +26,6 @@ public class Project {
 	@Column(name="startDate")
 	private String startDate;
 	
-
 	@Column(name="status")
 	private String status;
 	
@@ -42,8 +43,18 @@ public class Project {
 
 	@Column(name="action")
 	private String action;
-
 	
+	@ManyToOne
+	@JoinColumn(name="idteam")
+	private Team team;
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 
 	public int getIdproject() {
 		return idproject;

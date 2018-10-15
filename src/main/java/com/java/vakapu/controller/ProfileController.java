@@ -85,7 +85,7 @@ public class ProfileController {
 	@RequestMapping(value = "/avatar/{email}", method = RequestMethod.GET)
 	public void downloadAvatar(HttpServletResponse response, @PathVariable("email") String email) throws IOException {
 
-		System.out.println("Email la:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + email);
+		System.out.println("Email la vao:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + email);
 		Profile profile = profileServices.findByEmail(email+".com");
 		if (profile == null) {
 			return;
