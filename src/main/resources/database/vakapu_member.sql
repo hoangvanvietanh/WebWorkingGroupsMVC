@@ -16,35 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `task`
+-- Table structure for table `member`
 --
 
-DROP TABLE IF EXISTS `task`;
+DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task` (
-  `idtask` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(145) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT '0',
-  `description` varchar(300) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  `owner` varchar(45) DEFAULT NULL,
-  `startDate` varchar(45) DEFAULT NULL,
-  `endDate` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idtask`),
-  KEY `FKlg5367lnvyh36v17qnoqy5wmj` (`idproject`),
-  CONSTRAINT `FKlg5367lnvyh36v17qnoqy5wmj` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
+CREATE TABLE `member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(145) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `idmember` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKbelmr4kje8bovnpxs8abw74m1` (`idmember`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task`
+-- Dumping data for table `member`
 --
 
-LOCK TABLES `task` WRITE;
-/*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'test',0,'nothing',9,'hoangvanvietanh@gmail.com',NULL,NULL),(2,'test 2',1,'Nothing 2',NULL,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(3,'test 3',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(4,'duoc roi nhe',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-19'),(5,'gkj',NULL,'khkj',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-12'),(7,'test2',NULL,'hi',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-27');
-/*!40000 ALTER TABLE `task` ENABLE KEYS */;
+LOCK TABLES `member` WRITE;
+/*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES (6,'hoangvanvietanh@gmail.com','',1),(7,'k11giadinh@gmail.com',NULL,2);
+/*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

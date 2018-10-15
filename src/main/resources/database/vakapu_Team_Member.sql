@@ -16,35 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `task`
+-- Table structure for table `Team_Member`
 --
 
-DROP TABLE IF EXISTS `task`;
+DROP TABLE IF EXISTS `Team_Member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task` (
-  `idtask` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(145) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT '0',
-  `description` varchar(300) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  `owner` varchar(45) DEFAULT NULL,
-  `startDate` varchar(45) DEFAULT NULL,
-  `endDate` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idtask`),
-  KEY `FKlg5367lnvyh36v17qnoqy5wmj` (`idproject`),
-  CONSTRAINT `FKlg5367lnvyh36v17qnoqy5wmj` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+CREATE TABLE `Team_Member` (
+  `idmember` int(11) NOT NULL,
+  `idteam` int(11) NOT NULL,
+  PRIMARY KEY (`idmember`,`idteam`),
+  KEY `FKelo60ii7ochndwwepv9s4bhfj` (`idteam`),
+  CONSTRAINT `FKelo60ii7ochndwwepv9s4bhfj` FOREIGN KEY (`idteam`) REFERENCES `team` (`idteam`),
+  CONSTRAINT `FKlnj2nwovisef29voc2fd50rk3` FOREIGN KEY (`idmember`) REFERENCES `member` (`idmember`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task`
+-- Dumping data for table `Team_Member`
 --
 
-LOCK TABLES `task` WRITE;
-/*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'test',0,'nothing',9,'hoangvanvietanh@gmail.com',NULL,NULL),(2,'test 2',1,'Nothing 2',NULL,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(3,'test 3',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(4,'duoc roi nhe',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-19'),(5,'gkj',NULL,'khkj',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-12'),(7,'test2',NULL,'hi',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-27');
-/*!40000 ALTER TABLE `task` ENABLE KEYS */;
+LOCK TABLES `Team_Member` WRITE;
+/*!40000 ALTER TABLE `Team_Member` DISABLE KEYS */;
+INSERT INTO `Team_Member` VALUES (1,1),(2,1),(1,2),(1,3);
+/*!40000 ALTER TABLE `Team_Member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:48
+-- Dump completed on 2018-10-15 17:27:49

@@ -33,7 +33,10 @@ CREATE TABLE `project` (
   `idtask` int(11) DEFAULT NULL,
   `action` varchar(45) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idproject`)
+  `idteam` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idproject`),
+  KEY `fk_project_1_idx` (`idteam`),
+  CONSTRAINT `fk_project_1` FOREIGN KEY (`idteam`) REFERENCES `team` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,7 +46,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (9,'test','2018-10-12 00:00:00','2018-11-02 00:00:00','hoangvanvietanh@gmail.com','test','on,',NULL,NULL,NULL),(15,'test2','2018-10-12 00:00:00','2018-10-13 00:00:00','hoangvanvietanh@gmail.com','nothing','private',NULL,NULL,NULL),(16,'test3','2018-10-13 00:00:00','2018-10-17 00:00:00','hoangvanvietanh@gmail.com','nothing','public',NULL,NULL,NULL),(17,'test4','2018-10-12 00:00:00','2018-10-12 00:00:00','hoangvanvietanh@gmail.com','nothing','team',NULL,NULL,NULL),(18,'test5','2018-10-12 00:00:00','2018-10-13 00:00:00','hoangvanvietanh@gmail.com','nothing','team',NULL,NULL,NULL),(19,'test6','2018-10-13 00:00:00','2018-10-26 00:00:00','hoangvanvietanh@gmail.com','not','private',NULL,NULL,NULL);
+INSERT INTO `project` VALUES (9,'test','2018-10-12 00:00:00','2018-11-02 00:00:00','hoangvanvietanh@gmail.com','test','on,',NULL,NULL,NULL,NULL),(15,'test2','2018-10-12 00:00:00','2018-10-13 00:00:00','hoangvanvietanh@gmail.com','nothing','private',NULL,NULL,NULL,NULL),(16,'test3','2018-10-13 00:00:00','2018-10-17 00:00:00','hoangvanvietanh@gmail.com','nothing','public',NULL,NULL,NULL,NULL),(17,'test4','2018-10-12 00:00:00','2018-10-12 00:00:00','hoangvanvietanh@gmail.com','nothing','team',NULL,NULL,NULL,NULL),(18,'test5','2018-10-12 00:00:00','2018-10-13 00:00:00','hoangvanvietanh@gmail.com','nothing','team',NULL,NULL,NULL,NULL),(19,'test6','2018-10-13 00:00:00','2018-10-26 00:00:00','hoangvanvietanh@gmail.com','not','private',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 21:18:19
+-- Dump completed on 2018-10-15 17:27:48

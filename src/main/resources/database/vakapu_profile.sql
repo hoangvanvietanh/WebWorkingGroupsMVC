@@ -45,7 +45,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg');
+INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg'),('k11giadinh@gmail.com','',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','check.png');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 21:18:19
+-- Dump completed on 2018-10-15 17:27:48

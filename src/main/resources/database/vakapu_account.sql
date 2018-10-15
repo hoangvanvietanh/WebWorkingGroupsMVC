@@ -36,7 +36,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('hoangvanvietanh@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq',NULL);
+INSERT INTO `account` VALUES ('hoangvanvietanh@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq',NULL),('k11giadinh@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 21:18:20
+-- Dump completed on 2018-10-15 17:27:48

@@ -26,12 +26,12 @@ CREATE TABLE `project_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) DEFAULT NULL,
   `role` varchar(100) DEFAULT NULL,
-  `idproject_idproject` int(11) DEFAULT NULL,
+  `idproject` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_project_1_idx` (`email`),
-  KEY `FK1u4qxnikrb7vrewgkj8asb0mr` (`idproject_idproject`),
-  CONSTRAINT `FK1u4qxnikrb7vrewgkj8asb0mr` FOREIGN KEY (`idproject_idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  KEY `FKokmvqi4odeiswrunde7ei6r7s` (`idproject`),
+  CONSTRAINT `FKokmvqi4odeiswrunde7ei6r7s` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `project_user` (
 
 LOCK TABLES `project_user` WRITE;
 /*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (2,'hoangvanvietanh@gmail.com','Administator',9);
+INSERT INTO `project_user` VALUES (2,'hoangvanvietanh@gmail.com','Administator',NULL);
 /*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-12 21:18:20
+-- Dump completed on 2018-10-15 17:27:48
