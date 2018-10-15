@@ -21,9 +21,10 @@
 	left: 35%;
 }
 </style>
-<title>Forgot Password</title>
+<title>Change Password</title>
 </head>
 <body>
+<form:form modelAttribute="account" method=post>
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
 		<div class="logo">Create New Password</div>
 		<!-- Main Form -->
@@ -32,7 +33,14 @@
 				method="post">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
+				
 					<div class="login-group">
+						<div class="form-group">
+							<label for="email" class="sr-only">Email</label><br> <input
+								type="text" class="form-control" path="email" />
+						</div>
+					</div>
+					
 						<div class="form-group">
 							<label for="reg_password" class="sr-only">Password</label> <input
 								type="password" class="form-control" name="pass"
@@ -60,7 +68,7 @@
 		</div>
 		<!-- end:Main Form -->
 	</div>
-
+</form:form>
 	<br>
 	<div>${message}</div>
 	<script src="<spring:url value='/resources/js/app.js' />"></script>

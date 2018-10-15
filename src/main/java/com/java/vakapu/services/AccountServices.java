@@ -43,6 +43,11 @@ public class AccountServices {
 		accountDao.deleteAccount(account);
 	}
 	
+	public void deletePassword(Account account)
+	{
+		account.setPassword(null);
+	}
+	
 	public String getEmailUser()
 	{
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

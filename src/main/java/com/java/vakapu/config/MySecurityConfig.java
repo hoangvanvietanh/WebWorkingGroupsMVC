@@ -36,6 +36,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.anyRequest().permitAll()
+			.antMatchers("/forgot-password").permitAll()
+			
 //			.antMatchers("/sign-up").permitAll()
 //			.antMatchers("/sign-up/authentication").permitAll()
 //			.antMatchers("/sign-up/create-password").permitAll()
