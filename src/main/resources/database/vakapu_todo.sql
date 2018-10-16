@@ -32,7 +32,7 @@ CREATE TABLE `todo` (
   PRIMARY KEY (`idtodo`),
   KEY `fk_todo_1_idx` (`task`),
   CONSTRAINT `fk_todo_1` FOREIGN KEY (`task`) REFERENCES `task` (`idtask`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,6 @@ CREATE TABLE `todo` (
 
 LOCK TABLES `todo` WRITE;
 /*!40000 ALTER TABLE `todo` DISABLE KEYS */;
-INSERT INTO `todo` VALUES (1,'Hello Viet Anh',1,1,'Nothing','TEst note'),(2,'Go to school',0,1,'Hello','Viet Anh'),(3,'',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `todo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:49
+-- Dump completed on 2018-10-16 18:00:19

@@ -23,14 +23,12 @@ DROP TABLE IF EXISTS `team`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idteam` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(145) DEFAULT NULL,
   `description` varchar(245) DEFAULT NULL,
   `owner` varchar(145) DEFAULT NULL,
-  `idteam` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKgrhn4cbtoin4dcm08vkmev2nc` (`idteam`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idteam`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +37,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (6,'Test team 1','nothing','vakapuWeb@gmail.com',1),(7,'Test team 2','nothing','vakapuWeb@gmail.com',2),(8,'Test team 3','nothing','vakapuWeb@gmail.com',3);
+INSERT INTO `team` VALUES (1,'Test Team 1','Nothing','hoangvanvietanh@gmail.com'),(2,'Test Team 2','No','k11giadinh@gmail.com'),(3,'Test Team 3','No','vakapuWeb@gmail.com');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:48
+-- Dump completed on 2018-10-16 18:00:19

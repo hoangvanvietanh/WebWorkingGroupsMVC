@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `member`
+-- Table structure for table `friendship`
 --
 
-DROP TABLE IF EXISTS `member`;
+DROP TABLE IF EXISTS `friendship`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `member` (
-  `email` varchar(145) NOT NULL,
-  `name` varchar(145) DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `friendship` (
+  `idfriendship` int(11) NOT NULL AUTO_INCREMENT,
+  `email1` varchar(145) DEFAULT NULL,
+  `email2` varchar(145) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idfriendship`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `member`
+-- Dumping data for table `friendship`
 --
 
-LOCK TABLES `member` WRITE;
-/*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('hoangvanvietanh@gmail.com','Viet Anh'),('k11giadinh@gmail.com','Dat');
-/*!40000 ALTER TABLE `member` ENABLE KEYS */;
+LOCK TABLES `friendship` WRITE;
+/*!40000 ALTER TABLE `friendship` DISABLE KEYS */;
+INSERT INTO `friendship` VALUES (1,'hoangvanvietanh@gmail.com','k11giadinh@gmail.com',NULL);
+/*!40000 ALTER TABLE `friendship` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -34,7 +34,7 @@ CREATE TABLE `task` (
   PRIMARY KEY (`idtask`),
   KEY `FKlg5367lnvyh36v17qnoqy5wmj` (`idproject`),
   CONSTRAINT `FKlg5367lnvyh36v17qnoqy5wmj` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'test',0,'nothing',9,'hoangvanvietanh@gmail.com',NULL,NULL),(2,'test 2',1,'Nothing 2',NULL,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(3,'test 3',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-13'),(4,'duoc roi nhe',NULL,'nothing',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-19'),(5,'gkj',NULL,'khkj',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-12'),(7,'test2',NULL,'hi',9,'hoangvanvietanh@gmail.com','2018-10-12','2018-10-27');
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:48
+-- Dump completed on 2018-10-16 18:00:18

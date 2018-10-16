@@ -35,6 +35,7 @@ CREATE TABLE `profile` (
   `education` varchar(1000) DEFAULT NULL,
   `birthdate` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
+  `about` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,7 +46,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg'),('k11giadinh@gmail.com','',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','check.png');
+INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg','I am a coder'),('k11giadinh@gmail.com','Hoang van Dat',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','check.png','I am a designer');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:48
+-- Dump completed on 2018-10-16 18:00:18

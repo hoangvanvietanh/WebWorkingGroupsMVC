@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `project_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL,
+  `email` varchar(145) DEFAULT NULL,
   `idproject` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_project_1_idx` (`email`),
-  KEY `FKokmvqi4odeiswrunde7ei6r7s` (`idproject`),
-  CONSTRAINT `FKokmvqi4odeiswrunde7ei6r7s` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `fk_project_user_2_idx` (`idproject`),
+  KEY `fk_project_user_1_idx` (`email`),
+  CONSTRAINT `fk_project_user_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_project_user_2` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `project_user` (
 
 LOCK TABLES `project_user` WRITE;
 /*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (2,'hoangvanvietanh@gmail.com','Administator',NULL);
+INSERT INTO `project_user` VALUES (9,'hoangvanvietanh@gmail.com',1),(10,'hoangvanvietanh@gmail.com',3),(11,'k11giadinh@gmail.com',4),(12,'k11giadinh@gmail.com',1),(13,'hoangvanvietanh@gmail.com',4);
 /*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 17:27:48
+-- Dump completed on 2018-10-16 18:00:18
