@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,6 +74,40 @@ public class AccountController {
 	public String checkCode(@ModelAttribute("email") String email, Model model) {
 		
 		return "redirect:/sign-in";
+	}
+	
+	@RequestMapping(value="change-password",method=RequestMethod.GET)
+	public String changePasswordGet(Model model)
+	{
+		String current=accountServices.getEmailUser();
+		Account a=accountServices.findByEmail(current);
+		AccountModel account=new AccountModel();
+		account.fromAccount(a);
+		model.addAttribute("account",account);
+		return "change-password";
+	}
+	
+	public String changePasswordPost(@ModelAttribute("account") AccountModel acc, BindingResult result,
+			@RequestParam(name="pass") String Pass,@RequestParam(name="re_pass") String rePass,ModelMap model) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "change-password";
+		}
+		if(Pass.equals(rePass))
+		{
+			Account account=acc.toAccount();
+			accountServices.deletePassword(account);
+			BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+			account.setPassword(passwordEncoder.encode(Pass));
+			accountServices.updateAccount(account);
+			
+			model.remove("email");
+			return "redirect:/";
+		}
+		return "redirect:/account/change-password";
+		
+		
 	}
 
 }

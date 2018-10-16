@@ -94,7 +94,7 @@ body {
 					<ul>
 
 						<li><a href="#0">My Account</a></li>
-						<li><a href="account">Edit Account</a></li>
+						<li><a href="account/change-password">Edit Account</a></li>
 						<li><a href="logout">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -190,6 +190,7 @@ body {
 
 									<div class="profile-info-value">
 										<span><form:input class="test" path="email" /></span>
+										<input type="hidden" action=>
 									</div>
 								</div>
 								<div class="profile-info-row">
