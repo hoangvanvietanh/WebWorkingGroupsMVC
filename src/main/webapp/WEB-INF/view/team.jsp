@@ -89,7 +89,7 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="nav-side-user.html" class="dropdown-item">Profile</a> <a
+								<a href="profile" class="dropdown-item">Profile</a> <a
 									href="utility-account-settings.html" class="dropdown-item">Account
 									Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
@@ -103,11 +103,10 @@
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Overview</a>
+						<li class="breadcrumb-item"><a href="home">Home</a>
 						</li>
 
-						<li class="breadcrumb-item"><a href="pages-app.html">App
-								Pages</a></li>
+						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
 
 
 						<li class="breadcrumb-item active" aria-current="page">Team</li>
@@ -133,17 +132,16 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-11 col-xl-10">
 						<div class="page-header">
-							<h1>Medium Rare &#x2615;</h1>
-							<p class="lead">A small web studio crafting lovely template
-								products.</p>
+							<h1>${team.name}</h1>
+							<p class="lead">${team.description}</p>
 							<div class="d-flex align-items-center">
 								<ul class="avatars">
-
+									<c:forEach var="member" items="${member}">
 									<li><a href="#" data-toggle="tooltip" data-placement="top"
-										title="Claire Connors"> <img alt="Claire Connors"
-											class="avatar" src="assets/img/avatar-female-1.jpg" />
+										title="${member.member.name}"> <img alt="${member.member.name}"
+											class="avatar" src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
 									</a></li>
-
+									</c:forEach>
 								</ul>
 								<button class="btn btn-round" data-toggle="modal"
 									data-target="#user-invite-modal">
@@ -188,6 +186,7 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body row">
+										<c:forEach var="project" items="${project}">
 										<div class="col-lg-6">
 											<div class="card card-project">
 
@@ -211,36 +210,13 @@
 													</div>
 													<div class="card-title">
 														<a href="#">
-															<h5 data-filter-by="text">Brand Concept &amp; Design</h5>
+															<h5 data-filter-by="text">${project.name}</h5>
 														</a>
 													</div>
 													<ul class="avatars">
 														<li><a href="#" data-toggle="tooltip" title="Ravi">
 																<img alt="Ravi Singh" class="avatar"
 																src="assets/img/avatar-male-3.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Masimba">
-																<img alt="Masimba Sibanda" class="avatar"
-																src="assets/img/avatar-male-5.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Peggy">
-																<img alt="Peggy Brown" class="avatar"
-																src="assets/img/avatar-female-2.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Marcus">
-																<img alt="Marcus Simmons" class="avatar"
-																src="assets/img/avatar-male-1.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip"
-															title="Kerri-Anne"> <img alt="Kerri-Anne Banks"
-																class="avatar" src="assets/img/avatar-female-5.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Claire">
-																<img alt="Claire Connors" class="avatar"
-																src="assets/img/avatar-female-1.jpg"
-																data-filter-by="alt" />
 														</a></li>
 													</ul>
 													<div class="card-meta d-flex justify-content-between">
@@ -254,50 +230,7 @@
 												</div>
 											</div>
 										</div>
-
-										<div class="col-lg-6">
-											<div class="card card-project">
-
-												<div class="card-body">
-													<div class="dropdown card-options">
-														<button class="btn-options" type="button"
-															id="project-dropdown-button-6" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item" href="#">Share</a>
-														</div>
-													</div>
-													<div class="card-title">
-														<a href="#">
-															<h5 data-filter-by="text">Company Getaway</h5>
-														</a>
-													</div>
-													<ul class="avatars">
-														<li><a href="#" data-toggle="tooltip" title="Claire">
-																<img alt="Claire Connors" class="avatar"
-																src="assets/img/avatar-female-1.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip"
-															title="Kristina"> <img alt="Kristina Van Der Stroem"
-																class="avatar" src="assets/img/avatar-female-4.jpg"
-																data-filter-by="alt" />
-														</a></li>
-													</ul>
-													<div class="card-meta d-flex justify-content-between">
-														<div class="d-flex align-items-center">
-															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">-/-</span>
-														</div>
-														<span class="text-small" data-filter-by="text">Unscheduled</span>
-													</div>
-												</div>
-											</div>
-										</div>
-
+										</c:forEach>
 									</div>
 									<!--end of content list body-->
 								</div>
@@ -331,18 +264,18 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body row">
-
+										<c:forEach var="member" items="${member}">
 										<div class="col-6">
 											<a class="media media-member" href="#"> <img
-												alt="Claire Connors" src="assets/img/avatar-female-1.jpg"
+												alt="${member.member.name}" src="<spring:url value='/profile/avatar/${member.member.email}'/>"
 												class="avatar avatar-lg" />
 												<div class="media-body">
-													<h6 class="mb-0" data-filter-by="text">Claire Connors</h6>
-													<span data-filter-by="text" class="text-body">Administrator</span>
+													<h6 class="mb-0" data-filter-by="text">${member.member.name}</h6>
+													<span data-filter-by="text" class="text-body">${member.role}</span>
 												</div>
 											</a>
 										</div>
-
+										</c:forEach>
 									</div>
 								</div>
 								<!--end of content list-->

@@ -43,8 +43,17 @@ public class Profile {
 	@Column(name="avatar")
 	private String avartar;
 	
+	@Column(name="about")
+	private String about;
 	
-	
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
 	public String getBirthdate() {
 		return birthdate;
 	}

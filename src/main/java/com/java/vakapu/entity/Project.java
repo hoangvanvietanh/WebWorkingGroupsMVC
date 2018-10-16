@@ -43,11 +43,11 @@ public class Project {
 
 	@Column(name="action")
 	private String action;
-	
-	@ManyToOne
-	@JoinColumn(name="idteam")
-	private Team team;
 
+	@ManyToOne
+	@JoinColumn(name="idTeam")
+	private Team team;
+	
 	public Team getTeam() {
 		return team;
 	}
@@ -55,8 +55,6 @@ public class Project {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-
-	
 
 	public int getIdProject() {
 		return idProject;
@@ -74,8 +72,6 @@ public class Project {
 		this.name = name;
 	}
 	
-	
-
 	public String getStartDate() {
 		return startDate;
 	}

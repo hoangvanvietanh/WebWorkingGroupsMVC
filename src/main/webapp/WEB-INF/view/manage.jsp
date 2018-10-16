@@ -39,7 +39,8 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img style="width: 80px;height: 30px"  alt="Pipeline"
+			<a class="navbar-brand" href="index.html"> <img
+				style="width: 80px; height: 30px" alt="Pipeline"
 				src="resources/img/fun.gif" />
 			</a>
 			<div class="d-flex align-items-center">
@@ -99,50 +100,37 @@
 			</div>
 		</div>
 		<div class="main-container">
-
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Overview</a>
+						<li class="breadcrumb-item"><a href="home">Home</a>
 						</li>
-
-						<li class="breadcrumb-item"><a href="pages-app.html">App
-								Pages</a></li>
-
-
-						<li class="breadcrumb-item active" aria-current="page">User</li>
+						<li class="breadcrumb-item active" aria-current="page">Manage</li>
 					</ol>
 				</nav>
-
 				<div class="dropdown">
 					<button class="btn btn-round" role="button" data-toggle="dropdown"
 						aria-expanded="false">
 						<i class="material-icons">settings</i>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-
-
-
-
-
 						<a class="dropdown-item" href="#">Account Settings</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Log out</a>
-
 					</div>
 				</div>
-
 			</div>
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-11 col-xl-10">
 						<div class="page-header mb-4">
 							<div class="media">
-								<img alt="Image" src="<spring:url value='/profile/avatar/${emailUser}'/>"
+								<img alt="Image"
+									src="<spring:url value='/profile/avatar/${emailUser}'/>"
 									class="avatar avatar-lg mt-1" />
 								<div class="media-body ml-3">
-									<h1 class="mb-0">David Whittaker</h1>
-									<p class="lead">Interface designer and front-end developer</p>
+									<h1 class="mb-0">${profile.name}</h1>
+									<p class="lead">${profile.about}</p>
 								</div>
 							</div>
 						</div>
@@ -182,42 +170,44 @@
 									</form>
 								</div>
 								<!--end of content list head-->
-								
 								<div class="content-list-body row">
-								<c:forEach var="team" items="${team}">
-									<div class="col-md-6">
-										<div class="card card-team">
-											<div class="card-body">
-												<div class="dropdown card-options">
-													<button class="btn-options" type="button"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="material-icons">more_vert</i>
-													</button>
-													<div class="dropdown-menu dropdown-menu-right">
-														<a class="dropdown-item" href="#">Manage</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item text-danger" href="#">Leave
-															Team</a>
+									<c:forEach var="team" items="${team}">
+										<div class="col-md-6">
+											<div class="card card-team">
+												<div class="card-body">
+													<div class="dropdown card-options">
+														<button class="btn-options" type="button"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">
+															<i class="material-icons">more_vert</i>
+														</button>
+														<div class="dropdown-menu dropdown-menu-right">
+															<a class="dropdown-item" href="#">Manage</a>
+															<div class="dropdown-divider"></div>
+															<a class="dropdown-item text-danger" href="#">Leave
+																Team</a>
+														</div>
 													</div>
+													<div class="card-title">
+														<a href="team?idTeam=${team.team.idTeam}">
+															<h5 data-filter-by="text">${team.team.name}</h5>
+														</a> <span>3 Projects, 2 Members</span>
+													</div>
+
+													<ul class="avatars">
+														<c:forEach var="member" items="${member}">
+															<c:if test="${member.team.idTeam ==  team.team.idTeam}">
+																<li><a href="#" data-toggle="tooltip"
+																	title="${member.member.name}"> <img
+																		alt="${member.member.name}" class="avatar"
+																		src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
+																</a></li>
+															</c:if>
+														</c:forEach>
+													</ul>
 												</div>
-												<div class="card-title">
-													<a href="#">
-														<h5 data-filter-by="text">${team.name}</h5>
-													</a> <span>3 Projects, 2 Members</span>
-												</div>
-												<img src="<spring:url value='/manage/searchTeam/${team.idTeam}'/>">
-												<ul class="avatars">
-													<c:forEach var="member" items="${member}">
-													<li><a href="#" data-toggle="tooltip" title="David">
-															<img alt="David Whittaker" class="avatar"
-															src="<spring:url value='/profile/avatar/${member.email}'/>" />
-													</a></li>
-													</c:forEach>
-												</ul>
 											</div>
 										</div>
-									</div>
 									</c:forEach>
 								</div>
 								<!--end of content-list-body-->
@@ -245,116 +235,52 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body row">
-										<div class="col-lg-6">
-											<div class="card card-project">
+										<c:forEach var="project" items="${project}">
+											<div class="col-lg-6">
+												<div class="card card-project">
 
-												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 8%" aria-valuenow="8" aria-valuemin="0"
-														aria-valuemax="100"></div>
-												</div>
-
-												<div class="card-body">
-													<div class="dropdown card-options">
-														<button class="btn-options" type="button"
-															id="project-dropdown-button-5" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item" href="#">Share</a>
+													<div class="card-body">
+														<div class="dropdown card-options">
+															<button class="btn-options" type="button"
+																id="project-dropdown-button-6" data-toggle="dropdown"
+																aria-haspopup="true" aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#">Edit</a> <a
+																	class="dropdown-item" href="#">Share</a>
+															</div>
 														</div>
-													</div>
-													<div class="card-title">
-														<a href="#">
-															<h5 data-filter-by="text">Brand Concept &amp; Design</h5>
-														</a>
-													</div>
-													<ul class="avatars">
-														<li><a href="#" data-toggle="tooltip" title="Ravi">
-																<img alt="Ravi Singh" class="avatar"
-																src="assets/img/avatar-male-3.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Masimba">
-																<img alt="Masimba Sibanda" class="avatar"
-																src="assets/img/avatar-male-5.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Peggy">
-																<img alt="Peggy Brown" class="avatar"
-																src="assets/img/avatar-female-2.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Marcus">
-																<img alt="Marcus Simmons" class="avatar"
-																src="assets/img/avatar-male-1.jpg" data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip"
-															title="Kerri-Anne"> <img alt="Kerri-Anne Banks"
-																class="avatar" src="assets/img/avatar-female-5.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip" title="Claire">
-																<img alt="Claire Connors" class="avatar"
-																src="assets/img/avatar-female-1.jpg"
-																data-filter-by="alt" />
-														</a></li>
-													</ul>
-													<div class="card-meta d-flex justify-content-between">
-														<div class="d-flex align-items-center">
-															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">1/12</span>
+														<div class="card-title">
+															<a href="#">
+																<h5 data-filter-by="text">${project.project.name}</h5>
+															</a>
 														</div>
-														<span class="text-small" data-filter-by="text">Due
-															20 days</span>
+														<ul class="avatars">
+															<c:forEach var="user" items="${userPro}">
+																<c:if
+																	test="${user.project.idProject == project.project.idProject}">
+																	<li><a
+																		href="project?idProject=${project.project.idProject}"
+																		data-toggle="tooltip" title="${user.user.name}"> <img
+																			alt="${user.user.name}" class="avatar"
+																			src="<spring:url value='/profile/avatar/${user.user.email}'/>"
+																			data-filter-by="alt" />
+																	</a></li>
+																</c:if>
+															</c:forEach>
+														</ul>
+														<div class="card-meta d-flex justify-content-between">
+															<div class="d-flex align-items-center">
+																<i class="material-icons mr-1">playlist_add_check</i> <span
+																	class="text-small">-/-</span>
+															</div>
+															<span class="text-small" data-filter-by="text">Unscheduled</span>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-
-										<div class="col-lg-6">
-											<div class="card card-project">
-
-												<div class="card-body">
-													<div class="dropdown card-options">
-														<button class="btn-options" type="button"
-															id="project-dropdown-button-6" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item" href="#">Share</a>
-														</div>
-													</div>
-													<div class="card-title">
-														<a href="#">
-															<h5 data-filter-by="text">Company Getaway</h5>
-														</a>
-													</div>
-													<ul class="avatars">
-														<li><a href="#" data-toggle="tooltip" title="Claire">
-																<img alt="Claire Connors" class="avatar"
-																src="assets/img/avatar-female-1.jpg"
-																data-filter-by="alt" />
-														</a></li>
-														<li><a href="#" data-toggle="tooltip"
-															title="Kristina"> <img alt="Kristina Van Der Stroem"
-																class="avatar" src="assets/img/avatar-female-4.jpg"
-																data-filter-by="alt" />
-														</a></li>
-													</ul>
-													<div class="card-meta d-flex justify-content-between">
-														<div class="d-flex align-items-center">
-															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">-/-</span>
-														</div>
-														<span class="text-small" data-filter-by="text">Unscheduled</span>
-													</div>
-												</div>
-											</div>
-										</div>
-
+										</c:forEach>
 									</div>
 									<!--end of content list body-->
 								</div>
@@ -482,9 +408,10 @@
 													data-filter-list="form-group-users">
 													<div class="mb-3">
 														<ul class="avatars text-center">
-															<li><img alt="Harry Xai"
-																src="assets/img/avatar-male-2.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Harry Xai" /></li>
+															<li><img alt="${profile.name}"
+																src="<spring:url value='/profile/avatar/${emailUser}'/>"
+																class="avatar" data-toggle="tooltip"
+																data-title="${profile.name}" /></li>
 
 														</ul>
 													</div>
@@ -500,31 +427,32 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
 																id="user-manage-4" checked> <label
 																class="custom-control-label" for="user-manage-4">
 																<div class="d-flex align-items-center">
-																	<img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
+																	<img alt="${profile.name}"
+																		src="<spring:url value='/profile/avatar/${emailUser}'/>"
 																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Harry Xai</span>
+																		data-filter-by="text">${profile.name}</span>
 																</div>
 															</label>
 														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="user-manage-5"> <label
-																class="custom-control-label" for="user-manage-5">
-																<div class="d-flex align-items-center">
-																	<img alt="Sally Harper"
-																		src="assets/img/avatar-female-3.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Sally Harper</span>
-																</div>
-															</label>
-														</div>
+														<c:forEach var="friend" items="${friend}">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="user-manage-4"> <label
+																	class="custom-control-label" for="user-manage-4">
+																	<div class="d-flex align-items-center">
+																		<img alt="Harry Xai"
+																			src="<spring:url value='/profile/avatar/${friend.email2}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${friend.email2}</span>
+																	</div>
+																</label>
+															</div>
+														</c:forEach>
 													</div>
 												</div>
 											</div>

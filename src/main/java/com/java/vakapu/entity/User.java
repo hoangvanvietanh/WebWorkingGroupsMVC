@@ -6,13 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="member")
-public class Member {
+@Table(name="user")
+public class User {
 
 	@Id
 	@Column(name="email")
 	private String email;
-	
+
 	@Column(name="name")
 	private String name;
 
@@ -30,5 +30,7 @@ public class Member {
 
 	public void setName(String name) {
 		this.name = name;
-	}
+	}	
+	
+	
 }

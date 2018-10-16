@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.vakapu.dao.MemberDAO;
 import com.java.vakapu.entity.Member;
+import com.java.vakapu.entity.Member;
 
 @Service
 @Transactional

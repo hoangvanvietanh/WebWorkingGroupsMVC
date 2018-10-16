@@ -2,19 +2,18 @@ package com.java.vakapu.model;
 
 import com.java.vakapu.entity.Project;
 import com.java.vakapu.entity.ProjectUser;
+import com.java.vakapu.entity.User;
 
 public class ProjectUserModel {
 	private int id;
-	private String email;
-	private String role;
+	private User user;
 	private Project project;
 	
 	public ProjectUser toProjectUser()
 	{
 		ProjectUser pro=new ProjectUser();
 		pro.setId(this.getId());
-		pro.setEmail(this.getEmail());
-		pro.setRole(this.getRole());
+		pro.setUser(this.getUser());
 		pro.setProject(this.getProject());
 		return pro;
 	}
@@ -22,8 +21,7 @@ public class ProjectUserModel {
 	public void fromProjectUser(ProjectUser pro)
 	{
 		this.setId(pro.getId());
-		this.setEmail(pro.getEmail());
-		this.setRole(pro.getRole());
+		this.setUser(pro.getUser());
 		this.setProject(pro.getProject());
 	}
 	
@@ -33,17 +31,13 @@ public class ProjectUserModel {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getEmail() {
-		return email;
+	
+	public User getUser() {
+		return user;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Project getProject() {

@@ -24,8 +24,8 @@ public class MemberDAO {
 	
 	public List<Member> findAll(){
 		TypedQuery<Member> query = getSession().createQuery("FROM Member", Member.class);
-		List<Member> contact = query.getResultList();
-		return contact;
+		List<Member> member = query.getResultList();
+		return member;
 	}
 	public List<Member> findByIdTeam(int id) {
 		TypedQuery<Member> query = getSession().createQuery("select a from Member a join a.team b where b.id=:id",Member.class);

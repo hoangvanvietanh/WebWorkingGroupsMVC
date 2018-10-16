@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.java.vakapu.entity.Member;
 import com.java.vakapu.entity.Team;
 
 @Repository

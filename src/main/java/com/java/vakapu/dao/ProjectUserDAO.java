@@ -32,8 +32,7 @@ public class ProjectUserDAO {
 	}
 	
 	public List<ProjectUser> findByEmail(String email) {
-		@SuppressWarnings("unchecked")
-		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.email=:email");
+		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.user.email=:email",ProjectUser.class);
 		query.setParameter("email", email);
 		List<ProjectUser> result= query.getResultList();
 		return result;
