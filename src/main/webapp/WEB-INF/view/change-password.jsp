@@ -24,32 +24,38 @@
 <title>Change Password</title>
 </head>
 <body>
-<form:form modelAttribute="account" method=post>
+<form:form modelAttribute="account" method="post">
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
 		<div class="logo">Create New Password</div>
 		<!-- Main Form -->
 		<div class="login-form-1">
-			<form id="register-form" class="text-left" action="change-password"
-				method="post">
+		
+		<!-- 
+			<form id="register-form" class="text-left" action="change-password"  
+				method="post">-->
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 				
 					<div class="login-group">
 						<div class="form-group">
-							<label for="email" class="sr-only">Email</label><br> <input
+							<label for="email" class="sr-only">Email</label><br> <form:input
 								type="text" class="form-control" path="email" />
 						</div>
-					</div>
-					
 						<div class="form-group">
-							<label for="reg_password" class="sr-only">Password</label> <input
-								type="password" class="form-control" name="pass"
+							<label for="reg_password" class="sr-only">Old Password</label> <input
+								type="password" class="form-control" name="oldpass" 
+								placeholder="password" /> <form:input name="oldPass" type="hidden" path="password" />
+						</div>
+					</div>
+					<div class="login-group">
+						<div class="form-group">
+							<label for="reg_password" class="sr-only">New Password</label> <input
+								type="password" class="form-control" name="newpass"
 								placeholder="password">
 						</div>
 						<div class="form-group">
-							<label for="reg_password_confirm" class="sr-only">Password
-								Confirm</label> <input type="password" class="form-control"
-								name="re_pass" placeholder="confirm password"> <input
+							<label for="reg_password_confirm" class="sr-only">Confirm New Password</label> <input type="password" class="form-control"
+								name="newre_pass" placeholder="confirm password"> <input
 								type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 						</div>
@@ -64,7 +70,7 @@
 							here</a>
 					</p>
 				</div>
-			</form>
+			
 		</div>
 		<!-- end:Main Form -->
 	</div>

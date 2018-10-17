@@ -76,38 +76,62 @@ public class AccountController {
 		return "redirect:/sign-in";
 	}
 	
-	@RequestMapping(value="change-password",method=RequestMethod.GET)
-	public String changePasswordGet(Model model)
+
+	@RequestMapping(value="/change-password",method=RequestMethod.GET)
+	public String changePasswordGet(ModelMap model, Model mode)
 	{
-		String current=accountServices.getEmailUser();
-		Account a=accountServices.findByEmail(current);
-		AccountModel account=new AccountModel();
-		account.fromAccount(a);
-		model.addAttribute("account",account);
+		String current= accountServices.getEmailUser();
+		model.put("email", current);
+		System.out.println(current);
+		
+		Account acc= accountServices.findByEmail(current);
+		AccountModel account= new AccountModel();
+		account.fromAccount(acc);
+		mode.addAttribute("account", account);
 		return "change-password";
-	}
+	}		
+		
 	
-	public String changePasswordPost(@ModelAttribute("account") AccountModel acc, BindingResult result,
-			@RequestParam(name="pass") String Pass,@RequestParam(name="re_pass") String rePass,ModelMap model) throws ParseException
+	
+	@RequestMapping(value="/change-password",method=RequestMethod.POST)
+	public String changePasswordPost(@ModelAttribute("account") AccountModel account, @ModelAttribute("oldpass") String oldPass, 
+			@ModelAttribute("oldPass") String oldPassword,
+			@ModelAttribute("newpass") String newPass,@ModelAttribute("newre_pass") String newRePass ,
+			BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes) throws ParseException
 	{
 		if(result.hasErrors())
 		{
-			return "change-password";
+			return "redirect:/forgot-password/change-password";
 		}
-		if(Pass.equals(rePass))
+		BCryptPasswordEncoder Encoder=new BCryptPasswordEncoder();
+		String pass=Encoder.encode(oldPass);
+		if(oldPass.equals(oldPassword))
 		{
-			Account account=acc.toAccount();
-			accountServices.deletePassword(account);
-			BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-			account.setPassword(passwordEncoder.encode(Pass));
-			accountServices.updateAccount(account);
-			
-			model.remove("email");
-			return "redirect:/";
+			if(newPass.equals(newRePass))
+			{
+				Account acc=account.toAccount();
+				//accountServices.deletePassword(acc);
+				
+				BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+				acc.setPassword(passwordEncoder.encode(newRePass));
+				acc.setStatus("active");
+				accountServices.updateAccount(acc);
+			}
 		}
-		return "redirect:/account/change-password";
 		
-		
+			
+		return "redirect:/sign-in";
+	}
+	
+	@RequestMapping(value="/deactivate",method=RequestMethod.GET)
+	public String  deactivate(ModelMap model)
+	{
+		String current=accountServices.getEmailUser();
+		Account a=accountServices.findByEmail(current);
+		a.setStatus("deactive");
+		accountServices.updateAccount(a);
+		return "redirect:/profile";
 	}
 
 }

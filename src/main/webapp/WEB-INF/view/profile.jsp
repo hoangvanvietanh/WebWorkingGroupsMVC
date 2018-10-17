@@ -96,6 +96,7 @@ body {
 						<li><a href="#0">My Account</a></li>
 						<li><a href="account/change-password">Edit Account</a></li>
 						<li><a href="logout">Logout</a></li>
+						<li><a href="account/deactivate">Deactivate</a></li>
 					</ul></li>
 			</ul>
 		</nav>
