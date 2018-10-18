@@ -2,30 +2,24 @@ package com.java.vakapu.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.TeamProject;
 
-import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.model.ProjectModel;
 
-import com.java.vakapu.model.ProjectUserModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.ProjectServices;
-
-import com.java.vakapu.services.ProjectUserServices;
 
 
 @Controller
@@ -36,16 +30,13 @@ public class ProjectController {
 	private AccountServices accountServices;
 	
 	@Autowired
-	private ProjectUserServices userServices;
-	
-	@Autowired
 	private ProjectServices proServices;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getInfoProject(Model model)
 	{
-		List<Project> result= proServices.findAll();
-		model.addAttribute("listInfo",result);
+		//List<TeamProject> result= proServices.findAll();
+		//model.addAttribute("listInfo",result);
 		return "home-project";
 	}
 	
@@ -66,11 +57,11 @@ public class ProjectController {
 		{
 			return "create-project";
 		}
-		Project project=proModel.toProject();
+		TeamProject teamProject=proModel.toProject();
 		String currentUser= accountServices.getEmailUser();
-		project.setOwner(currentUser);
-		project.setStatus("New");
-		proServices.createProject(project);
+		teamProject.setOwner(currentUser);
+		teamProject.setStatus("New");
+		proServices.createProject(teamProject);
 		
 //		ProjectUserModel user=new ProjectUserModel();
 //		model.addAttribute("createPro", user);
@@ -87,7 +78,7 @@ public class ProjectController {
 			return "redirect:/project";
 		}
 		
-		Project a=proServices.find(idproject);
+		TeamProject a=proServices.find(idproject);
 		ProjectModel proModel=new ProjectModel();
 		proModel.fromProject(a);
 		
@@ -105,7 +96,7 @@ public class ProjectController {
 		{
 			return "update-project";
 		}
-		Project pro=proM.toProject();
+		TeamProject pro=proM.toProject();
 		proServices.updateProject(pro);
 		return "redirect:/project";
 	}
@@ -118,7 +109,7 @@ public class ProjectController {
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
-		Project pro=proServices.find(idproject);
+		TeamProject pro=proServices.find(idproject);
 		pro.setStatus("In-progress");
 		pro.setStartDate(time);
 		proServices.updateProject(pro);
@@ -139,7 +130,7 @@ public class ProjectController {
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
-		Project b=proServices.find(idproject);
+		TeamProject b=proServices.find(idproject);
 		b.setStatus("Done");
 		b.setEndDate(time);
 		proServices.updateProject(b);
@@ -150,7 +141,7 @@ public class ProjectController {
 	@RequestMapping(value="view",method=RequestMethod.POST)
 	public String viewGet(@ModelAttribute("idProject") int idproject, Model model) throws ParseException
 	{
-		Project c=proServices.find(idproject);
+		TeamProject c=proServices.find(idproject);
 		ProjectModel proModel=new ProjectModel();
 		proModel.fromProject(c);
 		
@@ -171,7 +162,7 @@ public class ProjectController {
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
-		Project d=proServices.find(idproject);
+		TeamProject d=proServices.find(idproject);
 		d.setStatus("Cancel");
 		d.setEndDate(time);
 		proServices.updateProject(d);
@@ -182,7 +173,7 @@ public class ProjectController {
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
 	public String deletePost(@RequestParam(name="idProject") int idproject, Model model) throws ParseException
 	{
-		Project pro=proServices.find(idproject);
+		TeamProject pro=proServices.find(idproject);
 		proServices.deleteProject(pro);
 		return "redirect:/project";
 	}

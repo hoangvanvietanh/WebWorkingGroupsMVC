@@ -1,15 +1,11 @@
 package com.java.vakapu.model;
 
-import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.TeamProject;
 
-import java.util.Date;
-
-import com.google.protobuf.TextFormat.ParseException;
-import com.java.vakapu.entity.Profile;
 
 public class ProjectModel {
 
-	private int idProject;
+	private int id;
 	
 	private String name;
 	
@@ -30,45 +26,47 @@ public class ProjectModel {
 	private int idtask;
 	
 	
-	public void fromProject(Project project) 
+	public void fromProject(TeamProject teamProject) 
 	{
-		this.setIdProject(project.getIdProject());;
-		this.setName(project.getName());
+		this.setId(teamProject.getId());;
+		this.setName(teamProject.getName());
 		
 		this.setStartDate(this.getStartDate());
 		
-		this.setStatus(project.getStatus());
-		this.setEndDate(project.getEndDate());
-		this.setOwner(project.getOwner());
-		this.setDescription(project.getDescription());
-		this.setVisibility(project.getVisibility());
-		this.setAction(project.getAction());
+		this.setStatus(teamProject.getStatus());
+		this.setEndDate(teamProject.getEndDate());
+		this.setOwner(teamProject.getOwner());
+		this.setDescription(teamProject.getDescription());
+		this.setVisibility(teamProject.getVisibility());
+		this.setAction(teamProject.getAction());
 	}
 	
-	public Project toProject() 
+	public TeamProject toProject() 
 	{
-		Project project= new Project();
-		project.setIdProject(this.getIdProject());;
-		project.setName(this.getName());
-		project.setStartDate(this.getStartDate());
-		project.setStatus(this.getStatus());
-		project.setEndDate(this.getEndDate());
-		project.setOwner(this.getOwner());
-		project.setDescription(this.getDescription());
-		project.setVisibility(this.getVisibility());
-		project.setAction(this.getAction());
+		TeamProject teamProject= new TeamProject();
+		teamProject.setId(this.getId());
+		teamProject.setName(this.getName());
+		teamProject.setStartDate(this.getStartDate());
+		teamProject.setStatus(this.getStatus());
+		teamProject.setEndDate(this.getEndDate());
+		teamProject.setOwner(this.getOwner());
+		teamProject.setDescription(this.getDescription());
+		teamProject.setVisibility(this.getVisibility());
+		teamProject.setAction(this.getAction());
 		
-		return project;
+		return teamProject;
 	}
 
 
 
-	public int getIdProject() {
-		return idProject;
+	
+
+	public int getId() {
+		return id;
 	}
 
-	public void setIdProject(int idProject) {
-		this.idProject = idProject;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

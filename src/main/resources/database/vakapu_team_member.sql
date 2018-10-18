@@ -23,16 +23,16 @@ DROP TABLE IF EXISTS `team_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team_member` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idteam_member` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(155) DEFAULT NULL,
   `idteam` int(11) DEFAULT NULL,
   `role` varchar(145) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_team_user_2_idx` (`idteam`),
-  KEY `FKeji7l0vpxe80pixvfrgunllnk` (`email`),
-  CONSTRAINT `FKeji7l0vpxe80pixvfrgunllnk` FOREIGN KEY (`email`) REFERENCES `member` (`email`),
-  CONSTRAINT `fk_team_user_2` FOREIGN KEY (`idteam`) REFERENCES `team` (`idteam`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idteam_member`),
+  KEY `FKqdapgrj46hnhyeaecik8m04b3` (`idteam`),
+  KEY `fk_team_member_1_idx` (`email`),
+  CONSTRAINT `FKqdapgrj46hnhyeaecik8m04b3` FOREIGN KEY (`idteam`) REFERENCES `team` (`idteam`),
+  CONSTRAINT `fk_team_member_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `team_member` (
 
 LOCK TABLES `team_member` WRITE;
 /*!40000 ALTER TABLE `team_member` DISABLE KEYS */;
-INSERT INTO `team_member` VALUES (10,'hoangvanvietanh@gmail.com',1,'Admin'),(11,'hoangvanvietanh@gmail.com',2,'Member'),(12,'k11giadinh@gmail.com',1,'Member');
+INSERT INTO `team_member` VALUES (18,'hoangvanvietanh@gmail.com',7,'Admin'),(19,'hoangvanvietanh@gmail.com',8,'Member'),(22,'khanh@gmail.com',7,'Member'),(23,'phuong@gmail.com',7,'Member'),(24,'hoangvanvietanh@gmail.com',9,'Member'),(25,'hoangvanvietanh@gmail.com',10,'Member'),(26,'hoangvanvietanh@gmail.com',11,'Admin'),(27,'khanh@gmail.com',11,'Member'),(28,'giang@gmail.com',11,'Member'),(29,'phuong@gmail.com',11,'Member'),(30,'hoangvanvietanh@gmail.com',12,'Admin'),(31,'khanh@gmail.com',12,'Member'),(32,'giang@gmail.com',12,'Member'),(33,'phuong@gmail.com',12,'Member'),(34,'duyhieu@gmail.com',12,'Member'),(35,'khuuhieu@gmail.com',12,'Member'),(36,'vietem@gmail.com',12,'Member');
 /*!40000 ALTER TABLE `team_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:19
+-- Dump completed on 2018-10-18 16:44:27

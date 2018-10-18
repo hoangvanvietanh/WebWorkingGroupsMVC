@@ -209,15 +209,19 @@
 														</div>
 													</div>
 													<div class="card-title">
-														<a href="#">
+														<a href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
 															<h5 data-filter-by="text">${project.name}</h5>
 														</a>
 													</div>
 													<ul class="avatars">
-														<li><a href="#" data-toggle="tooltip" title="Ravi">
-																<img alt="Ravi Singh" class="avatar"
-																src="assets/img/avatar-male-3.jpg" data-filter-by="alt" />
+														<c:forEach var="user" items="${user}">
+														<c:if test="${user.teamProject.id == project.id}">
+														<li><a href="#" data-toggle="tooltip" title="${user.teamMember.member.name}">
+																<img alt="${user.teamMember.member.name}" class="avatar"
+																src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>" data-filter-by="alt" />
 														</a></li>
+														</c:if>
+														</c:forEach>
 													</ul>
 													<div class="card-meta d-flex justify-content-between">
 														<div class="d-flex align-items-center">
@@ -509,9 +513,9 @@
 													<div class="mb-3">
 														<ul class="avatars text-center">
 
-															<li><img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Claire Connors" /></li>
+															<li><img alt="${profile.name}"
+																src="<spring:url value='/profile/avatar/${emailUser}'/>" class="avatar"
+																data-toggle="tooltip" data-title="${profile.name}" /></li>
 
 														</ul>
 													</div>
@@ -527,20 +531,20 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-
+														<c:forEach var="member" items="${member}">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input"
-																id="project-user-1" checked> <label
-																class="custom-control-label" for="project-user-1">
+																id="${member.member.email}"> <label
+																class="custom-control-label" for="${member.member.email}">
 																<div class="d-flex align-items-center">
-																	<img alt="Claire Connors"
-																		src="assets/img/avatar-female-1.jpg"
+																	<img alt="${member.member.name}"
+																		src="<spring:url value='/profile/avatar/${member.member.email}'/>"
 																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Claire Connors</span>
+																		data-filter-by="text">${member.member.name}</span>
 																</div>
 															</label>
 														</div>
-
+														</c:forEach>
 													</div>
 												</div>
 											</div>

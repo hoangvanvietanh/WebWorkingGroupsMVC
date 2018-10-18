@@ -16,8 +16,8 @@ public class FriendshipServices {
 	@Autowired
 	private FriendshipDAO friendshipDAO;
 	
-	public List<Friendship> findFriend(String email)
+	public List<Friendship> findFriend(String emailUser, int status)
 	{
-		return friendshipDAO.findFriend(email);
+		return friendshipDAO.findFriend(emailUser,status);
 	}
 }

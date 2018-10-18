@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.java.vakapu.dao.ProjectUserDAO;
-import com.java.vakapu.entity.Project;
 import com.java.vakapu.entity.ProjectUser;
 
 
@@ -30,9 +29,9 @@ public class ProjectUserServices {
 		return userDao.findByEmail(email);
 	}
 
-	public List<ProjectUser> findByID( int id)
+	public List<ProjectUser> findByIdProject( int id)
 	{
-		return userDao.findById(id);
+		return userDao.findByIdProject(id);
 	}
 	
 	public ProjectUser createProjectUser(ProjectUser project)

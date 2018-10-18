@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.java.vakapu.entity.Project;
-import com.java.vakapu.entity.Task;
+import com.java.vakapu.entity.TaskTeamProject;
+import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 
 @Repository
 public class TaskDAO {
@@ -22,32 +22,39 @@ public class TaskDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List<Task> findAll(){
-		TypedQuery<Task> query = getSession().createQuery("FROM Task", Task.class);
-		List<Task> contact = query.getResultList();
+	public List<TaskTeamProject> findAll(){
+		TypedQuery<TaskTeamProject> query = getSession().createQuery("FROM TaskTeamProject", TaskTeamProject.class);
+		List<TaskTeamProject> contact = query.getResultList();
 		return contact;
 	}
-	public List<Task> findByIdProject(int id) {
-		TypedQuery<Task> query = getSession().createQuery("select a from Task a where a.project.idproject=:id",Task.class);
+	
+	public List<TeamMemberTaskTeamProject> findByEmailUser(String email) {
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamMember.member.email=:email",TeamMemberTaskTeamProject.class);
+		query.setParameter("email", email);
+		return query.getResultList();
+	}
+	
+	public List<TaskTeamProject> findByIdProject(int id) {
+		TypedQuery<TaskTeamProject> query = getSession().createQuery("select a from TaskTeamProject a where a.project.idproject=:id",TaskTeamProject.class);
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
-	public Task find(int id) {
-		return getSession().find(Task.class, id);
+	public TaskTeamProject find(int id) {
+		return getSession().find(TaskTeamProject.class, id);
 	}
 	
-	public Task create(Task task) {
-		getSession().save(task);
-		return task;
+	public TaskTeamProject create(TaskTeamProject taskTeamProject) {
+		getSession().save(taskTeamProject);
+		return taskTeamProject;
 	}
 	
-	public Task delete(Task task) {
-		getSession().delete(task);
-		return task;
+	public TaskTeamProject delete(TaskTeamProject taskTeamProject) {
+		getSession().delete(taskTeamProject);
+		return taskTeamProject;
 	}
 	
-	public Task update(Task task) {
-		getSession().update(task);
-		return task;
+	public TaskTeamProject update(TaskTeamProject taskTeamProject) {
+		getSession().update(taskTeamProject);
+		return taskTeamProject;
 	}
 }

@@ -23,8 +23,19 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `email` varchar(145) NOT NULL,
-  `name` varchar(145) DEFAULT NULL,
+  `email` varchar(150) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone` varchar(22) DEFAULT NULL,
+  `address` varchar(300) DEFAULT NULL,
+  `summary` varchar(1000) DEFAULT NULL,
+  `skill` varchar(1000) DEFAULT NULL,
+  `experience` varchar(3000) DEFAULT NULL,
+  `education` varchar(1000) DEFAULT NULL,
+  `birthdate` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `about` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +46,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('hoangvanvietanh@gmail.com','Viet Anh'),('k11giadinh@gmail.com','Dat');
+INSERT INTO `user` VALUES ('duyhieu@gmail.com','Duy Hieu',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','lukin-the-conversation.jpg',NULL),('giang@gmail.com','Giang',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','34843996_2088967914682201_7358940408837046272_n.jpg',NULL),('hoang@gmail.com','Khanh',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','419392.jpg',NULL),('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg','I am a coder'),('k11giadinh@gmail.com','Hoang van Dat',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','check.png','I am a designer'),('khanh@gmail.com','Khanh',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','Screenshot from 2018-10-17 14-29-53.png',NULL),('khoa@gmail.com','Khoa',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','images.jpeg',NULL),('khuuhieu@gmail.com','Khuu Hieu',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','download.jpeg',NULL),('phuong@gmail.com','Phuong',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','37732346_457573618040043_7939214211631022080_n.jpg',NULL),('vietem@gmail.com','Viet Em',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','sun.png',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:19
+-- Dump completed on 2018-10-18 16:44:26

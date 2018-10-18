@@ -29,9 +29,10 @@ CREATE TABLE `todo` (
   `task` int(11) DEFAULT NULL,
   `note` varchar(455) DEFAULT NULL,
   `titlenote` varchar(145) DEFAULT NULL,
+  `taskTeamProject` int(11) DEFAULT NULL,
   PRIMARY KEY (`idtodo`),
-  KEY `fk_todo_1_idx` (`task`),
-  CONSTRAINT `fk_todo_1` FOREIGN KEY (`task`) REFERENCES `task` (`idtask`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `FKl3kd2hun1wexy9dl36viy5vlf` (`taskTeamProject`),
+  CONSTRAINT `FKl3kd2hun1wexy9dl36viy5vlf` FOREIGN KEY (`taskTeamProject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:19
+-- Dump completed on 2018-10-18 16:44:26

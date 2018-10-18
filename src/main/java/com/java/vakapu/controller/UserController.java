@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -29,37 +28,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.User;
 import com.java.vakapu.model.ProfileModel;
 import com.java.vakapu.services.AccountServices;
-import com.java.vakapu.services.ProfileServices;
+import com.java.vakapu.services.UserServices;
 
 import utils.Constants;
 
 @Controller
 @RequestMapping("/profile")
-public class ProfileController {
+public class UserController {
 
 	@Autowired
 	private AccountServices accountServices;
 
 	@Autowired
-	private ProfileServices profileServices;
+	private UserServices userServices;
 
 	@GetMapping
 	public String showProfile(Model model) {
-		Profile profile = profileServices.findByEmail(accountServices.getEmailUser());
+		com.java.vakapu.entity.User user = userServices.findByEmail(accountServices.getEmailUser());
 		ProfileModel profileModel = new ProfileModel();
-		profileModel.fromProfile(profile);
+		profileModel.fromProfile(user);
 
 		model.addAttribute("profile", profileModel);
-		model.addAttribute("emailProfile", profile.getEmail());
+		model.addAttribute("emailProfile", user.getEmail());
 		return "profile";
 	}
 
 	@PostMapping
 	public String updateProfile(Model model, @RequestParam("file") MultipartFile file,
-			@ModelAttribute("profile") Profile profile, RedirectAttributes redirectAttributes) {
+			@ModelAttribute("profile") User user, RedirectAttributes redirectAttributes) {
 		if (!file.isEmpty()) {
 			try {
 
@@ -74,11 +73,11 @@ public class ProfileController {
 				e.printStackTrace();
 			}
 
-			profile.setAvartar(file.getOriginalFilename());
+			user.setAvartar(file.getOriginalFilename());
 		} else {
-			profile.setAvartar(profileServices.findByEmail(accountServices.getEmailUser()).getAvartar());
+			user.setAvartar(userServices.findByEmail(accountServices.getEmailUser()).getAvartar());
 		}
-		profileServices.updateProfile(profile);
+		userServices.updateProfile(user);
 		return "redirect:/profile";
 	}
 
@@ -86,12 +85,12 @@ public class ProfileController {
 	public void downloadAvatar(HttpServletResponse response, @PathVariable("email") String email) throws IOException {
 
 		System.out.println("Email la vao:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + email);
-		Profile profile = profileServices.findByEmail(email+".com");
-		if (profile == null) {
+		User user = userServices.findByEmail(email+".com");
+		if (user == null) {
 			return;
 		}
 
-		String fullPath = Constants.UPLOAD_FOLDER + "/" + profile.getAvartar();
+		String fullPath = Constants.UPLOAD_FOLDER + "/" + user.getAvartar();
 		File file = new File(fullPath);
 
 		if (!file.exists()) {

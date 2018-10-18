@@ -5,27 +5,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.java.vakapu.dao.ProfileDAO;
-import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.User;
 
 @Service
 @Transactional
-public class ProfileServices {
+public class UserServices {
 
 	@Autowired
 	private ProfileDAO profileDAO;
 	
-	public Profile findByEmail(String email)
+	public User findByEmail(String email)
 	{
 		return profileDAO.find(email);
 	}
 	
-	public Profile updateProfile(Profile profile)
+	public User updateProfile(User user)
 	{
-		return profileDAO.update(profile);
+		return profileDAO.update(user);
 	}
 	
-	public Profile createProfile(Profile profile)
+	public User createProfile(User user)
 	{
-		return profileDAO.create(profile);
+		return profileDAO.create(user);
 	}
 }

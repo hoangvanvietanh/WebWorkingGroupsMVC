@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,13 +35,29 @@ public class TeamDAO {
 		return query.getResultList();
 	}
 	
+	public long countMember(int idTeam)
+	{
+		@SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery("select count(*) from TeamMember a where a.team.idTeam=:idTeam");
+		query.setParameter("idTeam", idTeam);
+		return  (long) query.uniqueResult();
+	}
+	
+	public long countProject(int idTeam)
+	{
+		@SuppressWarnings("rawtypes")
+		Query query = getSession().createQuery("select count(*) from TeamProject a where a.team.idTeam=:idTeam");
+		query.setParameter("idTeam", idTeam);
+		return  (long) query.uniqueResult();
+	}
+	
 	public Team findById(int id) {
 		return getSession().find(Team.class, id);
 	}
 	
-	public Team create(Team Team) {
-		getSession().save(Team);
-		return Team;
+	public Team create(Team team) {
+		getSession().persist(team);
+		return team;
 	}
 	
 	public Team delete(Team Team) {

@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.User;
 
 @Repository
 public class ProfileDAO {
@@ -21,28 +21,28 @@ public class ProfileDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List<Profile> findAll(){
-		TypedQuery<Profile> query = getSession().createQuery("FROM Profile", Profile.class);
-		List<Profile> contact = query.getResultList();
+	public List<User> findAll(){
+		TypedQuery<User> query = getSession().createQuery("FROM User", User.class);
+		List<User> contact = query.getResultList();
 		return contact;
 	}
 	
-	public Profile find(String email) {
-		return getSession().find(Profile.class, email);
+	public User find(String email) {
+		return getSession().find(User.class, email);
 	}
 	
-	public Profile create(Profile profile) {
-		getSession().save(profile);
-		return profile;
+	public User create(User user) {
+		getSession().save(user);
+		return user;
 	}
 	
-	public Profile delete(Profile profile) {
-		getSession().delete(profile);
-		return profile;
+	public User delete(User user) {
+		getSession().delete(user);
+		return user;
 	}
 	
-	public Profile update(Profile profile) {
-		getSession().update(profile);
-		return profile;
+	public User update(User user) {
+		getSession().update(user);
+		return user;
 	}
 }

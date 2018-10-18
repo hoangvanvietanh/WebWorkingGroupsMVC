@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.java.vakapu.entity.Friendship;
-import com.java.vakapu.entity.User;
 
 @Repository
 public class FriendshipDAO {
@@ -22,10 +21,11 @@ public class FriendshipDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List<Friendship> findFriend(String email)
+	public List<Friendship> findFriend(String emailUser,int status)
 	{
-		TypedQuery<Friendship> query = getSession().createQuery("select a from Friendship a where a.email1 =:email or a.email2 =:email",Friendship.class);
-		query.setParameter("email", email);
+		TypedQuery<Friendship> query = getSession().createQuery("select a from Friendship a where a.emailUser.email =:emailUser or a.status =:status",Friendship.class);
+		query.setParameter("emailUser", emailUser);
+		query.setParameter("status", status);
 		return query.getResultList();
 	}
 }

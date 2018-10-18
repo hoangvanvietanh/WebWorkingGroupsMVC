@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.java.vakapu.dao.ProjectDAO;
-import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.TeamMemberTeamProject;
+import com.java.vakapu.entity.TeamProject;
 
 @Service
 @Transactional
@@ -16,39 +17,39 @@ public class ProjectServices {
 	@Autowired
 	private ProjectDAO projectDao;
 	
-	public List<Project> findAll()
+	public List<TeamMemberTeamProject> findAll()
 	{
 		return projectDao.findAll();
 	}
 	
-	public Project find(int id)
+	public TeamProject find(int id)
 	{
 		return projectDao.find(id);
 	}
 	
-	public List<Project> findByIdTeam(int id)
+	public List<TeamMemberTeamProject> findByIdTeam(int id)
 	{
 		return projectDao.findByIdTeam(id);
 	}
 	
-	public List<Project> findByEmail(String email)
+	public List<TeamMemberTeamProject> findByEmail(String email)
 	{
 		return projectDao.findByEmail(email);
 	}
 	
-	public Project createProject(Project project)
+	public TeamProject createProject(TeamProject teamProject)
 	{
-		return projectDao.create(project);
+		return projectDao.create(teamProject);
 	}
 	
-	public Project updateProject(Project project)
+	public TeamProject updateProject(TeamProject teamProject)
 	{
-		return projectDao.update(project);
+		return projectDao.update(teamProject);
 	}
 	
-	public void deleteProject(Project project)
+	public void deleteProject(TeamProject teamProject)
 	{
-		projectDao.delete(project);
+		projectDao.delete(teamProject);
 	}
 	
 }

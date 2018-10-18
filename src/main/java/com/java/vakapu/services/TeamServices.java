@@ -21,6 +21,16 @@ public class TeamServices {
 		return TeamDAO.findById(id);
 	}
 	
+	public long countMember(int idTeam)
+	{
+		return TeamDAO.countMember(idTeam);
+	}
+	
+	public long countProject(int idTeam)
+	{
+		return TeamDAO.countProject(idTeam);
+	}
+	
 	public List<Team> findByEmail(String email)
 	{
 		return TeamDAO.findByEmail(email);

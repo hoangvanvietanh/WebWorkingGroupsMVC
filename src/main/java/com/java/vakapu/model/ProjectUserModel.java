@@ -1,20 +1,20 @@
 package com.java.vakapu.model;
 
-import com.java.vakapu.entity.Project;
+import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.ProjectUser;
 import com.java.vakapu.entity.User;
 
 public class ProjectUserModel {
 	private int id;
 	private User user;
-	private Project project;
+	private TeamProject teamProject;
 	
 	public ProjectUser toProjectUser()
 	{
 		ProjectUser pro=new ProjectUser();
 		pro.setId(this.getId());
 		pro.setUser(this.getUser());
-		pro.setProject(this.getProject());
+	//	pro.setProject(this.getProject());
 		return pro;
 	}
 	
@@ -22,7 +22,7 @@ public class ProjectUserModel {
 	{
 		this.setId(pro.getId());
 		this.setUser(pro.getUser());
-		this.setProject(pro.getProject());
+		//this.setProject(pro.getProject());
 	}
 	
 	public int getId() {
@@ -40,12 +40,12 @@ public class ProjectUserModel {
 		this.user = user;
 	}
 
-	public Project getProject() {
-		return project;
+	public TeamProject getProject() {
+		return teamProject;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProject(TeamProject teamProject) {
+		this.teamProject = teamProject;
 	}
 
 	

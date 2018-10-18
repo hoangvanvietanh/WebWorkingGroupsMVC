@@ -16,7 +16,27 @@ public class TeamMemberServices {
 	@Autowired
 	private TeamMemberDAO teamMemberDAO;
 	
+	public List<TeamMember> findAll()
+	{
+		return teamMemberDAO.findAll();
+	}
+	
+	public List<TeamMember> findByEmai(String email)
+	{
+		return teamMemberDAO.findByEmail(email);
+	}
+	
 	public List<TeamMember> findByIdTeam(int id)
+	{
+		return teamMemberDAO.findUserByIdTeam(id);
+	}
+	
+	public TeamMember create(TeamMember teamMember)
+	{
+		return teamMemberDAO.createTeamMember(teamMember);
+	}
+	
+	public List<TeamMember> findUserByIdTeam(int id)
 	{
 		return teamMemberDAO.findUserByIdTeam(id);
 	}

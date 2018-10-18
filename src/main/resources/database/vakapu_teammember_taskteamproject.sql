@@ -16,37 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project`
+-- Table structure for table `teammember_taskteamproject`
 --
 
-DROP TABLE IF EXISTS `project`;
+DROP TABLE IF EXISTS `teammember_taskteamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project` (
-  `idproject` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `endDate` datetime DEFAULT NULL,
-  `owner` varchar(100) DEFAULT NULL,
-  `description` varchar(450) DEFAULT NULL,
-  `visibility` varchar(45) DEFAULT NULL,
-  `action` varchar(45) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `idTeam` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idproject`),
-  KEY `FK46uoahkw5kn0trc5y23hqxu7n` (`idTeam`),
-  CONSTRAINT `FK46uoahkw5kn0trc5y23hqxu7n` FOREIGN KEY (`idTeam`) REFERENCES `team` (`idteam`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `teammember_taskteamproject` (
+  `idteammember_taskteamproject` int(11) NOT NULL AUTO_INCREMENT,
+  `idteammember_teamproject` int(11) DEFAULT NULL,
+  `idtaskteamproject` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idteammember_taskteamproject`),
+  KEY `fk_teammember_taskproject_1_idx` (`idteammember_teamproject`),
+  KEY `fk_teammember_taskteamproject_2_idx` (`idtaskteamproject`),
+  CONSTRAINT `fk_teammember_taskteamproject_1` FOREIGN KEY (`idteammember_teamproject`) REFERENCES `teammember_teamproject` (`idteammember_teamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_teammember_taskteamproject_2` FOREIGN KEY (`idtaskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project`
+-- Dumping data for table `teammember_taskteamproject`
 --
 
-LOCK TABLES `project` WRITE;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (1,'Test Pro 1',NULL,NULL,NULL,NULL,'team',NULL,NULL,1),(3,'Test pro 2',NULL,NULL,NULL,NULL,'justme',NULL,NULL,NULL),(4,'Test Pro 3',NULL,NULL,NULL,NULL,'public',NULL,NULL,NULL);
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+LOCK TABLES `teammember_taskteamproject` WRITE;
+/*!40000 ALTER TABLE `teammember_taskteamproject` DISABLE KEYS */;
+INSERT INTO `teammember_taskteamproject` VALUES (1,1,1),(2,1,2),(3,2,2);
+/*!40000 ALTER TABLE `teammember_taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:19
+-- Dump completed on 2018-10-18 16:44:26

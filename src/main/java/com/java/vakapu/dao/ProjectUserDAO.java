@@ -38,9 +38,8 @@ public class ProjectUserDAO {
 		return result;
 	}
 	
-	public List<ProjectUser> findById(int id) {
-		@SuppressWarnings("unchecked")
-		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.idproject.id=:id");
+	public List<ProjectUser> findByIdProject(int id) {
+		TypedQuery<ProjectUser> query=getSession().createQuery("from ProjectUser a where a.project.id=:id",ProjectUser.class);
 		query.setParameter("id", id);
 		List<ProjectUser> result= query.getResultList();
 		return result;

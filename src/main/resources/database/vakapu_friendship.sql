@@ -24,11 +24,15 @@ DROP TABLE IF EXISTS `friendship`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `friendship` (
   `idfriendship` int(11) NOT NULL AUTO_INCREMENT,
-  `email1` varchar(145) DEFAULT NULL,
-  `email2` varchar(145) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idfriendship`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `email_user` varchar(145) DEFAULT NULL,
+  `email_friend` varchar(145) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idfriendship`),
+  KEY `fk_friendship_1_idx` (`email_user`),
+  KEY `fk_friendship_2_idx` (`email_friend`),
+  CONSTRAINT `fk_friendship_1` FOREIGN KEY (`email_user`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_friendship_2` FOREIGN KEY (`email_friend`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +41,7 @@ CREATE TABLE `friendship` (
 
 LOCK TABLES `friendship` WRITE;
 /*!40000 ALTER TABLE `friendship` DISABLE KEYS */;
-INSERT INTO `friendship` VALUES (1,'hoangvanvietanh@gmail.com','k11giadinh@gmail.com',NULL);
+INSERT INTO `friendship` VALUES (1,'hoangvanvietanh@gmail.com','khanh@gmail.com',1),(2,'hoangvanvietanh@gmail.com','giang@gmail.com',1),(3,'hoangvanvietanh@gmail.com','phuong@gmail.com',1),(4,'hoangvanvietanh@gmail.com','duyhieu@gmail.com',1),(5,'hoangvanvietanh@gmail.com','khuuhieu@gmail.com',1),(6,'hoangvanvietanh@gmail.com','vietem@gmail.com',0);
 /*!40000 ALTER TABLE `friendship` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:18
+-- Dump completed on 2018-10-18 16:44:26

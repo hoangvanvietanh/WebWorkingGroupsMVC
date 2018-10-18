@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.java.vakapu.entity.Team;
 import com.java.vakapu.entity.TeamMember;
 
 @Repository
@@ -41,5 +40,10 @@ public class TeamMemberDAO {
 		query.setParameter("id", id);
 		List<TeamMember> result= query.getResultList();
 		return result;
+	}
+	public TeamMember createTeamMember(TeamMember teamMember)
+	{
+		getSession().save(teamMember);
+		return teamMember;
 	}
 }

@@ -19,9 +19,9 @@ public class ProjectUser {
 	@JoinColumn(name="email")
 	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name="idproject")
-	private Project project;
+//	@ManyToOne
+//	@JoinColumn(name="idproject")
+//	private TeamProject project;
 
 	public int getId() {
 		return id;
@@ -31,13 +31,13 @@ public class ProjectUser {
 		this.id = id;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
+//	public TeamProject getProject() {
+//		return project;
+//	}
+//
+//	public void setProject(TeamProject project) {
+//		this.project = project;
+//	}
 
 	public User getUser() {
 		return user;

@@ -28,8 +28,8 @@ public class Todo {
 	private String titleNote;
 	
 	@ManyToOne
-	@JoinColumn(name="task")
-	private Task task;
+	@JoinColumn(name="taskTeamProject")
+	private TaskTeamProject taskTeamProject;
 
 	public int getId() {
 		return id;
@@ -55,12 +55,12 @@ public class Todo {
 		this.completed = completed;
 	}
 
-	public Task getTask() {
-		return task;
+	public TaskTeamProject getTask() {
+		return taskTeamProject;
 	}
 
-	public void setTask(Task task) {
-		this.task = task;
+	public void setTask(TaskTeamProject taskTeamProject) {
+		this.taskTeamProject = taskTeamProject;
 	}
 
 	public String getNote() {

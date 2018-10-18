@@ -1,24 +1,19 @@
 package com.java.vakapu.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="project")
-public class Project {
+@Table(name="teamproject")
+public class TeamProject {
 
 	@Id
 	@GeneratedValue
-	@Column(name="idproject")
-	private int idProject;
+	@Column(name="idteamproject")
+	private int id;
 	
 	@Column(name="name")
 	private String name;
@@ -44,24 +39,14 @@ public class Project {
 	@Column(name="action")
 	private String action;
 
-	@ManyToOne
-	@JoinColumn(name="idTeam")
-	private Team team;
 	
-	public Team getTeam() {
-		return team;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
-	public int getIdProject() {
-		return idProject;
-	}
-
-	public void setIdProject(int idProject) {
-		this.idProject = idProject;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

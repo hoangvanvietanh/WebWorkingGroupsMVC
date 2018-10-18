@@ -16,27 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `member`
+-- Table structure for table `teamproject`
 --
 
-DROP TABLE IF EXISTS `member`;
+DROP TABLE IF EXISTS `teamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `member` (
-  `email` varchar(145) NOT NULL,
-  `name` varchar(145) DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `teamproject` (
+  `idteamproject` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `owner` varchar(100) DEFAULT NULL,
+  `description` varchar(450) DEFAULT NULL,
+  `visibility` varchar(45) DEFAULT NULL,
+  `action` varchar(45) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idteamproject`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `member`
+-- Dumping data for table `teamproject`
 --
 
-LOCK TABLES `member` WRITE;
-/*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('hoangvanvietanh@gmail.com','Viet Anh'),('k11giadinh@gmail.com','Dat');
-/*!40000 ALTER TABLE `member` ENABLE KEYS */;
+LOCK TABLES `teamproject` WRITE;
+/*!40000 ALTER TABLE `teamproject` DISABLE KEYS */;
+INSERT INTO `teamproject` VALUES (1,'Test Project Team',NULL,NULL,NULL,'nothing','Team',NULL,NULL),(2,'Test 2',NULL,NULL,NULL,'nothing','Team',NULL,NULL);
+/*!40000 ALTER TABLE `teamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:18
+-- Dump completed on 2018-10-18 16:44:26

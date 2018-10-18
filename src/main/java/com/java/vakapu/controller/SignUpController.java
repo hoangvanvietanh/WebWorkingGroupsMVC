@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.vakapu.entity.Account;
-import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.User;
 import com.java.vakapu.model.AccountModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.EmailServices;
-import com.java.vakapu.services.ProfileServices;
+import com.java.vakapu.services.UserServices;
 
-import sun.security.krb5.internal.PAEncTSEnc;
 import utils.RandomCode;
 
 @Controller
@@ -36,7 +35,7 @@ public class SignUpController {
 	private EmailServices emailServices;
 
 	@Autowired
-	private ProfileServices profileServices;
+	private UserServices userServices;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String create(Model model) {
@@ -101,9 +100,9 @@ public class SignUpController {
 			account.setPassword(passwordEncoder.encode(pass));
 			accountServices.createAccount(account);
 			
-			Profile profile = new Profile();
-			profile.setEmail(email);
-			profileServices.createProfile(profile);
+			User user = new User();
+			user.setEmail(email);
+			userServices.createProfile(user);
 			
 			model.remove("email");
 			return "redirect:/";

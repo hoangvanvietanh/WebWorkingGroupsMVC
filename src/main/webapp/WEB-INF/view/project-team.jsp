@@ -103,13 +103,13 @@
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Overview</a>
+						<li class="breadcrumb-item"><a href="home">Home</a>
 						</li>
 
-						<li class="breadcrumb-item"><a href="pages-app.html">App
-								Pages</a></li>
-
-
+						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
+						<c:if test="${idTeam ne 0}">
+						<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
+						</c:if>
 						<li class="breadcrumb-item active" aria-current="page">Project</li>
 					</ol>
 				</nav>
@@ -140,17 +140,16 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-11 col-xl-10">
 						<div class="page-header">
-							<h1>Brand Concept and Design</h1>
-							<p class="lead">Research, ideate and present brand concepts
-								for client consideration</p>
+							<h1>${project.name}</h1>
+							<p class="lead">${project.description}</p>
 							<div class="d-flex align-items-center">
 								<ul class="avatars">
-
+									<c:forEach var="user" items="${user}">
 									<li><a href="#" data-toggle="tooltip" data-placement="top"
-										title="Claire Connors"> <img alt="Claire Connors"
-											class="avatar" src="assets/img/avatar-female-1.jpg" />
+										title="${user.teamMember.member.name}"> <img alt="${user.teamMember.member.name}"
+											class="avatar" src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>" />
 									</a></li>
-
+									</c:forEach>
 								</ul>
 								<button class="btn btn-round" data-toggle="modal"
 									data-target="#user-manage-modal">
@@ -206,23 +205,10 @@
 								</div>
 								<!--end of content list head-->
 								<div class="content-list-body">
+									
 									<div class="card-list">
-										<div class="card-list-head">
-											<h6>Evaluation</h6>
-											<div class="dropdown">
-												<button class="btn-options" type="button"
-													id="cardlist-dropdown-button-1" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													<i class="material-icons">more_vert</i>
-												</button>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="#">Rename</a> <a
-														class="dropdown-item text-danger" href="#">Archive</a>
-												</div>
-											</div>
-										</div>
 										<div class="card-list-body">
-
+											<c:forEach var="task" items="${task}">
 											<div class="card card-task">
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
@@ -232,133 +218,19 @@
 												<div class="card-body">
 													<div class="card-title">
 														<a href="#">
-															<h6 data-filter-by="text">Assemble Outcomes Report
-																for client</h6>
-														</a> <span class="text-small">7 days</span>
-													</div>
-													<div class="card-meta">
-														<ul class="avatars">
-															<li><a href="#" data-toggle="tooltip" title="Marcus">
-																	<img alt="Marcus Simmons" class="avatar"
-																	src="assets/img/avatar-male-1.jpg" />
-															</a></li>
-														</ul>
-														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>0/6</span>
-														</div>
-														<div class="dropdown card-options">
-															<button class="btn-options" type="button"
-																id="task-dropdown-button-3" data-toggle="dropdown"
-																aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Mark as done</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#">Archive</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-
-										</div>
-									</div>
-									<div class="card-list">
-										<div class="card-list-head">
-											<h6>Ideation</h6>
-											<div class="dropdown">
-												<button class="btn-options" type="button"
-													id="cardlist-dropdown-button-2" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													<i class="material-icons">more_vert</i>
-												</button>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="#">Rename</a> <a
-														class="dropdown-item text-danger" href="#">Archive</a>
-												</div>
-											</div>
-										</div>
-										<div class="card-list-body">
-											<div class="card card-task">
-												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 0%" aria-valuenow="25" aria-valuemin="0"
-														aria-valuemax="100"></div>
-												</div>
-												<div class="card-body">
-													<div class="card-title">
-														<a href="#">
-															<h6 data-filter-by="text">Present concepts and
-																establish direction</h6>
-														</a> <span class="text-small">28 days</span>
-													</div>
-													<div class="card-meta">
-														<ul class="avatars">
-															<li><a href="#" data-toggle="tooltip"
-																title="Kristina"> <img alt="Kristina Van Der Stroem"
-																	class="avatar" src="assets/img/avatar-female-4.jpg" />
-															</a></li>
-														</ul>
-														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>0/3</span>
-														</div>
-														<div class="dropdown card-options">
-															<button class="btn-options" type="button"
-																id="task-dropdown-button-6" data-toggle="dropdown"
-																aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Mark as done</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#">Archive</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-
-										</div>
-									</div>
-									<div class="card-list">
-										<div class="card-list-head">
-											<h6>Design</h6>
-											<div class="dropdown">
-												<button class="btn-options" type="button"
-													id="cardlist-dropdown-button-3" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													<i class="material-icons">more_vert</i>
-												</button>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="#">Rename</a> <a
-														class="dropdown-item text-danger" href="#">Archive</a>
-												</div>
-											</div>
-										</div>
-										<div class="card-list-body">
-
-											<div class="card card-task">
-												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 0%" aria-valuenow="25" aria-valuemin="0"
-														aria-valuemax="100"></div>
-												</div>
-												<div class="card-body">
-													<div class="card-title">
-														<a href="#">
-															<h6 data-filter-by="text">Produce realised brand
-																package</h6>
+															<h6 data-filter-by="text">${task.name}</h6>
 														</a> <span class="text-small">Unscheduled</span>
 													</div>
 													<div class="card-meta">
 														<ul class="avatars">
+															<c:forEach var="userTask" items="${userTask}">
+															<c:if test="${userTask.taskTeamProject.id ==task.id}">
 															<li><a href="#" data-toggle="tooltip"
-																title="Kristina"> <img alt="Kristina Van Der Stroem"
-																	class="avatar" src="assets/img/avatar-female-4.jpg" />
+																title="${userTask.teamMemberTeamProject.teamMember.member.name}"> <img alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																	class="avatar" src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
 															</a></li>
+															</c:if>
+															</c:forEach>
 														</ul>
 														<div class="d-flex align-items-center">
 															<i class="material-icons">playlist_add_check</i> <span>-/-</span>
@@ -379,7 +251,7 @@
 												</div>
 											</div>
 
-
+											</c:forEach>
 										</div>
 									</div>
 									<!--end of content list body-->
@@ -939,6 +811,7 @@
 											aria-controls="task-add-members" aria-selected="false">Members</a>
 										</li>
 									</ul>
+<!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   -->									
 									<div class="modal-body">
 										<div class="tab-content">
 											<div class="tab-pane fade show active" id="task-add-details"

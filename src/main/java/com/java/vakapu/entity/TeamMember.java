@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class TeamMember {
 
 	@Id
-	@Column(name="id")
+	@Column(name="idteam_member")
 	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name="email")
-	private Member member;
+	private User member;
 	
 	@Column(name="role")
 	private String role;
@@ -34,11 +34,11 @@ public class TeamMember {
 		this.id = id;
 	}
 
-	public Member getMember() {
+	public User getMember() {
 		return member;
 	}
 
-	public void setMember(Member member) {
+	public void setMember(User member) {
 		this.member = member;
 	}
 

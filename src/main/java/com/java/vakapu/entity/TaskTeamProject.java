@@ -3,16 +3,14 @@ package com.java.vakapu.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "task")
-public class Task {
+@Table(name = "taskteamproject")
+public class TaskTeamProject {
 
 	@Id
-	@Column(name = "idtask")
+	@Column(name = "idtaskteamproject")
 	private int id;
 
 	@Column(name = "name")
@@ -32,10 +30,6 @@ public class Task {
 	
 	@Column(name="endDate")
 	private String endDate;	
-	
-	@ManyToOne
-	@JoinColumn(name = "idproject")
-	private Project project;
 
 	public int getId() {
 		return id;
@@ -67,14 +61,6 @@ public class Task {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
 	}
 
 	public String getOwner() {

@@ -16,34 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `task`
+-- Table structure for table `teammember_teamproject`
 --
 
-DROP TABLE IF EXISTS `task`;
+DROP TABLE IF EXISTS `teammember_teamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task` (
-  `idtask` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(145) DEFAULT NULL,
-  `completed` tinyint(1) DEFAULT '0',
-  `description` varchar(300) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  `owner` varchar(45) DEFAULT NULL,
-  `startDate` varchar(45) DEFAULT NULL,
-  `endDate` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idtask`),
-  KEY `FKlg5367lnvyh36v17qnoqy5wmj` (`idproject`),
-  CONSTRAINT `FKlg5367lnvyh36v17qnoqy5wmj` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `teammember_teamproject` (
+  `idteammember_teamproject` int(11) NOT NULL AUTO_INCREMENT,
+  `idteammember` int(11) DEFAULT NULL,
+  `idteamproject` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idteammember_teamproject`),
+  KEY `fk_teammember_teamproject_1_idx` (`idteamproject`),
+  KEY `fk_teammember_teamproject_2_idx` (`idteammember`),
+  CONSTRAINT `fk_teammember_teamproject_1` FOREIGN KEY (`idteamproject`) REFERENCES `teamproject` (`idteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_teammember_teamproject_2` FOREIGN KEY (`idteammember`) REFERENCES `team_member` (`idteam_member`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task`
+-- Dumping data for table `teammember_teamproject`
 --
 
-LOCK TABLES `task` WRITE;
-/*!40000 ALTER TABLE `task` DISABLE KEYS */;
-/*!40000 ALTER TABLE `task` ENABLE KEYS */;
+LOCK TABLES `teammember_teamproject` WRITE;
+/*!40000 ALTER TABLE `teammember_teamproject` DISABLE KEYS */;
+INSERT INTO `teammember_teamproject` VALUES (1,18,1),(2,22,1),(3,23,1),(4,18,2);
+/*!40000 ALTER TABLE `teammember_teamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:18
+-- Dump completed on 2018-10-18 16:44:26

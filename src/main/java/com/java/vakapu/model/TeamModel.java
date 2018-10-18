@@ -1,35 +1,44 @@
-package com.java.vakapu.entity;
+package com.java.vakapu.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="team")
-public class Team {
+import com.java.vakapu.entity.Team;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idteam", updatable = false, nullable = false)
+public class TeamModel {
+
 	private int idTeam;
-	
-	@Column(name="name")
+
 	private String name;
-	
-	@Column(name="description")
+
 	private String description;
 
-	@Column(name="owner")
 	private String owner;
 
-	@Column(name="member_amount")
 	private int memberAmount;
-	
-	@Column(name="project_amount")
+
 	private int projectAmount;
+	
+	private String[] email;
+
+	public void fromTeam(Team team)
+	{
+		this.setName(team.getName());
+		this.setDescription(team.getDescription());
+		this.setIdTeam(team.getIdTeam());
+		this.setOwner(team.getOwner());
+		this.setMemberAmount(team.getMemberAmount());
+		this.setProjectAmount(team.getProjectAmount());
+	}
+	
+	public void toTeam()
+	{
+		Team team = new Team();
+		team.setIdTeam(this.getIdTeam());
+		team.setDescription(this.getDescription());
+		team.setName(this.getName());
+		team.setMemberAmount(this.getMemberAmount());
+		team.setProjectAmount(this.getProjectAmount());
+		team.setOwner(this.getOwner());
+	}
 	
 	public int getIdTeam() {
 		return idTeam;
@@ -77,5 +86,13 @@ public class Team {
 
 	public void setProjectAmount(int projectAmount) {
 		this.projectAmount = projectAmount;
+	}
+
+	public String[] getEmail() {
+		return email;
+	}
+
+	public void setEmail(String[] email) {
+		this.email = email;
 	}
 }

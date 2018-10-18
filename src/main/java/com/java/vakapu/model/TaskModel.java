@@ -1,7 +1,7 @@
 package com.java.vakapu.model;
 
-import com.java.vakapu.entity.Project;
-import com.java.vakapu.entity.Task;
+import com.java.vakapu.entity.TeamProject;
+import com.java.vakapu.entity.TaskTeamProject;
 
 public class TaskModel {
 
@@ -13,7 +13,7 @@ public class TaskModel {
 
 	private String description;
 
-	private Project project;
+	private TeamProject teamProject;
 
 	private String owner;
 	
@@ -21,28 +21,28 @@ public class TaskModel {
 	
 	private String endDate;
 
-	public void fromTask(Task task) {
-		this.setIdtask(task.getId());
-		this.setName(task.getName());
-		this.setCompleted(task.getCompleted());
-		this.setDescription(task.getDescription());
-		this.setProject(task.getProject());
-		this.setOwner(task.getOwner());
-		this.setStartDate(task.getStartDate());
-		this.setEndDate(task.getEndDate());
+	public void fromTask(TaskTeamProject taskTeamProject) {
+		this.setIdtask(taskTeamProject.getId());
+		this.setName(taskTeamProject.getName());
+		this.setCompleted(taskTeamProject.getCompleted());
+		this.setDescription(taskTeamProject.getDescription());
+		//this.setProject(taskTeamProject.getProject());
+		this.setOwner(taskTeamProject.getOwner());
+		this.setStartDate(taskTeamProject.getStartDate());
+		this.setEndDate(taskTeamProject.getEndDate());
 	}
 
-	public Task toTask() {
-		Task task = new Task();
-		task.setId(this.getIdtask());
-		task.setName(this.getName());
-		task.setCompleted(this.getCompleted());
-		task.setDescription(this.getDescription());
-		task.setProject(this.getProject());
-		task.setOwner(this.getOwner());
-		task.setStartDate(this.startDate);
-		task.setEndDate(this.endDate);
-		return task;
+	public TaskTeamProject toTask() {
+		TaskTeamProject taskTeamProject = new TaskTeamProject();
+		taskTeamProject.setId(this.getIdtask());
+		taskTeamProject.setName(this.getName());
+		taskTeamProject.setCompleted(this.getCompleted());
+		taskTeamProject.setDescription(this.getDescription());
+		//taskTeamProject.setProject(this.getProject());
+		taskTeamProject.setOwner(this.getOwner());
+		taskTeamProject.setStartDate(this.startDate);
+		taskTeamProject.setEndDate(this.endDate);
+		return taskTeamProject;
 	}
 
 	public int getIdtask() {
@@ -85,12 +85,12 @@ public class TaskModel {
 		this.owner = owner;
 	}
 
-	public Project getProject() {
-		return project;
+	public TeamProject getProject() {
+		return teamProject;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProject(TeamProject teamProject) {
+		this.teamProject = teamProject;
 	}
 
 	public String getStartDate() {

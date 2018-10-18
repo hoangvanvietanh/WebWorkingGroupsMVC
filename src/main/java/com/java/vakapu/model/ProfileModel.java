@@ -1,6 +1,6 @@
 package com.java.vakapu.model;
 
-import com.java.vakapu.entity.Profile;
+import com.java.vakapu.entity.User;
 
 public class ProfileModel {
 	
@@ -26,37 +26,37 @@ public class ProfileModel {
 	
 	private String avatar;
 	
-	public void fromProfile(Profile profile)
+	public void fromProfile(User user)
 	{
-		this.setEmail(profile.getEmail());
-		this.setName(profile.getName());
-		this.setAddress(profile.getAddress());
-		this.setBirthdate(profile.getBirthdate());
-		this.setEducation(profile.getEducation());
-		this.setGender(profile.getGender());
-		this.setPhone(profile.getPhone());
-		this.setAvatar(profile.getAvartar());
-		this.setSkill(profile.getSkill());
-		this.setSummary(profile.getSummary());
-		this.setExperience(profile.getExperience());
+		this.setEmail(user.getEmail());
+		this.setName(user.getName());
+		this.setAddress(user.getAddress());
+		this.setBirthdate(user.getBirthdate());
+		this.setEducation(user.getEducation());
+		this.setGender(user.getGender());
+		this.setPhone(user.getPhone());
+		this.setAvatar(user.getAvartar());
+		this.setSkill(user.getSkill());
+		this.setSummary(user.getSummary());
+		this.setExperience(user.getExperience());
 	}
 	
-	public Profile toProfile()
+	public User toProfile()
 	{
-		Profile profile = new Profile();
-		profile.setAddress(this.getAddress());
-		profile.setAvartar(this.getAvatar());
-		profile.setBirthdate(this.getBirthdate());
-		profile.setEducation(this.getEducation());
-		profile.setEmail(this.getEmail());
-		profile.setExperience(this.getExperience());
-		profile.setGender(this.getGender());
-		profile.setName(this.getName());
-		profile.setPhone(this.getPhone());
-		profile.setSkill(this.getSkill());
-		profile.setSummary(this.getSummary());
+		User user = new User();
+		user.setAddress(this.getAddress());
+		user.setAvartar(this.getAvatar());
+		user.setBirthdate(this.getBirthdate());
+		user.setEducation(this.getEducation());
+		user.setEmail(this.getEmail());
+		user.setExperience(this.getExperience());
+		user.setGender(this.getGender());
+		user.setName(this.getName());
+		user.setPhone(this.getPhone());
+		user.setSkill(this.getSkill());
+		user.setSummary(this.getSummary());
 		
-		return profile;
+		return user;
 	}
 	
 	public String getEmail() {

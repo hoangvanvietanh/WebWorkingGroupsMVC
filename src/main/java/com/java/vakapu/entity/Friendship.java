@@ -3,6 +3,8 @@ package com.java.vakapu.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,14 +15,16 @@ public class Friendship {
 	@Column(name="idfriendship")
 	private int idfriendship;
 	
-	@Column(name="email1")
-	private String email1;
+	@OneToOne
+	@JoinColumn(name="email_user")
+	private User emailUser;
 	
-	@Column(name="email2")
-	private String email2;
+	@OneToOne
+	@JoinColumn(name="email_friend")
+	private User emailFriend;
 	
 	@Column(name="status")
-	private String status;
+	private int status;
 
 	public int getIdfriendship() {
 		return idfriendship;
@@ -30,27 +34,27 @@ public class Friendship {
 		this.idfriendship = idfriendship;
 	}
 
-	public String getEmail1() {
-		return email1;
+	public User getEmailUser() {
+		return emailUser;
 	}
 
-	public void setEmail1(String email1) {
-		this.email1 = email1;
+	public void setEmailUser(User emailUser) {
+		this.emailUser = emailUser;
 	}
 
-	public String getEmail2() {
-		return email2;
+	public User getEmailFriend() {
+		return emailFriend;
 	}
 
-	public void setEmail2(String email2) {
-		this.email2 = email2;
+	public void setEmailFriend(User emailFriend) {
+		this.emailFriend = emailFriend;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 }

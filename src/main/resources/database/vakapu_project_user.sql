@@ -27,11 +27,9 @@ CREATE TABLE `project_user` (
   `email` varchar(145) DEFAULT NULL,
   `idproject` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_project_user_2_idx` (`idproject`),
-  KEY `fk_project_user_1_idx` (`email`),
-  CONSTRAINT `fk_project_user_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_project_user_2` FOREIGN KEY (`idproject`) REFERENCES `project` (`idproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  KEY `FK8r8egdw1dlyh28lnie2dct5kr` (`email`),
+  CONSTRAINT `FK8r8egdw1dlyh28lnie2dct5kr` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +38,7 @@ CREATE TABLE `project_user` (
 
 LOCK TABLES `project_user` WRITE;
 /*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (9,'hoangvanvietanh@gmail.com',1),(10,'hoangvanvietanh@gmail.com',3),(11,'k11giadinh@gmail.com',4),(12,'k11giadinh@gmail.com',1),(13,'hoangvanvietanh@gmail.com',4);
+INSERT INTO `project_user` VALUES (3,'hoangvanvietanh@gmail.com',1),(4,'khanh@gmail.com',1),(5,'hoangvanvietanh@gmail.com',2);
 /*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:18
+-- Dump completed on 2018-10-18 16:44:26

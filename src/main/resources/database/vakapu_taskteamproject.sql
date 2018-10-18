@@ -16,38 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `profile`
+-- Table structure for table `taskteamproject`
 --
 
-DROP TABLE IF EXISTS `profile`;
+DROP TABLE IF EXISTS `taskteamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `profile` (
-  `email` varchar(150) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `phone` varchar(22) DEFAULT NULL,
-  `address` varchar(300) DEFAULT NULL,
-  `summary` varchar(1000) DEFAULT NULL,
-  `skill` varchar(1000) DEFAULT NULL,
-  `experience` varchar(3000) DEFAULT NULL,
-  `education` varchar(1000) DEFAULT NULL,
-  `birthdate` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `about` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `taskteamproject` (
+  `idtaskteamproject` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(145) DEFAULT NULL,
+  `completed` tinyint(1) DEFAULT '0',
+  `description` varchar(300) DEFAULT NULL,
+  `owner` varchar(45) DEFAULT NULL,
+  `startDate` varchar(45) DEFAULT NULL,
+  `endDate` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idtaskteamproject`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `profile`
+-- Dumping data for table `taskteamproject`
 --
 
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('hoangvanvietanh@gmail.com','Hoang Van Viet Anh',NULL,'1998-07-10','0903026389','Ho Chi Minh',NULL,NULL,NULL,NULL,'','251038.jpg','I am a coder'),('k11giadinh@gmail.com','Hoang van Dat',NULL,NULL,'','',NULL,NULL,NULL,NULL,'','check.png','I am a designer');
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+LOCK TABLES `taskteamproject` WRITE;
+/*!40000 ALTER TABLE `taskteamproject` DISABLE KEYS */;
+INSERT INTO `taskteamproject` VALUES (1,'Trang Manage',0,'Nothing','hoangvanvietanh@gmail.com','2018/10/19','2018/10/25'),(2,'Trang User',0,'Nothing','hoangvanvietanh@gmail.com','2018/10/20','2018/10/30');
+/*!40000 ALTER TABLE `taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-16 18:00:18
+-- Dump completed on 2018-10-18 16:44:26
