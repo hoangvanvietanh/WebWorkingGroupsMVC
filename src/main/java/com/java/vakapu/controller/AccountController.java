@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +20,7 @@ import com.java.vakapu.entity.Account;
 import com.java.vakapu.model.AccountModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.EmailServices;
+import com.java.vakapu.services.ProfileServices;
 
 import utils.RandomPassword;
 
@@ -31,6 +33,9 @@ public class AccountController {
 
 	@Autowired
 	private EmailServices emailServices;
+
+	@Autowired
+	private ProfileServices profileServices;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String create(Model model) {
@@ -99,6 +104,9 @@ public class AccountController {
 		{
 			return "redirect:/forgot-password/change-password";
 		}
+		if(oldPass.equals(oldPassword))
+		BCryptPasswordEncoder Encoder=new BCryptPasswordEncoder();
+		String pass=Encoder.encode(oldPass);
 		if(oldPass.equals(oldPassword))
 		{
 			if(newPass.equals(newRePass))

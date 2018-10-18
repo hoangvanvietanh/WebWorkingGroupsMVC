@@ -21,24 +21,38 @@
 	left: 35%;
 }
 </style>
-<title>I FORGOT</title>
+<title>I Forgot</title>
 </head>
 <body>
-
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
-		<div class="logo">I Forgot</div>
+		<div class="logo">I FORGOT</div>
 		<!-- Main Form -->
 		<div class="login-form-1">
-			<form id="register-form" class="text-left" action="forgot-password"
-				method="post">
+		
+		 
+			<form id="register-form" class="text-left" action="forgot-password/i-forgot"  
+				method="post">-->
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
+				
 					<div class="login-group">
 						<div class="form-group">
-							<label for="reg_username" class="sr-only">Email address</label> <input
-								type="text" class="form-control" name="email"
-								placeholder="Your email address" /> <input type="hidden"
-								name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<label for="email" class="sr-only">Email</label><br> <input
+								type="text" name="email" class="form-control" value="${email}" readonly="readonly"/>
+						</div>
+					</div>
+					<div class="login-group">
+						<div class="form-group">
+							<label for="reg_password" class="sr-only">New Password</label> <input
+								type="password" class="form-control" name="newpass"
+								placeholder="password">
+						</div>
+						<div class="form-group">
+							<label for="reg_password_confirm" class="sr-only">New Password
+								Confirm</label> <input type="password" class="form-control"
+								name="newre_pass" placeholder="confirm password"> <input
+								type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 						</div>
 					</div>
 					<button type="submit" class="login-button">
@@ -53,9 +67,9 @@
 				</div>
 			</form>
 		</div>
+	
 		<!-- end:Main Form -->
 	</div>
-
 	<br>
 	<div>${message}</div>
 	<script src="<spring:url value='/resources/js/app.js' />"></script>

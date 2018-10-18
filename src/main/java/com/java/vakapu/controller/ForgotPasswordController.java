@@ -1,6 +1,15 @@
 package com.java.vakapu.controller;
 
 
+<<<<<<< HEAD
+=======
+import javax.jws.WebParam.Mode;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> branch 'master' of https://github.com/hoangvanvietanh/WebWorkingGroupsMVC.git
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -15,51 +24,72 @@ import com.java.vakapu.model.AccountModel;
 public class ForgotPasswordController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String create(Model model) {
-		AccountModel account = new AccountModel();
-		model.addAttribute("email", account);
+	public String homeForgot(Model model) {
+//		AccountModel account = new AccountModel();
+//		model.addAttribute("account", account);
 		return "forgot-password";
 	}
 	
+	@RequestMapping(method=RequestMethod.POST)
+	public String homeForgotPost(@ModelAttribute("email") String email, ModelMap model, Model mode)
+	{
+		Account acc=accountServices.findByEmail(email);
+		if(acc==null)
+		{
+			model.addAttribute("message", "Your email is not exist");
+			return "denied";
+		}
+		model.addAttribute("email", email);
+		List<Account> listAll=accountServices.findAll();
+		for(Account a : listAll)
+		{
+			if(a.getEmail().equals(email))
+			{
+				AccountModel account=new AccountModel();
+				account.fromAccount(a);
+				mode.addAttribute("forgot", account);
+				
+				return "i-forgot";
+			}
+		}
+		return "redirect:/forgot-password";
+		
+	}
 	
 
-//	@RequestMapping(value="/change-password",method=RequestMethod.GET)
-//	public String changePasswordGet(@ModelAttribute("emailSignUp") String emailSignUp,BindingResult result, ModelMap model)
-//	{
-//		
-//		if(result.hasErrors())
-//		{
-//			return"change-password";
-//		}
-//		model.put("email", emailSignUp);
-//		System.out.println(emailSignUp);
-//		return "redirect:/forgot-password/change-password";
+	@RequestMapping(value="/i-forgot",method=RequestMethod.POST)
+	public String forgotPost( @ModelAttribute("email") String email,
+			@ModelAttribute("newpass") String Pass,@ModelAttribute("newre_pass") String RePass ,
+			BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/forgot-password/change-password";
+		}
 		
-		
-	
-	
-//	@RequestMapping(value="/change-password",method=RequestMethod.POST)
-//	public String changePasswordPost(@ModelAttribute("emailSignUp") String emailSignUp, @ModelAttribute("pass") String pass, 
-//			@ModelAttribute("re_pass") String rePass,BindingResult result, ModelMap model,
-//			RedirectAttributes redirectAttributes) throws ParseException
-//	{
-//		if(result.hasErrors())
-//		{
-//			return "redirect:/forgot-password/change-password";
-//		}
-//		
-//		if(pass.equals(rePass))
-//		{
-//			model.put("email",emailSignUp);
-//			Account acc=accountServices.findByEmail(emailSignUp);
-//			BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-//			acc.setPassword(passwordEncoder.encode(pass));
-//			acc.setStatus("active");
-//			accountServices.updateAccount(acc);
-//		}
-//		
-//		
-//		return "redirect:/sign-in";
-//	}
+		if(Pass.equals(RePass))
+			{
+			
+				Account acc=accountServices.findByEmail(email);
 
+				if(acc==null)
+				{
+					return "redirect:/sign-up";
+				}
+
+				
+				BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+				acc.setPassword(passwordEncoder.encode(Pass));
+				acc.setStatus("active");
+				accountServices.updateAccount(acc);
+				return "redirect:/sign-in";
+			}
+		return "redirect:/forgot-password";
+	}
+	
+	
+	
+
+		
 }
