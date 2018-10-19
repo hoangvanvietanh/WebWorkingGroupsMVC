@@ -46,7 +46,7 @@ public class ProjectDAO {
 	}
 	
 	public TeamProject create(TeamProject TeamProject) {
-		getSession().save(TeamProject);
+		getSession().persist(TeamProject);
 		return TeamProject;
 	}
 	

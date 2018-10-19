@@ -43,7 +43,18 @@ public class TeamMemberDAO {
 	}
 	public TeamMember createTeamMember(TeamMember teamMember)
 	{
-		getSession().save(teamMember);
+		getSession().persist(teamMember);
 		return teamMember;
+	}
+	
+	public TeamMember getUserTeam(int idTeam,String email)
+	{
+		String hql="select a from TeamMember a where a.team.idTeam=:id and a.member.email=:email";
+		TypedQuery<TeamMember> query= getSession().createQuery(hql,TeamMember.class);
+		query.setParameter("id", idTeam);
+		query.setParameter("email", email);
+		TeamMember result=query.getSingleResult();
+		return result;
+		
 	}
 }

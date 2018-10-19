@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.java.vakapu.entity.Team;
+import com.java.vakapu.entity.TeamMember;
 
 @Repository
 public class TeamDAO {
@@ -34,6 +35,8 @@ public class TeamDAO {
 		query.setParameter("email", email);
 		return query.getResultList();
 	}
+	
+	
 	
 	public Team findById(int id) {
 		return getSession().find(Team.class, id);

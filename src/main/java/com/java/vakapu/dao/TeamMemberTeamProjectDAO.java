@@ -32,4 +32,10 @@ public class TeamMemberTeamProjectDAO {
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
+	
+	public TeamMemberTeamProject create(TeamMemberTeamProject memberProject)
+	{
+		getSession().persist(memberProject);
+		return memberProject;
+	}
 }
