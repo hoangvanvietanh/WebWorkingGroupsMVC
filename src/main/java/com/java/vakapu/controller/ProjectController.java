@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.vakapu.entity.TeamProject;
 
-import com.java.vakapu.model.ProjectModel;
+import com.java.vakapu.model.TeamProjectModel;
 
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.ProjectServices;
@@ -43,13 +43,13 @@ public class ProjectController {
 	@RequestMapping(value="/create",method=RequestMethod.GET)
 	public String createInfoGet(Model model) throws ParseException
 	{
-		ProjectModel pro=new ProjectModel();
+		TeamProjectModel pro=new TeamProjectModel();
 		model.addAttribute("project", pro);
 		return "create-project";
 	}
 							
 	@RequestMapping(value="/create",method=RequestMethod.POST)
-	public String createInfoPost(@ModelAttribute("project") ProjectModel proModel,
+	public String createInfoPost(@ModelAttribute("project") TeamProjectModel proModel,
 			BindingResult result,Model model) throws ParseException
 	{
 		
@@ -70,7 +70,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public String updateGet(@ModelAttribute("project") ProjectModel proM, @RequestParam(name="idProject") int idproject,
+	public String updateGet(@ModelAttribute("project") TeamProjectModel proM, @RequestParam(name="idProject") int idproject,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -79,7 +79,7 @@ public class ProjectController {
 		}
 		
 		TeamProject a=proServices.find(idproject);
-		ProjectModel proModel=new ProjectModel();
+		TeamProjectModel proModel=new TeamProjectModel();
 		proModel.fromProject(a);
 		
 		model.addAttribute("project",proModel);
@@ -89,7 +89,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String updatePost(@ModelAttribute("project") ProjectModel proM,BindingResult result,Model model)
+	public String updatePost(@ModelAttribute("project") TeamProjectModel proM,BindingResult result,Model model)
 	{
 		
 		if(result.hasErrors())
@@ -102,7 +102,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/start",method=RequestMethod.POST)
-	public String updatePost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String updatePost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") TeamProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -119,7 +119,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="end",method=RequestMethod.POST)
-	public String endPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String endPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") TeamProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -142,7 +142,7 @@ public class ProjectController {
 	public String viewGet(@ModelAttribute("idProject") int idproject, Model model) throws ParseException
 	{
 		TeamProject c=proServices.find(idproject);
-		ProjectModel proModel=new ProjectModel();
+		TeamProjectModel proModel=new TeamProjectModel();
 		proModel.fromProject(c);
 		
 		model.addAttribute("project",proModel);
@@ -151,7 +151,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/cancel",method=RequestMethod.POST)
-	public String cancelPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") ProjectModel proM,
+	public String cancelPost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") TeamProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())

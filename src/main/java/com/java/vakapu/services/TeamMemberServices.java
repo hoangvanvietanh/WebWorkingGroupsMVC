@@ -40,4 +40,9 @@ public class TeamMemberServices {
 	{
 		return teamMemberDAO.findUserByIdTeam(id);
 	}
+	
+	public TeamMember getUserTeam(int idTeam, String email)
+	{
+		return teamMemberDAO.getUserTeam(idTeam, email);
+	}
 }

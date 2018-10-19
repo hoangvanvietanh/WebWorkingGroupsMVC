@@ -3,7 +3,7 @@ package com.java.vakapu.model;
 import com.java.vakapu.entity.TeamProject;
 
 
-public class ProjectModel {
+public class TeamProjectModel {
 
 	private int id;
 	
@@ -24,7 +24,6 @@ public class ProjectModel {
 	private String action;
 	
 	private int idtask;
-	
 	
 	public void fromProject(TeamProject teamProject) 
 	{

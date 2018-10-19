@@ -22,4 +22,9 @@ public class TeamMemberTeamProjectServices {
 	{
 		return teamMemberTeamProjectDAO.findByIdProject(id);
 	}
+	
+	public TeamMemberTeamProject create(TeamMemberTeamProject memberProject)
+	{
+		return teamMemberTeamProjectDAO.create(memberProject);
+	}
 }

@@ -158,13 +158,13 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 25%;"></div>
+									<div class="progress-bar bg-success" style="width: ${project.taskDone div project.totalTask * 100}%;"></div>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
-										<i class="material-icons">playlist_add_check</i> <span>3/12</span>
+										<i class="material-icons">playlist_add_check</i> <span>${project.taskDone}/${project.totalTask}</span>
 									</div>
-									<span>Due 9 days</span>
+									<span>Due ${project.due} days</span>
 								</div>
 							</div>
 						</div>
@@ -812,6 +812,7 @@
 										</li>
 									</ul>
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   -->									
+						<form:form modelAttribute="newProject" method="post">
 									<div class="modal-body">
 										<div class="tab-content">
 											<div class="tab-pane fade show active" id="task-add-details"
@@ -1041,6 +1042,7 @@
 											</div>
 										</div>
 									</div>
+							</form:form>
 									<!--end of modal body-->
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
