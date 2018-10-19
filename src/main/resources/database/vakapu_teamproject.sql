@@ -25,13 +25,16 @@ DROP TABLE IF EXISTS `teamproject`;
 CREATE TABLE `teamproject` (
   `idteamproject` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `endDate` datetime DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
   `owner` varchar(100) DEFAULT NULL,
   `description` varchar(450) DEFAULT NULL,
   `visibility` varchar(45) DEFAULT NULL,
   `action` varchar(45) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
+  `total_task` int(4) DEFAULT NULL,
+  `task_done` int(4) DEFAULT NULL,
+  `due` int(4) DEFAULT NULL,
   PRIMARY KEY (`idteamproject`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +45,7 @@ CREATE TABLE `teamproject` (
 
 LOCK TABLES `teamproject` WRITE;
 /*!40000 ALTER TABLE `teamproject` DISABLE KEYS */;
-INSERT INTO `teamproject` VALUES (1,'Test Project Team',NULL,NULL,NULL,'nothing','Team',NULL,NULL),(2,'Test 2',NULL,NULL,NULL,'nothing','Team',NULL,NULL);
+INSERT INTO `teamproject` VALUES (1,'Test Project Team','2018-07-30','2018-11-30',NULL,'nothing','Team',NULL,NULL,4,3,41),(2,'Test 2','2018-10-30','2018-12-30',NULL,'nothing','Team',NULL,NULL,5,2,71);
 /*!40000 ALTER TABLE `teamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-18 16:44:26
+-- Dump completed on 2018-10-19 17:50:17

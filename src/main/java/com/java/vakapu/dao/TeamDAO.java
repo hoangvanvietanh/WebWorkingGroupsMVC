@@ -35,22 +35,6 @@ public class TeamDAO {
 		return query.getResultList();
 	}
 	
-	public long countMember(int idTeam)
-	{
-		@SuppressWarnings("rawtypes")
-		Query query = getSession().createQuery("select count(*) from TeamMember a where a.team.idTeam=:idTeam");
-		query.setParameter("idTeam", idTeam);
-		return  (long) query.uniqueResult();
-	}
-	
-	public long countProject(int idTeam)
-	{
-		@SuppressWarnings("rawtypes")
-		Query query = getSession().createQuery("select count(*) from TeamProject a where a.team.idTeam=:idTeam");
-		query.setParameter("idTeam", idTeam);
-		return  (long) query.uniqueResult();
-	}
-	
 	public Team findById(int id) {
 		return getSession().find(Team.class, id);
 	}

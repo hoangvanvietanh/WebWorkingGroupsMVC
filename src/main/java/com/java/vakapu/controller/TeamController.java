@@ -51,9 +51,6 @@ public class TeamController {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		Team team = teamServices.findById(idTeam);
-//		team.setMemberAmount((int) teamServices.countMember(idTeam));
-//		team.setProjectAmount((int) teamServices.countProject(idTeam));
-//		teamServices.updateTeam(team);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
 		List<TeamMemberTeamProject> teamProject = proServices.findByIdTeam(idTeam);
 		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
@@ -64,16 +61,19 @@ public class TeamController {
 			listProject.add(t.getTeamProject().getId());
 		}
 		for(Integer p:listProject)
-		{
+		{	
 			teamProjects.add(proServices.find(p));
 		}
-//		List<ProjectUser> userStore = proUserServices.findAll();
+		team.setProjectAmount(teamProjects.size());
+		team.setMemberAmount(member.size());
+		teamServices.updateTeam(team);
 		model.addAttribute("emailUser", emailUser);
 		model.addAttribute("project", teamProjects);
 		model.addAttribute("member", member);
 		model.addAttribute("team", team);
 		model.addAttribute("user", userProjectStore);
 		model.addAttribute("profile", user);
+		
 		return "team";
 	}
 

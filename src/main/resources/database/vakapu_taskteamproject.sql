@@ -28,8 +28,8 @@ CREATE TABLE `taskteamproject` (
   `completed` tinyint(1) DEFAULT '0',
   `description` varchar(300) DEFAULT NULL,
   `owner` varchar(45) DEFAULT NULL,
-  `startDate` varchar(45) DEFAULT NULL,
-  `endDate` varchar(45) DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
   PRIMARY KEY (`idtaskteamproject`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +40,7 @@ CREATE TABLE `taskteamproject` (
 
 LOCK TABLES `taskteamproject` WRITE;
 /*!40000 ALTER TABLE `taskteamproject` DISABLE KEYS */;
-INSERT INTO `taskteamproject` VALUES (1,'Trang Manage',0,'Nothing','hoangvanvietanh@gmail.com','2018/10/19','2018/10/25'),(2,'Trang User',0,'Nothing','hoangvanvietanh@gmail.com','2018/10/20','2018/10/30');
+INSERT INTO `taskteamproject` VALUES (1,'Trang Manage',0,'Nothing','hoangvanvietanh@gmail.com','2018-10-19','2018-10-25'),(2,'Trang User',0,'Nothing','hoangvanvietanh@gmail.com','2018-10-20','2018-10-30');
 /*!40000 ALTER TABLE `taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-18 16:44:26
+-- Dump completed on 2018-10-19 17:50:17

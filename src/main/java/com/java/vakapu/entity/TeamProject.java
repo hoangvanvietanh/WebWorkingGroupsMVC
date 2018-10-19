@@ -39,7 +39,38 @@ public class TeamProject {
 	@Column(name="action")
 	private String action;
 
+	@Column(name="total_task")
+	private int totalTask;
 	
+	@Column(name="task_done")
+	private int taskDone;
+	
+	@Column(name="due")
+	private int due;
+	
+	public int getDue() {
+		return due;
+	}
+
+	public void setDue(int due) {
+		this.due = due;
+	}
+
+	public int getTotalTask() {
+		return totalTask;
+	}
+
+	public void setTotalTask(int totalTask) {
+		this.totalTask = totalTask;
+	}
+
+	public int getTaskDone() {
+		return taskDone;
+	}
+
+	public void setTaskDone(int taskDone) {
+		this.taskDone = taskDone;
+	}
 
 	public int getId() {
 		return id;

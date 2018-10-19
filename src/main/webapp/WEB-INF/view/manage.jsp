@@ -275,9 +275,9 @@
 														<div class="card-meta d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<i class="material-icons mr-1">playlist_add_check</i> <span
-																	class="text-small">-/-</span>
+																	class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
 															</div>
-															<span class="text-small" data-filter-by="text">Unscheduled</span>
+															<span class="text-small" data-filter-by="text">due ${project.teamProject.due} days</span>
 														</div>
 													</div>
 												</div>

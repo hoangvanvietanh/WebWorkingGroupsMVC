@@ -30,7 +30,7 @@ CREATE TABLE `team` (
   `member_amount` int(11) DEFAULT NULL,
   `project_amount` int(11) DEFAULT NULL,
   PRIMARY KEY (`idteam`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (7,'Test Team 1','nothing','hoangvanvietanh@gmail.com',3,2),(8,'Test Team 2','nothing','hoangvanvietanh@gmail.com',1,0),(9,'next','test','hoangvanvietanh@gmail.com',1,0),(10,'test111','s','hoangvanvietanh@gmail.com',1,0),(11,'hello','nothing','hoangvanvietanh@gmail.com',0,0),(12,'Test team ne','nothing impossible','hoangvanvietanh@gmail.com',6,0);
+INSERT INTO `team` VALUES (7,'Test Team 1','nothing','hoangvanvietanh@gmail.com',3,2),(8,'Test Team 2','nothing','hoangvanvietanh@gmail.com',1,0),(9,'next','test','hoangvanvietanh@gmail.com',1,0),(10,'test111','s','hoangvanvietanh@gmail.com',1,0),(11,'hello','nothing','hoangvanvietanh@gmail.com',0,0),(12,'Test team ne','nothing impossible','hoangvanvietanh@gmail.com',6,0),(13,'Hello Viet Anh','Meo','hoangvanvietanh@gmail.com',7,0),(14,'test','123','hoangvanvietanh@gmail.com',4,0),(15,'asd','asd','hoangvanvietanh@gmail.com',5,0);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-18 16:44:26
+-- Dump completed on 2018-10-19 17:50:17

@@ -192,7 +192,7 @@
 
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 8%" aria-valuenow="8" aria-valuemin="0"
+														style="width: ${project.taskDone div project.totalTask * 100}%" aria-valuenow="8" aria-valuemin="0"
 														aria-valuemax="100"></div>
 												</div>
 
@@ -226,10 +226,10 @@
 													<div class="card-meta d-flex justify-content-between">
 														<div class="d-flex align-items-center">
 															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">1/12</span>
+																class="text-small">${project.taskDone}/${project.totalTask}</span>
 														</div>
 														<span class="text-small" data-filter-by="text">Due
-															20 days</span>
+															${project.due} days</span>
 													</div>
 												</div>
 											</div>

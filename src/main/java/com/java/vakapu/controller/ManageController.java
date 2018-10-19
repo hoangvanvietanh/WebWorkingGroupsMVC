@@ -23,7 +23,9 @@ import com.java.vakapu.entity.Team;
 import com.java.vakapu.entity.TeamMember;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTeamProject;
+import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.FriendshipServices;
 import com.java.vakapu.services.UserServices;
 import com.java.vakapu.services.ProjectServices;
@@ -55,14 +57,23 @@ public class ManageController {
 	
 	@Autowired
 	private TaskServices taskServices;
+	
+	@Autowired
+	private DateServices dateServices;
 
 	@GetMapping
-	public String getInfoProject(Model model) {
+	public String getInfoProject(Model model) throws java.text.ParseException {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		List<TeamMember> team = teamMemberServices.findByEmai(emailUser);
 		List<TeamMember> memberStore = teamMemberServices.findAll();
 		List<TeamMemberTeamProject> teamProject = projectServices.findByEmail(emailUser);
+		for(TeamMemberTeamProject t: teamProject)
+		{
+			  TeamProject teamPro = projectServices.find(t.getTeamProject().getId());
+			  teamPro.setDue(dateServices.caculatorDue(t.getTeamProject().getEndDate()));
+			  projectServices.updateProject(teamPro);
+		}
 		List<TeamMemberTeamProject> userProjectStore = projectServices.findAll();
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<TeamMemberTaskTeamProject> task = taskServices.findByEmailUser(emailUser);
