@@ -39,7 +39,8 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img style="width: 80px;height: 30px"  alt="Pipeline"
+			<a class="navbar-brand" href="index.html"> <img
+				style="width: 80px; height: 30px" alt="Pipeline"
 				src="resources/img/fun.gif" />
 			</a>
 			<div class="d-flex align-items-center">
@@ -89,7 +90,7 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="nav-side-user.html" class="dropdown-item">Profile</a> <a
+								<a href="profile" class="dropdown-item">Profile</a> <a
 									href="utility-account-settings.html" class="dropdown-item">Account
 									Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
@@ -103,13 +104,10 @@
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Overview</a>
-						</li>
-
-						<li class="breadcrumb-item"><a href="pages-app.html">App
-								Pages</a></li>
-
-
+						<li class="breadcrumb-item"><a href="home">Home</a></li>
+						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
+						<li class="breadcrumb-item"><a href="pages-app.html">Team</a></li>
+						<li class="breadcrumb-item"><a href="pages-app.html">Project</a></li>
 						<li class="breadcrumb-item active" aria-current="page">Task</li>
 					</ol>
 				</nav>
@@ -139,17 +137,20 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-11 col-xl-10">
 						<div class="page-header">
-							<h1>Create brand mood boards</h1>
-							<p class="lead">Assemble three distinct mood boards for
-								client consideration</p>
+							<h1>${task.name}</h1>
+							<p class="lead">${task.description}</p>
 							<div class="d-flex align-items-center">
 								<ul class="avatars">
-
-									<li><a href="#" data-toggle="tooltip" data-placement="top"
-										title="Claire Connors"> <img alt="Claire Connors"
-											class="avatar" src="assets/img/avatar-female-1.jpg" />
-									</a></li>
-
+									<c:forEach var="member" items="${member}">
+										<li><a href="#" data-toggle="tooltip"
+											data-placement="top"
+											title="${member.teamMemberTeamProject.teamMember.member.name}">
+												<img
+												alt="${member.teamMemberTeamProject.teamMember.member.name}"
+												class="avatar"
+												src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>" />
+										</a></li>
+									</c:forEach>
 								</ul>
 								<button class="btn btn-round" data-toggle="modal"
 									data-target="#user-manage-modal">
@@ -208,26 +209,49 @@
 									<!--end of content list head-->
 									<div class="content-list-body">
 										<form class="checklist">
-
-											<div class="row">
-												<div class="form-group col">
-													<span class="checklist-reorder"> <i
-														class="material-icons">reorder</i>
-													</span>
-													<div class="custom-control custom-checkbox col">
-														<input type="checkbox" class="custom-control-input"
-															id="checklist-item-1" checked> <label
-															class="custom-control-label" for="checklist-item-1"></label>
-														<div>
-															<input type="text" placeholder="Checklist item"
-																value="Create boards in Matboard" data-filter-by="value" />
-															<div class="checklist-strikethrough"></div>
+											<c:forEach var="todo" items="${todo}">
+												<c:choose>
+													<c:when test="${todo.completed == 1}">
+														<div class="row">
+															<div class="form-group col">
+																<span class="checklist-reorder"> <i
+																	class="material-icons">reorder</i>
+																</span>
+																<div class="custom-control custom-checkbox col">
+																	<input type="checkbox" class="custom-control-input"
+																		id="${todo.id}" checked> <label
+																		class="custom-control-label" for="${todo.id}"></label>
+																	<div>
+																		<input type="text" placeholder="Checklist item"
+																			value="${todo.todo}" data-filter-by="value" />
+																		<div class="checklist-strikethrough"></div>
+																	</div>
+																</div>
+															</div>
 														</div>
-													</div>
-												</div>
-												<!--end of form group-->
-											</div>
+													</c:when>
+													<c:otherwise>
+														<div class="row">
+															<div class="form-group col">
+																<span class="checklist-reorder"> <i
+																	class="material-icons">reorder</i>
+																</span>
+																<div class="custom-control custom-checkbox col">
+																	<input type="checkbox" class="custom-control-input"
+																		id="${todo.id}"> <label
+																		class="custom-control-label" for="${todo.id}"></label>
+																	<div>
+																		<input type="text" placeholder="Checklist item"
+																			value="${todo.todo}" data-filter-by="value" />
+																		<div class="checklist-strikethrough"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:otherwise>
+												</c:choose>
 
+											</c:forEach>
 										</form>
 										<div class="drop-to-delete">
 											<div class="drag-to-delete-title">

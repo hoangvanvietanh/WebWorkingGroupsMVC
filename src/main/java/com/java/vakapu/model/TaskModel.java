@@ -1,7 +1,11 @@
 package com.java.vakapu.model;
 
 import com.java.vakapu.entity.TeamProject;
+
+import java.util.List;
+
 import com.java.vakapu.entity.TaskTeamProject;
+import com.java.vakapu.entity.TeamMemberTeamProject;
 
 public class TaskModel {
 
@@ -9,11 +13,9 @@ public class TaskModel {
 
 	private String name;
 
-	private String completed;
+	private int completed;
 
 	private String description;
-
-	private TeamProject teamProject;
 
 	private String owner;
 	
@@ -21,12 +23,13 @@ public class TaskModel {
 	
 	private String endDate;
 
+	private String[] email;
+	
 	public void fromTask(TaskTeamProject taskTeamProject) {
 		this.setIdtask(taskTeamProject.getId());
 		this.setName(taskTeamProject.getName());
 		this.setCompleted(taskTeamProject.getCompleted());
 		this.setDescription(taskTeamProject.getDescription());
-		//this.setProject(taskTeamProject.getProject());
 		this.setOwner(taskTeamProject.getOwner());
 		this.setStartDate(taskTeamProject.getStartDate());
 		this.setEndDate(taskTeamProject.getEndDate());
@@ -38,11 +41,18 @@ public class TaskModel {
 		taskTeamProject.setName(this.getName());
 		taskTeamProject.setCompleted(this.getCompleted());
 		taskTeamProject.setDescription(this.getDescription());
-		//taskTeamProject.setProject(this.getProject());
 		taskTeamProject.setOwner(this.getOwner());
 		taskTeamProject.setStartDate(this.startDate);
 		taskTeamProject.setEndDate(this.endDate);
 		return taskTeamProject;
+	}
+	
+	public String[] getEmail() {
+		return email;
+	}
+
+	public void setEmail(String[] email) {
+		this.email = email;
 	}
 
 	public int getIdtask() {
@@ -61,11 +71,11 @@ public class TaskModel {
 		this.name = name;
 	}
 
-	public String getCompleted() {
+	public int getCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(String completed) {
+	public void setCompleted(int completed) {
 		this.completed = completed;
 	}
 
@@ -83,14 +93,6 @@ public class TaskModel {
 
 	public void setOwner(String owner) {
 		this.owner = owner;
-	}
-
-	public TeamProject getProject() {
-		return teamProject;
-	}
-
-	public void setProject(TeamProject teamProject) {
-		this.teamProject = teamProject;
 	}
 
 	public String getStartDate() {

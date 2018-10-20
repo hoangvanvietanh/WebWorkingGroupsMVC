@@ -39,7 +39,8 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img style="width: 80px;height: 30px"  alt="Pipeline"
+			<a class="navbar-brand" href="index.html"> <img
+				style="width: 80px; height: 30px" alt="Pipeline"
 				src="resources/img/fun.gif" />
 			</a>
 			<div class="d-flex align-items-center">
@@ -103,12 +104,11 @@
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="home">Home</a></li>
 
 						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
 						<c:if test="${idTeam ne 0}">
-						<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
+							<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
 						</c:if>
 						<li class="breadcrumb-item active" aria-current="page">Project</li>
 					</ol>
@@ -159,7 +159,8 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success" style="width: ${project.taskDone div project.totalTask * 100}%;"></div>
+									<div class="progress-bar bg-success"
+										style="width: ${project.taskDone div project.totalTask * 100}%;"></div>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
@@ -206,51 +207,54 @@
 								</div>
 								<!--end of content list head-->
 								<div class="content-list-body">
-									
+
 									<div class="card-list">
 										<div class="card-list-body">
 											<c:forEach var="task" items="${task}">
-											<div class="card card-task">
-												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 0%" aria-valuenow="25" aria-valuemin="0"
-														aria-valuemax="100"></div>
-												</div>
-												<div class="card-body">
-													<div class="card-title">
-														<a href="#">
-															<h6 data-filter-by="text">${task.name}</h6>
-														</a> <span class="text-small">Unscheduled</span>
+												<div class="card card-task">
+													<div class="progress">
+														<div class="progress-bar bg-success" role="progressbar"
+															style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+															aria-valuemax="100"></div>
 													</div>
-													<div class="card-meta">
-														<ul class="avatars">
-															<c:forEach var="userTask" items="${userTask}">
-															<c:if test="${userTask.taskTeamProject.id ==task.id}">
-															<li><a href="#" data-toggle="tooltip"
-																title="${userTask.teamMemberTeamProject.teamMember.member.name}"> <img alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
-																	class="avatar" src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
-															</a></li>
-															</c:if>
-															</c:forEach>
-														</ul>
-														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>-/-</span>
+													<div class="card-body">
+														<div class="card-title">
+															<a href="task-todo?idTask=${task.id}">
+																<h6 data-filter-by="text">${task.name}</h6>
+															</a> <span class="text-small">Unscheduled</span>
 														</div>
-														<div class="dropdown card-options">
-															<button class="btn-options" type="button"
-																id="task-dropdown-button-7" data-toggle="dropdown"
-																aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Mark as done</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#">Archive</a>
+														<div class="card-meta">
+															<ul class="avatars">
+																<c:forEach var="userTask" items="${userTask}">
+																	<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																		<li><a href="#" data-toggle="tooltip"
+																			title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																				<img
+																				alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																				class="avatar"
+																				src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																		</a></li>
+																	</c:if>
+																</c:forEach>
+															</ul>
+															<div class="d-flex align-items-center">
+																<i class="material-icons">playlist_add_check</i> <span>-/-</span>
+															</div>
+															<div class="dropdown card-options">
+																<button class="btn-options" type="button"
+																	id="task-dropdown-button-7" data-toggle="dropdown"
+																	aria-haspopup="true" aria-expanded="false">
+																	<i class="material-icons">more_vert</i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right">
+																	<a class="dropdown-item" href="#">Mark as done</a>
+																	<div class="dropdown-divider"></div>
+																	<a class="dropdown-item text-danger" href="#">Archive</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
 											</c:forEach>
 										</div>
@@ -788,8 +792,10 @@
 								</div>
 							</div>
 						</form>
-						<form class="modal fade" id="task-add-modal" tabindex="-1"
-							role="dialog" aria-labelledby="task-add-modal" aria-hidden="true">
+						<form:form modelAttribute="taskModel" method="post"
+							action="team-project/create-task" class="modal fade"
+							id="task-add-modal" tabindex="-1" role="dialog"
+							aria-labelledby="task-add-modal" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -819,26 +825,26 @@
 												role="tabpanel" aria-labelledby="task-add-details-tab">
 												<h6>General Details</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <input
-														class="form-control col" type="text"
-														placeholder="Task name" name="task-name" />
+													<label class="col-3">Name</label>
+													<form:input class="form-control col" type="text"
+														placeholder="Task name" path="name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
-													<textarea class="form-control col" rows="3"
-														placeholder="Task description" name="task-description"></textarea>
+													<form:textarea class="form-control col" rows="3"
+														placeholder="Task description" path="description"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> <input
-														class="form-control col" type="date"
-														placeholder="Task start" name="task-start" />
+													<label class="col-3">Start Date</label>
+													<form:input class="form-control col" type="date"
+														placeholder="Task start" path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <input
-														class="form-control col" type="date"
-														placeholder="Task due" name="task-due" />
+													<label class="col-3">Due Date</label>
+													<form:input class="form-control col" type="date"
+														placeholder="Task due" path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -851,22 +857,10 @@
 													<div class="mb-3">
 														<ul class="avatars text-center">
 
-															<li><img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Claire Connors" /></li>
-
-															<li><img alt="Marcus Simmons"
-																src="assets/img/avatar-male-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Marcus Simmons" /></li>
-
-															<li><img alt="Peggy Brown"
-																src="assets/img/avatar-female-2.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Peggy Brown" /></li>
-
-															<li><img alt="Harry Xai"
-																src="assets/img/avatar-male-2.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Harry Xai" /></li>
-
+															<li><img alt="${userLogin.name}"
+																src="<spring:url value='/profile/avatar/${userLogin.email}'/>"
+																class="avatar" data-toggle="tooltip"
+																data-title="${userLogin.name}" /></li>
 														</ul>
 													</div>
 													<div class="input-group input-group-round">
@@ -882,160 +876,22 @@
 													</div>
 													<div class="form-group-users">
 
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-1" checked> <label
-																class="custom-control-label" for="task-user-1">
-																<div class="d-flex align-items-center">
-																	<img alt="Claire Connors"
-																		src="assets/img/avatar-female-1.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Claire Connors</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-2" checked> <label
-																class="custom-control-label" for="task-user-2">
-																<div class="d-flex align-items-center">
-																	<img alt="Marcus Simmons"
-																		src="assets/img/avatar-male-1.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Marcus
-																		Simmons</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-3" checked> <label
-																class="custom-control-label" for="task-user-3">
-																<div class="d-flex align-items-center">
-																	<img alt="Peggy Brown"
-																		src="assets/img/avatar-female-2.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Peggy Brown</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-4" checked> <label
-																class="custom-control-label" for="task-user-4">
-																<div class="d-flex align-items-center">
-																	<img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Harry Xai</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-5"> <label
-																class="custom-control-label" for="task-user-5">
-																<div class="d-flex align-items-center">
-																	<img alt="Sally Harper"
-																		src="assets/img/avatar-female-3.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Sally Harper</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-6"> <label
-																class="custom-control-label" for="task-user-6">
-																<div class="d-flex align-items-center">
-																	<img alt="Ravi Singh"
-																		src="assets/img/avatar-male-3.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Ravi
-																		Singh</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-7"> <label
-																class="custom-control-label" for="task-user-7">
-																<div class="d-flex align-items-center">
-																	<img alt="Kristina Van Der Stroem"
-																		src="assets/img/avatar-female-4.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Kristina Van Der Stroem</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-8"> <label
-																class="custom-control-label" for="task-user-8">
-																<div class="d-flex align-items-center">
-																	<img alt="David Whittaker"
-																		src="assets/img/avatar-male-4.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">David
-																		Whittaker</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-9"> <label
-																class="custom-control-label" for="task-user-9">
-																<div class="d-flex align-items-center">
-																	<img alt="Kerri-Anne Banks"
-																		src="assets/img/avatar-female-5.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Kerri-Anne Banks</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-10"> <label
-																class="custom-control-label" for="task-user-10">
-																<div class="d-flex align-items-center">
-																	<img alt="Masimba Sibanda"
-																		src="assets/img/avatar-male-5.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Masimba
-																		Sibanda</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-11"> <label
-																class="custom-control-label" for="task-user-11">
-																<div class="d-flex align-items-center">
-																	<img alt="Krishna Bajaj"
-																		src="assets/img/avatar-female-6.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Krishna Bajaj</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-12"> <label
-																class="custom-control-label" for="task-user-12">
-																<div class="d-flex align-items-center">
-																	<img alt="Kenny Tran"
-																		src="assets/img/avatar-male-6.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Kenny
-																		Tran</span>
-																</div>
-															</label>
-														</div>
+														<c:forEach var="user" items="${user}">
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email" class="custom-control-input"
+																	id="${user.teamMember.member.email}"
+																	value="${user.teamMember.member.email}" />
+																<form:label class="custom-control-label"
+																	for="${user.teamMember.member.email}" path="email">
+																	<div class="d-flex align-items-center">
+																		<img alt="${user.teamMember.member.name}"
+																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${user.teamMember.member.name}</span>
+																	</div>
+																</form:label>
+															</div>
+														</c:forEach>
 
 													</div>
 												</div>
@@ -1049,7 +905,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

@@ -45,7 +45,6 @@ public class AccountController {
 		if (result.hasErrors()) {
 			return "sign-up";
 		}
-		// System.out.println(email);
 		model.put("email", emailSignUp);
 		List<Account> accountAll = accountServices.findAll();
 		for (Account u : accountAll) {
@@ -95,7 +94,6 @@ public class AccountController {
 			if (oldPass.equals(oldPassword)) {
 				if (newPass.equals(newRePass)) {
 					Account acc = account.toAccount();
-					// accountServices.deletePassword(acc);
 
 					BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 					acc.setPassword(passwordEncoder.encode(newRePass));

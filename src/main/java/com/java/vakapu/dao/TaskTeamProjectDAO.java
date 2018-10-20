@@ -32,9 +32,22 @@ public class TaskTeamProjectDAO {
 		return getAll;
 	}
 	
-	public List<TeamMemberTaskTeamProject> findByIdProject(int id) {
-		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:id",TeamMemberTaskTeamProject.class);
-		query.setParameter("id", id);
+	public List<TeamMemberTaskTeamProject> findByIdProject(int idProject, int idTask) {
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject and a.taskTeamProject.id=:idTask",TeamMemberTaskTeamProject.class);
+		query.setParameter("idProject", idProject);
+		query.setParameter("idTask", idTask);
 		return query.getResultList();
+	}
+	
+	public List<TeamMemberTaskTeamProject> findByIdProjectAll(int idProject) {
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject",TeamMemberTaskTeamProject.class);
+		query.setParameter("idProject", idProject);
+		return query.getResultList();
+	}
+	
+	public TeamMemberTaskTeamProject create(TeamMemberTaskTeamProject t)
+	{
+		getSession().save(t);
+		return t;
 	}
 }

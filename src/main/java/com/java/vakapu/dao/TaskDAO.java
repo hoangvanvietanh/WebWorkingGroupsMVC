@@ -44,7 +44,7 @@ public class TaskDAO {
 	}
 	
 	public TaskTeamProject create(TaskTeamProject taskTeamProject) {
-		getSession().save(taskTeamProject);
+		getSession().persist(taskTeamProject);
 		return taskTeamProject;
 	}
 	

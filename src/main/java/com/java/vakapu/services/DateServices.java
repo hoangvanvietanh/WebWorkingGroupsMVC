@@ -25,4 +25,18 @@ public class DateServices {
 		
 		return results;
 	}
+	
+	public int caculatorDayDo(String date) throws ParseException 
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		long millis=System.currentTimeMillis();  
+		Date dateNow=new Date(millis);  
+		Date dateObj = sdf.parse(date);
+		
+		DateTime dt1 = new DateTime(dateObj);
+		DateTime dt2 = new DateTime(dateNow);
+		int results = Days.daysBetween(dt1, dt2).getDays();
+		
+		return results;
+	}
 }

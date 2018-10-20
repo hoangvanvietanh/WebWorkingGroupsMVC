@@ -35,8 +35,6 @@ public class ProjectController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String getInfoProject(Model model)
 	{
-		//List<TeamProject> result= proServices.findAll();
-		//model.addAttribute("listInfo",result);
 		return "home-project";
 	}
 	
@@ -62,9 +60,6 @@ public class ProjectController {
 		teamProject.setOwner(currentUser);
 		teamProject.setStatus("New");
 		proServices.createProject(teamProject);
-		
-//		ProjectUserModel user=new ProjectUserModel();
-//		model.addAttribute("createPro", user);
 		
 		return "redirect:/project";
 	}

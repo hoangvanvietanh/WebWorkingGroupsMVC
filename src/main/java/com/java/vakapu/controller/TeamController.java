@@ -61,7 +61,6 @@ public class TeamController {
 		User user = userServices.findByEmail(emailUser);
 		Team team = teamServices.findById(idTeam);
 
-		TeamProject newTeam = new TeamProject();
 		TeamProjectModel newProject= new TeamProjectModel();
 		modelMap.put("idteam", idTeam);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
@@ -87,11 +86,6 @@ public class TeamController {
 		model.addAttribute("team", team);
 		model.addAttribute("user", userProjectStore);
 		model.addAttribute("profile", user);
-//		model.addAttribute("idTeam",idTeam);
-		
-		TeamMember test=teamMemberServices.getUserTeam(idTeam, emailUser);
-		System.out.println("...................................................");
-		System.out.println(test.getId() + test.getMember().getName());
 		
 		return "team";
 	}
@@ -113,9 +107,6 @@ public class TeamController {
 		String email=accountServices.getEmailUser();
 		TeamMember team=teamMemberServices.getUserTeam(idTeam, email);
 		
-		System.out.println("................................................... 22222222222222222222222" );
-		System.out.println(team.getId() + team.getMember().getName());
-		
 		TeamProject a= newProject.toProject();
 		TeamProject b= proServices.createProject(a);
 		
@@ -125,8 +116,6 @@ public class TeamController {
 		c.setTeamProject(b);
 		memberProjectServices.create(c);
 		return "redirect:/team?idTeam="+idTeam;
-		
-		
 		
 	}
 }

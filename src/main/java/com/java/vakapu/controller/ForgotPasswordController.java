@@ -28,8 +28,6 @@ public class ForgotPasswordController {
 	private AccountServices accountServices;
 	@RequestMapping(method = RequestMethod.GET)
 	public String homeForgot(Model model) {
-//		AccountModel account = new AccountModel();
-//		model.addAttribute("account", account);
 		return "forgot-password";
 	}
 	

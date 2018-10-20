@@ -50,7 +50,6 @@ public class SignUpController {
 		if (result.hasErrors()) {
 			return "sign-up";
 		}
-		// System.out.println(email);
 		model.put("email", emailSignUp);
 		List<Account> accountAll = accountServices.findAll();
 		for (Account u : accountAll) {

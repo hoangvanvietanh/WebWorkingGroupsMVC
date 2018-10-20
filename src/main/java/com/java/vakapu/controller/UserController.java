@@ -84,7 +84,6 @@ public class UserController {
 	@RequestMapping(value = "/avatar/{email}", method = RequestMethod.GET)
 	public void downloadAvatar(HttpServletResponse response, @PathVariable("email") String email) throws IOException {
 
-		System.out.println("Email la vao:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + email);
 		User user = userServices.findByEmail(email+".com");
 		if (user == null) {
 			return;

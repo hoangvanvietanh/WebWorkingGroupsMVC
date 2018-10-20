@@ -33,6 +33,13 @@ public class TeamMemberTeamProjectDAO {
 		return query.getResultList();
 	}
 	
+	public TeamMemberTeamProject findByEmailUser(String email, int id) {
+		TypedQuery<TeamMemberTeamProject> query = getSession().createQuery("select a from TeamMemberTeamProject a where a.teamMember.member.email=:email and a.teamProject.id=:id",TeamMemberTeamProject.class);
+		query.setParameter("email", email);
+		query.setParameter("id", id);
+		return query.getSingleResult();
+	}
+	
 	public TeamMemberTeamProject create(TeamMemberTeamProject memberProject)
 	{
 		getSession().persist(memberProject);

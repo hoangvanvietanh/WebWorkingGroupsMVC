@@ -27,7 +27,7 @@ public class TodoDAO {
 		return contact;
 	}
 	public List<Todo> findByIdTask(int id) {
-		TypedQuery<Todo> query = getSession().createQuery("select a from Todo a where a.task.id=:id",Todo.class);
+		TypedQuery<Todo> query = getSession().createQuery("select a from Todo a where a.taskTeamProject.id=:id",Todo.class);
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
