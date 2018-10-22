@@ -32,7 +32,7 @@ CREATE TABLE `team_member` (
   KEY `fk_team_member_1_idx` (`email`),
   CONSTRAINT `FKqdapgrj46hnhyeaecik8m04b3` FOREIGN KEY (`idteam`) REFERENCES `team` (`idteam`),
   CONSTRAINT `fk_team_member_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `team_member` (
 
 LOCK TABLES `team_member` WRITE;
 /*!40000 ALTER TABLE `team_member` DISABLE KEYS */;
-INSERT INTO `team_member` VALUES (18,'hoangvanvietanh@gmail.com',7,'Admin'),(19,'hoangvanvietanh@gmail.com',8,'Member'),(22,'khanh@gmail.com',7,'Member'),(23,'phuong@gmail.com',7,'Member'),(24,'hoangvanvietanh@gmail.com',9,'Member'),(25,'hoangvanvietanh@gmail.com',10,'Member'),(26,'hoangvanvietanh@gmail.com',11,'Admin'),(27,'khanh@gmail.com',11,'Member'),(28,'giang@gmail.com',11,'Member'),(29,'phuong@gmail.com',11,'Member'),(30,'hoangvanvietanh@gmail.com',12,'Admin'),(31,'khanh@gmail.com',12,'Member'),(32,'giang@gmail.com',12,'Member'),(33,'phuong@gmail.com',12,'Member'),(34,'duyhieu@gmail.com',12,'Member'),(35,'khuuhieu@gmail.com',12,'Member'),(36,'vietem@gmail.com',12,'Member'),(37,'hoangvanvietanh@gmail.com',13,'Admin'),(38,'khanh@gmail.com',13,'Member'),(39,'giang@gmail.com',13,'Member'),(40,'phuong@gmail.com',13,'Member'),(41,'duyhieu@gmail.com',13,'Member'),(42,'khuuhieu@gmail.com',13,'Member'),(43,'vietem@gmail.com',13,'Member'),(44,'hoangvanvietanh@gmail.com',14,'Admin'),(45,'khanh@gmail.com',14,'Member'),(46,'duyhieu@gmail.com',14,'Member'),(47,'khuuhieu@gmail.com',14,'Member'),(48,'vietem@gmail.com',14,'Member'),(49,'hoangvanvietanh@gmail.com',15,'Admin'),(50,'khanh@gmail.com',15,'Member'),(51,'giang@gmail.com',15,'Member'),(52,'phuong@gmail.com',15,'Member'),(53,'khuuhieu@gmail.com',15,'Member');
+INSERT INTO `team_member` VALUES (23,'phuong@gmail.com',7,'Member'),(27,'khanh@gmail.com',11,'Member'),(28,'giang@gmail.com',11,'Member'),(29,'phuong@gmail.com',11,'Member'),(31,'khanh@gmail.com',12,'Member'),(32,'giang@gmail.com',12,'Member'),(33,'phuong@gmail.com',12,'Member'),(34,'duyhieu@gmail.com',12,'Member'),(35,'khuuhieu@gmail.com',12,'Member'),(36,'vietem@gmail.com',12,'Member'),(38,'khanh@gmail.com',13,'Member'),(39,'giang@gmail.com',13,'Member'),(40,'phuong@gmail.com',13,'Member'),(41,'duyhieu@gmail.com',13,'Member'),(42,'khuuhieu@gmail.com',13,'Member'),(43,'vietem@gmail.com',13,'Member'),(44,'hoangvanvietanh@gmail.com',14,'Admin'),(46,'duyhieu@gmail.com',14,'Member'),(47,'khuuhieu@gmail.com',14,'Member'),(48,'vietem@gmail.com',14,'Member'),(50,'khanh@gmail.com',15,'Member'),(51,'giang@gmail.com',15,'Member'),(52,'phuong@gmail.com',15,'Member'),(53,'khuuhieu@gmail.com',15,'Member'),(56,'khanh@gmail.com',17,'Member'),(57,'giang@gmail.com',17,'Member'),(58,'phuong@gmail.com',17,'Member'),(59,'duyhieu@gmail.com',17,'Member'),(64,'duyhieu@gmail.com',18,'Member'),(65,'khuuhieu@gmail.com',18,'Member'),(66,'vietem@gmail.com',18,'Member'),(68,'khanh@gmail.com',19,'Member'),(69,'phuong@gmail.com',19,'Member'),(70,'duyhieu@gmail.com',19,'Member'),(71,'khuuhieu@gmail.com',19,'Member'),(72,'hoangvanvietanh@gmail.com',20,'Admin'),(73,'khanh@gmail.com',20,'Member'),(74,'giang@gmail.com',20,'Member'),(75,'duyhieu@gmail.com',20,'Member'),(76,'khuuhieu@gmail.com',20,'Member');
 /*!40000 ALTER TABLE `team_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-19 17:50:17
+-- Dump completed on 2018-10-22 12:25:34
