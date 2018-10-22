@@ -192,7 +192,7 @@
 
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
-														style="width: ${project.taskDone div project.totalTask * 100}%" aria-valuenow="8" aria-valuemin="0"
+														style="width: ${project.teamProject.taskDone div project.teamProject.totalTask * 100}%" aria-valuenow="8" aria-valuemin="0"
 														aria-valuemax="100"></div>
 												</div>
 
@@ -209,13 +209,13 @@
 														</div>
 													</div>
 													<div class="card-title">
-														<a href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
-															<h5 data-filter-by="text">${project.name}</h5>
+														<a href="team-project?idTeam=${team.idTeam}&idProject=${project.teamProject.id}">
+															<h5 data-filter-by="text">${project.teamProject.name}</h5>
 														</a>
 													</div>
 													<ul class="avatars">
 														<c:forEach var="user" items="${user}">
-														<c:if test="${user.teamProject.id == project.id}">
+														<c:if test="${user.teamProject.id == project.teamProject.id}">
 														<li><a href="#" data-toggle="tooltip" title="${user.teamMember.member.name}">
 																<img alt="${user.teamMember.member.name}" class="avatar"
 																src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>" data-filter-by="alt" />
@@ -226,10 +226,10 @@
 													<div class="card-meta d-flex justify-content-between">
 														<div class="d-flex align-items-center">
 															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">${project.taskDone}/${project.totalTask}</span>
+																class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
 														</div>
 														<span class="text-small" data-filter-by="text">Due
-															${project.due} days</span>
+															${project.teamProject.due} days</span>
 													</div>
 												</div>
 											</div>

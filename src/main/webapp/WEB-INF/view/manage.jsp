@@ -183,7 +183,7 @@
 														<div class="dropdown-menu dropdown-menu-right">
 															<a class="dropdown-item" href="#">Manage</a>
 															<div class="dropdown-divider"></div>
-															<a class="dropdown-item text-danger" href="#">Leave
+															<a class="dropdown-item text-danger" href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
 														</div>
 													</div>
@@ -204,6 +204,7 @@
 																</a></li>
 															</c:if>
 														</c:forEach>
+														</ul>
 												</div>
 											</div>
 										</div>

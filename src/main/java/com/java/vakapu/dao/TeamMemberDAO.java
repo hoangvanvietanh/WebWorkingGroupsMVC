@@ -47,6 +47,12 @@ public class TeamMemberDAO {
 		return teamMember;
 	}
 	
+	public TeamMember deleteTeamMember(TeamMember teamMember)
+	{
+		getSession().delete(teamMember);
+		return teamMember;
+	}
+	
 	public TeamMember getUserTeam(int idTeam,String email)
 	{
 		String hql="select a from TeamMember a where a.team.idTeam=:id and a.member.email=:email";

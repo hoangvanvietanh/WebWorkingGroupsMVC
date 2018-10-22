@@ -159,13 +159,13 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 42%;"></div>
+									<div class="progress-bar bg-success" style="width: ${task.completedAmount /task.totalTask*100}%;"></div>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
-										<i class="material-icons">playlist_add_check</i> <span>3/7</span>
+										<i class="material-icons">playlist_add_check</i> <span>${task.completedAmount}/${task.totalTask}</span>
 									</div>
-									<span>Due 14 days</span>
+									<span>Due ${task.due} days</span>
 								</div>
 							</div>
 						</div>
@@ -187,8 +187,8 @@
 									<div class="row content-list-head">
 										<div class="col-auto">
 											<h3>Checklist</h3>
-											<button class="btn btn-round" data-toggle="tooltip"
-												data-title="New item">
+											<button class="btn btn-round" data-toggle="modal"
+												data-target="#todo-add-modal">
 												<i class="material-icons">add</i>
 											</button>
 										</div>
@@ -208,51 +208,66 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body">
-										<form class="checklist">
-											<c:forEach var="todo" items="${todo}">
-												<c:choose>
-													<c:when test="${todo.completed == 1}">
+										<c:forEach var="todo" items="${todo}">
+											<c:choose>
+												<c:when test="${todo.completed == 1}">
+													<form action="task-todo/update-todo" method="post"
+														class="checklist">
 														<div class="row">
 															<div class="form-group col">
 																<span class="checklist-reorder"> <i
 																	class="material-icons">reorder</i>
 																</span>
 																<div class="custom-control custom-checkbox col">
-																	<input type="checkbox" class="custom-control-input"
-																		id="${todo.id}" checked> <label
-																		class="custom-control-label" for="${todo.id}"></label>
+																	<input type="hidden" name="${_csrf.parameterName}"
+																		value="${_csrf.token}" /> <input
+																		onclick="this.form.submit();" type="checkbox"
+																		class="custom-control-input" id="${todo.id}" checked>
+																	<label class="custom-control-label" for="${todo.id}"></label>
 																	<div>
-																		<input type="text" placeholder="Checklist item"
-																			value="${todo.todo}" data-filter-by="value" />
+																		<input name="todo" type="text"
+																			placeholder="Checklist item" value="${todo.todo}"
+																			data-filter-by="value" /> <input type="hidden"
+																			name="completed" value="0" /> <input type="hidden"
+																			name="idTodo" value="${todo.id}" />
 																		<div class="checklist-strikethrough"></div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</c:when>
-													<c:otherwise>
+													</form>
+												</c:when>
+												<c:otherwise>
+													<form action="task-todo/update-todo" method="post"
+														class="checklist">
 														<div class="row">
 															<div class="form-group col">
 																<span class="checklist-reorder"> <i
 																	class="material-icons">reorder</i>
 																</span>
 																<div class="custom-control custom-checkbox col">
-																	<input type="checkbox" class="custom-control-input"
-																		id="${todo.id}"> <label
-																		class="custom-control-label" for="${todo.id}"></label>
+																	<input type="hidden" name="${_csrf.parameterName}"
+																		value="${_csrf.token}" /> <input
+																		onclick="this.form.submit();" type="checkbox"
+																		class="custom-control-input" id="${todo.id}">
+																	<label class="custom-control-label" for="${todo.id}"></label>
 																	<div>
-																		<input type="text" placeholder="Checklist item"
-																			value="${todo.todo}" data-filter-by="value" />
+																		<input name="todo" type="text"
+																			placeholder="Checklist item" value="${todo.todo}"
+																			data-filter-by="value" /> <input type="hidden"
+																			name="completed" value="1" /> <input type="hidden"
+																			name="idTodo" value="${todo.id}" />
 																		<div class="checklist-strikethrough"></div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</c:otherwise>
-												</c:choose>
+													</form>
+												</c:otherwise>
+											</c:choose>
 
-											</c:forEach>
-										</form>
+										</c:forEach>
+
 										<div class="drop-to-delete">
 											<div class="drag-to-delete-title">
 												<i class="material-icons">delete</i>
@@ -775,6 +790,36 @@
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
 											Create Note</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<form action="task-todo/create-todo" method="post"
+							class="modal fade" id="todo-add-modal" tabindex="-1"
+							role="dialog" aria-labelledby="note-add-modal" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">New Todo</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+									<div class="modal-body">
+										<div class="form-group row align-items-center">
+											<label class="col-3">Todo</label> <input
+												class="form-control col" type="text" placeholder="Todo"
+												name="todo" />
+										</div>
+									</div>
+									<!--end of modal body-->
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+									<div class="modal-footer">
+										<button role="button" class="btn btn-primary" type="submit">
+											Create Todo</button>
 									</div>
 								</div>
 							</div>

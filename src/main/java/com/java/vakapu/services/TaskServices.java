@@ -2,6 +2,8 @@ package com.java.vakapu.services;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,10 @@ public class TaskServices {
 	{
 		return todoDAO.findByIdTask(id);
 	}
+	public int findTodoDoneByIdTask(int id)
+	{
+		return (int)todoDAO.findTodoDoneByIdTask(id);
+	}
 	public List<TeamMemberTaskTeamProject> findAll()
 	{
 		return taskTeamProDAO.findAll();
@@ -49,9 +55,18 @@ public class TaskServices {
 		return taskTeamProDAO.findByIdProjectAll(idProject);
 	}
 	
+	public List<TeamMemberTaskTeamProject> findByIdMemberProject(int id) {
+		return taskTeamProDAO.findByIdMemberProject(id);
+	}
+	
 	public List<TeamMemberTaskTeamProject> findByEmailUser(String email)
 	{
 		return taskDao.findByEmailUser(email);
+	}
+	
+	public TeamMemberTaskTeamProject deleteTaskTeamPro(TeamMemberTaskTeamProject t)
+	{
+		return taskTeamProDAO.delete(t);
 	}
 	
 	public List<TaskTeamProject> findByIdProject(int id)
@@ -69,8 +84,26 @@ public class TaskServices {
 		return taskDao.create(taskTeamProject);
 	}
 	
+	public TaskTeamProject update(TaskTeamProject taskTeamProject)
+	{
+		return taskDao.update(taskTeamProject);
+	}
+	
 	public TeamMemberTaskTeamProject createMemberTask(TeamMemberTaskTeamProject t)
 	{
 		return taskTeamProDAO.create(t);
+	}
+	
+	public Todo createTodo(Todo todo)
+	{
+		return todoDAO.create(todo);
+	}
+	
+	public Todo update(Todo Todo) {
+		return todoDAO.update(Todo);
+	}
+	
+	public Todo find(int id) {
+		return todoDAO.find(id);
 	}
 }

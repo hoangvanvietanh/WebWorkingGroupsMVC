@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +31,12 @@ public class TodoDAO {
 		TypedQuery<Todo> query = getSession().createQuery("select a from Todo a where a.taskTeamProject.id=:id",Todo.class);
 		query.setParameter("id", id);
 		return query.getResultList();
+	}
+	
+	public long findTodoDoneByIdTask(int id) {
+		Query<Long> query = getSession().createQuery("select count(*) from Todo a where a.taskTeamProject.id=:id and a.completed like '1'",Long.class);
+		query.setParameter("id", id);
+		return query.uniqueResult();
 	}
 	public Todo find(int id) {
 		return getSession().find(Todo.class, id);

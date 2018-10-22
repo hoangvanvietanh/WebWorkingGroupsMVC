@@ -34,6 +34,15 @@ public class TaskTeamProject {
 	@Column(name="endDate")
 	private String endDate;	
 
+	@Column(name="totalTask")
+	private int totalTask;
+	
+	@Column(name="completedAmount")
+	private int completedAmount;
+	
+	@Column(name="due")
+	private int due;
+	
 	public int getId() {
 		return id;
 	}
@@ -88,6 +97,30 @@ public class TaskTeamProject {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public int getTotalTask() {
+		return totalTask;
+	}
+
+	public void setTotalTask(int totalTask) {
+		this.totalTask = totalTask;
+	}
+
+	public int getCompletedAmount() {
+		return completedAmount;
+	}
+
+	public void setCompletedAmount(int completedAmount) {
+		this.completedAmount = completedAmount;
+	}
+
+	public int getDue() {
+		return due;
+	}
+
+	public void setDue(int due) {
+		this.due = due;
 	}
 
 }

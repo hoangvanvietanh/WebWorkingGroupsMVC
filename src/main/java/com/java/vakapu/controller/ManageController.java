@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TeamModel;
@@ -31,6 +32,7 @@ import com.java.vakapu.services.UserServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
 import com.java.vakapu.services.TeamMemberServices;
+import com.java.vakapu.services.TeamMemberTeamProjectServices;
 import com.java.vakapu.services.TeamServices;
 
 @Controller
@@ -39,7 +41,7 @@ public class ManageController {
 
 	@Autowired
 	private TeamServices teamServices;
-	
+
 	@Autowired
 	private AccountServices accountServices;
 
@@ -48,44 +50,40 @@ public class ManageController {
 
 	@Autowired
 	private UserServices userServices;
-	
+
 	@Autowired
 	private FriendshipServices friendshipServices;
-	
+
 	@Autowired
 	private TeamMemberServices teamMemberServices;
-	
+
 	@Autowired
 	private TaskServices taskServices;
-	
+
 	@Autowired
 	private DateServices dateServices;
+
+	@Autowired
+	private TeamMemberTeamProjectServices teamMemberTeamProjectServices;
 
 	@GetMapping
 	public String getInfoProject(Model model) throws java.text.ParseException {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
+		
 		List<TeamMember> team = teamMemberServices.findByEmai(emailUser);
 		List<TeamMember> memberStore = teamMemberServices.findAll();
 		List<TeamMemberTeamProject> teamProject = projectServices.findByEmail(emailUser);
-		for(TeamMemberTeamProject t: teamProject)
-		{
-			  TeamProject teamPro = projectServices.find(t.getTeamProject().getId());
-			  teamPro.setDue(dateServices.caculatorDue(t.getTeamProject().getEndDate()));
-			  projectServices.updateProject(teamPro);
-		}
 		List<TeamMemberTeamProject> userProjectStore = projectServices.findAll();
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<TeamMemberTaskTeamProject> task = taskServices.findByEmailUser(emailUser);
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
 		Set<Integer> listProject = new HashSet<>();
 		List<TaskTeamProject> taskTeam = new ArrayList<>();
-		for(TeamMemberTaskTeamProject t: task)
-		{
+		for (TeamMemberTaskTeamProject t : task) {
 			listProject.add(t.getTaskTeamProject().getId());
 		}
-		for(Integer p:listProject)
-		{
+		for (Integer p : listProject) {
 			taskTeam.add(taskServices.findById(p));
 		}
 		TeamModel teamModel = new TeamModel();
@@ -99,7 +97,7 @@ public class ManageController {
 		model.addAttribute("profile", user);
 		model.addAttribute("userTask", userTaskStore);
 		model.addAttribute("task", taskTeam);
-		
+
 		return "manage";
 	}
 
@@ -108,24 +106,22 @@ public class ManageController {
 
 		return "redirect:/manage";
 	}
-	
-	
-	@RequestMapping(value="/createTeam",method=RequestMethod.POST)
-	public String createTeam(@ModelAttribute("addMember") TeamModel teamModel,@ModelAttribute("teamAdd") Team team,Model model) throws ParseException
-	{
+
+	@RequestMapping(value = "/createTeam", method = RequestMethod.POST)
+	public String createTeam(@ModelAttribute("addMember") TeamModel teamModel, @ModelAttribute("teamAdd") Team team,
+			Model model) throws ParseException {
 		String[] email = teamModel.getEmail();
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		team.setOwner(emailUser);
-		Team team2 =teamServices.createTeam(team);
+		Team team2 = teamServices.createTeam(team);
 		TeamMember teamMemberAdmin = new TeamMember();
 		teamMemberAdmin.setMember(user);
 		teamMemberAdmin.setTeam(team);
 		teamMemberAdmin.setRole("Admin");
 		teamMemberServices.create(teamMemberAdmin);
-		int i =0;
-		for(String e:email)
-		{
+		int i = 1;
+		for (String e : email) {
 			i++;
 			User adduser = userServices.findByEmail(e);
 			TeamMember teamMember = new TeamMember();
@@ -136,7 +132,24 @@ public class ManageController {
 		}
 		team2.setMemberAmount(i);
 		teamServices.updateTeam(team2);
-	
+
 		return "redirect:/manage";
 	}
+
+	@RequestMapping(value = "/leaveTeam", method = RequestMethod.GET)
+	public String leaveTeam(@RequestParam("idTeam") int idTeam, Model model) throws ParseException {
+		String emailUser = accountServices.getEmailUser();
+		TeamMember t = teamMemberServices.getUserTeam(idTeam, emailUser);
+		List<TeamMemberTeamProject> t1 = teamMemberTeamProjectServices.findByIdTeamMember(t.getId());
+		for (TeamMemberTeamProject team : t1) {
+			List<TeamMemberTaskTeamProject> t3 = taskServices.findByIdMemberProject(team.getId());
+			for (TeamMemberTaskTeamProject team2 : t3) {
+				taskServices.deleteTaskTeamPro(team2);
+			}
+			teamMemberTeamProjectServices.delete(team);
+		}
+		teamMemberServices.delete(t);
+		return "redirect:/manage";
+	}
+
 }

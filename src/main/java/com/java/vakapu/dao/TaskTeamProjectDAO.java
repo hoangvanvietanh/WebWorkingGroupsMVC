@@ -45,9 +45,21 @@ public class TaskTeamProjectDAO {
 		return query.getResultList();
 	}
 	
+	public List<TeamMemberTaskTeamProject> findByIdMemberProject(int id) {
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.id=:id",TeamMemberTaskTeamProject.class);
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+	
 	public TeamMemberTaskTeamProject create(TeamMemberTaskTeamProject t)
 	{
 		getSession().save(t);
+		return t;
+	}
+	
+	public TeamMemberTaskTeamProject delete(TeamMemberTaskTeamProject t)
+	{
+		getSession().delete(t);
 		return t;
 	}
 }

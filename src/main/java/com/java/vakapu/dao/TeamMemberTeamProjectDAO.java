@@ -33,6 +33,12 @@ public class TeamMemberTeamProjectDAO {
 		return query.getResultList();
 	}
 	
+	public List<TeamMemberTeamProject> findByIdTeamMember(int id) {
+		TypedQuery<TeamMemberTeamProject> query = getSession().createQuery("select a from TeamMemberTeamProject a where a.teamMember.id=:id",TeamMemberTeamProject.class);
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+	
 	public TeamMemberTeamProject findByEmailUser(String email, int id) {
 		TypedQuery<TeamMemberTeamProject> query = getSession().createQuery("select a from TeamMemberTeamProject a where a.teamMember.member.email=:email and a.teamProject.id=:id",TeamMemberTeamProject.class);
 		query.setParameter("email", email);
@@ -43,6 +49,12 @@ public class TeamMemberTeamProjectDAO {
 	public TeamMemberTeamProject create(TeamMemberTeamProject memberProject)
 	{
 		getSession().persist(memberProject);
+		return memberProject;
+	}
+	
+	public TeamMemberTeamProject delete(TeamMemberTeamProject memberProject)
+	{
+		getSession().delete(memberProject);
 		return memberProject;
 	}
 }

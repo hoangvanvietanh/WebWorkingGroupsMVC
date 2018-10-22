@@ -62,22 +62,26 @@ public class ProjectTeamController {
 		modelMap.put("idproject", idProject);
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMemberTaskTeamProject> task = taskServices.findTaskByIdProjectAll(idProject);
+//		for(TeamMemberTaskTeamProject t:task)
+//		{
+//			t.getTaskTeamProject().getName();
+//		}
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
 
-		Set<Integer> listProject = new HashSet<>();
-		List<TaskTeamProject> taskTeam = new ArrayList<>();
-		for(TeamMemberTaskTeamProject t: task)
-		{
-			listProject.add(t.getTaskTeamProject().getId());
-		}
-		for(Integer p:listProject)
-		{
-			taskTeam.add(taskServices.findById(p));
-		}
+//		Set<Integer> listProject = new HashSet<>();
+//		List<TaskTeamProject> taskTeam = new ArrayList<>();
+//		for(TeamMemberTaskTeamProject t: task)
+//		{
+//			listProject.add(t.getTaskTeamProject().getId());
+//		}
+//		for(Integer p:listProject)
+//		{
+//			taskTeam.add(taskServices.findById(p));
+//		}
 		TaskModel taskModel = new TaskModel();
 		model.addAttribute("taskModel", taskModel);
 		model.addAttribute("userTask", userTaskStore);
-		model.addAttribute("task", taskTeam);
+		model.addAttribute("task", task);
 		model.addAttribute("user", userStore);
 		model.addAttribute("project", teamProject);
 		model.addAttribute("emailUser", emailUser);
@@ -97,6 +101,10 @@ public class ProjectTeamController {
 	public String createTeam(@ModelAttribute("idproject") int idProject,@ModelAttribute("idteam") int idTeam,@ModelAttribute("taskModel") TaskModel taskModel,
 			BindingResult result,Model model) throws ParseException
 	{
+		if(taskModel.getEmail().length==0)
+		{
+			return "redirect:/team-project?idProject="+idProject+"&idTeam="+idTeam;
+		}
 		String emailUser = accountServices.getEmailUser();
 		TaskTeamProject task = taskModel.toTask();
 		task.setOwner(emailUser);

@@ -31,4 +31,13 @@ public class TeamMemberTeamProjectServices {
 	{
 		return teamMemberTeamProjectDAO.create(memberProject);
 	}
+	
+	public TeamMemberTeamProject delete(TeamMemberTeamProject memberProject)
+	{
+		return teamMemberTeamProjectDAO.delete(memberProject);
+	}
+	
+	public List<TeamMemberTeamProject> findByIdTeamMember(int id){
+		return teamMemberTeamProjectDAO.findByIdTeamMember(id);
+	}
 }

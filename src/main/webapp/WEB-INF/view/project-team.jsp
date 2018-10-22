@@ -219,14 +219,14 @@
 													</div>
 													<div class="card-body">
 														<div class="card-title">
-															<a href="task-todo?idTask=${task.id}">
-																<h6 data-filter-by="text">${task.name}</h6>
+															<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
 															</a> <span class="text-small">Unscheduled</span>
 														</div>
 														<div class="card-meta">
 															<ul class="avatars">
 																<c:forEach var="userTask" items="${userTask}">
-																	<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																	<c:if test="${userTask.taskTeamProject.id ==task.taskTeamProject.id}">
 																		<li><a href="#" data-toggle="tooltip"
 																			title="${userTask.teamMemberTeamProject.teamMember.member.name}">
 																				<img

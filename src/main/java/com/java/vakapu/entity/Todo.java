@@ -78,6 +78,14 @@ public class Todo {
 	public void setTitleNote(String titleNote) {
 		this.titleNote = titleNote;
 	}
+
+	public TaskTeamProject getTaskTeamProject() {
+		return taskTeamProject;
+	}
+
+	public void setTaskTeamProject(TaskTeamProject taskTeamProject) {
+		this.taskTeamProject = taskTeamProject;
+	}
 	
 	
 

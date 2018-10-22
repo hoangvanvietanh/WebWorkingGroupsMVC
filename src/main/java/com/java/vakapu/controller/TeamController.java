@@ -26,6 +26,7 @@ import com.java.vakapu.entity.Team;
 import com.java.vakapu.entity.TeamMember;
 import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.UserServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TeamMemberServices;
@@ -55,6 +56,9 @@ public class TeamController {
 	@Autowired
 	private TeamMemberTeamProjectServices memberProjectServices;
 
+	@Autowired
+	private DateServices dateServices;
+	
 	@GetMapping
 	public String getInfoProject(@RequestParam("idTeam") int idTeam,Model model, ModelMap modelMap) {
 		String emailUser = accountServices.getEmailUser();
@@ -65,23 +69,27 @@ public class TeamController {
 		modelMap.put("idteam", idTeam);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
 		List<TeamMemberTeamProject> teamProject = proServices.findByIdTeam(idTeam);
+//		for(TeamMemberTeamProject t:teamProject)
+//		{
+//			t.getTeamProject().getName();
+//		}
 		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
-		Set<Integer> listProject = new HashSet<>();
-		List<TeamProject> teamProjects = new ArrayList<>();
-		for(TeamMemberTeamProject t: teamProject)
-		{
-			listProject.add(t.getTeamProject().getId());
-		}
-		for(Integer p:listProject)
-		{	
-			teamProjects.add(proServices.find(p));
-		}
-		model.addAttribute("newProject", newProject);
-		team.setProjectAmount(teamProjects.size());
+//		Set<Integer> listProject = new HashSet<>();
+//		List<TeamProject> teamProjects = new ArrayList<>();
+//		for(TeamMemberTeamProject t: teamProject)
+//		{
+//			listProject.add(t.getTeamProject().getId());
+//		}
+//		for(Integer p:listProject)
+//		{	
+//			teamProjects.add(proServices.find(p));
+//		}
+		team.setProjectAmount(teamProject.size());
 		team.setMemberAmount(member.size());
 		teamServices.updateTeam(team);
+		model.addAttribute("newProject", newProject);
 		model.addAttribute("emailUser", emailUser);
-		model.addAttribute("project", teamProjects);
+		model.addAttribute("project", teamProject);
 		model.addAttribute("member", member);
 		model.addAttribute("team", team);
 		model.addAttribute("user", userProjectStore);
@@ -115,6 +123,15 @@ public class TeamController {
 		c.setTeamMember(team);
 		c.setTeamProject(b);
 		memberProjectServices.create(c);
+		
+		List<TeamMemberTeamProject> teamProject = proServices.findByEmail(email);
+		for (TeamMemberTeamProject t : teamProject) {
+			int id = t.getTeamProject().getId();
+			TeamProject teamPro = proServices.find(id);
+			teamPro.setDue(dateServices.caculatorDue(t.getTeamProject().getEndDate()));
+			proServices.updateProject(teamPro);
+		}
+		
 		return "redirect:/team?idTeam="+idTeam;
 		
 	}
