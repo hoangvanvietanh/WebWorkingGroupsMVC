@@ -16,30 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project_user`
+-- Table structure for table `project_history`
 --
 
-DROP TABLE IF EXISTS `project_user`;
+DROP TABLE IF EXISTS `project_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(145) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK8r8egdw1dlyh28lnie2dct5kr` (`email`),
-  CONSTRAINT `FK8r8egdw1dlyh28lnie2dct5kr` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
+CREATE TABLE `project_history` (
+  `idproject_history` int(11) NOT NULL AUTO_INCREMENT,
+  `activity` varchar(45) DEFAULT NULL,
+  `teamproject` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `user` varchar(60) DEFAULT NULL,
+  `last` varchar(45) DEFAULT NULL,
+  `id_last` int(11) DEFAULT NULL,
+  `id_user` varchar(75) DEFAULT NULL,
+  PRIMARY KEY (`idproject_history`),
+  KEY `fk_project_history_1_idx` (`teamproject`),
+  CONSTRAINT `fk_project_history_1` FOREIGN KEY (`teamproject`) REFERENCES `teamproject` (`idteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project_user`
+-- Dumping data for table `project_history`
 --
 
-LOCK TABLES `project_user` WRITE;
-/*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (3,'hoangvanvietanh@gmail.com',1),(4,'khanh@gmail.com',1),(5,'hoangvanvietanh@gmail.com',2);
-/*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
+LOCK TABLES `project_history` WRITE;
+/*!40000 ALTER TABLE `project_history` DISABLE KEYS */;
+INSERT INTO `project_history` VALUES (4,'create project',27,NULL,'hoangvanvietanh@gmail.com','Project 8',27,'hoangvanvietanh@gmail.com'),(5,'create project',28,NULL,'Hoang Van Viet Anh','',28,'hoangvanvietanh@gmail.com');
+/*!40000 ALTER TABLE `project_history` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

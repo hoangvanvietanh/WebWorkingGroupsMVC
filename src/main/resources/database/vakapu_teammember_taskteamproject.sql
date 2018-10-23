@@ -31,7 +31,7 @@ CREATE TABLE `teammember_taskteamproject` (
   KEY `fk_teammember_taskteamproject_2_idx` (`idtaskteamproject`),
   CONSTRAINT `fk_teammember_taskteamproject_1` FOREIGN KEY (`idteammember_teamproject`) REFERENCES `teammember_teamproject` (`idteammember_teamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_teammember_taskteamproject_2` FOREIGN KEY (`idtaskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `teammember_taskteamproject` (
 
 LOCK TABLES `teammember_taskteamproject` WRITE;
 /*!40000 ALTER TABLE `teammember_taskteamproject` DISABLE KEYS */;
-INSERT INTO `teammember_taskteamproject` VALUES (1,4,11),(2,4,12),(5,5,15),(6,10,16);
+INSERT INTO `teammember_taskteamproject` VALUES (9,17,18),(10,18,18),(12,18,19),(14,23,20),(15,25,20),(17,21,21),(18,26,22),(19,27,22),(20,26,23),(21,27,23),(22,28,23),(23,29,24),(24,30,24),(25,29,25),(26,31,25),(27,32,25),(28,33,26),(29,34,26),(30,35,26),(31,33,27),(32,36,27),(33,37,27),(34,36,28),(35,37,28);
 /*!40000 ALTER TABLE `teammember_taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-22 12:25:34
+-- Dump completed on 2018-10-24  4:40:34
