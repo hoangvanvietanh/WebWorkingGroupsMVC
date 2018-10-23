@@ -2,36 +2,37 @@ package com.java.vakapu.model;
 
 import com.java.vakapu.entity.TeamProject;
 
-
 public class TeamProjectModel {
 
 	private int id;
-	
+
 	private String name;
-	
+
 	private String startDate;
-	
+
 	private String status;
-	
+
 	private String endDate;
-	
+
 	private String owner;
-	
+
 	private String description;
-	
+
 	private String visibility;
-	
+
 	private String action;
-	
+
+	private String[] email;
+
 	private int idtask;
-	
-	public void fromProject(TeamProject teamProject) 
-	{
-		this.setId(teamProject.getId());;
+
+	public void fromProject(TeamProject teamProject) {
+		this.setId(teamProject.getId());
+		;
 		this.setName(teamProject.getName());
-		
+
 		this.setStartDate(this.getStartDate());
-		
+
 		this.setStatus(teamProject.getStatus());
 		this.setEndDate(teamProject.getEndDate());
 		this.setOwner(teamProject.getOwner());
@@ -39,10 +40,9 @@ public class TeamProjectModel {
 		this.setVisibility(teamProject.getVisibility());
 		this.setAction(teamProject.getAction());
 	}
-	
-	public TeamProject toProject() 
-	{
-		TeamProject teamProject= new TeamProject();
+
+	public TeamProject toProject() {
+		TeamProject teamProject = new TeamProject();
 		teamProject.setId(this.getId());
 		teamProject.setName(this.getName());
 		teamProject.setStartDate(this.getStartDate());
@@ -52,13 +52,17 @@ public class TeamProjectModel {
 		teamProject.setDescription(this.getDescription());
 		teamProject.setVisibility(this.getVisibility());
 		teamProject.setAction(this.getAction());
-		
+
 		return teamProject;
 	}
 
+	public String[] getEmail() {
+		return email;
+	}
 
-
-	
+	public void setEmail(String[] email) {
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;
@@ -75,8 +79,6 @@ public class TeamProjectModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
 
 	public String getStartDate() {
 		return startDate;
@@ -141,7 +143,5 @@ public class TeamProjectModel {
 	public void setAction(String action) {
 		this.action = action;
 	}
-	
-	
-	
+
 }

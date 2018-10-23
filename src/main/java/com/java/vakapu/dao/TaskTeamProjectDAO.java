@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,12 @@ public class TaskTeamProjectDAO {
 		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject",TeamMemberTaskTeamProject.class);
 		query.setParameter("idProject", idProject);
 		return query.getResultList();
+	}
+	
+	public long findTaskDoneByIdProject(int idProject) {
+		Query<Long> query = getSession().createQuery("select count(distinct a.taskTeamProject.id) from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject and a.taskTeamProject.completed like '1'",Long.class);
+		query.setParameter("idProject", idProject);
+		return query.uniqueResult();
 	}
 	
 	public List<TeamMemberTaskTeamProject> findByIdMemberProject(int id) {

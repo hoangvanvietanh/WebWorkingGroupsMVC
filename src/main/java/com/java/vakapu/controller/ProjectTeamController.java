@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTeamProject;
@@ -26,6 +27,7 @@ import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.HistoryServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
 import com.java.vakapu.services.TeamMemberTeamProjectServices;
@@ -54,34 +56,42 @@ public class ProjectTeamController {
 	@Autowired
 	private TeamMemberTeamProjectServices teamMemberTeamProjectDAO;
 	
+	@Autowired
+	private HistoryServices historyServices;
+	
 	@GetMapping
-	public String teamProject(@RequestParam("idTeam") int idTeam,@RequestParam("idProject") int idProject,Model model,ModelMap modelMap) {
+	public String teamProject(@ModelAttribute("idteam") int idTeam,@RequestParam("idProject") int idProject,Model model,ModelMap modelMap) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		TeamProject teamProject = proServices.find(idProject);
 		modelMap.put("idproject", idProject);
+		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
+//		for(ProjectHistory p:proHis)
+//		{
+//			System.out.println( "Testt"+p.getUser() + p.getActivity() + p.getLast());
+//		}
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMemberTaskTeamProject> task = taskServices.findTaskByIdProjectAll(idProject);
-//		for(TeamMemberTaskTeamProject t:task)
-//		{
-//			t.getTaskTeamProject().getName();
-//		}
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
-
-//		Set<Integer> listProject = new HashSet<>();
-//		List<TaskTeamProject> taskTeam = new ArrayList<>();
-//		for(TeamMemberTaskTeamProject t: task)
-//		{
-//			listProject.add(t.getTaskTeamProject().getId());
-//		}
-//		for(Integer p:listProject)
-//		{
-//			taskTeam.add(taskServices.findById(p));
-//		}
+		Set<Integer> listProject = new HashSet<>();
+		List<TaskTeamProject> taskTeam = new ArrayList<>();
+		for(TeamMemberTaskTeamProject t: task)
+		{
+			listProject.add(t.getTaskTeamProject().getId());
+		}
+		for(Integer p:listProject)
+		{
+			taskTeam.add(taskServices.findById(p));
+		}
+		int taskDone = taskServices.findTaskDoneByIdProject(idProject);
+		teamProject.setTaskDone(taskDone);
+		teamProject.setTotalTask(taskTeam.size());
+		proServices.updateProject(teamProject);
 		TaskModel taskModel = new TaskModel();
+		model.addAttribute("history", proHis);
 		model.addAttribute("taskModel", taskModel);
 		model.addAttribute("userTask", userTaskStore);
-		model.addAttribute("task", task);
+		model.addAttribute("task", taskTeam);
 		model.addAttribute("user", userStore);
 		model.addAttribute("project", teamProject);
 		model.addAttribute("emailUser", emailUser);

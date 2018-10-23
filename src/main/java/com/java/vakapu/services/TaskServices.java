@@ -55,6 +55,10 @@ public class TaskServices {
 		return taskTeamProDAO.findByIdProjectAll(idProject);
 	}
 	
+	public int findTaskDoneByIdProject(int idProject) {
+		return (int) taskTeamProDAO.findTaskDoneByIdProject(idProject);
+	}
+	
 	public List<TeamMemberTaskTeamProject> findByIdMemberProject(int id) {
 		return taskTeamProDAO.findByIdMemberProject(id);
 	}
