@@ -30,8 +30,11 @@ CREATE TABLE `taskteamproject` (
   `owner` varchar(45) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
+  `totalTask` int(4) DEFAULT NULL,
+  `completedAmount` int(4) DEFAULT NULL,
+  `due` int(4) DEFAULT NULL,
   PRIMARY KEY (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +43,7 @@ CREATE TABLE `taskteamproject` (
 
 LOCK TABLES `taskteamproject` WRITE;
 /*!40000 ALTER TABLE `taskteamproject` DISABLE KEYS */;
-INSERT INTO `taskteamproject` VALUES (1,'Trang Manage',0,'Nothing','hoangvanvietanh@gmail.com','2018-10-19','2018-10-25'),(2,'Trang User',0,'Nothing','hoangvanvietanh@gmail.com','2018-10-20','2018-10-30');
+INSERT INTO `taskteamproject` VALUES (11,'test',0,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',7,6,8),(12,'test',0,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(13,'test',0,'123','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(14,'hehehe',0,'Viet Anh','hoangvanvietanh@gmail.com','2018-10-22','2018-10-22',2,2,0),(15,'hihihihi',0,'hehe','hoangvanvietanh@gmail.com','2018-10-22','2018-10-24',0,0,0),(16,'Hoang Van Viet Anh',0,'Hoang Van Viet Anh','hoangvanvietanh@gmail.com','2018-10-23','2018-10-30',3,1,7);
 /*!40000 ALTER TABLE `taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-19 17:50:17
+-- Dump completed on 2018-10-22 12:25:34

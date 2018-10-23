@@ -31,7 +31,7 @@ CREATE TABLE `teammember_teamproject` (
   KEY `fk_teammember_teamproject_2_idx` (`idteammember`),
   CONSTRAINT `fk_teammember_teamproject_1` FOREIGN KEY (`idteamproject`) REFERENCES `teamproject` (`idteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_teammember_teamproject_2` FOREIGN KEY (`idteammember`) REFERENCES `team_member` (`idteam_member`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `teammember_teamproject` (
 
 LOCK TABLES `teammember_teamproject` WRITE;
 /*!40000 ALTER TABLE `teammember_teamproject` DISABLE KEYS */;
-INSERT INTO `teammember_teamproject` VALUES (1,18,1),(2,22,1),(3,23,1),(4,18,2);
+INSERT INTO `teammember_teamproject` VALUES (3,23,1),(4,44,7),(5,44,8),(7,44,10),(8,44,11),(10,72,13),(11,72,14);
 /*!40000 ALTER TABLE `teammember_teamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-19 17:50:17
+-- Dump completed on 2018-10-22 12:25:34

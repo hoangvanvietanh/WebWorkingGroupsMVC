@@ -36,7 +36,7 @@ CREATE TABLE `teamproject` (
   `task_done` int(4) DEFAULT NULL,
   `due` int(4) DEFAULT NULL,
   PRIMARY KEY (`idteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `teamproject` (
 
 LOCK TABLES `teamproject` WRITE;
 /*!40000 ALTER TABLE `teamproject` DISABLE KEYS */;
-INSERT INTO `teamproject` VALUES (1,'Test Project Team','2018-07-30','2018-11-30',NULL,'nothing','Team',NULL,NULL,4,3,41),(2,'Test 2','2018-10-30','2018-12-30',NULL,'nothing','Team',NULL,NULL,5,2,71);
+INSERT INTO `teamproject` VALUES (1,'Test Project Team','2018-07-30','2018-11-30',NULL,'nothing','Team',NULL,NULL,2,2,40),(2,'Test 2','2018-10-30','2018-12-30',NULL,'nothing','Team',NULL,NULL,5,2,70),(3,'test','2018-10-19','2018-10-27',NULL,'s','Member',NULL,NULL,0,0,6),(4,'test3','2018-10-20','2018-10-31',NULL,'hihi','Member',NULL,NULL,0,0,10),(5,'hihihihi','2018-10-20','2018-10-27',NULL,'ghj',NULL,NULL,NULL,0,0,6),(6,'hagu','2018-10-20','2018-10-27',NULL,'hihi','Everyone',NULL,NULL,0,0,6),(7,'nothing','2018-10-13','2018-10-25',NULL,'hihi','Member',NULL,NULL,0,0,2),(8,'test3333','2018-10-21','2018-10-25',NULL,'hihi','Member',NULL,NULL,0,0,2),(9,'HoÃ ng VÄ?n Viá»?t Anh','2018-10-21','2018-08-31',NULL,'df','Everyone',NULL,NULL,0,0,-52),(10,'testttttt','2018-10-21','2018-10-30',NULL,'1231313','Everyone',NULL,NULL,0,0,7),(11,'vietanh','2018-10-21','2018-10-31',NULL,'123','Everyone',NULL,NULL,0,0,8),(12,'test','2018-10-23','2018-10-31',NULL,'hihi','Member',NULL,NULL,0,0,8),(13,'Hoang Van Viet Anh','2018-10-22','2018-10-25',NULL,'Hoang Van Viet Anh','Member',NULL,NULL,0,0,2),(14,'Hoang Van Viet EM','2018-10-22','2018-10-31',NULL,'Hoang Van Viet Em','Everyone',NULL,NULL,0,0,8);
 /*!40000 ALTER TABLE `teamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-19 17:50:17
+-- Dump completed on 2018-10-22 12:25:34

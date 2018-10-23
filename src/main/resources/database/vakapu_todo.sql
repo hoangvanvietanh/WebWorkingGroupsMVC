@@ -33,7 +33,7 @@ CREATE TABLE `todo` (
   PRIMARY KEY (`idtodo`),
   KEY `FKl3kd2hun1wexy9dl36viy5vlf` (`taskTeamProject`),
   CONSTRAINT `FKl3kd2hun1wexy9dl36viy5vlf` FOREIGN KEY (`taskTeamProject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `todo` (
 
 LOCK TABLES `todo` WRITE;
 /*!40000 ALTER TABLE `todo` DISABLE KEYS */;
+INSERT INTO `todo` VALUES (4,'null',1,NULL,NULL,NULL,11),(5,'testt2',1,NULL,NULL,NULL,11),(6,'testt3',1,NULL,NULL,NULL,11),(7,'testt',0,NULL,NULL,NULL,13),(8,'testt2',0,NULL,NULL,NULL,13),(9,'testt3',0,NULL,NULL,NULL,13),(10,'t1',1,NULL,NULL,NULL,11),(11,'2',1,NULL,NULL,NULL,11),(12,'3',0,NULL,NULL,NULL,11),(13,'hihihi',1,NULL,NULL,NULL,11),(14,'test 1',1,NULL,NULL,NULL,14),(15,'test 2',1,NULL,NULL,NULL,14),(16,'Viet Anh 1',0,NULL,NULL,NULL,16),(17,'Viet Anh 2',1,NULL,NULL,NULL,16),(18,'Viet Anh 3',0,NULL,NULL,NULL,16);
 /*!40000 ALTER TABLE `todo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-19 17:50:17
+-- Dump completed on 2018-10-22 12:25:34
