@@ -204,7 +204,7 @@
 															<i class="material-icons">more_vert</i>
 														</button>
 														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
+															<a class="dropdown-item" href="team/edit-project" method="post">Edit</a> <a
 																class="dropdown-item" href="#">Share</a>
 														</div>
 													</div>
@@ -469,7 +469,7 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label> <form:input
 														class="form-control col" type="date"
-														placeholder="Project start" path="startDate" />
+														 path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label> <form:input
@@ -553,7 +553,7 @@
 									</div>
 								</div>
 							</div>
-						</form:form>
+						</form:form>	
 					</div>
 				</div>
 			</div>

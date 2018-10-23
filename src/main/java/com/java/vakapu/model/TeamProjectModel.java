@@ -29,9 +29,7 @@ public class TeamProjectModel {
 	{
 		this.setId(teamProject.getId());;
 		this.setName(teamProject.getName());
-		
 		this.setStartDate(this.getStartDate());
-		
 		this.setStatus(teamProject.getStatus());
 		this.setEndDate(teamProject.getEndDate());
 		this.setOwner(teamProject.getOwner());

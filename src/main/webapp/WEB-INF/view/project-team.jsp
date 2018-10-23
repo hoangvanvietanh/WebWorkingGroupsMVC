@@ -122,15 +122,12 @@
 					<div class="dropdown-menu dropdown-menu-right">
 
 
-						<a class="dropdown-item" href="#" data-toggle="modal"
+						<a class="dropdown-item" href="" data-toggle="modal"
 							data-target="#project-edit-modal">Edit Project</a> <a
 							class="dropdown-item" href="#">Share</a> <a class="dropdown-item"
 							href="#">Mark as Complete</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Archive</a>
-
-
-
 
 					</div>
 				</div>
@@ -500,7 +497,10 @@
 								</div>
 							</div>
 						</form>
-						<form class="modal fade" id="project-edit-modal" tabindex="-1"
+						
+						<!----------------------------- Edit Project ------------------------------------->
+						<form:form modelAttribute="editProject" action="team-project/edit-project" method="post" 
+						class="modal fade" id="project-edit-modal" tabindex="-1"
 							role="dialog" aria-labelledby="project-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -532,56 +532,46 @@
 												aria-labelledby="project-edit-details-tab">
 												<h6>General Details</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <input
+													<label class="col-3">Name</label> <form:input
 														class="form-control col" type="text"
-														value="Brand Concept and Design" name="project-name" />
+														path="name" name="project-name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
-													<textarea class="form-control col" rows="3"
-														placeholder="Project description"
-														name="project-description">Research, ideate and present brand concepts for client consideration</textarea>
+													<form:textarea class="form-control col" rows="3"
+														path="description"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> <input
-														class="form-control col" type="date"
-														placeholder="Project start" name="project-start" />
+													<label class="col-3">Start Date</label> 
+													<form:input path="startDate" class="form-control col" type="date"/>
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <input
+													<label class="col-3">Due Date</label> <form:input
 														class="form-control col" type="date"
-														placeholder="Project due" name="project-due" />
+														path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
 												</div>
 												<hr>
-												<h6>Visibility</h6>
+												<h6><form:label path="visibility">Visibility</form:label></h6>
 												<div class="row">
 													<div class="col">
 														<div class="custom-control custom-radio">
-															<input type="radio" id="visibility-everyone"
-																name="visibility" class="custom-control-input" checked>
+															<form:radiobutton id="visibility-everyone"
+																path="visibility" class="custom-control-input"  value="Everyone" />
 															<label class="custom-control-label"
 																for="visibility-everyone">Everyone</label>
 														</div>
 													</div>
 													<div class="col">
 														<div class="custom-control custom-radio">
-															<input type="radio" id="visibility-members"
-																name="visibility" class="custom-control-input">
+															<form:radiobutton id="visibility-members"
+																path="visibility" class="custom-control-input" value="Member"/>
 															<label class="custom-control-label"
 																for="visibility-members">Members</label>
-														</div>
-													</div>
-													<div class="col">
-														<div class="custom-control custom-radio">
-															<input type="radio" id="visibility-me" name="visibility"
-																class="custom-control-input"> <label
-																class="custom-control-label" for="visibility-me">Just
-																me</label>
 														</div>
 													</div>
 												</div>
@@ -791,7 +781,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 						<form:form modelAttribute="taskModel" method="post"
 							action="team-project/create-task" class="modal fade"
 							id="task-add-modal" tabindex="-1" role="dialog"

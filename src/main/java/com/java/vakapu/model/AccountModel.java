@@ -7,6 +7,7 @@ public class AccountModel {
 	private String password;
 	private String status;
 	
+	
 	public void fromAccount(Account account) {
 		this.setPassword(account.getPassword());
 		this.setEmail(account.getEmail());

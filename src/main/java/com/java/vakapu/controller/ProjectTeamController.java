@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.hibernate.annotations.OnDelete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,7 @@ import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
+import com.java.vakapu.model.TeamProjectModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
@@ -59,6 +63,7 @@ public class ProjectTeamController {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		TeamProject teamProject = proServices.find(idProject);
+		TeamProject editProject=proServices.find(idProject);
 		modelMap.put("idproject", idProject);
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMemberTaskTeamProject> task = taskServices.findTaskByIdProjectAll(idProject);
@@ -78,7 +83,11 @@ public class ProjectTeamController {
 //		{
 //			taskTeam.add(taskServices.findById(p));
 //		}
+		TeamProjectModel edit=new TeamProjectModel();
 		TaskModel taskModel = new TaskModel();
+		
+		edit.fromProject(editProject);
+		model.addAttribute("editProject", edit);
 		model.addAttribute("taskModel", taskModel);
 		model.addAttribute("userTask", userTaskStore);
 		model.addAttribute("task", task);
@@ -121,6 +130,20 @@ public class ProjectTeamController {
 			taskServices.createMemberTask(taskTeam);
 		}
 		return "redirect:/team-project?idProject="+idProject+"&idTeam="+idTeam;
+	}
+	
+	@RequestMapping(value="/edit-project",method=RequestMethod.POST)
+	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,@ModelAttribute("idteam") int idTeam,
+			@ModelAttribute("idproject") int idProject,Model model, BindingResult result)
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/team-project";
+		}
+		
+		TeamProject a=editProject.toProject();
+		proServices.updateProject(a);
+		return "redirect:/team-project?idproject="+idProject+"&idTeam="+idTeam;
 	}
 }
 	
