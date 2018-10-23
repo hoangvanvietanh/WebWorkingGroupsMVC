@@ -205,7 +205,7 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Edit</a> <a
+																<a class="dropdown-item" href="team/edit-project" method="post">Edit</a> <a
 																	class="dropdown-item" href="#">Share</a>
 															</div>
 														</div>

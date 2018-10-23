@@ -31,7 +31,7 @@ public class TeamProjectModel {
 		;
 		this.setName(teamProject.getName());
 
-		this.setStartDate(this.getStartDate());
+		this.setStartDate(teamProject.getStartDate());
 
 		this.setStatus(teamProject.getStatus());
 		this.setEndDate(teamProject.getEndDate());

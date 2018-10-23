@@ -24,7 +24,7 @@
 <title>Change Password</title>
 </head>
 <body>
-<form:form modelAttribute="account" method="post">
+<form:form modelAttribute="change" action="change-password" method="post">
 	<div id="mydiv" class="text-center" style="padding: 50px 0">
 		<div class="logo">Create New Password</div>
 		<!-- Main Form -->
@@ -42,9 +42,13 @@
 								type="text" class="form-control" path="email" />
 						</div>
 						<div class="form-group">
-							<label for="reg_password" class="sr-only">Old Password</label> <input
+							<label for="reg_oldpassword" class="sr-only">Old Password</label> <input
 								type="password" class="form-control" name="oldpass" 
-								placeholder="password" /> <form:input name="oldPass" type="hidden" path="password" />
+								placeholder="password" /> 
+						</div>
+						<div class="form-group">
+							
+							<form:input  class="form-control" type="hidden" path="password" />
 						</div>
 					</div>
 					<div class="login-group">

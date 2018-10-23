@@ -90,7 +90,7 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a href="profile" class="dropdown-item">Profile</a> <a
-									href="utility-account-settings.html" class="dropdown-item">Account
+									href="account/change-password" method="post" class="dropdown-item">Account
 									Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>

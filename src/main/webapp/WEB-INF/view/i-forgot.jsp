@@ -31,7 +31,7 @@
 		
 		 
 			<form id="register-form" class="text-left" action="forgot-password/i-forgot"  
-				method="post">-->
+				method="post">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 				

@@ -26,6 +26,7 @@ import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
+import com.java.vakapu.model.TeamProjectModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.HistoryServices;
 import com.java.vakapu.services.ProjectServices;
@@ -64,6 +65,7 @@ public class ProjectTeamController {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		TeamProject teamProject = proServices.find(idProject);
+		TeamProject editProject=proServices.find(idProject);
 		modelMap.put("idproject", idProject);
 		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
 //		for(ProjectHistory p:proHis)
@@ -87,7 +89,10 @@ public class ProjectTeamController {
 		teamProject.setTaskDone(taskDone);
 		teamProject.setTotalTask(taskTeam.size());
 		proServices.updateProject(teamProject);
+		TeamProjectModel edit=new TeamProjectModel();
 		TaskModel taskModel = new TaskModel();
+		edit.fromProject(editProject);
+		model.addAttribute("editProject", edit);
 		model.addAttribute("history", proHis);
 		model.addAttribute("taskModel", taskModel);
 		model.addAttribute("userTask", userTaskStore);
@@ -131,6 +136,20 @@ public class ProjectTeamController {
 			taskServices.createMemberTask(taskTeam);
 		}
 		return "redirect:/team-project?idProject="+idProject+"&idTeam="+idTeam;
+	}
+	
+	@RequestMapping(value="/edit-project",method=RequestMethod.POST)
+	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,@ModelAttribute("idteam") int idTeam,
+			@ModelAttribute("idproject") int idProject,Model model, BindingResult result)
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/team-project";
+		}
+		
+		TeamProject a=editProject.toProject();
+		proServices.updateProject(a);
+		return "redirect:/team-project?idproject="+idProject+"&idTeam="+idTeam;
 	}
 }
 	
