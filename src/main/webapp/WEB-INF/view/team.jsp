@@ -39,7 +39,8 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img style="width: 80px;height: 30px"  alt="Pipeline"
+			<a class="navbar-brand" href="index.html"> <img
+				style="width: 80px; height: 30px" alt="Pipeline"
 				src="resources/img/fun.gif" />
 			</a>
 			<div class="d-flex align-items-center">
@@ -103,8 +104,7 @@
 			<div class="navbar bg-white breadcrumb-bar">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="home">Home</a>
-						</li>
+						<li class="breadcrumb-item"><a href="home">Home</a></li>
 
 						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
 
@@ -137,10 +137,11 @@
 							<div class="d-flex align-items-center">
 								<ul class="avatars">
 									<c:forEach var="member" items="${member}">
-									<li><a href="#" data-toggle="tooltip" data-placement="top"
-										title="${member.member.name}"> <img alt="${member.member.name}"
-											class="avatar" src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
-									</a></li>
+										<li><a href="#" data-toggle="tooltip"
+											data-placement="top" title="${member.member.name}"> <img
+												alt="${member.member.name}" class="avatar"
+												src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
+										</a></li>
 									</c:forEach>
 								</ul>
 								<button class="btn btn-round" data-toggle="modal"
@@ -187,53 +188,57 @@
 									<!--end of content list head-->
 									<div class="content-list-body row">
 										<c:forEach var="project" items="${project}">
-										<div class="col-lg-6">
-											<div class="card card-project">
+											<div class="col-lg-6">
+												<div class="card card-project">
 
-												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: ${project.teamProject.taskDone div project.teamProject.totalTask * 100}%" aria-valuenow="8" aria-valuemin="0"
-														aria-valuemax="100"></div>
-												</div>
+													<div class="progress">
+														<div class="progress-bar bg-success" role="progressbar"
+															style="width: ${project.taskDone div project.totalTask * 100}%"
+															aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
 
-												<div class="card-body">
-													<div class="dropdown card-options">
-														<button class="btn-options" type="button"
-															id="project-dropdown-button-5" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="team/edit-project" method="post">Edit</a> <a
-																class="dropdown-item" href="#">Share</a>
+													<div class="card-body">
+														<div class="dropdown card-options">
+															<button class="btn-options" type="button"
+																id="project-dropdown-button-5" data-toggle="dropdown"
+																aria-haspopup="true" aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="team/edit-project" method="post">Edit</a> <a
+																	class="dropdown-item" href="#">Share</a>
+															</div>
 														</div>
-													</div>
-													<div class="card-title">
-														<a href="team-project?idTeam=${team.idTeam}&idProject=${project.teamProject.id}">
-															<h5 data-filter-by="text">${project.teamProject.name}</h5>
-														</a>
-													</div>
-													<ul class="avatars">
-														<c:forEach var="user" items="${user}">
-														<c:if test="${user.teamProject.id == project.teamProject.id}">
-														<li><a href="#" data-toggle="tooltip" title="${user.teamMember.member.name}">
-																<img alt="${user.teamMember.member.name}" class="avatar"
-																src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>" data-filter-by="alt" />
-														</a></li>
-														</c:if>
-														</c:forEach>
-													</ul>
-													<div class="card-meta d-flex justify-content-between">
-														<div class="d-flex align-items-center">
-															<i class="material-icons mr-1">playlist_add_check</i> <span
-																class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
+														<div class="card-title">
+															<a
+																href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
+																<h5 data-filter-by="text">${project.name}</h5>
+															</a>
 														</div>
-														<span class="text-small" data-filter-by="text">Due
-															${project.teamProject.due} days</span>
+														<ul class="avatars">
+															<c:forEach var="user" items="${user}">
+																<c:if
+																	test="${user.teamProject.id == project.id}">
+																	<li><a href="#" data-toggle="tooltip"
+																		title="${user.teamMember.member.name}"> <img
+																			alt="${user.teamMember.member.name}" class="avatar"
+																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																			data-filter-by="alt" />
+																	</a></li>
+																</c:if>
+															</c:forEach>
+														</ul>
+														<div class="card-meta d-flex justify-content-between">
+															<div class="d-flex align-items-center">
+																<i class="material-icons mr-1">playlist_add_check</i> <span
+																	class="text-small">${project.taskDone}/${project.totalTask}</span>
+															</div>
+															<span class="text-small" data-filter-by="text">Due
+																${project.due} days</span>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
 										</c:forEach>
 									</div>
 									<!--end of content list body-->
@@ -269,16 +274,17 @@
 									<!--end of content list head-->
 									<div class="content-list-body row">
 										<c:forEach var="member" items="${member}">
-										<div class="col-6">
-											<a class="media media-member" href="#"> <img
-												alt="${member.member.name}" src="<spring:url value='/profile/avatar/${member.member.email}'/>"
-												class="avatar avatar-lg" />
-												<div class="media-body">
-													<h6 class="mb-0" data-filter-by="text">${member.member.name}</h6>
-													<span data-filter-by="text" class="text-body">${member.role}</span>
-												</div>
-											</a>
-										</div>
+											<div class="col-6">
+												<a class="media media-member" href="#"> <img
+													alt="${member.member.name}"
+													src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+													class="avatar avatar-lg" />
+													<div class="media-body">
+														<h6 class="mb-0" data-filter-by="text">${member.member.name}</h6>
+														<span data-filter-by="text" class="text-body">${member.role}</span>
+													</div>
+												</a>
+											</div>
 										</c:forEach>
 									</div>
 								</div>
@@ -420,10 +426,11 @@
 								</div>
 							</div>
 						</form>
-<!-- ------------------------	Project - Team	----------------------------- -->				
-						<form:form modelAttribute="newProject" action="team/create-project" method="post" class="modal fade" id="project-add-modal" tabindex="-1"
-							role="dialog" aria-labelledby="project-add-modal"
-							aria-hidden="true">
+						<!-- ------------------------	Project - Team	----------------------------- -->
+						<form:form modelAttribute="newProject"
+							action="team/create-project" method="post" class="modal fade"
+							id="project-add-modal" tabindex="-1" role="dialog"
+							aria-labelledby="project-add-modal" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -453,39 +460,40 @@
 												aria-labelledby="project-add-details-tab">
 												<h6>General Details</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <form:input
-														class="form-control col" type="text" 
+													<label class="col-3">Name</label>
+													<form:input class="form-control col" type="text"
 														placeholder="Project name" path="name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Project description"
-														
-														path="description"></form:textarea>
+														placeholder="Project description" path="description"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> <form:input
-														class="form-control col" type="date"
-														 path="startDate" />
+													<label class="col-3">Start Date</label>
+													<form:input class="form-control col" type="date"
+														placeholder="Project start" path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <form:input
-														class="form-control col" type="date"
+													<label class="col-3">Due Date</label>
+													<form:input class="form-control col" type="date"
 														placeholder="Project due" path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
 												</div>
 												<hr>
-												<h6><form:label path="visibility">Visibility</form:label></h6>
+												<h6>
+													<form:label path="visibility">Visibility</form:label>
+												</h6>
 												<div class="row">
 													<div class="col">
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-everyone"
-																path="visibility" class="custom-control-input"  value="Everyone" />
+																path="visibility" class="custom-control-input"
+																value="Everyone" />
 															<label class="custom-control-label"
 																for="visibility-everyone">Everyone</label>
 														</div>
@@ -493,12 +501,13 @@
 													<div class="col">
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-members"
-																path="visibility" class="custom-control-input" value="Member"/>
+																path="visibility" class="custom-control-input"
+																value="Member" />
 															<label class="custom-control-label"
 																for="visibility-members">Members</label>
 														</div>
 													</div>
-													
+
 												</div>
 											</div>
 											<div class="tab-pane fade" id="project-add-members"
@@ -509,8 +518,9 @@
 														<ul class="avatars text-center">
 
 															<li><img alt="${profile.name}"
-																src="<spring:url value='/profile/avatar/${emailUser}'/>" class="avatar"
-																data-toggle="tooltip" data-title="${profile.name}" /></li>
+																src="<spring:url value='/profile/avatar/${emailUser}'/>"
+																class="avatar" data-toggle="tooltip"
+																data-title="${profile.name}" /></li>
 
 														</ul>
 													</div>
@@ -527,18 +537,21 @@
 													</div>
 													<div class="form-group-users">
 														<c:forEach var="member" items="${member}">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="${member.member.email}"> <label
-																class="custom-control-label" for="${member.member.email}">
-																<div class="d-flex align-items-center">
-																	<img alt="${member.member.name}"
-																		src="<spring:url value='/profile/avatar/${member.member.email}'/>"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">${member.member.name}</span>
-																</div>
-															</label>
-														</div>
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email"
+																	value="${member.member.email}"
+																	class="custom-control-input"
+																	id="${member.member.email}" />
+																<form:label path="email" class="custom-control-label"
+																	for="${member.member.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${member.member.name}"
+																			src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${member.member.name}</span>
+																	</div>
+																</form:label>
+															</div>
 														</c:forEach>
 													</div>
 												</div>
@@ -546,14 +559,14 @@
 										</div>
 									</div>
 									<!--end of modal body-->
-								<!-- 	<input type="hidden" name="idTeam" value="${idTeam}"/> -->
+									<!-- 	<input type="hidden" name="idTeam" value="${idTeam}"/> -->
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
 											Create Project</button>
 									</div>
 								</div>
 							</div>
-						</form:form>	
+						</form:form>
 					</div>
 				</div>
 			</div>

@@ -39,8 +39,8 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img style="width: 80px;height: 30px"  alt="Pipeline"
-				src="resources/img/fun.gif" />
+			<a class="navbar-brand" href="index.html"> <img style="width: 30px;height: 30px"  alt="Pipeline"
+				src="resources/img/vakapu.png" />
 			</a>
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -67,11 +67,11 @@
 				id="navbar-collapse">
 				<form class="form-inline my-lg-0 my-2">
 					<div class="input-group input-group-dark input-group-round">
-						<div class="input-group-prepend">
+						<div  class="input-group-prepend">
 							<span class="input-group-text"> <i class="material-icons">search</i>
 							</span>
 						</div>
-						<input type="search" class="form-control form-control-dark"
+						<input type="search" class="form-control-search form-control-dark"
 							placeholder="Search" aria-label="Search app"
 							aria-describedby="search-app">
 					</div>

@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project_user`
+-- Table structure for table `task_history`
 --
 
-DROP TABLE IF EXISTS `project_user`;
+DROP TABLE IF EXISTS `task_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(145) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK8r8egdw1dlyh28lnie2dct5kr` (`email`),
-  CONSTRAINT `FK8r8egdw1dlyh28lnie2dct5kr` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+CREATE TABLE `task_history` (
+  `idtask_history` int(11) NOT NULL AUTO_INCREMENT,
+  `activity` varchar(45) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `taskteamproject` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idtask_history`),
+  KEY `fk_task_history_1_idx` (`taskteamproject`),
+  CONSTRAINT `fk_task_history_1` FOREIGN KEY (`taskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project_user`
+-- Dumping data for table `task_history`
 --
 
-LOCK TABLES `project_user` WRITE;
-/*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (3,'hoangvanvietanh@gmail.com',1),(4,'khanh@gmail.com',1),(5,'hoangvanvietanh@gmail.com',2);
-/*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
+LOCK TABLES `task_history` WRITE;
+/*!40000 ALTER TABLE `task_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task_history` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

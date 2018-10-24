@@ -183,7 +183,8 @@
 														<div class="dropdown-menu dropdown-menu-right">
 															<a class="dropdown-item" href="#">Manage</a>
 															<div class="dropdown-divider"></div>
-															<a class="dropdown-item text-danger" href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
+															<a class="dropdown-item text-danger"
+																href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
 														</div>
 													</div>
@@ -204,7 +205,7 @@
 																</a></li>
 															</c:if>
 														</c:forEach>
-														</ul>
+													</ul>
 												</div>
 											</div>
 										</div>
@@ -238,7 +239,11 @@
 										<c:forEach var="project" items="${project}">
 											<div class="col-lg-6">
 												<div class="card card-project">
-
+													<div class="progress">
+														<div class="progress-bar bg-success" role="progressbar"
+															style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%" aria-valuenow="8" aria-valuemin="0"
+															aria-valuemax="100"></div>
+													</div>
 													<div class="card-body">
 														<div class="dropdown card-options">
 															<button class="btn-options" type="button"
@@ -277,7 +282,8 @@
 																<i class="material-icons mr-1">playlist_add_check</i> <span
 																	class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
 															</div>
-															<span class="text-small" data-filter-by="text">due ${project.teamProject.due} days</span>
+															<span class="text-small" data-filter-by="text">due
+																${project.teamProject.due} days</span>
 														</div>
 													</div>
 												</div>
@@ -314,19 +320,21 @@
 											<div class="card card-task">
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 0%" aria-valuenow="25" aria-valuemin="0"
-														aria-valuemax="100"></div>
+														style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+														aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 												<div class="card-body">
 													<div class="card-title">
 														<a href="#">
-															<h6 data-filter-by="text">${task.name}</h6>
-														</a> <span class="text-small">Unscheduled</span>
+															<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+														</a> <span class="text-small">due
+															${task.taskTeamProject.due} days</span>
 													</div>
 													<div class="card-meta">
 														<ul class="avatars">
 															<c:forEach var="userTask" items="${userTask}">
-																<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																<c:if
+																	test="${userTask.taskTeamProject.id ==task.taskTeamProject.id}">
 																	<li><a href="#" data-toggle="tooltip"
 																		title="${userTask.teamMemberTeamProject.teamMember.member.name}">
 																			<img
@@ -338,8 +346,9 @@
 															</c:forEach>
 														</ul>
 														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>-/-</span>
+															<i class="material-icons">playlist_add_check</i> <span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
 														</div>
+
 														<div class="dropdown card-options">
 															<button class="btn-options" type="button"
 																id="task-dropdown-button-7" data-toggle="dropdown"

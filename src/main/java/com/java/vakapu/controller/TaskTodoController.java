@@ -28,7 +28,7 @@ import com.java.vakapu.services.TeamMemberTeamProjectServices;
 import com.java.vakapu.services.UserServices;
 
 @Controller
-@SessionAttributes({ "idproject", "idtask" })
+@SessionAttributes({ "idteam","idproject", "idtask" })
 @RequestMapping("/task-todo")
 public class TaskTodoController {
 
@@ -42,7 +42,7 @@ public class TaskTodoController {
 	private TaskServices taskServices;
 
 	@GetMapping
-	public String teamProject(@RequestParam("idTask") int idTask, @ModelAttribute("idproject") int idProject,
+	public String teamProject(@RequestParam("idTask") int idTask, @ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,
 			Model model, ModelMap modelMap) throws ParseException {
 		modelMap.put("idtask", idTask);
 		String emailUser = accountServices.getEmailUser();
@@ -54,11 +54,21 @@ public class TaskTodoController {
 		task.setCompletedAmount(completedAmount);
 		task.setTotalTask(listTodo.size());
 		task.setDue(due);
+		if(task.getCompletedAmount() == task.getTotalTask() && task.getTotalTask()!=0)
+		{
+			task.setCompleted(1);
+		}
+		else
+		{
+			task.setCompleted(0);
+		}
 		taskServices.update(task);
 		model.addAttribute("todo", listTodo);
 		model.addAttribute("member", listMember);
 		model.addAttribute("task", task);
 		model.addAttribute("emailUser", emailUser);
+		model.addAttribute("idProject", idProject);
+		model.addAttribute("idTeam", idTeam);
 		return "task-team";
 	}
 
@@ -88,7 +98,6 @@ public class TaskTodoController {
 		Todo todo2 = taskServices.find(idtodo);
 		todo2.setCompleted(completed);
 		taskServices.update(todo2);
-
 		return "redirect:/task-todo?idTask=" + idTask;
 	}
 

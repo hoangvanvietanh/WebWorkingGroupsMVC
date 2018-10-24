@@ -211,19 +211,19 @@
 												<div class="card card-task">
 													<div class="progress">
 														<div class="progress-bar bg-success" role="progressbar"
-															style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+															style="width: ${task.completedAmount/task.totalTask*100}%" aria-valuenow="25" aria-valuemin="0"
 															aria-valuemax="100"></div>
 													</div>
 													<div class="card-body">
 														<div class="card-title">
-															<a href="task-todo?idTask=${task.taskTeamProject.id}">
-																<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
-															</a> <span class="text-small">Unscheduled</span>
+															<a href="task-todo?idTask=${task.id}">
+																<h6 data-filter-by="text">${task.name}</h6>
+															</a> <span class="text-small">due ${task.due} days</span>
 														</div>
 														<div class="card-meta">
 															<ul class="avatars">
 																<c:forEach var="userTask" items="${userTask}">
-																	<c:if test="${userTask.taskTeamProject.id ==task.taskTeamProject.id}">
+																	<c:if test="${userTask.taskTeamProject.id ==task.id}">
 																		<li><a href="#" data-toggle="tooltip"
 																			title="${userTask.teamMemberTeamProject.teamMember.member.name}">
 																				<img
@@ -235,7 +235,7 @@
 																</c:forEach>
 															</ul>
 															<div class="d-flex align-items-center">
-																<i class="material-icons">playlist_add_check</i> <span>-/-</span>
+																<i class="material-icons">playlist_add_check</i> <span>${task.completedAmount}/${task.totalTask}</span>
 															</div>
 															<div class="dropdown card-options">
 																<button class="btn-options" type="button"
@@ -405,7 +405,7 @@
 									<div class="content-list-body">
 										<ol class="list-group list-group-activity">
 
-
+											<c:forEach var="history" items="${history}">
 											<li class="list-group-item">
 												<div class="media align-items-center">
 													<ul class="avatars">
@@ -414,23 +414,22 @@
 																<i class="material-icons">playlist_add_check</i>
 															</div>
 														</li>
-														<li><img alt="Claire"
-															src="assets/img/avatar-female-1.jpg" class="avatar"
+														<li><img alt="${history.user}"
+															src="<spring:url value='/profile/avatar/${history.id_user}'/>" class="avatar"
 															data-filter-by="alt" /></li>
 													</ul>
 													<div class="media-body">
 														<div>
-															<span class="h6" data-filter-by="text">Claire</span> <span
-																data-filter-by="text">completed the task</span><a
-																href="#" data-filter-by="text">Set up client chat
-																channel</a>
+															<span class="h6" data-filter-by="text">${history.user}</span> <span
+																data-filter-by="text">${history.activity}</span><a
+																href="#" data-filter-by="text">${history.last}</a>
 														</div>
 														<span class="text-small" data-filter-by="text">Just
 															now</span>
 													</div>
 												</div>
 											</li>
-
+											</c:forEach>
 										</ol>
 									</div>
 								</div>

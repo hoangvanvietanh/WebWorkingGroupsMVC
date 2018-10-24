@@ -77,15 +77,19 @@ public class ManageController {
 		List<TeamMemberTeamProject> userProjectStore = projectServices.findAll();
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<TeamMemberTaskTeamProject> task = taskServices.findByEmailUser(emailUser);
+//		for(TeamMemberTaskTeamProject t:task)
+//		{
+//			t.getTaskTeamProject().getName();
+//		}
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
-		Set<Integer> listProject = new HashSet<>();
-		List<TaskTeamProject> taskTeam = new ArrayList<>();
-		for (TeamMemberTaskTeamProject t : task) {
-			listProject.add(t.getTaskTeamProject().getId());
-		}
-		for (Integer p : listProject) {
-			taskTeam.add(taskServices.findById(p));
-		}
+//		Set<Integer> listProject = new HashSet<>();
+//		List<TaskTeamProject> taskTeam = new ArrayList<>();
+//		for (TeamMemberTaskTeamProject t : task) {
+//			listProject.add(t.getTaskTeamProject().getId());
+//		}
+//		for (Integer p : listProject) {
+//			taskTeam.add(taskServices.findById(p));
+//		}
 		TeamModel teamModel = new TeamModel();
 		model.addAttribute("teamAdd", teamModel);
 		model.addAttribute("friend", myFriend);
@@ -96,7 +100,7 @@ public class ManageController {
 		model.addAttribute("project", teamProject);
 		model.addAttribute("profile", user);
 		model.addAttribute("userTask", userTaskStore);
-		model.addAttribute("task", taskTeam);
+		model.addAttribute("task", task);
 
 		return "manage";
 	}

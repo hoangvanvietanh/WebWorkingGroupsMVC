@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project_user`
+-- Table structure for table `upload_file`
 --
 
-DROP TABLE IF EXISTS `project_user`;
+DROP TABLE IF EXISTS `upload_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(145) DEFAULT NULL,
-  `idproject` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK8r8egdw1dlyh28lnie2dct5kr` (`email`),
-  CONSTRAINT `FK8r8egdw1dlyh28lnie2dct5kr` FOREIGN KEY (`email`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+CREATE TABLE `upload_file` (
+  `idupload_file` int(11) NOT NULL AUTO_INCREMENT,
+  `file` varchar(100) DEFAULT NULL,
+  `teamproject` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`idupload_file`),
+  KEY `fk_upload_file_project_1_idx` (`teamproject`),
+  CONSTRAINT `fk_upload_file_project_1` FOREIGN KEY (`teamproject`) REFERENCES `teamproject` (`idteamproject`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project_user`
+-- Dumping data for table `upload_file`
 --
 
-LOCK TABLES `project_user` WRITE;
-/*!40000 ALTER TABLE `project_user` DISABLE KEYS */;
-INSERT INTO `project_user` VALUES (3,'hoangvanvietanh@gmail.com',1),(4,'khanh@gmail.com',1),(5,'hoangvanvietanh@gmail.com',2);
-/*!40000 ALTER TABLE `project_user` ENABLE KEYS */;
+LOCK TABLES `upload_file` WRITE;
+/*!40000 ALTER TABLE `upload_file` DISABLE KEYS */;
+/*!40000 ALTER TABLE `upload_file` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-24  4:40:34
+-- Dump completed on 2018-10-24  4:40:35

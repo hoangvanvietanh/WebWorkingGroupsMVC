@@ -106,8 +106,8 @@
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="home">Home</a></li>
 						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
-						<li class="breadcrumb-item"><a href="pages-app.html">Team</a></li>
-						<li class="breadcrumb-item"><a href="pages-app.html">Project</a></li>
+						<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
+						<li class="breadcrumb-item"><a href="team-project?idProject=${idProject}">Project</a></li>
 						<li class="breadcrumb-item active" aria-current="page">Task</li>
 					</ol>
 				</nav>

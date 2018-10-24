@@ -21,12 +21,6 @@ public class Todo {
 	@Column(name="completed")
 	private int completed;
 	
-	@Column(name="note")
-	private String note;
-	
-	@Column(name="titlenote")
-	private String titleNote;
-	
 	@ManyToOne
 	@JoinColumn(name="taskTeamProject")
 	private TaskTeamProject taskTeamProject;
@@ -61,22 +55,6 @@ public class Todo {
 
 	public void setTask(TaskTeamProject taskTeamProject) {
 		this.taskTeamProject = taskTeamProject;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public String getTitleNote() {
-		return titleNote;
-	}
-
-	public void setTitleNote(String titleNote) {
-		this.titleNote = titleNote;
 	}
 
 	public TaskTeamProject getTaskTeamProject() {

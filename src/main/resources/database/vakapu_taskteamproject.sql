@@ -34,7 +34,7 @@ CREATE TABLE `taskteamproject` (
   `completedAmount` int(4) DEFAULT NULL,
   `due` int(4) DEFAULT NULL,
   PRIMARY KEY (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `taskteamproject` (
 
 LOCK TABLES `taskteamproject` WRITE;
 /*!40000 ALTER TABLE `taskteamproject` DISABLE KEYS */;
-INSERT INTO `taskteamproject` VALUES (11,'test',0,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',7,6,8),(12,'test',0,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(13,'test',0,'123','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(14,'hehehe',0,'Viet Anh','hoangvanvietanh@gmail.com','2018-10-22','2018-10-22',2,2,0),(15,'hihihihi',0,'hehe','hoangvanvietanh@gmail.com','2018-10-22','2018-10-24',0,0,0),(16,'Hoang Van Viet Anh',0,'Hoang Van Viet Anh','hoangvanvietanh@gmail.com','2018-10-23','2018-10-30',3,1,7);
+INSERT INTO `taskteamproject` VALUES (11,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',7,7,8),(12,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,2,8),(13,'test',0,'123','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(14,'hehehe',0,'Viet Anh','hoangvanvietanh@gmail.com','2018-10-22','2018-10-22',2,2,0),(15,'hihihihi',0,'hehe','hoangvanvietanh@gmail.com','2018-10-22','2018-10-24',0,0,0),(16,'Hoang Van Viet Anh',0,'Hoang Van Viet Anh','hoangvanvietanh@gmail.com','2018-10-23','2018-10-30',3,1,7),(17,'hihihihi',0,'haha','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',0,0,8),(18,'hihihihi',1,'hahs','hoangvanvietanh@gmail.com','2018-10-23','2018-10-31',3,3,8),(19,'test',0,'nothing','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',2,0,8),(20,'hihi',0,'haha','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',2,1,8),(21,'hello',0,'asd','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',4,2,8),(22,'task 1',1,'hi','hoangvanvietanh@gmail.com','2018-10-23','2018-10-25',2,2,1),(23,'task 2',1,'hi','hoangvanvietanh@gmail.com','2018-10-25','2018-11-01',2,2,8),(24,'task 1',1,'hihi','hoangvanvietanh@gmail.com','2018-10-22','2018-10-29',3,3,6),(25,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-31','2018-11-03',3,3,11),(26,'task 1',0,'nothing','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',3,2,8),(27,'task 2',1,'nothing','hoangvanvietanh@gmail.com','2018-11-13','2018-11-30',2,2,37),(28,'task 3',0,'nothing','hoangvanvietanh@gmail.com','2018-11-03','2018-11-30',0,0,0);
 /*!40000 ALTER TABLE `taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-22 12:25:34
+-- Dump completed on 2018-10-24  4:40:34
