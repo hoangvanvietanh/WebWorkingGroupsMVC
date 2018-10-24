@@ -134,7 +134,7 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/edit-project",method=RequestMethod.POST)
 	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,@ModelAttribute("idteam") int idTeam,
-			@ModelAttribute("idproject") int idProject,Model model, BindingResult result)
+			@ModelAttribute("idproject") int idProject,Model model, BindingResult result) throws ParseException
 	{
 		if(result.hasErrors())
 		{
