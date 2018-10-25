@@ -39,9 +39,9 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img
-				style="width: 80px; height: 30px" alt="Pipeline"
-				src="resources/img/fun.gif" />
+			<a class="navbar-brand" href="home"> <img
+				style="width: 45px; height: 45px" alt="Vakapu"
+				src="resources/img/logo1.png" />
 			</a>
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -66,22 +66,40 @@
 			</div>
 			<div class="collapse navbar-collapse justify-content-between"
 				id="navbar-collapse">
-				<form class="form-inline my-lg-0 my-2">
-					<div class="input-group input-group-dark input-group-round">
-						<div class="input-group-prepend">
-							<span class="input-group-text"> <i class="material-icons">search</i>
-							</span>
-						</div>
-						<input type="search" class="form-control form-control-dark"
-							placeholder="Search" aria-label="Search app"
-							aria-describedby="search-app">
-					</div>
-				</form>
+
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<form class="form-inline my-lg-0 my-2">
+							<div class="input-group input-group-dark input-group-round">
+								<div class="input-group-prepend">
+									<span class="input-group-text"> <i
+										class="material-icons">search</i>
+									</span>
+								</div>
+								<input type="search" class="form-control form-control-dark"
+									placeholder="Search" aria-label="Search app"
+									aria-describedby="search-app">
+							</div>
+						</form>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
+
+				</ul>
+
 				<div class="d-lg-flex align-items-center">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
-					</ul>
-					<div class="dropdown mx-lg-2"></div>
+					<a class="material-icons" href="manage">notifications</a>
+					<div class="dropdown">
+						<a class="nav-link material-icons dropdown-toggle" href="#"
+							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+							id="nav-dropdown-2">add</a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="nav-dropdown-2">
+							<a class="dropdown-item" href="#">Team</a> <a
+								class="dropdown-item" href="#">Project</a> <a
+								class="dropdown-item" href="#">Task</a>
+						</div>
+					</div>
+
 					<div class="d-none d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
@@ -107,17 +125,6 @@
 						<li class="breadcrumb-item active" aria-current="page">Manage</li>
 					</ol>
 				</nav>
-				<div class="dropdown">
-					<button class="btn btn-round" role="button" data-toggle="dropdown"
-						aria-expanded="false">
-						<i class="material-icons">settings</i>
-					</button>
-					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="#">Account Settings</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="#">Log out</a>
-					</div>
-				</div>
 			</div>
 			<div class="container">
 				<div class="row justify-content-center">
@@ -252,7 +259,8 @@
 															<div class="dropdown-menu dropdown-menu-right">
 																<a class="dropdown-item" href="#">Share</a>
 																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="manage/leaveProject?idProject=${project.teamProject.id}">Leave
+																<a class="dropdown-item text-danger"
+																	href="manage/leaveProject?idProject=${project.teamProject.id}">Leave
 																	Project</a>
 															</div>
 														</div>
@@ -325,7 +333,8 @@
 												</div>
 												<div class="card-body">
 													<div class="card-title">
-														<a href="task-todo?idTask=${task.taskTeamProject.id}&idTeam=0">
+														<a
+															href="task-todo?idTask=${task.taskTeamProject.id}&idTeam=0">
 															<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
 														</a> <span class="text-small">due
 															${task.taskTeamProject.due} days</span>
@@ -356,7 +365,9 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="manage/makeDoneTask?idTask=${task.taskTeamProject.id}">Mark as done</a>
+																<a class="dropdown-item"
+																	href="manage/makeDoneTask?idTask=${task.taskTeamProject.id}">Mark
+																	as done</a>
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger" href="#">Archive</a>
 															</div>
@@ -441,7 +452,8 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														<form:input type="hidden" path="email" value="${emailUser}"/>
+														<form:input type="hidden" path="email"
+															value="${emailUser}" />
 														<c:forEach var="friend" items="${friend}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email"
@@ -478,9 +490,8 @@
 
 		</div>
 	</div>
-
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="<spring:url value='/resources/js/jquery-3.2.1.min.js'/>"
+		type="text/javascript"></script>
 	<script type="text/javascript"
 		src="https://cdn.jsdelivr.net/npm/autosize@4.0.2/dist/autosize.min.js"></script>
 	<script type="text/javascript"

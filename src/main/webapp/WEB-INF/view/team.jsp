@@ -558,19 +558,20 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														<c:set var="i" value="0"/>
+														<c:set var="i" value="0" />
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>
-																<c:when test="${member.member.email eq emailUser and member.role ne 'Admin'}">
-																	<form:input type="hidden" path="email" value="${member.member.email}"/>
+																<c:when
+																	test="${member.member.email eq emailUser and member.role ne 'Admin'}">
+																	<form:input type="hidden" path="email"
+																		value="${member.member.email}" />
 																</c:when>
 																<c:otherwise>
 																	<div class="custom-control custom-checkbox">
 																		<form:checkbox path="email"
 																			value="${member.member.email}"
-																			class="custom-control-input"
-																			id="${i}" />
+																			class="custom-control-input" id="${i}" />
 																		<form:label path="email" class="custom-control-label"
 																			for="${i}">
 																			<div class="d-flex align-items-center">
