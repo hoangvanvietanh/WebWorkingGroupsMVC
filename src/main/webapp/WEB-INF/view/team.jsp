@@ -123,7 +123,7 @@
 							data-target="#team-manage-modal">Edit Team</a> <a
 							class="dropdown-item" href="#">Share</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="#">Leave</a>
+						<a class="dropdown-item text-danger" href="team/leaveTeam">Leave</a>
 					</div>
 				</div>
 
@@ -205,8 +205,9 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="team/edit-project" method="post">Edit</a> <a
-																	class="dropdown-item" href="#">Share</a>
+																<a class="dropdown-item" href="team/edit-project"
+																	method="post">Edit</a> <a class="dropdown-item"
+																	href="#">Share</a>
 															</div>
 														</div>
 														<div class="card-title">
@@ -217,8 +218,7 @@
 														</div>
 														<ul class="avatars">
 															<c:forEach var="user" items="${user}">
-																<c:if
-																	test="${user.teamProject.id == project.id}">
+																<c:if test="${user.teamProject.id == project.id}">
 																	<li><a href="#" data-toggle="tooltip"
 																		title="${user.teamMember.member.name}"> <img
 																			alt="${user.teamMember.member.name}" class="avatar"
@@ -332,8 +332,9 @@
 								</div>
 							</div>
 						</form>
-						<form class="modal fade" id="team-manage-modal" tabindex="-1"
-							role="dialog" aria-labelledby="team-manage-modal"
+						<form:form modelAttribute="teamModel" action="team/editTeam"
+							method="post" class="modal fade" id="team-manage-modal"
+							tabindex="-1" role="dialog" aria-labelledby="team-manage-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -364,15 +365,14 @@
 												aria-labelledby="team-manage-details-tab">
 												<h6>Team Details</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <input
-														class="form-control col" type="text"
-														placeholder="Team name" name="team-name"
-														value="Medium Rare" />
+													<label class="col-3">Name</label>
+													<form:input class="form-control col" type="text"
+														placeholder="Team name" path="name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
-													<textarea class="form-control col" rows="3"
-														placeholder="Team description" name="team-description">A small web studio crafting lovely template products.</textarea>
+													<form:textarea class="form-control col" rows="3"
+														placeholder="Team description" path="description"></form:textarea>
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-manage-members"
@@ -381,10 +381,12 @@
 													data-filter-list="form-group-users">
 													<div class="mb-3">
 														<ul class="avatars text-center">
-
-															<li><img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Claire Connors" /></li>
+															<c:forEach var="member" items="${member}">
+																<li><img alt="${member.member.name}"
+																	src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																	class="avatar" data-toggle="tooltip"
+																	data-title="${member.member.name}" /></li>
+															</c:forEach>
 														</ul>
 													</div>
 													<div class="input-group input-group-round">
@@ -400,32 +402,52 @@
 													</div>
 													<div class="form-group-users">
 
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="user-manage-1" checked> <label
-																class="custom-control-label" for="user-manage-1">
-																<div class="d-flex align-items-center">
-																	<img alt="Claire Connors"
-																		src="assets/img/avatar-female-1.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Claire Connors</span>
-																</div>
-															</label>
-														</div>
-
+														<c:forEach var="member" items="${member}">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="${member.member.email}" checked> <label
+																	class="custom-control-label"
+																	for="${member.member.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${member.member.name}"
+																			src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${member.member.name}</span>
+																	</div>
+																</label>
+															</div>
+														</c:forEach>
+														<c:forEach var="addFriend" items="${listFriend}">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="${addFriend.email}"> <label
+																	class="custom-control-label" for="${addFriend.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${addFriend.name}"
+																			src="<spring:url value='/profile/avatar/${addFriend.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${addFriend.name}</span>
+																	</div>
+																</label>
+															</div>
+														</c:forEach>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<!--end of modal body-->
+									<form:input type="hidden" path="owner" />
+									<form:input type="hidden" path="memberAmount" />
+									<form:input type="hidden" path="projectAmount" />
+									<form:input type="hidden" path="idTeam" />
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
 											Done</button>
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 						<!-- ------------------------	Project - Team	----------------------------- -->
 						<form:form modelAttribute="newProject"
 							action="team/create-project" method="post" class="modal fade"
@@ -536,23 +558,33 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
+														<c:set var="i" value="0"/>
 														<c:forEach var="member" items="${member}">
-															<div class="custom-control custom-checkbox">
-																<form:checkbox path="email"
-																	value="${member.member.email}"
-																	class="custom-control-input"
-																	id="${member.member.email}" />
-																<form:label path="email" class="custom-control-label"
-																	for="${member.member.email}">
-																	<div class="d-flex align-items-center">
-																		<img alt="${member.member.name}"
-																			src="<spring:url value='/profile/avatar/${member.member.email}'/>"
-																			class="avatar mr-2" /> <span class="h6 mb-0"
-																			data-filter-by="text">${member.member.name}</span>
+															<input type="hidden" value="${i=i+1}">
+															<c:choose>
+																<c:when test="${member.member.email eq emailUser and member.role ne 'Admin'}">
+																	<form:input type="hidden" path="email" value="${member.member.email}"/>
+																</c:when>
+																<c:otherwise>
+																	<div class="custom-control custom-checkbox">
+																		<form:checkbox path="email"
+																			value="${member.member.email}"
+																			class="custom-control-input"
+																			id="${i}" />
+																		<form:label path="email" class="custom-control-label"
+																			for="${i}">
+																			<div class="d-flex align-items-center">
+																				<img alt="${member.member.name}"
+																					src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																					class="avatar mr-2" /> <span class="h6 mb-0"
+																					data-filter-by="text">${member.member.name}</span>
+																			</div>
+																		</form:label>
 																	</div>
-																</form:label>
-															</div>
+																</c:otherwise>
+															</c:choose>
 														</c:forEach>
+
 													</div>
 												</div>
 											</div>
@@ -574,27 +606,30 @@
 		</div>
 	</div>
 
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/autosize@4.0.2/dist/autosize.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.bundle.legacy.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins/swap-animation.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="<spring:url value='/resources/js/theme.js'/>"
+
+
+	<script src="<spring:url value='/resources/js/jquery-3.2.1.min.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/autosize.min.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/popper.min.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/prism.min.js'/>"
+		type="text/javascript"></script>
+	<script
+		src="<spring:url value='/resources/js/draggable.bundle.legacy.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/swap-animation.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/dropzone.min.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/list.min.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/bootstrap.min.js'/>"
 		type="text/javascript"></script>
 
+	<script src="<spring:url value='/resources/js/theme.js'/>"
+		type="text/javascript"></script>
 
 
 

@@ -106,8 +106,14 @@
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="home">Home</a></li>
 						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
-						<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
-						<li class="breadcrumb-item"><a href="team-project?idProject=${idProject}">Project</a></li>
+						<c:if test="${idTeam ne 0}">
+							<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
+						</c:if>
+						<c:if test="${idProject ne 0}">
+							<li class="breadcrumb-item"><a
+								href="team-project?idProject=${idProject}">Project</a></li>
+						</c:if>
+
 						<li class="breadcrumb-item active" aria-current="page">Task</li>
 					</ol>
 				</nav>
@@ -159,7 +165,8 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success" style="width: ${task.completedAmount /task.totalTask*100}%;"></div>
+									<div class="progress-bar bg-success"
+										style="width: ${task.completedAmount /task.totalTask*100}%;"></div>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">

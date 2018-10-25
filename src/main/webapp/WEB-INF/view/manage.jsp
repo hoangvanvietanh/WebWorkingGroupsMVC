@@ -181,8 +181,6 @@
 															<i class="material-icons">more_vert</i>
 														</button>
 														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Manage</a>
-															<div class="dropdown-divider"></div>
 															<a class="dropdown-item text-danger"
 																href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
@@ -241,8 +239,8 @@
 												<div class="card card-project">
 													<div class="progress">
 														<div class="progress-bar bg-success" role="progressbar"
-															style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%" aria-valuenow="8" aria-valuemin="0"
-															aria-valuemax="100"></div>
+															style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
+															aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 													</div>
 													<div class="card-body">
 														<div class="dropdown card-options">
@@ -252,8 +250,10 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Edit</a> <a
-																	class="dropdown-item" href="#">Share</a>
+																<a class="dropdown-item" href="#">Share</a>
+																<div class="dropdown-divider"></div>
+																<a class="dropdown-item text-danger" href="manage/leaveProject?idProject=${project.teamProject.id}">Leave
+																	Project</a>
 															</div>
 														</div>
 														<div class="card-title">
@@ -325,7 +325,7 @@
 												</div>
 												<div class="card-body">
 													<div class="card-title">
-														<a href="#">
+														<a href="task-todo?idTask=${task.taskTeamProject.id}&idTeam=0">
 															<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
 														</a> <span class="text-small">due
 															${task.taskTeamProject.due} days</span>
@@ -356,7 +356,7 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Mark as done</a>
+																<a class="dropdown-item" href="manage/makeDoneTask?idTask=${task.taskTeamProject.id}">Mark as done</a>
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger" href="#">Archive</a>
 															</div>
@@ -441,18 +441,7 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="${emailUser}" checked> <label
-																class="custom-control-label" for="${emailUser}">
-																<div class="d-flex align-items-center">
-																	<img alt="${profile.name}"
-																		src="<spring:url value='/profile/avatar/${emailUser}'/>"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">${profile.name}</span>
-																</div>
-															</label>
-														</div>
+														<form:input type="hidden" path="email" value="${emailUser}"/>
 														<c:forEach var="friend" items="${friend}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email"

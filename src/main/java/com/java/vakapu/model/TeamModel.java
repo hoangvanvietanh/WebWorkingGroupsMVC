@@ -29,7 +29,7 @@ public class TeamModel {
 		this.setProjectAmount(team.getProjectAmount());
 	}
 	
-	public void toTeam()
+	public Team toTeam()
 	{
 		Team team = new Team();
 		team.setIdTeam(this.getIdTeam());
@@ -38,6 +38,7 @@ public class TeamModel {
 		team.setMemberAmount(this.getMemberAmount());
 		team.setProjectAmount(this.getProjectAmount());
 		team.setOwner(this.getOwner());
+		return team;
 	}
 	
 	public int getIdTeam() {

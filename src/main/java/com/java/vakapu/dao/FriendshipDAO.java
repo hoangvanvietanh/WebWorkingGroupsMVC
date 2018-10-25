@@ -23,7 +23,7 @@ public class FriendshipDAO {
 	
 	public List<Friendship> findFriend(String emailUser,int status)
 	{
-		TypedQuery<Friendship> query = getSession().createQuery("select a from Friendship a where a.emailUser.email =:emailUser or a.status =:status",Friendship.class);
+		TypedQuery<Friendship> query = getSession().createQuery("select a from Friendship a where a.emailUser.email =:emailUser and a.status =:status",Friendship.class);
 		query.setParameter("emailUser", emailUser);
 		query.setParameter("status", status);
 		return query.getResultList();
