@@ -211,8 +211,8 @@
 												<div class="card card-task">
 													<div class="progress">
 														<div class="progress-bar bg-success" role="progressbar"
-															style="width: ${task.completedAmount/task.totalTask*100}%" aria-valuenow="25" aria-valuemin="0"
-															aria-valuemax="100"></div>
+															style="width: ${task.completedAmount/task.totalTask*100}%"
+															aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 													</div>
 													<div class="card-body">
 														<div class="card-title">
@@ -406,29 +406,29 @@
 										<ol class="list-group list-group-activity">
 
 											<c:forEach var="history" items="${history}">
-											<li class="list-group-item">
-												<div class="media align-items-center">
-													<ul class="avatars">
-														<li>
-															<div class="avatar bg-primary">
-																<i class="material-icons">playlist_add_check</i>
+												<li class="list-group-item">
+													<div class="media align-items-center">
+														<ul class="avatars">
+															<li>
+																<div class="avatar bg-primary">
+																	<i class="material-icons">playlist_add_check</i>
+																</div>
+															</li>
+															<li><img alt="${history.user}"
+																src="<spring:url value='/profile/avatar/${history.id_user}'/>"
+																class="avatar" data-filter-by="alt" /></li>
+														</ul>
+														<div class="media-body">
+															<div>
+																<span class="h6" data-filter-by="text">${history.user}</span>
+																<span data-filter-by="text">${history.activity}</span><a
+																	href="#" data-filter-by="text">${history.last}</a>
 															</div>
-														</li>
-														<li><img alt="${history.user}"
-															src="<spring:url value='/profile/avatar/${history.id_user}'/>" class="avatar"
-															data-filter-by="alt" /></li>
-													</ul>
-													<div class="media-body">
-														<div>
-															<span class="h6" data-filter-by="text">${history.user}</span> <span
-																data-filter-by="text">${history.activity}</span><a
-																href="#" data-filter-by="text">${history.last}</a>
+															<span class="text-small" data-filter-by="text">Just
+																now</span>
 														</div>
-														<span class="text-small" data-filter-by="text">Just
-															now</span>
 													</div>
-												</div>
-											</li>
+												</li>
 											</c:forEach>
 										</ol>
 									</div>
@@ -454,9 +454,12 @@
 											<div class="mb-3">
 												<ul class="avatars text-center">
 
-													<li><img alt="Claire Connors"
-														src="assets/img/avatar-female-1.jpg" class="avatar"
-														data-toggle="tooltip" data-title="Claire Connors" /></li>
+													<c:forEach var="user" items="${user}">
+														<li><img alt="${user.teamMember.member.name}"
+															src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+															class="avatar" data-toggle="tooltip"
+															data-title="${user.teamMember.member.name}" /></li>
+													</c:forEach>
 
 												</ul>
 											</div>
@@ -472,18 +475,20 @@
 											</div>
 											<div class="form-group-users">
 
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input"
-														id="user-manage-1" checked> <label
-														class="custom-control-label" for="user-manage-1">
+												<c:forEach var="user" items="${user}">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="${user.teamMember.member.email}" checked> <label
+															class="custom-control-label"
+															for="${user.teamMember.member.email}"> </label>
 														<div class="d-flex align-items-center">
-															<img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar mr-2" />
-															<span class="h6 mb-0" data-filter-by="text">Claire
-																Connors</span>
+															<img alt="${user.teamMember.member.name}"
+																src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																class="avatar mr-2" /> <span class="h6 mb-0"
+																data-filter-by="text">${user.teamMember.member.name}</span>
 														</div>
-													</label>
-												</div>
+													</div>
+												</c:forEach>
 
 											</div>
 										</div>
@@ -496,10 +501,11 @@
 								</div>
 							</div>
 						</form>
-						
+
 						<!----------------------------- Edit Project ------------------------------------->
-						<form:form modelAttribute="editProject" action="team-project/edit-project" method="post" 
-						class="modal fade" id="project-edit-modal" tabindex="-1"
+						<form:form modelAttribute="editProject"
+							action="team-project/edit-project" method="post"
+							class="modal fade" id="project-edit-modal" tabindex="-1"
 							role="dialog" aria-labelledby="project-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -531,8 +537,8 @@
 												aria-labelledby="project-edit-details-tab">
 												<h6>General Details</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <form:input
-														class="form-control col" type="text"
+													<label class="col-3">Name</label>
+													<form:input class="form-control col" type="text"
 														path="name" name="project-name" />
 												</div>
 												<div class="form-group row">
@@ -543,24 +549,28 @@
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> 
-													<form:input path="startDate" class="form-control col" type="date"/>
+													<label class="col-3">Start Date</label>
+													<form:input path="startDate" class="form-control col"
+														type="date" />
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <form:input
-														class="form-control col" type="date"
+													<label class="col-3">Due Date</label>
+													<form:input class="form-control col" type="date"
 														path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
 												</div>
 												<hr>
-												<h6><form:label path="visibility">Visibility</form:label></h6>
+												<h6>
+													<form:label path="visibility">Visibility</form:label>
+												</h6>
 												<div class="row">
 													<div class="col">
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-everyone"
-																path="visibility" class="custom-control-input"  value="Everyone" />
+																path="visibility" class="custom-control-input"
+																value="Everyone" />
 															<label class="custom-control-label"
 																for="visibility-everyone">Everyone</label>
 														</div>
@@ -568,7 +578,8 @@
 													<div class="col">
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-members"
-																path="visibility" class="custom-control-input" value="Member"/>
+																path="visibility" class="custom-control-input"
+																value="Member" />
 															<label class="custom-control-label"
 																for="visibility-members">Members</label>
 														</div>
@@ -581,23 +592,12 @@
 													data-filter-list="form-group-users">
 													<div class="mb-3">
 														<ul class="avatars text-center">
-
-															<li><img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Claire Connors" /></li>
-
-															<li><img alt="Marcus Simmons"
-																src="assets/img/avatar-male-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Marcus Simmons" /></li>
-
-															<li><img alt="Peggy Brown"
-																src="assets/img/avatar-female-2.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Peggy Brown" /></li>
-
-															<li><img alt="Harry Xai"
-																src="assets/img/avatar-male-2.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Harry Xai" /></li>
-
+															<c:forEach var="user" items="${user}">
+																<li><img alt="${user.teamMember.member.name}"
+																	src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																	class="avatar" data-toggle="tooltip"
+																	data-title="${user.teamMember.member.name}" /></li>
+															</c:forEach>
 														</ul>
 													</div>
 													<div class="input-group input-group-round">
@@ -612,162 +612,22 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-1" checked> <label
-																class="custom-control-label" for="project-user-1">
+													<c:set var="i" value="0"/>
+														<c:forEach var="user" items="${user}">
+														<input type="hidden" value="${i=i+1}">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="${i}" checked> <label
+																	class="custom-control-label"
+																	for="${i}"> </label>
 																<div class="d-flex align-items-center">
-																	<img alt="Claire Connors"
-																		src="assets/img/avatar-female-1.jpg"
+																	<img alt="${user.teamMember.member.name}"
+																		src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
 																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Claire Connors</span>
+																		data-filter-by="text">${user.teamMember.member.name}</span>
 																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-2" checked> <label
-																class="custom-control-label" for="project-user-2">
-																<div class="d-flex align-items-center">
-																	<img alt="Marcus Simmons"
-																		src="assets/img/avatar-male-1.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Marcus
-																		Simmons</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-3" checked> <label
-																class="custom-control-label" for="project-user-3">
-																<div class="d-flex align-items-center">
-																	<img alt="Peggy Brown"
-																		src="assets/img/avatar-female-2.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Peggy Brown</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-4" checked> <label
-																class="custom-control-label" for="project-user-4">
-																<div class="d-flex align-items-center">
-																	<img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Harry Xai</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-5"> <label
-																class="custom-control-label" for="project-user-5">
-																<div class="d-flex align-items-center">
-																	<img alt="Sally Harper"
-																		src="assets/img/avatar-female-3.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Sally Harper</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-6"> <label
-																class="custom-control-label" for="project-user-6">
-																<div class="d-flex align-items-center">
-																	<img alt="Ravi Singh"
-																		src="assets/img/avatar-male-3.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Ravi
-																		Singh</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-7"> <label
-																class="custom-control-label" for="project-user-7">
-																<div class="d-flex align-items-center">
-																	<img alt="Kristina Van Der Stroem"
-																		src="assets/img/avatar-female-4.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Kristina Van Der Stroem</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-8"> <label
-																class="custom-control-label" for="project-user-8">
-																<div class="d-flex align-items-center">
-																	<img alt="David Whittaker"
-																		src="assets/img/avatar-male-4.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">David
-																		Whittaker</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-9"> <label
-																class="custom-control-label" for="project-user-9">
-																<div class="d-flex align-items-center">
-																	<img alt="Kerri-Anne Banks"
-																		src="assets/img/avatar-female-5.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Kerri-Anne Banks</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-10"> <label
-																class="custom-control-label" for="project-user-10">
-																<div class="d-flex align-items-center">
-																	<img alt="Masimba Sibanda"
-																		src="assets/img/avatar-male-5.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Masimba
-																		Sibanda</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-11"> <label
-																class="custom-control-label" for="project-user-11">
-																<div class="d-flex align-items-center">
-																	<img alt="Krishna Bajaj"
-																		src="assets/img/avatar-female-6.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Krishna Bajaj</span>
-																</div>
-															</label>
-														</div>
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="project-user-12"> <label
-																class="custom-control-label" for="project-user-12">
-																<div class="d-flex align-items-center">
-																	<img alt="Kenny Tran"
-																		src="assets/img/avatar-male-6.jpg" class="avatar mr-2" />
-																	<span class="h6 mb-0" data-filter-by="text">Kenny
-																		Tran</span>
-																</div>
-															</label>
-														</div>
-
+															</div>
+														</c:forEach>
 													</div>
 												</div>
 											</div>
@@ -866,12 +726,13 @@
 													<div class="form-group-users">
 
 														<c:forEach var="user" items="${user}">
+														<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email" class="custom-control-input"
-																	id="${user.teamMember.member.email}"
+																	id="${i}"
 																	value="${user.teamMember.member.email}" />
 																<form:label class="custom-control-label"
-																	for="${user.teamMember.member.email}" path="email">
+																	for="${i}" path="email">
 																	<div class="d-flex align-items-center">
 																		<img alt="${user.teamMember.member.name}"
 																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
@@ -895,225 +756,6 @@
 								</div>
 							</div>
 						</form:form>
-					</div>
-				</div>
-			</div>
-			<button class="btn btn-primary btn-round btn-floating btn-lg"
-				type="button" data-toggle="collapse" data-target="#floating-chat"
-				aria-expanded="false" aria-controls="sidebar-floating-chat">
-				<i class="material-icons">chat_bubble</i> <i class="material-icons">close</i>
-			</button>
-			<div class="collapse sidebar-floating" id="floating-chat">
-				<div class="sidebar-content">
-					<div class="chat-module" data-filter-list="chat-module-body">
-						<div class="chat-module-top">
-							<form>
-								<div class="input-group input-group-round">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="material-icons">search</i>
-										</span>
-									</div>
-									<input type="search" class="form-control filter-list-input"
-										placeholder="Search chat" aria-label="Search Chat"
-										aria-describedby="search-chat">
-								</div>
-							</form>
-							<div class="chat-module-body">
-
-
-								<div class="media chat-item">
-									<img alt="Claire" src="assets/img/avatar-female-1.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Claire</span>
-											<span data-filter-by="text">4 days ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>Hey guys, just kicking things off here in the chat
-												window. Hope you&#39;re all ready to tackle this great
-												project. Let&#39;s smash some Brand Concept &amp; Design!</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Peggy" src="assets/img/avatar-female-2.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Peggy</span>
-											<span data-filter-by="text">4 days ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>
-												Nice one <a href="#">@Claire</a>, we&#39;ve got some killer
-												ideas kicking about already. <img
-													src="https://media.giphy.com/media/aTeHNLRLrwwwM/giphy.gif"
-													alt="alt text" title="Thinking">
-											</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Marcus" src="assets/img/avatar-male-1.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Marcus</span>
-											<span data-filter-by="text">3 days ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>
-												Roger that boss! <a href="">@Ravi</a> and I have already
-												started gathering some stuff for the mood boards, excited to
-												start! &#x1f525;
-											</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Ravi" src="assets/img/avatar-male-3.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Ravi</span>
-											<span data-filter-by="text">3 days ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<h1 id="-">&#x1f609;</h1>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Claire" src="assets/img/avatar-female-1.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Claire</span>
-											<span data-filter-by="text">2 days ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>
-												Can&#39;t wait! <a href="#">@David</a> how are we coming
-												along with the <a href="#">Client Objective Meeting</a>?
-											</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="David" src="assets/img/avatar-male-4.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">David</span>
-											<span data-filter-by="text">Yesterday</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>Coming along nicely, we&#39;ve got a draft for the
-												client questionnaire completed, take a look! &#x1f913;</p>
-
-										</div>
-
-										<div class="media media-attachment">
-											<div class="avatar bg-primary">
-												<i class="material-icons">insert_drive_file</i>
-											</div>
-											<div class="media-body">
-												<a href="#" data-filter-by="text">questionnaire-draft.doc</a>
-												<span data-filter-by="text">24kb Document</span>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Sally" src="assets/img/avatar-female-3.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Sally</span>
-											<span data-filter-by="text">2 hours ago</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>Great start guys, I&#39;ve added some notes to the
-												task. We may need to make some adjustments to the last
-												couple of items - but no biggie!</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-
-								<div class="media chat-item">
-									<img alt="Peggy" src="assets/img/avatar-female-2.jpg"
-										class="avatar" />
-									<div class="media-body">
-										<div class="chat-item-title">
-											<span class="chat-item-author" data-filter-by="text">Peggy</span>
-											<span data-filter-by="text">Just now</span>
-										</div>
-										<div class="chat-item-body" data-filter-by="text">
-											<p>
-												Well done <a href="#">@all</a>. See you all at 2 for the
-												kick-off meeting. &#x1f91C;
-											</p>
-
-										</div>
-
-									</div>
-								</div>
-
-
-							</div>
-						</div>
-						<div class="chat-module-bottom">
-							<form class="chat-form">
-								<textarea class="form-control" placeholder="Type message"
-									rows="1"></textarea>
-								<div class="chat-form-buttons">
-									<button type="button" class="btn btn-link">
-										<i class="material-icons">tag_faces</i>
-									</button>
-									<div class="custom-file custom-file-naked">
-										<input type="file" class="custom-file-input" id="customFile">
-										<label class="custom-file-label" for="customFile"> <i
-											class="material-icons">attach_file</i>
-										</label>
-									</div>
-								</div>
-							</form>
-						</div>
 					</div>
 				</div>
 			</div>

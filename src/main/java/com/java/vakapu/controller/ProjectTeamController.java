@@ -34,6 +34,8 @@ import com.java.vakapu.services.TaskServices;
 import com.java.vakapu.services.TeamMemberTeamProjectServices;
 import com.java.vakapu.services.UserServices;
 
+import utils.Activity;
+
 @Controller
 @SessionAttributes({"idproject","idteam"})
 @RequestMapping("/team-project")
@@ -121,11 +123,21 @@ public class ProjectTeamController {
 			return "redirect:/team-project?idProject="+idProject+"&idTeam="+idTeam;
 		}
 		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
 		TaskTeamProject task = taskModel.toTask();
 		task.setOwner(emailUser);
 		task.setCompleted(0);
 		TaskTeamProject task2 =taskServices.create(task);
 		String[] emailStore = taskModel.getEmail();
+		TeamProject pro = proServices.find(idProject);
+		ProjectHistory proHis = new ProjectHistory();
+		proHis.setUser(user.getName());
+		proHis.setActivity(Activity.ADDTASK);
+		proHis.setLast(task2.getName());
+		proHis.setTeamProject(pro);
+		proHis.setId_user(emailUser);
+		proHis.setId_last(task2.getId());
+		historyServices.create(proHis);
 		
 		for(String t:emailStore)
 		{

@@ -106,8 +106,14 @@
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="home">Home</a></li>
 						<li class="breadcrumb-item"><a href="manage">Manage</a></li>
-						<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
-						<li class="breadcrumb-item"><a href="team-project?idProject=${idProject}">Project</a></li>
+						<c:if test="${idTeam ne 0}">
+							<li class="breadcrumb-item"><a href="team?idTeam=${idTeam}">Team</a></li>
+						</c:if>
+						<c:if test="${idProject ne 0}">
+							<li class="breadcrumb-item"><a
+								href="team-project?idProject=${idProject}">Project</a></li>
+						</c:if>
+
 						<li class="breadcrumb-item active" aria-current="page">Task</li>
 					</ol>
 				</nav>
@@ -159,7 +165,8 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success" style="width: ${task.completedAmount /task.totalTask*100}%;"></div>
+									<div class="progress-bar bg-success"
+										style="width: ${task.completedAmount /task.totalTask*100}%;"></div>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
@@ -717,9 +724,16 @@
 													<div class="mb-3">
 														<ul class="avatars text-center">
 
-															<li><img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar"
-																data-toggle="tooltip" data-title="Claire Connors" /></li>
+															<c:forEach var="member" items="${member}">
+																<li><a href="#" data-toggle="tooltip"
+																	data-placement="top"
+																	title="${member.teamMemberTeamProject.teamMember.member.name}">
+																		<img
+																		alt="${member.teamMemberTeamProject.teamMember.member.name}"
+																		class="avatar"
+																		src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>" />
+																</a></li>
+															</c:forEach>
 
 														</ul>
 													</div>
@@ -735,20 +749,20 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-
-														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input"
-																id="task-user-1" checked> <label
-																class="custom-control-label" for="task-user-1">
-																<div class="d-flex align-items-center">
-																	<img alt="Claire Connors"
-																		src="assets/img/avatar-female-1.jpg"
-																		class="avatar mr-2" /> <span class="h6 mb-0"
-																		data-filter-by="text">Claire Connors</span>
-																</div>
-															</label>
-														</div>
-
+														<c:forEach var="member" items="${member}">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input"
+																	id="${member.teamMemberTeamProject.teamMember.member.email}" checked> <label
+																	class="custom-control-label" for="${member.teamMemberTeamProject.teamMember.member.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${member.teamMemberTeamProject.teamMember.member.name}"
+																			src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${member.teamMemberTeamProject.teamMember.member.name}</span>
+																	</div>
+																</label>
+															</div>
+														</c:forEach>
 													</div>
 												</div>
 											</div>
