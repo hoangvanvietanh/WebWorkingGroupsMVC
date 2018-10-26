@@ -57,8 +57,8 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="account/change-password" class="dropdown-item">Profile</a> <a
-								href="utility-account-settings.html" class="dropdown-item">Password
+							<a href="/profile" class="dropdown-item">Profile</a> <a
+								href="account/change-password" class="dropdown-item">Password
 								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
 						</div>
 					</div>
@@ -94,8 +94,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="#">Team</a> <a
-								class="dropdown-item" href="#">Project</a> <a
+							<a class="dropdown-item" href="team">Team</a> <a
+								class="dropdown-item" href="team-project">Project</a> <a
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
