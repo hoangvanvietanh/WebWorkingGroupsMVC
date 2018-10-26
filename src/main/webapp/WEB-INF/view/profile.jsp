@@ -106,7 +106,7 @@ body {
 		<nav class="cd-side-nav">
 			<ul>
 				<li class="cd-label">Main</li>
-				<li class="has-children overview"><a href="user">Profile</a></li>
+				<li class="has-children overview"><a href="profile">Profile</a></li>
 				<li class="has-children notifications "><a href="#0">Notifications<span
 						class="count">3</span></a>
 
@@ -161,16 +161,7 @@ body {
 				<form:form id="form" modelAttribute="profile" action="profile"
 					method="post" enctype="multipart/form-data">
 					<div class="row">
-						<div class="profile-picture" style="float: left">
-
-							<img style="width: 290px; height: 290px" alt="Avatar"
-								src="<spring:url value='/profile/avatar/${emailProfile}'/>">
-							<div>
-								<input type="file" name="file" id="file" value="change picture"
-									style="display: none" /> <label for="file">Click here
-									Change picture</label>
-							</div>
-						</div>
+						
 
 						<div style="float: left; padding-left: 100px">
 							<h4 class="blue">

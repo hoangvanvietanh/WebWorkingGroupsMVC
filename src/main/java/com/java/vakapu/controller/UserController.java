@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,13 +49,15 @@ public class UserController {
 
 	@GetMapping
 	public String showProfile(Model model) {
-		com.java.vakapu.entity.User user = userServices.findByEmail(accountServices.getEmailUser());
+		User user = userServices.findByEmail(accountServices.getEmailUser());
 		ProfileModel profileModel = new ProfileModel();
+//		ProfileModel editProfile= new ProfileModel();
 		profileModel.fromProfile(user);
+//		editProfile.fromProfile(user);
 
 		model.addAttribute("profile", profileModel);
 		model.addAttribute("emailProfile", user.getEmail());
-		return "profile";
+		return "edit-profile";
 	}
 
 	@PostMapping
@@ -116,5 +120,16 @@ public class UserController {
 
 		FileCopyUtils.copy(inputStream, response.getOutputStream());
 	}
-
+	@RequestMapping(value="/edit-profile",method=RequestMethod.POST)
+	public String updateProfile(@ModelAttribute("profile") ProfileModel profile,
+			BindingResult result ,Model model) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/profile";
+		}
+		User user=profile.toProfile();
+		userServices.updateProfile(user);
+		return "redirect:/profile";
+	}
 }

@@ -205,8 +205,9 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="team/edit-project"
-																	method="post">Edit</a> <a class="dropdown-item"
+																<a class="dropdown-item" href="#" data-toggle="modal"
+																	data-target="#team-manage-modal">Edit</a> 
+																	<a class="dropdown-item"
 																	href="#">Share</a>
 															</div>
 														</div>
