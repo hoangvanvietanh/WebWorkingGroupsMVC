@@ -87,9 +87,9 @@
 				</ul>
 
 				<div class="d-lg-flex align-items-center">
-					<a class="material-icons" href="manage">notifications</a>
+					<a style="color: white;" class="material-icons" href="manage">notifications</a>
 					<div class="dropdown">
-						<a class="nav-link material-icons dropdown-toggle" href="#"
+						<a style="color: white;" class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"

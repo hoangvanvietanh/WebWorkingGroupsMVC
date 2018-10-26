@@ -291,9 +291,9 @@
 								<!--end of content list-->
 							</div>
 						</div>
-						<form class="modal fade" id="user-invite-modal" tabindex="-1"
-							role="dialog" aria-labelledby="user-invite-modal"
-							aria-hidden="true">
+						<form action="team/invitedMember" method="post" class="modal fade"
+							id="user-invite-modal" tabindex="-1" role="dialog"
+							aria-labelledby="user-invite-modal" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -314,16 +314,20 @@
 														class="material-icons">email</i>
 													</span>
 												</div>
-												<input type="email" class="form-control"
+												<input name="email" type="text" class="form-control"
 													placeholder="Recipient email address"
 													aria-label="Recipient email address"
 													aria-describedby="recipient-email-address">
 											</div>
-											<div class="text-right text-small mt-2">
-												<a href="#" role="button">Add another recipient</a>
-											</div>
+											<div class="form-group row">
+													<label class="col-3">Your Messages</label>
+													<textarea name="messages" class="form-control col" rows="3"
+														placeholder="Team description" path="description"></textarea>
+												</div>
 										</div>
 									</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<!--end of modal body-->
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
