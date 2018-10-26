@@ -57,7 +57,7 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="profile" class="dropdown-item">Profile</a> <a
+							<a href="/profile" class="dropdown-item">Profile</a> <a
 								href="utility-account-settings.html" class="dropdown-item">Account
 								Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 						</div>
@@ -113,7 +113,7 @@
 						<i class="material-icons">settings</i>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="#">Account Settings</a>
+						<a class="dropdown-item" href="account/change-password" method="post">Account Settings</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Log out</a>
 					</div>

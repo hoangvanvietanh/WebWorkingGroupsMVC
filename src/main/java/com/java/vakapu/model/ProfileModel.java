@@ -26,6 +26,8 @@ public class ProfileModel {
 	
 	private String avatar;
 	
+	private String about;
+	
 	public void fromProfile(User user)
 	{
 		this.setEmail(user.getEmail());
@@ -39,6 +41,7 @@ public class ProfileModel {
 		this.setSkill(user.getSkill());
 		this.setSummary(user.getSummary());
 		this.setExperience(user.getExperience());
+		this.setAbout(user.getAbout());
 	}
 	
 	public User toProfile()
@@ -55,6 +58,7 @@ public class ProfileModel {
 		user.setPhone(this.getPhone());
 		user.setSkill(this.getSkill());
 		user.setSummary(this.getSummary());
+		user.setAbout(this.getAbout());
 		
 		return user;
 	}
@@ -124,6 +128,14 @@ public class ProfileModel {
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
 	}
 	
 	
