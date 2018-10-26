@@ -39,9 +39,9 @@
 
 	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-			<a class="navbar-brand" href="index.html"> <img
-				style="width: 80px; height: 30px" alt="Pipeline"
-				src="resources/img/fun.gif" />
+			<a class="navbar-brand" href="home"> <img
+				style="width: 45px; height: 45px" alt="Vakapu"
+				src="resources/img/logo1.png" />
 			</a>
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -57,31 +57,49 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="profile" class="dropdown-item">Profile</a> <a
+							<a href="/profile" class="dropdown-item">Profile</a> <a
 								href="account/change-password" class="dropdown-item">Password
-								Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
+								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="collapse navbar-collapse justify-content-between"
 				id="navbar-collapse">
-				<form class="form-inline my-lg-0 my-2">
-					<div class="input-group input-group-dark input-group-round">
-						<div class="input-group-prepend">
-							<span class="input-group-text"> <i class="material-icons">Search</i>
-							</span>
-						</div>
-						<input type="search" class="form-control form-control-dark"
-							placeholder="Search" aria-label="Search app"
-							aria-describedby="search-app">
-					</div>
-				</form>
+
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<form class="form-inline my-lg-0 my-2">
+							<div class="input-group input-group-dark input-group-round">
+								<div class="input-group-prepend">
+									<span class="input-group-text"> <i
+										class="material-icons">search</i>
+									</span>
+								</div>
+								<input type="search" class="form-control form-control-dark"
+									placeholder="Search" aria-label="Search app"
+									aria-describedby="search-app">
+							</div>
+						</form>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
+
+				</ul>
+
 				<div class="d-lg-flex align-items-center">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
-					</ul>
-					<div class="dropdown mx-lg-2"></div>
+					<a style="color: white;" class="material-icons" href="manage">notifications</a>
+					<div class="dropdown">
+						<a style="color: white;" class="nav-link material-icons dropdown-toggle" href="#"
+							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+							id="nav-dropdown-2">add</a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="nav-dropdown-2">
+							<a class="dropdown-item" href="team">Team</a> <a
+								class="dropdown-item" href="team-project">Project</a> <a
+								class="dropdown-item" href="#">Task</a>
+						</div>
+					</div>
+
 					<div class="d-none d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
@@ -92,7 +110,7 @@
 							<div class="dropdown-menu dropdown-menu-right">
 								<a href="profile" class="dropdown-item">Profile</a> <a
 									href="account/change-password" class="dropdown-item">Password
-									Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
+										Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
