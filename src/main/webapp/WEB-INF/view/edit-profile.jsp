@@ -58,8 +58,8 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a href="profile" class="dropdown-item">Profile</a> <a
-								href="account/change-password" method="post" class="dropdown-item">Change
-								Password</a> <a href="logout" class="dropdown-item">Log Out</a>
+								href="account/change-password" method="post" class="dropdown-item">Password
+								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
 						</div>
 					</div>
 				</div>
