@@ -69,6 +69,7 @@ public class ProjectTeamController {
 		TeamProject teamProject = proServices.find(idProject);
 		TeamProject editProject=proServices.find(idProject);
 		modelMap.put("idproject", idProject);
+		
 		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
 //		for(ProjectHistory p:proHis)
 //		{
@@ -151,17 +152,17 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/edit-project",method=RequestMethod.POST)
-	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,@ModelAttribute("idteam") int idTeam,
-			@ModelAttribute("idproject") int idProject,Model model, BindingResult result) throws ParseException
+	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,
+			Model model, BindingResult result) throws ParseException
 	{
 		if(result.hasErrors())
 		{
 			return "redirect:/team-project";
 		}
 		
-		TeamProject a=editProject.toProject();
+		TeamProject a=editProject.toProject();	
 		proServices.updateProject(a);
-		return "redirect:/team-project?idproject="+idProject+"&idTeam="+idTeam;
+		return "redirect:/team-project?idProject="+a.getId();
 	}
 }
 	

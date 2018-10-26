@@ -58,7 +58,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<a href="profile" class="dropdown-item">Profile</a> <a
-								href="utility-account-settings.html" class="dropdown-item">Account
+								href="account/change-password" class="dropdown-item">Password
 								Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 				<form class="form-inline my-lg-0 my-2">
 					<div class="input-group input-group-dark input-group-round">
 						<div class="input-group-prepend">
-							<span class="input-group-text"> <i class="material-icons">search</i>
+							<span class="input-group-text"> <i class="material-icons">Search</i>
 							</span>
 						</div>
 						<input type="search" class="form-control form-control-dark"
@@ -90,8 +90,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="nav-side-user.html" class="dropdown-item">Profile</a> <a
-									href="utility-account-settings.html" class="dropdown-item">Account
+								<a href="profile" class="dropdown-item">Profile</a> <a
+									href="account/change-password" class="dropdown-item">Password
 									Settings</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
@@ -536,6 +536,8 @@
 												id="project-edit-details" role="tabpanel"
 												aria-labelledby="project-edit-details-tab">
 												<h6>General Details</h6>
+												
+												<form:input path="id" type="hidden"/>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
