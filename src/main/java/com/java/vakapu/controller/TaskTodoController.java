@@ -1,6 +1,8 @@
 package com.java.vakapu.controller;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,11 +139,18 @@ public class TaskTodoController {
 		{
 			return "redirect:/task-todo";
 		}
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local=LocalDateTime.now();
+		String time=date.format(local);
 		
 		TaskTeamProject task=taskServices.findByIdTask(idtask);
 		
+		String current=accountServices.getEmailUser();
+		
 		Notes note=noteModel.toNote();
 		note.setTaskTeamProject(task);
+		note.setDate(time);
+		note.setEmailUser(current);
 		noteServices.createNote(note);
 		
 		return "redirect:/task-todo?idTask="+idtask;

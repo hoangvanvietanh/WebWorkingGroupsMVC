@@ -8,6 +8,7 @@ public class NoteModel {
 	private String notes;
 	private String titleNotes;
 	private String date;
+	private String emailUser;
 	private TaskTeamProject taskTeamProject;
 	
 	public void fromNote(Notes note)
@@ -16,6 +17,7 @@ public class NoteModel {
 		this.setNotes(note.getNotes());
 		this.setTitleNotes(note.getTitleNotes());
 		this.setDate(note.getDate());
+		this.setEmailUser(note.getEmailUser());
 		this.setTaskTeamProject(note.getTaskTeamProject());
 	}
 	
@@ -26,6 +28,7 @@ public class NoteModel {
 		note.setNotes(this.getNotes());
 		note.setTitleNotes(this.getTitleNotes());
 		note.setDate(this.getDate());
+		note.setEmailUser(this.getEmailUser());
 		note.setTaskTeamProject(this.getTaskTeamProject());
 		
 		return note;
@@ -61,6 +64,14 @@ public class NoteModel {
 	}
 	public void setTaskTeamProject(TaskTeamProject taskTeamProject) {
 		this.taskTeamProject = taskTeamProject;
+	}
+
+	public String getEmailUser() {
+		return emailUser;
+	}
+
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
 	}
 	
 	

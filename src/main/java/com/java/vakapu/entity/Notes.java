@@ -26,6 +26,9 @@ public class Notes {
 	@Column(name="date")
 	private String date;
 	
+	@Column(name="emailUser")
+	private String emailUser;
+	
 	@ManyToOne
 	@JoinColumn(name="taskteamproject")
 	private TaskTeamProject taskTeamProject;
@@ -68,6 +71,14 @@ public class Notes {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getEmailUser() {
+		return emailUser;
+	}
+
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
 	}
 	
 	
