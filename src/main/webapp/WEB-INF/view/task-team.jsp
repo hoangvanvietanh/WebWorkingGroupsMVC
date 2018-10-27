@@ -361,12 +361,16 @@
 												</div>
 											</div>
 											<div class="card-body" data-filter-by="text">
+												<h6 data-filter-by="text">${note.emailUser}</h6>
+											</div>
+											<div class="card-body" data-filter-by="text">
 												<h6 data-filter-by="text">${note.notes}</h6>
 											</div>
 											<div class="card-body" data-filter-by="text">
 												<h6 data-filter-by="text">${note.date}</h6>
 											</div>
 											</c:forEach>
+											
 										</div>
 
 										<div class="card card-note">
@@ -821,11 +825,7 @@
 											<form:textarea class="form-control col" rows="6"
 												 path="notes"></form:textarea>
 										</div>
-										<div class="form-group row align-items-center">
-											<label class="col-3">Deadline</label> <form:input
-												class="form-control col" type="date"
-												placeholder="Note title" path="date" />
-										</div>
+										
 										
 									</div>
 									<!--end of modal body-->
