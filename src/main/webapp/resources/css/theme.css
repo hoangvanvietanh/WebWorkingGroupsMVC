@@ -6707,7 +6707,8 @@ h3 + .btn-round, h5 + .btn-round {
     height: calc(100% - 4rem);
     overflow-y: scroll;
     padding-right: 1.5rem;
-    -ms-overflow-style: none; }
+    -ms-overflow-style: none; 
+    background: white;}
     .chat-module .chat-module-body .chat-item:last-child {
       margin-bottom: .75rem; }
     .chat-module .chat-module-body::-webkit-scrollbar {
@@ -6793,7 +6794,9 @@ h3 + .btn-round, h5 + .btn-round {
   .chat-team-sidebar .tab-pane {
     overflow-y: scroll;
     -ms-overflow-style: none;
-    height: 100%; }
+    height: 100%;
+    padding-top: 20%;
+    padding-left: 5%; }
     .chat-team-sidebar .tab-pane::-webkit-scrollbar {
       display: none; }
   .chat-team-sidebar .list-group-item:first-child {

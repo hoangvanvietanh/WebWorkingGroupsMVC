@@ -47,7 +47,7 @@ public class SignInController {
 	public String login(ModelMap model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authenticationTrustResolver.isAnonymous(authentication)) {
-			return "sign-in";
+			return "sign-in-page";
 		}
 
 		return "redirect:/home";
