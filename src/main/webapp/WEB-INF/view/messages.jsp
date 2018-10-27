@@ -95,7 +95,7 @@
 				</ul>
 
 				<div class="d-lg-flex align-items-center">
-					<a style="color: white;" class="material-icons" href="messages">notifications</a>
+					<a style="color: white;" class="material-icons" href="manage">notifications</a>
 					<div class="dropdown">
 						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
@@ -126,8 +126,91 @@
 				</div>
 			</div>
 		</div>
+		<div class="layout-nav-side">
+			<div class="main-container">
 
-		<div class="main-container">Home</div>
+				<div class="content-container">
+					<div class="sidebar-content">
+						<button
+							class="btn btn-primary btn-round btn-floating btn-lg d-lg-none"
+							type="button" data-toggle="collapse"
+							data-target="#sidebar-collapse" aria-expanded="false"
+							aria-controls="sidebar-floating-chat">
+							<i class="material-icons">more_horiz</i> <i
+								class="material-icons">close</i>
+						</button>
+						<div class="sidebar collapse" id="sidebar-collapse">
+
+
+							<div class="chat-team-sidebar text-small">
+								<div class="chat-team-sidebar-bottom">
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="members"
+											role="tabpanel" aria-labelledby="members-tab"
+											data-filter-list="list-group">
+											<div class="list-group list-group-flush">
+
+												<a class="list-group-item list-group-item-action" href="#">
+													<div class="media media-member mb-0">
+														<img alt="Claire Connors"
+															src="assets/img/avatar-female-1.jpg" class="avatar" />
+														<div class="media-body">
+															<h6 class="mb-0" data-filter-by="text">Claire
+																Connors</h6>
+															<span data-filter-by="text">Administrator</span>
+														</div>
+													</div>
+												</a>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="chat-module" data-filter-list="chat-module-body">
+						<div class="chat-module-top">
+							<div class="chat-module-body">
+								<div class="media chat-item">
+									<img alt="Claire" src="assets/img/avatar-female-1.jpg"
+										class="avatar" />
+									<div class="media-body">
+										<div class="chat-item-title">
+											<span class="chat-item-author" data-filter-by="text">Viet
+												Anh</span> <span data-filter-by="text">4 days ago</span>
+										</div>
+										<div class="chat-item-body" data-filter-by="text">
+											<p>Hello Viet Anh</p>
+
+										</div>
+
+									</div>
+								</div>
+
+
+
+
+							</div>
+						</div>
+						<div class="chat-module-bottom">
+							<form class="chat-form">
+								<textarea class="form-control" placeholder="Type message"
+									rows="1"></textarea>
+								<div class="chat-form-buttons">
+									<button type="submit" class="btn btn-link">Send</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 

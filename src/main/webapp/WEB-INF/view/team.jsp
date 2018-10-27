@@ -338,10 +338,10 @@
 													aria-label="Recipient email address"
 													aria-describedby="recipient-email-address">
 											</div>
-											<div class="form-group row">
-													<label class="col-3">Your Messages</label>
+											<div class="input-group">
+													<label class="col-12">Your Messages</label>
 													<textarea name="messages" class="form-control col" rows="3"
-														placeholder="Team description" path="description"></textarea>
+														placeholder="Team description"></textarea>
 												</div>
 										</div>
 									</div>
