@@ -45,12 +45,13 @@
 
 <body>
 
-	<div class="layout layout-nav-top layout-sidebar">
+	<div class="layout layout-nav-top">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
 			<a class="navbar-brand" href="home"> <img
 				style="width: 45px; height: 45px" alt="Vakapu"
 				src="resources/img/logo1.png" />
 			</a>
+
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbar-collapse" aria-controls="navbar-collapse"
@@ -75,28 +76,34 @@
 			<div class="collapse navbar-collapse justify-content-between"
 				id="navbar-collapse">
 
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<form class="form-inline my-lg-0 my-2">
-							<div class="input-group input-group-dark input-group-round">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> <i
-										class="material-icons">search</i>
-									</span>
-								</div>
-								<input type="search" class="form-control form-control-dark"
-									placeholder="Search" aria-label="Search app"
-									aria-describedby="search-app">
+				<div class="navbar-nav">
+					<form class="form-inline my-lg-0 my-2">
+						<div class="input-group input-group-dark input-group-round">
+							<div class="input-group-prepend">
+								<span class="input-group-text"> <i class="material-icons">search</i>
+								</span>
 							</div>
-						</form>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
+							<input type="search" class="form-control form-control-dark"
+								placeholder="Search" aria-label="Search app"
+								aria-describedby="search-app">
+						</div>
+					</form>
 
-				</ul>
+					<div class="nav-item">
 
+						<div style="float: left;">
+							<a class="nav-link" href="index.html">Overview</a>
+						</div>
+						<div style="float: left; padding-left: 5px;">
+							<a class="nav-link" href="manage">Manage</a>
+						</div>
+					</div>
+
+				</div>
 				<div class="d-lg-flex align-items-center">
-					<a style="color: white;" class="material-icons" href="messages">notifications</a>
+
 					<div class="dropdown">
+						<a style="color: white;" class="material-icons" href="messages">notifications</a>
 						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
@@ -108,7 +115,6 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
-
 					<div class="d-none d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
@@ -126,8 +132,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="main-container">Home</div>
 	</div>
 
 
