@@ -33,6 +33,8 @@
 	href="<spring:url value='/resources/css/icon.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
+<link rel="stylesheet"
+	href="<spring:url value='/resources/css/chatbox.css'/>">
 <style type="text/css">
 .messages {
 	margin-top: 1.5rem;
@@ -97,6 +99,10 @@
 						<div style="float: left; padding-left: 5px;">
 							<a class="nav-link" href="manage">Manage</a>
 						</div>
+						<div id="navbarResponsive" style="float: left; padding-left: 5px;">
+							<a class="nav-link" data-toggle="modal" href="#msgModal">Messages</a>
+
+						</div>
 					</div>
 
 				</div>
@@ -115,7 +121,7 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
-					<div class="d-none d-lg-block">
+					<div class="d-none2 d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <img alt="Image"
@@ -129,6 +135,95 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-container">
+
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-9">
+						<div
+							class="text-center d-flex align-items-center justify-content-center pt-5">
+							<div>
+								<img alt="Empty State" src="assets/img/empty-state.svg"
+									class="w-50" style="opacity: .8" /> <span
+									class="h3 d-block mt-3">Content Here</span>
+								<p>Add your page content here</p>
+								<a class="btn btn-primary btn-sm" href="pages-layouts.html">Back
+									to Page Layouts</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+			aria-labelledby="bpq" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="d">
+						<h5 class="modal-title">Messages</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+
+					<div class="modal-body afx js-modalBody">
+						<div class="axw">
+							<div class="bow cj ca js-msgGroup">
+
+								<a href="#" class="b rx">
+									<div class="rv">
+										<img class="us bos vb yb aff" src="assets/img/avatar-dhg.png">
+										<div class="rw">
+											<strong>Dave Gamache</strong>
+											<div class="bpg">Hello</div>
+										</div>
+									</div>
+								</a> <a href="#" class="b rx">
+									<div class="rv">
+										<img class="us bos vb yb aff" src="assets/img/avatar-fat.jpg">
+										<div class="rw">
+											<strong>Jacob Thornton</strong> and <strong>1 other</strong>
+											<div class="bpg">Hello</div>
+										</div>
+									</div>
+								</a>
+
+							</div>
+
+							<div class="d-none afc js-conversation">
+								<ul class="bow bpc">
+									<li class="rv bpf afo">
+										<div class="rw">
+											<div class="bpd">Hello Viet Anh</div>
+											<div class="bpe">
+												<small class="axc"> <a href="#">Dave Gamache</a> at
+													4:20PM
+												</small>
+											</div>
+										</div> <img class="us bos vb yb afi" src="assets/img/avatar-dhg.png">
+									</li>
+
+									<li class="rv afo"><img class="us bos vb yb aff"
+										src="assets/img/avatar-fat.jpg">
+										<div class="rw">
+											<div class="bpd">Hi</div>
+											<div class="bpe">
+												<small class="axc"> <a href="#">Fat</a> at 4:28PM
+												</small>
+											</div>
+										</div></li>
+
+								</ul>
+								<div class="modal-body">
+									<input type="text" class="form-control" placeholder="Message">
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -154,6 +249,8 @@
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="<spring:url value='/resources/js/theme.js'/>"
+		type="text/javascript"></script>
+	<script src="<spring:url value='/resources/js/application.js'/>"
 		type="text/javascript"></script>
 </body>
 
