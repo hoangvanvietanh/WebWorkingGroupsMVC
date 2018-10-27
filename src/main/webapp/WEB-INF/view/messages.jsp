@@ -45,13 +45,12 @@
 
 <body>
 
-	<div class="layout layout-nav-top">
+	<div class="layout layout-nav-top layout-sidebar">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
 			<a class="navbar-brand" href="home"> <img
 				style="width: 45px; height: 45px" alt="Vakapu"
 				src="resources/img/logo1.png" />
 			</a>
-
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbar-collapse" aria-controls="navbar-collapse"
@@ -76,34 +75,28 @@
 			<div class="collapse navbar-collapse justify-content-between"
 				id="navbar-collapse">
 
-				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
-						<div class="input-group input-group-dark input-group-round">
-							<div class="input-group-prepend">
-								<span class="input-group-text"> <i class="material-icons">search</i>
-								</span>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<form class="form-inline my-lg-0 my-2">
+							<div class="input-group input-group-dark input-group-round">
+								<div class="input-group-prepend">
+									<span class="input-group-text"> <i
+										class="material-icons">search</i>
+									</span>
+								</div>
+								<input type="search" class="form-control form-control-dark"
+									placeholder="Search" aria-label="Search app"
+									aria-describedby="search-app">
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
-						</div>
-					</form>
+						</form>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="manage">Manage</a></li>
 
-					<div class="nav-item">
+				</ul>
 
-						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
-
-				</div>
 				<div class="d-lg-flex align-items-center">
-
+					<a style="color: white;" class="material-icons" href="manage">notifications</a>
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons" href="messages">notifications</a>
 						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
@@ -115,6 +108,7 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
+
 					<div class="d-none d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
@@ -130,6 +124,91 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="layout-nav-side">
+			<div class="main-container">
+
+				<div class="content-container">
+					<div class="sidebar-content">
+						<button
+							class="btn btn-primary btn-round btn-floating btn-lg d-lg-none"
+							type="button" data-toggle="collapse"
+							data-target="#sidebar-collapse" aria-expanded="false"
+							aria-controls="sidebar-floating-chat">
+							<i class="material-icons">more_horiz</i> <i
+								class="material-icons">close</i>
+						</button>
+						<div class="sidebar collapse" id="sidebar-collapse">
+
+
+							<div class="chat-team-sidebar text-small">
+								<div class="chat-team-sidebar-bottom">
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="members"
+											role="tabpanel" aria-labelledby="members-tab"
+											data-filter-list="list-group">
+											<div class="list-group list-group-flush">
+
+												<a class="list-group-item list-group-item-action" href="#">
+													<div class="media media-member mb-0">
+														<img alt="Claire Connors"
+															src="assets/img/avatar-female-1.jpg" class="avatar" />
+														<div class="media-body">
+															<h6 class="mb-0" data-filter-by="text">Claire
+																Connors</h6>
+															<span data-filter-by="text">Administrator</span>
+														</div>
+													</div>
+												</a>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="chat-module" data-filter-list="chat-module-body">
+						<div class="chat-module-top">
+							<div class="chat-module-body">
+								<div class="media chat-item">
+									<img alt="Claire" src="assets/img/avatar-female-1.jpg"
+										class="avatar" />
+									<div class="media-body">
+										<div class="chat-item-title">
+											<span class="chat-item-author" data-filter-by="text">Viet
+												Anh</span> <span data-filter-by="text">4 days ago</span>
+										</div>
+										<div class="chat-item-body" data-filter-by="text">
+											<p>Hello Viet Anh</p>
+
+										</div>
+
+									</div>
+								</div>
+
+
+
+
+							</div>
+						</div>
+						<div class="chat-module-bottom">
+							<form class="chat-form">
+								<textarea class="form-control" placeholder="Type message"
+									rows="1"></textarea>
+								<div class="chat-form-buttons">
+									<button type="submit" class="btn btn-link">Send</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
 			</div>
 		</div>
 	</div>
