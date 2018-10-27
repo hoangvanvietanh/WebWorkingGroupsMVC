@@ -47,6 +47,9 @@ public class TaskTodoController {
 		modelMap.put("idtask", idTask);
 		String emailUser = accountServices.getEmailUser();
 		TaskTeamProject task = taskServices.findById(idTask);
+		
+		TaskModel editTask=new TaskModel();
+		editTask.fromTask(task);
 		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);
 		List<Todo> listTodo = taskServices.findTodoByIdTask(idTask);
 		int completedAmount = taskServices.findTodoDoneByIdTask(idTask);
@@ -69,6 +72,7 @@ public class TaskTodoController {
 		model.addAttribute("emailUser", emailUser);
 		model.addAttribute("idProject", idProject);
 		model.addAttribute("idTeam", idTeam);
+		model.addAttribute("editTask", editTask);
 		return "task-team";
 	}
 
@@ -100,5 +104,19 @@ public class TaskTodoController {
 		taskServices.update(todo2);
 		return "redirect:/task-todo?idTask=" + idTask;
 	}
+	
+	@RequestMapping(value="edit-task",method=RequestMethod.POST)
+	public String updateTask(@ModelAttribute("editTask") TaskModel editTask, BindingResult result, Model model)
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/task-todo";
+		}
+		TaskTeamProject task= editTask.toTask();
+		taskServices.update(task);
+		return "redirect:/task-todo?idTask="+task.getId();
+		
+	}
+	
 
 }

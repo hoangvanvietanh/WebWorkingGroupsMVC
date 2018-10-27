@@ -554,6 +554,8 @@
 												id="project-edit-details" role="tabpanel"
 												aria-labelledby="project-edit-details-tab">
 												<h6>General Details</h6>
+												
+												<form:input path="id" type="hidden"/>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"

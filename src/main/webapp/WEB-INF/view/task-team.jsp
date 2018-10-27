@@ -678,7 +678,8 @@
 								</div>
 							</div>
 						</form>
-						<form class="modal fade" id="task-edit-modal" tabindex="-1"
+						<form:form modelAttribute="editTask" action="task-todo/edit-task" method="post" 
+						class="modal fade" id="task-edit-modal" tabindex="-1"
 							role="dialog" aria-labelledby="task-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -708,28 +709,29 @@
 											<div class="tab-pane fade show active" id="task-edit-details"
 												role="tabpanel" aria-labelledby="task-edit-details-tab">
 												<h6>General Details</h6>
+												<form:input path="idtask" type="hidden"/>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <input
+													<label class="col-3">Name</label> <form:input
 														class="form-control col" type="text"
-														placeholder="Task name" value="Create brand mood boards"
+														placeholder="Task name" path="name"
 														name="task-name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
-													<textarea class="form-control col" rows="3"
-														placeholder="Task description" name="task-description">Assemble three distinct mood boards for client consideration</textarea>
+													<form:textarea class="form-control col" rows="3"
+														placeholder="Task description" path="description"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> <input
+													<label class="col-3">Start Date</label> <form:input
 														class="form-control col" type="date"
-														placeholder="Task start" name="task-start" />
+														placeholder="Task start" path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <input
+													<label class="col-3">Due Date</label> <form:input
 														class="form-control col" type="date"
-														placeholder="Task due" name="task-due" />
+														placeholder="Task due" path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -793,7 +795,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 						<form class="modal fade" id="note-add-modal" tabindex="-1"
 							role="dialog" aria-labelledby="note-add-modal" aria-hidden="true">
 							<div class="modal-dialog" role="document">
