@@ -54,21 +54,21 @@ public class TaskTodoController {
 	
 
 	@GetMapping
-	public String teamProject(@RequestParam("idTask") int idTask,@ModelAttribute("idteam") int idTeam, @RequestParam(name="idnote") int idNote,@ModelAttribute("idproject") int idProject,
+	public String teamProject(@RequestParam("idTask") int idTask,@ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,
 			Model model, ModelMap modelMap) throws ParseException {
 		modelMap.put("idtask", idTask);
 		String emailUser = accountServices.getEmailUser();
 		
 		TaskTeamProject task = taskServices.findById(idTask);
 		Notes note=new Notes();
-		Notes noteEdit= noteServices.findByID(idNote);
+		//Notes noteEdit= noteServices.findByID(idNote);
 		
 		TaskModel editTask=new TaskModel();
 		NoteModel noteM=new NoteModel();
 		NoteModel noteE=new NoteModel();
 		
 		noteM.fromNote(note);
-		noteE.fromNote(noteEdit);
+		//noteE.fromNote(noteEdit);
 		editTask.fromTask(task);
 		
 		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);

@@ -60,9 +60,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
-							</div>
+							<a href="profile" class="dropdown-item">Accounts </a> <a
+								href="logout" class="dropdown-item">Log Out</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -117,8 +117,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts </a> <a
+									href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -253,9 +253,24 @@
 											<div class="col-lg-6">
 												<div class="card card-project">
 													<div class="progress">
-														<div class="progress-bar bg-success" role="progressbar"
-															style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
-															aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+														<c:choose>
+															<c:when test="${project.teamProject.due lt 5}">
+																<div class="progress-bar bg-danger" role="progressbar"
+																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:when test="${project.teamProject.due le 7 and project.teamProject.due ge 5 }">
+																<div class="progress-bar bg-warning" role="progressbar"
+																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:otherwise>
+																<div class="progress-bar bg-success" role="progressbar"
+																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:otherwise>
+														</c:choose>
+													
 													</div>
 													<div class="card-body">
 														<div class="dropdown card-options">
@@ -335,9 +350,23 @@
 										<c:forEach var="task" items="${task}">
 											<div class="card card-task">
 												<div class="progress">
-													<div class="progress-bar bg-success" role="progressbar"
-														style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-														aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+														<c:choose>
+															<c:when test="${task.taskTeamProject.due lt 5}">
+																<div class="progress-bar bg-danger" role="progressbar"
+																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:when test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																<div class="progress-bar bg-warning" role="progressbar"
+																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:otherwise>
+																<div class="progress-bar bg-success" role="progressbar"
+																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:otherwise>
+														</c:choose>	
 												</div>
 												<div class="card-body">
 													<div class="card-title">

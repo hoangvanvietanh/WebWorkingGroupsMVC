@@ -120,7 +120,7 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#awards">Awards</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="home">Home</a></li>
+					href="/">Home</a></li>
 
 			</ul>
 		</div>

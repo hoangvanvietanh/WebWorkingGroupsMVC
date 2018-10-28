@@ -60,9 +60,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
-							</div>
+							<a href="profile" class="dropdown-item">Accounts </a> <a
+								href="logout" class="dropdown-item">Log Out</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -117,8 +117,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts </a> <a
+									href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -182,8 +182,23 @@
 							</div>
 							<div>
 								<div class="progress">
-									<div class="progress-bar bg-success"
-										style="width: ${project.taskDone div project.totalTask * 100}%;"></div>
+									<c:choose>
+										<c:when test="${project.due lt 5}">
+											<div class="progress-bar bg-danger" role="progressbar"
+												style="width: ${project.taskDone div project.totalTask * 100}%"
+												aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+										</c:when>
+										<c:when test="${project.due le 7 and project.due ge 5 }">
+											<div class="progress-bar bg-warning" role="progressbar"
+												style="width: ${project.taskDone div project.totalTask * 100}%"
+												aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+										</c:when>
+										<c:otherwise>
+											<div class="progress-bar bg-success" role="progressbar"
+												style="width: ${project.taskDone div project.totalTask * 100}%"
+												aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
@@ -197,9 +212,6 @@
 							<li class="nav-item"><a class="nav-link active"
 								data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks"
 								aria-selected="true">Tasks</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#files" role="tab" aria-controls="files"
-								aria-selected="false">Files</a></li>
 							<li class="nav-item"><a class="nav-link" data-toggle="tab"
 								href="#activity" role="tab" aria-controls="activity"
 								aria-selected="false">Activity</a></li>
@@ -236,24 +248,41 @@
 											<c:forEach var="task" items="${task}">
 												<div class="card card-task">
 													<div class="progress">
-														<div class="progress-bar bg-success" role="progressbar"
-															style="width: ${task.completedAmount/task.totalTask*100}%"
-															aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+														<c:choose>
+															<c:when test="${task.due lt 5}">
+																<div class="progress-bar bg-danger" role="progressbar"
+																	style="width:${task.completedAmount/task.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:when test="${task.due le 7 and task.due ge 5 }">
+																<div class="progress-bar bg-warning" role="progressbar"
+																	style="width: ${task.completedAmount/task.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:when>
+															<c:otherwise>
+																<div class="progress-bar bg-success" role="progressbar"
+																	style="width: ${task.completedAmount/task.totalTask*100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+															</c:otherwise>
+														</c:choose>
+
+
 													</div>
 													<div class="card-body">
 														<div class="card-title">
 															<a href="task-todo?idTask=${task.id}">
 																<h6 data-filter-by="text">${task.name}</h6>
-															</a> 
+															</a>
 															<c:choose>
-															 <c:when test="${task.due == 0}">
-															 	<span class="text-small">Click on the task to start</span>
-															 </c:when>
-															 <c:otherwise>
-															 	<span class="text-small">due ${task.due} days</span>
-															 </c:otherwise>
+																<c:when test="${task.due == 0}">
+																	<span class="text-small">Click on the task to
+																		start</span>
+																</c:when>
+																<c:otherwise>
+																	<span class="text-small">due ${task.due} days</span>
+																</c:otherwise>
 															</c:choose>
-															
+
 														</div>
 														<div class="card-meta">
 															<ul class="avatars">
@@ -296,125 +325,7 @@
 								<!--end of content list-->
 							</div>
 							<!--end of tab-->
-							<div class="tab-pane fade" id="files" role="tabpanel"
-								aria-labelledby="files-tab" data-filter-list="dropzone-previews">
-								<div class="content-list">
-									<div class="row content-list-head">
-										<div class="col-auto">
-											<h3>Files</h3>
-										</div>
-										<form class="col-md-auto">
-											<div class="input-group input-group-round">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> <i
-														class="material-icons">filter_list</i>
-													</span>
-												</div>
-												<input type="search" class="form-control filter-list-input"
-													placeholder="Filter files" aria-label="Filter Tasks"
-													aria-describedby="filter-tasks">
-											</div>
-										</form>
-									</div>
-									<!--end of content list head-->
-									<div class="content-list-body row">
-										<div class="col">
-											<div class="d-none dz-template">
-												<li class="list-group-item dz-preview dz-file-preview">
-													<div class="media align-items-center dz-details">
-														<ul class="avatars">
-															<li>
-																<div class="avatar bg-primary dz-file-representation">
-																	<img class="avatar" data-dz-thumbnail /> <i
-																		class="material-icons">attach_file</i>
-																</div>
-															</li>
-															<li><img alt="David Whittaker"
-																src="assets/img/avatar-male-4.jpg" class="avatar"
-																data-title="David Whittaker" data-toggle="tooltip" /></li>
-														</ul>
-														<div
-															class="media-body d-flex justify-content-between align-items-center">
-															<div class="dz-file-details">
-																<a href="#" class="dz-filename"> <span data-dz-name></span>
-																</a> <br> <span class="text-small dz-size" data-dz-size></span>
-															</div>
-															<img alt="Loader" src="assets/img/loader.svg"
-																class="dz-loading" />
-															<div class="dropdown">
-																<button class="btn-options" type="button"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																	<i class="material-icons">more_vert</i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="#">Download</a> <a
-																		class="dropdown-item" href="#">Share</a>
-																	<div class="dropdown-divider"></div>
-																	<a class="dropdown-item text-danger" href="#"
-																		data-dz-remove>Delete</a>
-																</div>
-															</div>
-															<button class="btn btn-danger btn-sm dz-remove"
-																data-dz-remove>Cancel</button>
-														</div>
-													</div>
-													<div class="progress dz-progress">
-														<div class="progress-bar dz-upload" data-dz-uploadprogress></div>
-													</div>
-												</li>
-											</div>
-											<form class="dropzone"
-												action="http://mediumra.re/dropzone/upload.php">
-												<span class="dz-message">Drop files here or click
-													here to upload</span>
-											</form>
-											<ul
-												class="list-group list-group-activity dropzone-previews flex-column-reverse">
 
-												<li class="list-group-item">
-													<div class="media align-items-center">
-														<ul class="avatars">
-															<li>
-																<div class="avatar bg-primary">
-																	<i class="material-icons">insert_drive_file</i>
-																</div>
-															</li>
-															<li><img alt="David Whittaker"
-																src="assets/img/avatar-male-4.jpg" class="avatar"
-																data-title="David Whittaker" data-toggle="tooltip"
-																data-filter-by="data-title" /></li>
-														</ul>
-														<div
-															class="media-body d-flex justify-content-between align-items-center">
-															<div>
-																<a href="#" data-filter-by="text">Branding-Proforma</a>
-																<br> <span class="text-small" data-filter-by="text">15kb
-																	Text Document</span>
-															</div>
-															<div class="dropdown">
-																<button class="btn-options" type="button"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																	<i class="material-icons">more_vert</i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="#">Download</a> <a
-																		class="dropdown-item" href="#">Share</a>
-																	<div class="dropdown-divider"></div>
-																	<a class="dropdown-item text-danger" href="#">Delete</a>
-																</div>
-															</div>
-														</div>
-													</div>
-												</li>
-
-											</ul>
-										</div>
-									</div>
-								</div>
-								<!--end of content list-->
-							</div>
 							<div class="tab-pane fade" id="activity" role="tabpanel"
 								aria-labelledby="activity-tab"
 								data-filter-list="list-group-activity">
