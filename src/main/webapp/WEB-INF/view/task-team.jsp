@@ -358,8 +358,9 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Edit</a> <a
-																	class="dropdown-item text-danger" href="#">Delete</a>
+																<a class="dropdown-item" href="task-todo/edit-note?idnote=${note.id }"
+																method="post" data-target="note-edit-modal">Edit</a> 
+																<a class="dropdown-item text-danger" href="#">Delete</a>
 															</div>
 														</div>
 													</div>
@@ -720,6 +721,44 @@
 								</div>
 							</div>
 						</form:form>
+						
+						<form:form modelAttribute="editNote" action="task-todo/edit-note"
+							method="post" class="modal fade" id="note-edit-modal"
+							tabindex="-1" role="dialog" aria-labelledby="note-edit-modal"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Edit Note</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+
+									<div class="modal-body">
+										<div class="form-group row align-items-center">
+											<label class="col-3">Title</label>
+											<form:input class="form-control col" type="text"
+												placeholder="Note title" path="titleNotes" />
+										</div>
+										<div class="form-group row align-items-center">
+											<label class="col-3">Note</label>
+											<form:textarea class="form-control col" rows="6" path="notes"></form:textarea>
+										</div>
+
+
+									</div>
+									<!--end of modal body-->
+									<div class="modal-footer">
+										<button role="button" class="btn btn-primary" type="submit">
+											Save</button>
+									</div>
+								</div>
+							</div>
+						</form:form>
+						
 						<form action="task-todo/create-todo" method="post"
 							class="modal fade" id="todo-add-modal" tabindex="-1"
 							role="dialog" aria-labelledby="note-add-modal" aria-hidden="true">
