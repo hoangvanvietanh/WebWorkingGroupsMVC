@@ -33,6 +33,8 @@
 	href="<spring:url value='/resources/css/icon.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
+<link rel="stylesheet"
+	href="<spring:url value='/resources/css/notifications.css'/>">
 </head>
 
 <body>
@@ -95,8 +97,9 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons" href="messages">notifications</a>
-						<a style="color: white;"
+						<a style="color: white;" class="material-icons"
+							data-toggle="modal" href="#msgModal">notifications</a> <a
+							style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -107,7 +110,7 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
-					<div class="d-none d-lg-block">
+					<div class="d-none2 d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <img alt="Image"
@@ -333,41 +336,39 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body">
-										
+
 										<c:forEach var="note" items="${notes }">
-										<div class="card card-note">
-											<div class="card-header">
-												<div class="media align-items-center">
-													<img alt="${note.emailUser}"
-														src="<spring:url value='/profile/avatar/${note.emailUser}'/>" class="avatar"
-														data-toggle="tooltip" data-title="${note.emailUser}"
-														data-filter-by="alt" />
-													<div class="media-body">
-														<h6 class="mb-0" data-filter-by="text">${note.titleNotes }</h6>
+											<div class="card card-note">
+												<div class="card-header">
+													<div class="media align-items-center">
+														<img alt="${note.emailUser}"
+															src="<spring:url value='/profile/avatar/${note.emailUser}'/>"
+															class="avatar" data-toggle="tooltip"
+															data-title="${note.emailUser}" data-filter-by="alt" />
+														<div class="media-body">
+															<h6 class="mb-0" data-filter-by="text">${note.titleNotes }</h6>
+														</div>
 													</div>
-												</div>
-												<div class="d-flex align-items-center">
-													<span data-filter-by="text">${note.date}</span>
-													<div class="ml-1 dropdown card-options">
-														<button class="btn-options" type="button"
-															id="note-dropdown-button-2" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item text-danger" href="#">Delete</a>
+													<div class="d-flex align-items-center">
+														<span data-filter-by="text">${note.date}</span>
+														<div class="ml-1 dropdown card-options">
+															<button class="btn-options" type="button"
+																id="note-dropdown-button-2" data-toggle="dropdown"
+																aria-haspopup="true" aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="#">Edit</a> <a
+																	class="dropdown-item text-danger" href="#">Delete</a>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="card-body" data-filter-by="text">
-												<p>
-													${note.notes}
-												</p>
+												<div class="card-body" data-filter-by="text">
+													<p>${note.notes}</p>
 
+												</div>
 											</div>
-										</div>
 										</c:forEach>
 
 									</div>
@@ -397,13 +398,13 @@
 									<!--end of content list head-->
 									<div class="content-list-body">
 										<div class="d-none dz-template">
-										<form class="dropzone"
-											action="http://mediumra.re/dropzone/upload.php">
-											<span class="dz-message">Drop files here or click here
-												to upload</span>
-										</form>
+											<form class="dropzone"
+												action="http://mediumra.re/dropzone/upload.php">
+												<span class="dz-message">Drop files here or click
+													here to upload</span>
+											</form>
 										</div>
-										
+
 										<ul
 											class="list-group list-group-activity dropzone-previews flex-column-reverse">
 
@@ -564,9 +565,9 @@
 								</div>
 							</div>
 						</form>
-						<form:form modelAttribute="editTask" action="task-todo/edit-task" method="post" 
-						class="modal fade" id="task-edit-modal" tabindex="-1"
-							role="dialog" aria-labelledby="task-edit-modal"
+						<form:form modelAttribute="editTask" action="task-todo/edit-task"
+							method="post" class="modal fade" id="task-edit-modal"
+							tabindex="-1" role="dialog" aria-labelledby="task-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -595,12 +596,11 @@
 											<div class="tab-pane fade show active" id="task-edit-details"
 												role="tabpanel" aria-labelledby="task-edit-details-tab">
 												<h6>General Details</h6>
-												<form:input path="idtask" type="hidden"/>
+												<form:input path="idtask" type="hidden" />
 												<div class="form-group row align-items-center">
-													<label class="col-3">Name</label> <form:input
-														class="form-control col" type="text"
-														placeholder="Task name" path="name"
-														name="task-name" />
+													<label class="col-3">Name</label>
+													<form:input class="form-control col" type="text"
+														placeholder="Task name" path="name" name="task-name" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
@@ -610,13 +610,13 @@
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Start Date</label> <form:input
-														class="form-control col" type="date"
+													<label class="col-3">Start Date</label>
+													<form:input class="form-control col" type="date"
 														placeholder="Task start" path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
-													<label class="col-3">Due Date</label> <form:input
-														class="form-control col" type="date"
+													<label class="col-3">Due Date</label>
+													<form:input class="form-control col" type="date"
 														placeholder="Task due" path="endDate" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
@@ -658,10 +658,12 @@
 														<c:forEach var="member" items="${member}">
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
-																	id="${member.teamMemberTeamProject.teamMember.member.email}" checked> <label
-																	class="custom-control-label" for="${member.teamMemberTeamProject.teamMember.member.email}">
+																	id="${member.teamMemberTeamProject.teamMember.member.email}"
+																	checked> <label class="custom-control-label"
+																	for="${member.teamMemberTeamProject.teamMember.member.email}">
 																	<div class="d-flex align-items-center">
-																		<img alt="${member.teamMemberTeamProject.teamMember.member.name}"
+																		<img
+																			alt="${member.teamMemberTeamProject.teamMember.member.name}"
 																			src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>"
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.teamMemberTeamProject.teamMember.member.name}</span>
@@ -682,8 +684,10 @@
 								</div>
 							</div>
 						</form:form>
-						<form:form modelAttribute="note" action="task-todo/create-note" method="post" class="modal fade" id="note-add-modal" tabindex="-1"
-							role="dialog" aria-labelledby="note-add-modal" aria-hidden="true">
+						<form:form modelAttribute="note" action="task-todo/create-note"
+							method="post" class="modal fade" id="note-add-modal"
+							tabindex="-1" role="dialog" aria-labelledby="note-add-modal"
+							aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -694,20 +698,19 @@
 										</button>
 									</div>
 									<!--end of modal head-->
-									
+
 									<div class="modal-body">
 										<div class="form-group row align-items-center">
-											<label class="col-3">Title</label> <form:input
-												class="form-control col" type="text"
+											<label class="col-3">Title</label>
+											<form:input class="form-control col" type="text"
 												placeholder="Note title" path="titleNotes" />
 										</div>
 										<div class="form-group row align-items-center">
 											<label class="col-3">Note</label>
-											<form:textarea class="form-control col" rows="6"
-												 path="notes"></form:textarea>
+											<form:textarea class="form-control col" rows="6" path="notes"></form:textarea>
 										</div>
-										
-										
+
+
 									</div>
 									<!--end of modal body-->
 									<div class="modal-footer">
@@ -752,6 +755,37 @@
 			</div>
 
 
+		</div>
+		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+			aria-labelledby="bpq" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="d">
+						<h5 class="modal-title">Notifications</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body afx js-modalBody">
+						<div class="axw">
+							<div class="afc js-conversation">
+								<ul class="bow bpc">
+									<c:forEach var="mess" items="${messages}">
+										<li class="rv bpf afo">
+											<div class="rw">
+												<div class="bpd">${mess.messages}</div>
+												<div class="bpe">
+													<small class="axc">at ${mess.date} </small>
+												</div>
+											</div> <img class="us bos vb yb afi"
+											src="resources/img/anonymous.png">
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 

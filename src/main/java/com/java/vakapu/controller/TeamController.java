@@ -1,6 +1,8 @@
 package com.java.vakapu.controller;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +27,7 @@ import com.java.vakapu.model.TeamProjectModel;
 import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.Account;
 import com.java.vakapu.entity.Friendship;
-import com.java.vakapu.entity.MessagesSystem;
+import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.Team;
 import com.java.vakapu.entity.TeamMember;
@@ -36,7 +38,7 @@ import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.EmailServices;
 import com.java.vakapu.services.FriendshipServices;
 import com.java.vakapu.services.HistoryServices;
-import com.java.vakapu.services.MessagesSystemServices;
+import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.UserServices;
 
 import utils.Activity;
@@ -86,7 +88,7 @@ public class TeamController {
 	private EmailServices emailServices;
 
 	@Autowired
-	private MessagesSystemServices messagesSystemServices;
+	private NotificationsSystemServices notificationsSystemServices;
 
 	@GetMapping
 	public String getInfoProject(@RequestParam("idTeam") int idTeam, Model model, ModelMap modelMap) {
@@ -128,6 +130,8 @@ public class TeamController {
 		team.setProjectAmount(teamProjects.size());
 		team.setMemberAmount(member.size());
 		teamServices.updateTeam(team);
+		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		model.addAttribute("messages", listMes);
 		model.addAttribute("addFriend", listFriend);
 		model.addAttribute("myFriend", myFriend);
 		model.addAttribute("teamModel", teamModel);
@@ -220,12 +224,15 @@ public class TeamController {
 			@ModelAttribute("messages") String messages, Model model) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local=LocalDateTime.now();
+		String time=date.format(local);
 		List<Account> accountStore = accountServices.findAll();
 		for (Account a : accountStore) {
 			if (email.equals(a.getEmail())) {
 				User user2 = userServices.findByEmail(email);
 				System.out.println("email User2:" + user2.getEmail());
-				MessagesSystem mess = new MessagesSystem();
+				NotificationSystem mess = new NotificationSystem();
 //				mess.setUserFrom(user);
 				mess.setToUser(user2);
 //				mess.setText("Test");
@@ -235,7 +242,8 @@ public class TeamController {
 						+ "http://localhost:8080/time-is-gold/team/joinTeam?idTeam=" + idTeam;
 				mess.setMessages(messa + "\nAnd your message: " + messages);
 				mess.setStatus(0);
-				messagesSystemServices.create(mess);
+				mess.setDate(time);
+				notificationsSystemServices.create(mess);
 
 			}
 		}

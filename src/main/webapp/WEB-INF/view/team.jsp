@@ -33,6 +33,8 @@
 	href="<spring:url value='/resources/css/icon.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
+<link rel="stylesheet"
+	href="<spring:url value='/resources/css/notifications.css'/>">
 </head>
 
 <body>
@@ -95,8 +97,9 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons" href="messages">notifications</a>
-						<a style="color: white;"
+						<a style="color: white;" class="material-icons"
+							data-toggle="modal" href="#msgModal">notifications</a> <a
+							style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -107,7 +110,7 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
-					<div class="d-none d-lg-block">
+					<div class="d-none2 d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <img alt="Image"
@@ -633,6 +636,37 @@
 				</div>
 			</div>
 
+		</div>
+		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+			aria-labelledby="bpq" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="d">
+						<h5 class="modal-title">Notifications</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body afx js-modalBody">
+						<div class="axw">
+							<div class="afc js-conversation">
+								<ul class="bow bpc">
+									<c:forEach var="mess" items="${messages}">
+										<li class="rv bpf afo">
+											<div class="rw">
+												<div class="bpd">${mess.messages}</div>
+												<div class="bpe">
+													<small class="axc">at ${mess.date} </small>
+												</div>
+											</div> <img class="us bos vb yb afi"
+											src="resources/img/anonymous.png">
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 

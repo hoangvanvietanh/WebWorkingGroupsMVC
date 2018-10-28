@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
@@ -26,9 +27,11 @@ import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
+import com.java.vakapu.model.TeamModel;
 import com.java.vakapu.model.TeamProjectModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.HistoryServices;
+import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
 import com.java.vakapu.services.TeamMemberTeamProjectServices;
@@ -61,6 +64,9 @@ public class ProjectTeamController {
 	
 	@Autowired
 	private HistoryServices historyServices;
+	
+	@Autowired
+	private NotificationsSystemServices notificationsSystemServices ;
 	
 	@GetMapping
 	public String teamProject(@ModelAttribute("idteam") int idTeam,@RequestParam("idProject") int idProject,Model model,ModelMap modelMap) {
@@ -95,6 +101,8 @@ public class ProjectTeamController {
 		TeamProjectModel edit=new TeamProjectModel();
 		TaskModel taskModel = new TaskModel();
 		edit.fromProject(editProject);
+		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		model.addAttribute("messages", listMes);
 		model.addAttribute("editProject", edit);
 		model.addAttribute("history", proHis);
 		model.addAttribute("taskModel", taskModel);

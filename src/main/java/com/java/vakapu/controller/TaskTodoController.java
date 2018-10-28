@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.java.vakapu.entity.Notes;
+import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.Todo;
@@ -26,6 +27,7 @@ import com.java.vakapu.model.NoteModel;
 import com.java.vakapu.model.TaskModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.DateServices;
+import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.NoteService;
 import com.java.vakapu.services.TaskServices;
 
@@ -45,6 +47,9 @@ public class TaskTodoController {
 	
 	@Autowired
 	private NoteService noteServices;
+	
+	@Autowired
+	private NotificationsSystemServices notificationsSystemServices ;
 	
 
 	@GetMapping
@@ -77,6 +82,8 @@ public class TaskTodoController {
 			task.setCompleted(0);
 		}
 		taskServices.update(task);
+		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		model.addAttribute("messages", listMes);
 		model.addAttribute("note",noteM);
 		model.addAttribute("todo", listTodo);
 		model.addAttribute("member", listMember);

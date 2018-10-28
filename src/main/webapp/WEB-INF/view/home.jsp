@@ -34,7 +34,7 @@
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
-	href="<spring:url value='/resources/css/chatbox.css'/>">
+	href="<spring:url value='/resources/css/notifications.css'/>">
 <style type="text/css">
 .messages {
 	margin-top: 1.5rem;
@@ -99,18 +99,15 @@
 						<div style="float: left; padding-left: 5px;">
 							<a class="nav-link" href="manage">Manage</a>
 						</div>
-						<div id="navbarResponsive" style="float: left; padding-left: 5px;">
-							<a class="nav-link" data-toggle="modal" href="#msgModal">Messages</a>
-
-						</div>
 					</div>
 
 				</div>
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons" href="messages">notifications</a>
-						<a style="color: white;"
+						<a style="color: white;" class="material-icons"
+							data-toggle="modal" href="#msgModal">notifications</a> <a
+							style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -164,66 +161,29 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="d">
-						<h5 class="modal-title">Messages</h5>
+						<h5 class="modal-title">Notifications</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
-
 					<div class="modal-body afx js-modalBody">
 						<div class="axw">
-							<div class="bow cj ca js-msgGroup">
-
-								<a href="#" class="b rx">
-									<div class="rv">
-										<img class="us bos vb yb aff" src="assets/img/avatar-dhg.png">
-										<div class="rw">
-											<strong>Dave Gamache</strong>
-											<div class="bpg">Hello</div>
-										</div>
-									</div>
-								</a> <a href="#" class="b rx">
-									<div class="rv">
-										<img class="us bos vb yb aff" src="assets/img/avatar-fat.jpg">
-										<div class="rw">
-											<strong>Jacob Thornton</strong> and <strong>1 other</strong>
-											<div class="bpg">Hello</div>
-										</div>
-									</div>
-								</a>
-
-							</div>
-
-							<div class="d-none afc js-conversation">
+							<div class="afc js-conversation">
 								<ul class="bow bpc">
-									<li class="rv bpf afo">
-										<div class="rw">
-											<div class="bpd">Hello Viet Anh</div>
-											<div class="bpe">
-												<small class="axc"> <a href="#">Dave Gamache</a> at
-													4:20PM
-												</small>
-											</div>
-										</div> <img class="us bos vb yb afi" src="assets/img/avatar-dhg.png">
-									</li>
-
-									<li class="rv afo"><img class="us bos vb yb aff"
-										src="assets/img/avatar-fat.jpg">
-										<div class="rw">
-											<div class="bpd">Hi</div>
-											<div class="bpe">
-												<small class="axc"> <a href="#">Fat</a> at 4:28PM
-												</small>
-											</div>
-										</div></li>
-
+									<c:forEach var="mess" items="${messages}">
+										<li class="rv bpf afo">
+											<div class="rw">
+												<div class="bpd">${mess.messages}</div>
+												<div class="bpe">
+													<small class="axc">at ${mess.date} </small>
+												</div>
+											</div> <img class="us bos vb yb afi"
+											src="resources/img/anonymous.png">
+										</li>
+									</c:forEach>
 								</ul>
-								<div class="modal-body">
-									<input type="text" class="form-control" placeholder="Message">
-								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>

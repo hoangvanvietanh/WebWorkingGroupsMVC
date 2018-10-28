@@ -33,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.ProfileModel;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.UserServices;
 
 import utils.Constants;
@@ -46,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private UserServices userServices;
+	
+	@Autowired
+	private NotificationsSystemServices notificationsSystemServices ;
 
 	@GetMapping
 	public String showProfile(Model model) {

@@ -9,11 +9,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="messagesSystem")
-public class MessagesSystem {
+@Table(name="notifications")
+public class NotificationSystem {
 
 	@Id
-	@Column(name="idmessagesSystem")
+	@Column(name="idnotification")
 	private int id;
 	
 	@Column(name="messages")
@@ -30,6 +30,9 @@ public class MessagesSystem {
 	@JoinColumn(name="fromUser")
 	private User userFrom;
 
+	@JoinColumn(name="date")
+	private String date;
+	
 	public int getId() {
 		return id;
 	}
@@ -68,6 +71,14 @@ public class MessagesSystem {
 
 	public void setUserFrom(User userFrom) {
 		this.userFrom = userFrom;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 }

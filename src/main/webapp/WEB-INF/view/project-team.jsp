@@ -33,12 +33,14 @@
 	href="<spring:url value='/resources/css/icon.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/app.css'/>">
+<link rel="stylesheet"
+	href="<spring:url value='/resources/css/notifications.css'/>">
 </head>
 
 <body>
 
 	<div class="layout layout-nav-top">
-<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
 			<a class="navbar-brand" href="home"> <img
 				style="width: 45px; height: 45px" alt="Vakapu"
 				src="resources/img/logo1.png" />
@@ -95,8 +97,9 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons" href="messages">notifications</a>
-						<a style="color: white;"
+						<a style="color: white;" class="material-icons"
+							data-toggle="modal" href="#msgModal">notifications</a> <a
+							style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -107,7 +110,7 @@
 								class="dropdown-item" href="#">Task</a>
 						</div>
 					</div>
-					<div class="d-none d-lg-block">
+					<div class="d-none2 d-lg-block">
 						<div class="dropdown">
 							<a href="#" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <img alt="Image"
@@ -561,8 +564,8 @@
 												id="project-edit-details" role="tabpanel"
 												aria-labelledby="project-edit-details-tab">
 												<h6>General Details</h6>
-												
-												<form:input path="id" type="hidden"/>
+
+												<form:input path="id" type="hidden" />
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
@@ -639,14 +642,13 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-													<c:set var="i" value="0"/>
+														<c:set var="i" value="0" />
 														<c:forEach var="user" items="${user}">
-														<input type="hidden" value="${i=i+1}">
+															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" class="custom-control-input"
 																	id="${i}" checked> <label
-																	class="custom-control-label"
-																	for="${i}"> </label>
+																	class="custom-control-label" for="${i}"> </label>
 																<div class="d-flex align-items-center">
 																	<img alt="${user.teamMember.member.name}"
 																		src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
@@ -753,13 +755,12 @@
 													<div class="form-group-users">
 
 														<c:forEach var="user" items="${user}">
-														<input type="hidden" value="${i=i+1}">
+															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email" class="custom-control-input"
-																	id="${i}"
-																	value="${user.teamMember.member.email}" />
-																<form:label class="custom-control-label"
-																	for="${i}" path="email">
+																	id="${i}" value="${user.teamMember.member.email}" />
+																<form:label class="custom-control-label" for="${i}"
+																	path="email">
 																	<div class="d-flex align-items-center">
 																		<img alt="${user.teamMember.member.name}"
 																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
@@ -787,6 +788,37 @@
 				</div>
 			</div>
 
+		</div>
+		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+			aria-labelledby="bpq" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="d">
+						<h5 class="modal-title">Notifications</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body afx js-modalBody">
+						<div class="axw">
+							<div class="afc js-conversation">
+								<ul class="bow bpc">
+									<c:forEach var="mess" items="${messages}">
+										<li class="rv bpf afo">
+											<div class="rw">
+												<div class="bpd">${mess.messages}</div>
+												<div class="bpe">
+													<small class="axc">at ${mess.date} </small>
+												</div>
+											</div> <img class="us bos vb yb afi"
+											src="resources/img/anonymous.png">
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 

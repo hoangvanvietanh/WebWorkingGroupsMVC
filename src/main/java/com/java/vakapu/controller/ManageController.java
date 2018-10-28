@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TeamModel;
 import com.java.vakapu.entity.Friendship;
+import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.Team;
@@ -33,6 +34,7 @@ import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.FriendshipServices;
 import com.java.vakapu.services.HistoryServices;
+import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.UserServices;
 
 import utils.Activity;
@@ -78,6 +80,9 @@ public class ManageController {
 	@Autowired
 	private HistoryServices historyServices;
 	
+	@Autowired
+	private NotificationsSystemServices notificationsSystemServices ;
+	
 	@GetMapping
 	public String getInfoProject(Model model,ModelMap modelMap) throws java.text.ParseException {
 		modelMap.put("idteam", 0);
@@ -105,7 +110,9 @@ public class ManageController {
 //		for (Integer p : listProject) {
 //			taskTeam.add(taskServices.findById(p));
 //		}
+		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		TeamModel teamModel = new TeamModel();
+		model.addAttribute("messages", listMes);
 		model.addAttribute("teamAdd", teamModel);
 		model.addAttribute("friend", myFriend);
 		model.addAttribute("member", memberStore);
