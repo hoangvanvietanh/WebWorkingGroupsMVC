@@ -60,10 +60,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="/profile" class="dropdown-item">Profile</a> <a
-								href="account/change-password" class="dropdown-item">Password
-								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
-						</div>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -118,9 +117,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Profile</a> <a
-									href="account/change-password" class="dropdown-item">Password
-									Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -261,8 +259,16 @@
 																<i class="material-icons mr-1">playlist_add_check</i> <span
 																	class="text-small">${project.taskDone}/${project.totalTask}</span>
 															</div>
-															<span class="text-small" data-filter-by="text">Due
+															<c:choose>
+															<c:when test="${project.due == 0}">
+																<span class="text-small" data-filter-by="text">Click on the project to start</span>
+															</c:when>
+															<c:otherwise>
+																<span class="text-small" data-filter-by="text">Due
 																${project.due} days</span>
+															</c:otherwise>
+															</c:choose>
+															
 														</div>
 													</div>
 												</div>
@@ -449,20 +455,7 @@
 																</label>
 															</div>
 														</c:forEach>
-														<c:forEach var="addFriend" items="${listFriend}">
-															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="${addFriend.email}"> <label
-																	class="custom-control-label" for="${addFriend.email}">
-																	<div class="d-flex align-items-center">
-																		<img alt="${addFriend.name}"
-																			src="<spring:url value='/profile/avatar/${addFriend.email}'/>"
-																			class="avatar mr-2" /> <span class="h6 mb-0"
-																			data-filter-by="text">${addFriend.name}</span>
-																	</div>
-																</label>
-															</div>
-														</c:forEach>
+												
 													</div>
 												</div>
 											</div>
@@ -595,7 +588,7 @@
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>
 																<c:when
-																	test="${member.member.email eq emailUser and member.role ne 'Admin'}">
+																	test="${member.member.email eq emailUser}">
 																	<form:input type="hidden" path="email"
 																		value="${member.member.email}" />
 																</c:when>

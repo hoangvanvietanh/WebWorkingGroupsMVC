@@ -30,7 +30,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.java.vakapu.entity.Account;
 import com.java.vakapu.entity.User;
+import com.java.vakapu.model.AccountModel;
 import com.java.vakapu.model.ProfileModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.NotificationsSystemServices;
@@ -53,20 +55,26 @@ public class UserController {
 
 	@GetMapping
 	public String showProfile(Model model) {
-		User user = userServices.findByEmail(accountServices.getEmailUser());
+		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
 		ProfileModel profileModel = new ProfileModel();
 //		ProfileModel editProfile= new ProfileModel();
 		profileModel.fromProfile(user);
 //		editProfile.fromProfile(user);
-
+		Account acc = accountServices.findByEmail(emailUser);
+		AccountModel account = new AccountModel();
+		account.fromAccount(acc);
+		model.addAttribute("change", account);
 		model.addAttribute("profile", profileModel);
 		model.addAttribute("emailProfile", user.getEmail());
-		return "edit-profile";
+		model.addAttribute("emailUser", emailUser);
+		return "account-settings";
 	}
 
 	@PostMapping
 	public String updateProfile(Model model, @RequestParam("file") MultipartFile file,
 			@ModelAttribute("profile") User user, RedirectAttributes redirectAttributes) {
+		System.out.println("viet anh dep trai");
 		if (!file.isEmpty()) {
 			try {
 

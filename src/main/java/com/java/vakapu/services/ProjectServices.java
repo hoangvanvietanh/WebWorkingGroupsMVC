@@ -32,6 +32,10 @@ public class ProjectServices {
 		return projectDao.findByIdTeam(id);
 	}
 	
+	public List<Integer> findByIdTeam2(int id)
+	{
+		return projectDao.findByIdTeam2(id);
+	}
 	public List<TeamMemberTeamProject> findByEmail(String email)
 	{
 		return projectDao.findByEmail(email);

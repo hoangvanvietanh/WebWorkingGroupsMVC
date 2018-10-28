@@ -27,9 +27,9 @@ import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
-import com.java.vakapu.model.TeamModel;
 import com.java.vakapu.model.TeamProjectModel;
 import com.java.vakapu.services.AccountServices;
+import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.HistoryServices;
 import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.ProjectServices;
@@ -68,19 +68,20 @@ public class ProjectTeamController {
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices ;
 	
+	@Autowired
+	private DateServices dateServices;
+	
 	@GetMapping
-	public String teamProject(@ModelAttribute("idteam") int idTeam,@RequestParam("idProject") int idProject,Model model,ModelMap modelMap) {
+	public String teamProject(@ModelAttribute("idteam") int idTeam,@RequestParam("idProject") int idProject,Model model,ModelMap modelMap) throws ParseException {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		TeamProject teamProject = proServices.find(idProject);
-		TeamProject editProject=proServices.find(idProject);
+		teamProject.setDue(dateServices.caculatorDue(teamProject.getEndDate()));
+		proServices.updateProject(teamProject);
 		modelMap.put("idproject", idProject);
-		
+
 		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
-//		for(ProjectHistory p:proHis)
-//		{
-//			System.out.println( "Testt"+p.getUser() + p.getActivity() + p.getLast());
-//		}
+
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMemberTaskTeamProject> task = taskServices.findTaskByIdProjectAll(idProject);
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
@@ -100,7 +101,7 @@ public class ProjectTeamController {
 		proServices.updateProject(teamProject);
 		TeamProjectModel edit=new TeamProjectModel();
 		TaskModel taskModel = new TaskModel();
-		edit.fromProject(editProject);
+		edit.fromProject(teamProject);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("editProject", edit);

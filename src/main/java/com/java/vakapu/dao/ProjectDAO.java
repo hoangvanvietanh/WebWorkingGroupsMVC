@@ -41,6 +41,12 @@ public class ProjectDAO {
 		return query.getResultList();
 	}
 	
+	public List<Integer> findByIdTeam2(int id) {
+		TypedQuery<Integer> query = getSession().createQuery("select distinct b.teamProject.id from TeamMemberTeamProject b where b.teamMember.team.idTeam=:id",Integer.class);
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+	
 	public TeamProject find(int id) {
 		return getSession().find(TeamProject.class, id);
 	}
