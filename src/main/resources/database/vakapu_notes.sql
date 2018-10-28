@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,11 +28,11 @@ CREATE TABLE `notes` (
   `titlenote` varchar(145) DEFAULT NULL,
   `taskteamproject` int(11) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `emailUser` varchar(45) DEFAULT NULL,
+  `emailUser` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idnotes`),
   KEY `fk_notes_1_idx` (`taskteamproject`),
   CONSTRAINT `fk_notes_1` FOREIGN KEY (`taskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `notes` (
 
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-INSERT INTO `notes` VALUES (1,'test','test note ne',22,'2018-10-27 00:00:00',NULL),(2,'tao test','test note ne',22,'2018-10-27 00:00:00',NULL),(3,'qwert','test ',22,'2018-10-10 00:00:00',NULL);
+INSERT INTO `notes` VALUES (1,'123','nothing',31,'2018-10-27 00:00:00',NULL),(2,'1','nothinge 1',32,'2018-10-28 06:59:16','hoangvanvietanh@gmail.com'),(3,'hihi','note 1',22,'2018-10-28 07:07:06','hoangvanvietanh@gmail.com'),(4,'','nothing',26,'2018-10-28 09:24:10','hoangvanvietanh@gmail.com');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:58
+-- Dump completed on 2018-10-28  9:36:11

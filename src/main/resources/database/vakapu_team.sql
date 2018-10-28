@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `team` (
   `member_amount` int(11) DEFAULT NULL,
   `project_amount` int(11) DEFAULT NULL,
   PRIMARY KEY (`idteam`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (7,'Test Team 1','nothing','hoangvanvietanh@gmail.com',1,1),(8,'Test Team 2','nothing','hoangvanvietanh@gmail.com',1,1),(9,'next','test','hoangvanvietanh@gmail.com',1,1),(10,'test111','s','hoangvanvietanh@gmail.com',1,0),(11,'hello','nothing','hoangvanvietanh@gmail.com',3,0),(12,'Test team ne','nothing impossible','hoangvanvietanh@gmail.com',6,0),(13,'Hello Viet Anh','Meo','hoangvanvietanh@gmail.com',6,0),(14,'test','123','hoangvanvietanh@gmail.com',3,1),(15,'asd','asd','hoangvanvietanh@gmail.com',4,0),(16,'hihihihi','test','hoangvanvietanh@gmail.com',1,0),(17,'khanhs','nothing','hoangvanvietanh@gmail.com',4,0),(18,'test leave','hihi','hoangvanvietanh@gmail.com',3,0),(19,'hehe','hihihi','hoangvanvietanh@gmail.com',4,0),(20,'Hoang Van Viet Anh','Hoang Van Viet Anh','hoangvanvietanh@gmail.com',4,0),(21,'test update team','nothing','hoangvanvietanh@gmail.com',4,0),(22,'viet13','123','hoangvanvietanh@gmail.com',2,1),(23,'test create team','hihi','hoangvanvietanh@gmail.com',4,1),(24,'vietanh1113','vietanh','hoangvanvietanh@gmail.com',5,1),(25,'test Team 1','hello Viet Anh','hoangvanvietanh@gmail.com',6,9);
+INSERT INTO `team` VALUES (7,'Test Team 1','nothing','hoangvanvietanh@gmail.com',1,1),(8,'Test Team 2','nothing','hoangvanvietanh@gmail.com',1,1),(9,'next','test','hoangvanvietanh@gmail.com',1,1),(10,'test111','s','hoangvanvietanh@gmail.com',1,0),(11,'helloVietAnh','nothing','hoangvanvietanh@gmail.com',3,0),(12,'Test team ne','nothing impossible','hoangvanvietanh@gmail.com',6,0),(13,'Hello Viet Anh','Meo','hoangvanvietanh@gmail.com',6,0),(14,'test','123','hoangvanvietanh@gmail.com',3,1),(15,'asd','asd','hoangvanvietanh@gmail.com',4,0),(16,'hihihihi','test','hoangvanvietanh@gmail.com',1,0),(17,'khanhs','nothing','hoangvanvietanh@gmail.com',4,0),(18,'test leave','hihi','hoangvanvietanh@gmail.com',3,0),(19,'hehe','hihihi','hoangvanvietanh@gmail.com',4,0),(20,'Hoang Van Viet Anh','Hoang Van Viet Anh','hoangvanvietanh@gmail.com',4,0),(21,'test update team','nothing','hoangvanvietanh@gmail.com',4,0),(22,'viet13','123','hoangvanvietanh@gmail.com',2,1),(23,'test create team','hihi','hoangvanvietanh@gmail.com',4,1),(24,'vietanh1113','vietanh','hoangvanvietanh@gmail.com',5,1),(25,'test Team 123','hello Viet Anh','hoangvanvietanh@gmail.com',6,12),(26,'test Team 2','hihi',NULL,1,0),(27,'test Team 2','asd',NULL,5,0),(28,'test team 2','asd',NULL,4,2),(29,'test Team 3','hihi',NULL,5,1),(30,'test Team 4','nothing',NULL,3,0),(31,'team 4','1',NULL,4,0),(32,'team 5','s',NULL,2,0),(33,'test','123',NULL,2,0);
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  0:23:59
+-- Dump completed on 2018-10-28  9:36:11
