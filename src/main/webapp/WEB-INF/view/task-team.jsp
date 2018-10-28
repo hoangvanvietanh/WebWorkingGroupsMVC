@@ -333,60 +333,21 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body">
-
-										<div class="card card-note">
+										
 										<c:forEach var="note" items="${notes }">
-											<div class="card-header">
-												<div class="media align-items-center">
-													<img alt="Peggy Brown" src="assets/img/avatar-female-2.jpg"
-														class="avatar" data-toggle="tooltip"
-														data-title="Peggy Brown" data-filter-by="alt" />
-													<div class="media-body">
-														<h4 class="mb-0" data-filter-by="text">${note.titleNotes }</h4>
-													</div>
-												</div>
-												<div class="d-flex align-items-center">
-													<span data-filter-by="text">Just now</span>
-													<div class="ml-1 dropdown card-options">
-														<button class="btn-options" type="button"
-															id="note-dropdown-button-1" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item text-danger" href="#">Delete</a>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card-body" data-filter-by="text">
-												<h6 data-filter-by="text">${note.emailUser}</h6>
-											</div>
-											<div class="card-body" data-filter-by="text">
-												<h6 data-filter-by="text">${note.notes}</h6>
-											</div>
-											<div class="card-body" data-filter-by="text">
-												<h6 data-filter-by="text">${note.date}</h6>
-											</div>
-											</c:forEach>
-											
-										</div>
-
 										<div class="card card-note">
 											<div class="card-header">
 												<div class="media align-items-center">
-													<img alt="David Whittaker"
-														src="assets/img/avatar-male-4.jpg" class="avatar"
-														data-toggle="tooltip" data-title="David Whittaker"
+													<img alt="${note.emailUser}"
+														src="<spring:url value='/profile/avatar/${note.emailUser}'/>" class="avatar"
+														data-toggle="tooltip" data-title="${note.emailUser}"
 														data-filter-by="alt" />
 													<div class="media-body">
-														<h6 class="mb-0" data-filter-by="text">Client
-															preference</h6>
+														<h6 class="mb-0" data-filter-by="text">${note.titleNotes }</h6>
 													</div>
 												</div>
 												<div class="d-flex align-items-center">
-													<span data-filter-by="text">Yesterday</span>
+													<span data-filter-by="text">${note.date}</span>
 													<div class="ml-1 dropdown card-options">
 														<button class="btn-options" type="button"
 															id="note-dropdown-button-2" data-toggle="dropdown"
@@ -402,50 +363,12 @@
 											</div>
 											<div class="card-body" data-filter-by="text">
 												<p>
-													Hi all, just wanted to add that the client has requested
-													that we lean toward a &#39;friendly&#39; aesthetic. I know
-													this seems a little vague but it does give us a starting
-													point for the mood boards. I recommend we use larger
-													corporates who target &#39;youthful&#39; audiences as
-													initial inspiration. <a href="#">@Peggy</a> will take the
-													lead from here.
+													${note.notes}
 												</p>
 
 											</div>
 										</div>
-
-										<div class="card card-note">
-											<div class="card-header">
-												<div class="media align-items-center">
-													<img alt="Ravi Singh" src="assets/img/avatar-male-3.jpg"
-														class="avatar" data-toggle="tooltip"
-														data-title="Ravi Singh" data-filter-by="alt" />
-													<div class="media-body">
-														<h6 class="mb-0" data-filter-by="text">Matboard links</h6>
-													</div>
-												</div>
-												<div class="d-flex align-items-center">
-													<span data-filter-by="text">Just now</span>
-													<div class="ml-1 dropdown card-options">
-														<button class="btn-options" type="button"
-															id="note-dropdown-button-3" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-														</button>
-														<div class="dropdown-menu dropdown-menu-right">
-															<a class="dropdown-item" href="#">Edit</a> <a
-																class="dropdown-item text-danger" href="#">Delete</a>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card-body" data-filter-by="text">
-												<p>
-													Hey guys, here&#39;s the link to the Matboards: <a href="#">https://matboard.io/3928462</a>
-												</p>
-
-											</div>
-										</div>
+										</c:forEach>
 
 									</div>
 								</div>
@@ -474,55 +397,13 @@
 									<!--end of content list head-->
 									<div class="content-list-body">
 										<div class="d-none dz-template">
-											<li class="list-group-item dz-preview dz-file-preview">
-												<div class="media align-items-center dz-details">
-													<ul class="avatars">
-														<li>
-															<div class="avatar bg-primary dz-file-representation">
-																<img class="avatar" data-dz-thumbnail /> <i
-																	class="material-icons">attach_file</i>
-															</div>
-														</li>
-														<li><img alt="David Whittaker"
-															src="assets/img/avatar-male-4.jpg" class="avatar"
-															data-title="David Whittaker" data-toggle="tooltip" /></li>
-													</ul>
-													<div
-														class="media-body d-flex justify-content-between align-items-center">
-														<div class="dz-file-details">
-															<a href="#" class="dz-filename"> <span data-dz-name></span>
-															</a> <br> <span class="text-small dz-size" data-dz-size></span>
-														</div>
-														<img alt="Loader" src="assets/img/loader.svg"
-															class="dz-loading" />
-														<div class="dropdown">
-															<button class="btn-options" type="button"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Download</a> <a
-																	class="dropdown-item" href="#">Share</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#"
-																	data-dz-remove>Delete</a>
-															</div>
-														</div>
-														<button class="btn btn-danger btn-sm dz-remove"
-															data-dz-remove>Cancel</button>
-													</div>
-												</div>
-												<div class="progress dz-progress">
-													<div class="progress-bar dz-upload" data-dz-uploadprogress></div>
-												</div>
-											</li>
-										</div>
 										<form class="dropzone"
 											action="http://mediumra.re/dropzone/upload.php">
 											<span class="dz-message">Drop files here or click here
 												to upload</span>
 										</form>
+										</div>
+										
 										<ul
 											class="list-group list-group-activity dropzone-previews flex-column-reverse">
 
