@@ -93,7 +93,7 @@
 					<div class="nav-item">
 
 						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
+							<a class="nav-link" href="profile/show-profile">Profile CV</a>
 						</div>
 						<div style="float: left; padding-left: 5px;">
 							<a class="nav-link" href="manage">Manage</a>

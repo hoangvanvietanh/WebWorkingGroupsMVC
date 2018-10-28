@@ -144,4 +144,11 @@ public class UserController {
 		userServices.updateProfile(user);
 		return "redirect:/profile";
 	}
+	@RequestMapping(value="/show-profile",method = RequestMethod.GET)
+	public String create(Model model) {
+		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
+		model.addAttribute("user", user);
+		return "profile-cv";
+	}
 }
