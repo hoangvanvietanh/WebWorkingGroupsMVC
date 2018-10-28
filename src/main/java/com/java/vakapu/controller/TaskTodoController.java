@@ -1,5 +1,6 @@
 package com.java.vakapu.controller;
 
+import java.io.InputStream;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -53,18 +54,23 @@ public class TaskTodoController {
 	
 
 	@GetMapping
-	public String teamProject(@RequestParam("idTask") int idTask, @ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,
+	public String teamProject(@RequestParam("idTask") int idTask,@ModelAttribute("idteam") int idTeam, @RequestParam(name="idnote") int idNote,@ModelAttribute("idproject") int idProject,
 			Model model, ModelMap modelMap) throws ParseException {
 		modelMap.put("idtask", idTask);
 		String emailUser = accountServices.getEmailUser();
-		//String email=accountServices.getEmailUser();
+		
 		TaskTeamProject task = taskServices.findById(idTask);
 		Notes note=new Notes();
+		Notes noteEdit= noteServices.findByID(idNote);
 		
 		TaskModel editTask=new TaskModel();
 		NoteModel noteM=new NoteModel();
+		NoteModel noteE=new NoteModel();
+		
 		noteM.fromNote(note);
+		noteE.fromNote(noteEdit);
 		editTask.fromTask(task);
+		
 		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);
 		List<Todo> listTodo = taskServices.findTodoByIdTask(idTask);
 		List<Notes> listNotes= noteServices.findAllNote(idTask);
@@ -85,6 +91,7 @@ public class TaskTodoController {
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("note",noteM);
+		model.addAttribute("editNote", noteE);
 		model.addAttribute("todo", listTodo);
 		model.addAttribute("member", listMember);
 		model.addAttribute("notes", listNotes);
@@ -161,6 +168,24 @@ public class TaskTodoController {
 		noteServices.createNote(note);
 		
 		return "redirect:/task-todo?idTask="+idtask;
+		
+	}
+	
+	@RequestMapping(value="edit-note",method=RequestMethod.POST)
+	public String editNote(@ModelAttribute("editNote") NoteModel editNote,@ModelAttribute("idtask") int idtask ,
+			BindingResult result,Model model) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/task-todo?idTask="+idtask;
+		}
+		
+		
+		Notes note= editNote.toNote();
+		noteServices.updateNote(note);
+		
+		return "redirect:/task-todo?idTask="+idtask;
+		
 		
 	}
 	
