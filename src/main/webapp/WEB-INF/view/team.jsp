@@ -35,6 +35,9 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 
 <body>
@@ -60,9 +63,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
-							</div>
+							<a href="profile" class="dropdown-item">Accounts </a> <a
+								href="logout" class="dropdown-item">Log Out</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -117,8 +120,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts </a> <a
+									href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -256,19 +259,34 @@
 														</ul>
 														<div class="card-meta d-flex justify-content-between">
 															<div class="d-flex align-items-center">
-																<i class="material-icons mr-1">playlist_add_check</i> <span
-																	class="text-small">${project.taskDone}/${project.totalTask}</span>
+																<i class="material-icons mr-1">playlist_add_check</i>
+
+																<c:choose>
+																	<c:when
+																		test="${project.taskDone == 0 and project.totalTask ==0}">
+																		<span>-/-</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span>${project.taskDone}/${project.totalTask}</span>
+																	</c:otherwise>
+																</c:choose>
+
+
 															</div>
 															<c:choose>
-															<c:when test="${project.due == 0}">
-																<span class="text-small" data-filter-by="text">Click on the project to start</span>
-															</c:when>
-															<c:otherwise>
-																<span class="text-small" data-filter-by="text">Due
-																${project.due} days</span>
-															</c:otherwise>
+																<c:when test="${project.due == -1}">
+																	<span class="text-small" data-filter-by="text">Click
+																		on the project to start</span>
+																</c:when>
+																<c:when test="${project.due == 0}">
+																	<span class="text-small" data-filter-by="text">Today</span>
+																</c:when>
+																<c:otherwise>
+																	<span class="text-small" data-filter-by="text">Due
+																		${project.due} days</span>
+																</c:otherwise>
 															</c:choose>
-															
+
 														</div>
 													</div>
 												</div>
@@ -455,7 +473,7 @@
 																</label>
 															</div>
 														</c:forEach>
-												
+
 													</div>
 												</div>
 											</div>
@@ -509,24 +527,27 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Project name" path="name" />
+														placeholder="Project name" path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Project description" path="description"></form:textarea>
+														placeholder="Project description" path="description"
+														required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Project start" path="startDate" />
+													<form:input class="form-control col" id="StartDate"
+														type="date" placeholder="Project start" path="startDate"
+														required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Project due" path="endDate" />
+													<form:input class="form-control col" id="EndDate"
+														type="date" placeholder="Project due" path="endDate"
+														required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -540,7 +561,7 @@
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-everyone"
 																path="visibility" class="custom-control-input"
-																value="Everyone" />
+																value="Everyone" checked="checked" />
 															<label class="custom-control-label"
 																for="visibility-everyone">Everyone</label>
 														</div>
@@ -587,8 +608,7 @@
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>
-																<c:when
-																	test="${member.member.email eq emailUser}">
+																<c:when test="${member.member.email eq emailUser}">
 																	<form:input type="hidden" path="email"
 																		value="${member.member.email}" />
 																</c:when>
@@ -687,8 +707,19 @@
 
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#EndDate").change(function() {
+				var startDate = document.getElementById("StartDate").value;
+				var endDate = document.getElementById("EndDate").value;
 
-
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate").value = "";
+				}
+			});
+		});
+	</script>
 
 </body>
 

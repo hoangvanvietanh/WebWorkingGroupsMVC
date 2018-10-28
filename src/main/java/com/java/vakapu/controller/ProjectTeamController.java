@@ -137,6 +137,7 @@ public class ProjectTeamController {
 		TaskTeamProject task = taskModel.toTask();
 		task.setOwner(emailUser);
 		task.setCompleted(0);
+		task.setDue(-1);
 		TaskTeamProject task2 =taskServices.create(task);
 		String[] emailStore = taskModel.getEmail();
 		TeamProject pro = proServices.find(idProject);

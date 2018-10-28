@@ -35,6 +35,9 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 
 <body>
@@ -539,24 +542,24 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Task name" path="name" name="task-name" />
+														placeholder="Task name" path="name" name="task-name" required="required"/>
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Task description" path="description"></form:textarea>
+														placeholder="Task description" path="description" required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task start" path="startDate" />
+														placeholder="Task start" id="StartDate" path="startDate" required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task due" path="endDate" />
+														placeholder="Task due" id="EndDate" path="endDate" required="required"/>
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -786,6 +789,19 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#EndDate").change(function() {
+				var startDate = document.getElementById("StartDate").value;
+				var endDate = document.getElementById("EndDate").value;
+
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate").value = "";
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>

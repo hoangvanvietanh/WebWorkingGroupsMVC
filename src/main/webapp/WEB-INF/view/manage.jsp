@@ -259,7 +259,8 @@
 																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 															</c:when>
-															<c:when test="${project.teamProject.due le 7 and project.teamProject.due ge 5 }">
+															<c:when
+																test="${project.teamProject.due le 7 and project.teamProject.due ge 5 }">
 																<div class="progress-bar bg-warning" role="progressbar"
 																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
@@ -270,7 +271,7 @@
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 															</c:otherwise>
 														</c:choose>
-													
+
 													</div>
 													<div class="card-body">
 														<div class="dropdown card-options">
@@ -310,11 +311,32 @@
 														</ul>
 														<div class="card-meta d-flex justify-content-between">
 															<div class="d-flex align-items-center">
-																<i class="material-icons mr-1">playlist_add_check</i> <span
-																	class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
+																<i class="material-icons mr-1">playlist_add_check</i>
+																<c:choose>
+																	<c:when
+																		test="${project.teamProject.taskDone == 0 and project.teamProject.totalTask == 0}">
+																		<span class="text-small">-/-</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
+																	</c:otherwise>
+																</c:choose>
+
 															</div>
-															<span class="text-small" data-filter-by="text">due
-																${project.teamProject.due} days</span>
+															<c:choose>
+																<c:when test="${project.teamProject.due == 0}">
+																	<span class="text-small" data-filter-by="text">Today</span>
+																</c:when>
+																<c:when test="${project.teamProject.due == -1}">
+																	<span class="text-small" data-filter-by="text">Click
+																		on the project to start</span>
+																</c:when>
+																<c:otherwise>
+																	<span class="text-small" data-filter-by="text">due
+																		${project.teamProject.due} days</span>
+																</c:otherwise>
+															</c:choose>
+
 														</div>
 													</div>
 												</div>
@@ -350,31 +372,47 @@
 										<c:forEach var="task" items="${task}">
 											<div class="card card-task">
 												<div class="progress">
-														<c:choose>
-															<c:when test="${task.taskTeamProject.due lt 5}">
-																<div class="progress-bar bg-danger" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:when test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:otherwise>
-																<div class="progress-bar bg-success" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:otherwise>
-														</c:choose>	
+													<c:choose>
+														<c:when test="${task.taskTeamProject.due lt 5}">
+															<div class="progress-bar bg-danger" role="progressbar"
+																style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+														</c:when>
+														<c:when
+															test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+															<div class="progress-bar bg-warning" role="progressbar"
+																style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+														</c:when>
+														<c:otherwise>
+															<div class="progress-bar bg-success" role="progressbar"
+																style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+														</c:otherwise>
+													</c:choose>
 												</div>
 												<div class="card-body">
 													<div class="card-title">
 														<a
 															href="task-todo?idTask=${task.taskTeamProject.id}&idTeam=0">
 															<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
-														</a> <span class="text-small">due
-															${task.taskTeamProject.due} days</span>
+														</a>
+
+														<c:choose>
+															<c:when test="${task.taskTeamProject.due == 0}">
+																<span class="text-small" data-filter-by="text">Today</span>
+															</c:when>
+															<c:when test="${task.taskTeamProject.due == -1}">
+																<span class="text-small" data-filter-by="text">Click
+																	on the project to start</span>
+															</c:when>
+															<c:otherwise>
+																<span class="text-small">due
+																	${task.taskTeamProject.due} days</span>
+															</c:otherwise>
+														</c:choose>
+
+
 													</div>
 													<div class="card-meta">
 														<ul class="avatars">
@@ -392,7 +430,16 @@
 															</c:forEach>
 														</ul>
 														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+															<i class="material-icons">playlist_add_check</i> 
+															<c:choose>
+															<c:when test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask == 0}">
+																<span>-/-</span>
+															</c:when>
+															<c:otherwise>
+																<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+															</c:otherwise>
+															</c:choose>
+															
 														</div>
 
 														<div class="dropdown card-options">

@@ -35,6 +35,9 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 
 <body>
@@ -202,7 +205,17 @@
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
-										<i class="material-icons">playlist_add_check</i> <span>${project.taskDone}/${project.totalTask}</span>
+										<i class="material-icons">playlist_add_check</i>
+										<c:choose>
+											<c:when
+												test="${project.taskDone == 0 and project.totalTask ==0}">
+												<span>-/-</span>
+											</c:when>
+											<c:otherwise>
+												<span>${project.taskDone}/${project.totalTask}</span>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 									<span>Due ${project.due} days</span>
 								</div>
@@ -275,8 +288,7 @@
 															</a>
 															<c:choose>
 																<c:when test="${task.due == 0}">
-																	<span class="text-small">Click on the task to
-																		start</span>
+																	<span class="text-small">Today</span>
 																</c:when>
 																<c:otherwise>
 																	<span class="text-small">due ${task.due} days</span>
@@ -299,7 +311,19 @@
 																</c:forEach>
 															</ul>
 															<div class="d-flex align-items-center">
-																<i class="material-icons">playlist_add_check</i> <span>${task.completedAmount}/${task.totalTask}</span>
+																<i class="material-icons">playlist_add_check</i>
+
+																<c:choose>
+																	<c:when
+																		test="${task.completedAmount == 0 and task.totalTask ==0}">
+																		<span>-/-</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span>${task.completedAmount}/${task.totalTask}</span>
+																	</c:otherwise>
+																</c:choose>
+
+
 															</div>
 															<div class="dropdown card-options">
 																<button class="btn-options" type="button"
@@ -487,24 +511,24 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														path="name" name="project-name" />
+														path="name" name="project-name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														path="description"></form:textarea>
+														path="description" required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
-													<form:input path="startDate" class="form-control col"
-														type="date" />
+													<form:input path="startDate" id="StartDate"
+														class="form-control col" type="date" required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														path="endDate" />
+													<form:input class="form-control col" id="EndDate"
+														type="date" path="endDate" required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -623,24 +647,27 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Task name" path="name" />
+														placeholder="Task name" path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Task description" path="description"></form:textarea>
+														placeholder="Task description" path="description"
+														required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task start" path="startDate" />
+														placeholder="Task start" path="startDate" id="StartDate2"
+														required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Task due" path="endDate" />
+													<form:input class="form-control col" id="EndDate2"
+														type="date" placeholder="Task due" path="endDate"
+														required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -772,7 +799,28 @@
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#EndDate").change(function() {
+				var startDate = document.getElementById("StartDate").value;
+				var endDate = document.getElementById("EndDate").value;
 
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate").value = "";
+				}
+			});
+			$("#EndDate2").change(function() {
+				var startDate = document.getElementById("StartDate2").value;
+				var endDate = document.getElementById("EndDate2").value;
+
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate2").value = "";
+				}
+			});
+		});
+	</script>
 
 
 </body>
