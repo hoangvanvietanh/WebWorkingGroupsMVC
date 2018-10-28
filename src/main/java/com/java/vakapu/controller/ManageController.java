@@ -97,19 +97,9 @@ public class ManageController {
 		List<TeamMemberTeamProject> userProjectStore = projectServices.findAll();
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<TeamMemberTaskTeamProject> task = taskServices.findByEmailUser(emailUser);
-//		for(TeamMemberTaskTeamProject t:task)
-//		{
-//			t.getTaskTeamProject().getName();
-//		}
+
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
-//		Set<Integer> listProject = new HashSet<>();
-//		List<TaskTeamProject> taskTeam = new ArrayList<>();
-//		for (TeamMemberTaskTeamProject t : task) {
-//			listProject.add(t.getTaskTeamProject().getId());
-//		}
-//		for (Integer p : listProject) {
-//			taskTeam.add(taskServices.findById(p));
-//		}
+
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		TeamModel teamModel = new TeamModel();
 		model.addAttribute("messages", listMes);
@@ -139,14 +129,7 @@ public class ManageController {
 		System.out.println("test leng:" +teamModel.getEmail().length);
 		String[] email = teamModel.getEmail();
 		String emailUser = accountServices.getEmailUser();
-//		User user = userServices.findByEmail(emailUser);
-//		team.setOwner(emailUser);
 		Team team2 = teamServices.createTeam(team);
-//		TeamMember teamMemberAdmin = new TeamMember();
-//		teamMemberAdmin.setMember(user);
-//		teamMemberAdmin.setTeam(team);
-//		
-//		teamMemberServices.create(teamMemberAdmin);
 		int i = 0;
 		for (String e : email) {
 			i++;

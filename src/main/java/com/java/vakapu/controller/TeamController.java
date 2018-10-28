@@ -82,9 +82,6 @@ public class TeamController {
 	private TaskServices taskServices;
 
 	@Autowired
-	private FriendshipServices friendshipServices;
-
-	@Autowired
 	private EmailServices emailServices;
 
 	@Autowired
@@ -100,40 +97,18 @@ public class TeamController {
 		TeamProjectModel newProject = new TeamProjectModel();
 		modelMap.put("idteam", idTeam);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
-		for (TeamMember t : member) {
-			System.out.println("gia tri email:" + t.getMember().getEmail());
-		}
-		List<TeamMemberTeamProject> teamProject = proServices.findByIdTeam(idTeam);
-		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
-		Set<User> listFriend = new HashSet<>();
-		for (Friendship f : myFriend) {
-			listFriend.add(f.getEmailFriend());
-		}
-		for (Friendship f : myFriend) {
-			for (TeamMember t : member) {
-				if (f.getEmailFriend().getEmail().equals(t.getMember().getEmail())) {
-					listFriend.remove(f.getEmailFriend());
-				}
-
-			}
-		}
-
-		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
-		Set<Integer> listProject = new HashSet<>();
+		List<Integer> teamProject = proServices.findByIdTeam2(idTeam);
 		List<TeamProject> teamProjects = new ArrayList<>();
-		for (TeamMemberTeamProject t : teamProject) {
-			listProject.add(t.getTeamProject().getId());
+		for(int t:teamProject)
+		{
+			teamProjects.add(proServices.find(t));
 		}
-		for (Integer p : listProject) {
-			teamProjects.add(proServices.find(p));
-		}
+		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
 		team.setProjectAmount(teamProjects.size());
 		team.setMemberAmount(member.size());
 		teamServices.updateTeam(team);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		model.addAttribute("messages", listMes);
-		model.addAttribute("addFriend", listFriend);
-		model.addAttribute("myFriend", myFriend);
 		model.addAttribute("teamModel", teamModel);
 		model.addAttribute("newProject", newProject);
 		model.addAttribute("emailUser", emailUser);
@@ -161,7 +136,6 @@ public class TeamController {
 		}
 		String email = accountServices.getEmailUser();
 		User user = userServices.findByEmail(email);
-//		TeamMember team=teamMemberServices.getUserTeam(idTeam, email);
 		String[] emailStore = newProject.getEmail();
 
 		if (emailStore.length != 0) {
@@ -181,16 +155,7 @@ public class TeamController {
 				c.setTeamProject(b);
 				memberProjectServices.create(c);
 			}
-
-			List<TeamMemberTeamProject> teamProject = proServices.findByEmail(email);
-			for (TeamMemberTeamProject t : teamProject) {
-				int id = t.getTeamProject().getId();
-				TeamProject teamPro = proServices.find(id);
-				teamPro.setDue(dateServices.caculatorDue(t.getTeamProject().getEndDate()));
-				proServices.updateProject(teamPro);
-			}
 		}
-
 		return "redirect:/team?idTeam=" + idTeam;
 
 	}
@@ -233,9 +198,7 @@ public class TeamController {
 				User user2 = userServices.findByEmail(email);
 				System.out.println("email User2:" + user2.getEmail());
 				NotificationSystem mess = new NotificationSystem();
-//				mess.setUserFrom(user);
 				mess.setToUser(user2);
-//				mess.setText("Test");
 				mess.setUserFrom(user);
 				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
 						+ user.getName() + "\nThis is your link: "
@@ -244,7 +207,6 @@ public class TeamController {
 				mess.setStatus(0);
 				mess.setDate(time);
 				notificationsSystemServices.create(mess);
-
 			}
 		}
 

@@ -68,10 +68,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="/profile" class="dropdown-item">Profile</a> <a
-								href="account/change-password" class="dropdown-item">Password
-								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
-						</div>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -126,9 +125,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Profile</a> <a
-									href="account/change-password" class="dropdown-item">Password
-									Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>

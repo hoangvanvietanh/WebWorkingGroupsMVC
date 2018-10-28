@@ -60,10 +60,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="/profile" class="dropdown-item">Profile</a> <a
-								href="account/change-password" class="dropdown-item">Password
-								Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
-						</div>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -118,9 +117,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Profile</a> <a
-									href="account/change-password" class="dropdown-item">Password
-									Setting</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts
+								</a> <a href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -246,7 +244,16 @@
 														<div class="card-title">
 															<a href="task-todo?idTask=${task.id}">
 																<h6 data-filter-by="text">${task.name}</h6>
-															</a> <span class="text-small">due ${task.due} days</span>
+															</a> 
+															<c:choose>
+															 <c:when test="${task.due == 0}">
+															 	<span class="text-small">Click on the task to start</span>
+															 </c:when>
+															 <c:otherwise>
+															 	<span class="text-small">due ${task.due} days</span>
+															 </c:otherwise>
+															</c:choose>
+															
 														</div>
 														<div class="card-meta">
 															<ul class="avatars">
@@ -756,19 +763,30 @@
 
 														<c:forEach var="user" items="${user}">
 															<input type="hidden" value="${i=i+1}">
-															<div class="custom-control custom-checkbox">
-																<form:checkbox path="email" class="custom-control-input"
-																	id="${i}" value="${user.teamMember.member.email}" />
-																<form:label class="custom-control-label" for="${i}"
-																	path="email">
-																	<div class="d-flex align-items-center">
-																		<img alt="${user.teamMember.member.name}"
-																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
-																			class="avatar mr-2" /> <span class="h6 mb-0"
-																			data-filter-by="text">${user.teamMember.member.name}</span>
+															<c:choose>
+																<c:when
+																	test="${user.teamMember.member.email eq emailUser}">
+																	<form:input type="hidden" path="email"
+																		value="${emailUser}" />
+																</c:when>
+																<c:otherwise>
+																	<div class="custom-control custom-checkbox">
+																		<form:checkbox path="email"
+																			class="custom-control-input" id="${i}"
+																			value="${user.teamMember.member.email}" />
+																		<form:label class="custom-control-label" for="${i}"
+																			path="email">
+																			<div class="d-flex align-items-center">
+																				<img alt="${user.teamMember.member.name}"
+																					src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																					class="avatar mr-2" /> <span class="h6 mb-0"
+																					data-filter-by="text">${user.teamMember.member.name}</span>
+																			</div>
+																		</form:label>
 																	</div>
-																</form:label>
-															</div>
+																</c:otherwise>
+															</c:choose>
+
 														</c:forEach>
 
 													</div>
