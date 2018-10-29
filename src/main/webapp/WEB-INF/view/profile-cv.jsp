@@ -81,16 +81,19 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
 		id="sideNav">
-		<form class="form-inline my-lg-0 my-2">
+		<form action="profile-cv" method="post"
+			class="form-inline my-lg-0 my-2">
 			<div class="input-group input-group-dark input-group-round">
 				<div class="input-group-prepend">
 					<span class="input-group-text"> <i class="material-icons">search</i>
 					</span>
 				</div>
-				<input type="search" class="form-control form-control-dark"
-					placeholder="Search" aria-label="Search app"
-					aria-describedby="search-app">
+				<input type="search" name="email"
+					class="form-control form-control-dark" placeholder="Search"
+					aria-label="Search app" aria-describedby="search-app">
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 		</form>
 		<a class="navbar-brand js-scroll-trigger" href="#page-top"> <span
 			class="d-block d-lg-none">${user.name}</span> <span
@@ -175,10 +178,10 @@
 						<div class="subheading mb-3">${user.education}</div>
 
 					</div>
-				
+
 				</div>
 
-				
+
 
 			</div>
 		</section>
@@ -228,7 +231,7 @@
 			<div class="my-auto">
 				<h2 class="mb-5">Summary</h2>
 				<p>${user.summary}</p>
-				
+
 			</div>
 		</section>
 

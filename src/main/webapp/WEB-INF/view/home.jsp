@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page import="java.util.*"%>
 <!doctype html>
 <html lang="en">
 
@@ -53,7 +54,6 @@
 				style="width: 45px; height: 45px" alt="Vakapu"
 				src="resources/img/logo1.png" />
 			</a>
-
 			<div class="d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbar-collapse" aria-controls="navbar-collapse"
@@ -68,9 +68,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
-							</div>
+							<a href="profile" class="dropdown-item">Accounts </a> <a
+								href="logout" class="dropdown-item">Log Out</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -78,27 +78,20 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
+					<form action="profile-cv" method="post"
+						class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
 								</span>
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
+							<input type="search" name="email"
+								class="form-control form-control-dark" placeholder="Search"
+								aria-label="Search app" aria-describedby="search-app">
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
-
-					<div class="nav-item">
-
-						<div style="float: left;">
-							<a class="nav-link" href="profile-cv">Profile CV</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -112,9 +105,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="team">Team</a> <a
-								class="dropdown-item" href="team-project">Project</a> <a
-								class="dropdown-item" href="#">Task</a>
+							<a class="dropdown-item" href="manage">Manage</a> <a
+								class="dropdown-item" href="profile-cv">Profile CV</a>
 						</div>
 					</div>
 					<div class="d-none2 d-lg-block">
@@ -125,8 +117,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts </a> <a
+									href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -141,12 +133,14 @@
 						<div
 							class="text-center d-flex align-items-center justify-content-center pt-5">
 							<div>
-								<img alt="Empty State" src="assets/img/empty-state.svg"
+								<img alt="Empty State" src="resources/img/logo1.png"
 									class="w-50" style="opacity: .8" /> <span
-									class="h3 d-block mt-3">Content Here</span>
-								<p>Add your page content here</p>
-								<a class="btn btn-primary btn-sm" href="pages-layouts.html">Back
-									to Page Layouts</a>
+									class="h3 d-block mt-3">Hello</span>
+								<iframe scrolling="no" frameborder="no" clocktype="html5"
+									style="overflow: hidden; border: 0; margin: 0; padding: 0; width: 450px; height: 165px;"
+									src="https://www.clocklink.com/html5embed.php?clock=044&timezone=ICT&color=white&size=450&Title=&Message=&Target=&From=2018,1,1,0,0,0&Color=white"></iframe>
+								<p>How are you?</p>
+
 							</div>
 						</div>
 					</div>

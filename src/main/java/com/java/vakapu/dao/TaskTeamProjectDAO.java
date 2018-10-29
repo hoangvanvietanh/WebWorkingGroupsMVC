@@ -46,6 +46,12 @@ public class TaskTeamProjectDAO {
 		return query.getResultList();
 	}
 	
+	public List<Integer> findByIdProjectAll2(int idProject) {
+		TypedQuery<Integer> query = getSession().createQuery("select distinct a.taskTeamProject.id from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject",Integer.class);
+		query.setParameter("idProject", idProject);
+		return query.getResultList();
+	}
+	
 	public long findTaskDoneByIdProject(int idProject) {
 		Query<Long> query = getSession().createQuery("select count(distinct a.taskTeamProject.id) from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject and a.taskTeamProject.completed like '1'",Long.class);
 		query.setParameter("idProject", idProject);

@@ -73,27 +73,22 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
+					<form action="profile-cv" method="post"
+						class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
 								</span>
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
+							<input type="search" name="email"
+								class="form-control form-control-dark" placeholder="Search"
+								aria-label="Search app" aria-describedby="search-app">
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
 
-					<div class="nav-item">
-
-						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
+					
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -107,9 +102,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="team">Team</a> <a
-								class="dropdown-item" href="team-project">Project</a> <a
-								class="dropdown-item" href="#">Task</a>
+							<a class="dropdown-item" href="manage">Manage</a> <a
+								class="dropdown-item" href="profile-cv">Profile CV</a>
 						</div>
 					</div>
 					<div class="d-none2 d-lg-block">

@@ -140,7 +140,7 @@ public class TeamController {
 
 		if (emailStore.length != 0) {
 			TeamProject a = newProject.toProject();
-			a.setDue(-1);
+			a.setDue(-2);
 			TeamProject b = proServices.createProject(a);
 			ProjectHistory proHis = new ProjectHistory();
 			proHis.setUser(user.getName());

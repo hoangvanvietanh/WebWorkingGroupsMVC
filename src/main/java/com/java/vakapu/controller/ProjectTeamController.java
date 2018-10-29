@@ -2,6 +2,7 @@ package com.java.vakapu.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -83,18 +84,15 @@ public class ProjectTeamController {
 		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
 
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
-		List<TeamMemberTaskTeamProject> task = taskServices.findTaskByIdProjectAll(idProject);
-		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
-		Set<Integer> listProject = new HashSet<>();
+		List<Integer> task = taskServices.findTaskByIdProjectAll2(idProject);
 		List<TaskTeamProject> taskTeam = new ArrayList<>();
-		for(TeamMemberTaskTeamProject t: task)
-		{
-			listProject.add(t.getTaskTeamProject().getId());
-		}
-		for(Integer p:listProject)
+		for(Integer p:task)
 		{
 			taskTeam.add(taskServices.findById(p));
 		}
+		
+		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
+	
 		int taskDone = taskServices.findTaskDoneByIdProject(idProject);
 		teamProject.setTaskDone(taskDone);
 		teamProject.setTotalTask(taskTeam.size());
@@ -114,7 +112,6 @@ public class ProjectTeamController {
 		model.addAttribute("emailUser", emailUser);
 		model.addAttribute("idTeam", idTeam);
 		model.addAttribute("userLogin", user);
-		
 		return "project-team";
 	}
 
@@ -137,7 +134,7 @@ public class ProjectTeamController {
 		TaskTeamProject task = taskModel.toTask();
 		task.setOwner(emailUser);
 		task.setCompleted(0);
-		task.setDue(-1);
+		task.setDue(-2);
 		TaskTeamProject task2 =taskServices.create(task);
 		String[] emailStore = taskModel.getEmail();
 		TeamProject pro = proServices.find(idProject);
