@@ -20,4 +20,19 @@ public class FriendshipServices {
 	{
 		return friendshipDAO.findFriend(emailUser,status);
 	}
+	
+	public Friendship findFriendAndUser(String emailUser, String emailFriend)
+	{
+		return friendshipDAO.findFriendAndUser(emailUser, emailFriend);
+	}
+	
+	public Friendship create(Friendship friend)
+	{
+		return friendshipDAO.create(friend);
+	}
+	
+	public Friendship update(Friendship friend)
+	{
+		return friendshipDAO.update(friend);
+	}
 }

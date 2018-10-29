@@ -99,8 +99,7 @@ public class TeamController {
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
 		List<Integer> teamProject = proServices.findByIdTeam2(idTeam);
 		List<TeamProject> teamProjects = new ArrayList<>();
-		for(int t:teamProject)
-		{
+		for (int t : teamProject) {
 			teamProjects.add(proServices.find(t));
 		}
 		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
@@ -190,21 +189,22 @@ public class TeamController {
 			@ModelAttribute("messages") String messages, Model model) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime local=LocalDateTime.now();
-		String time=date.format(local);
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
 		List<Account> accountStore = accountServices.findAll();
 		for (Account a : accountStore) {
 			if (email.equals(a.getEmail())) {
 				User user2 = userServices.findByEmail(email);
-				System.out.println("email User2:" + user2.getEmail());
 				NotificationSystem mess = new NotificationSystem();
 				mess.setToUser(user2);
 				mess.setUserFrom(user);
 				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
-						+ user.getName() + "\nThis is your link: "
-						+ "http://localhost:8080/time-is-gold/team/joinTeam?idTeam=" + idTeam;
-				mess.setMessages(messa + "\nAnd your message: " + messages);
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s\">Agree</a>", idTeamString);
+				mess.setMessages(messa + messe + "<br>Your message: " + messages);
 				mess.setStatus(0);
 				mess.setDate(time);
 				notificationsSystemServices.create(mess);

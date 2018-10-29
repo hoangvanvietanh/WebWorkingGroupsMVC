@@ -140,7 +140,7 @@
 									style="overflow: hidden; border: 0; margin: 0; padding: 0; width: 450px; height: 165px;"
 									src="https://www.clocklink.com/html5embed.php?clock=044&timezone=ICT&color=white&size=450&Title=&Message=&Target=&From=2018,1,1,0,0,0&Color=white"></iframe>
 								<p>How are you?</p>
-
+								<a class="btn btn-primary btn-sm" href="team/joinTeam?idTeam=">Agree</a>
 							</div>
 						</div>
 					</div>
