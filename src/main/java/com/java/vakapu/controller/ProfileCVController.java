@@ -89,7 +89,7 @@ public class ProfileCVController {
 		NotificationSystem mess = new NotificationSystem();
 		mess.setToUser(userFriend);
 		mess.setUserFrom(user);
-		String messa = "Hello " + user.getName() + ",You have invitation to add friend form "
+		String messa = "Hello " + userFriend.getEmail() + ",You have invite to add friend form "
 				+ user.getName() + "<br>Do you agree?<br>";
 		String messe = String.format(
 				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/agree?emailFriend=%s&emailUser=%s\">Agree</a>", emailFriend,emailUser);

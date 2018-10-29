@@ -879,12 +879,12 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Team name" path="name" />
+														placeholder="Team name" path="name" required="required"/>
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" path="description" />
+														placeholder="Team description" path="description" required="required"/>
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-add-members"
