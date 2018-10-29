@@ -107,6 +107,10 @@ public class ProfileCVController {
 	public String agress(Model model, @RequestParam("emailFriend") String emailFriend,
 			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
 		
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		
 		Friendship friendship = friendshipServices.findFriendAndUser(emailUser, emailFriend);
 		friendship.setStatus(1);
 		friendshipServices.update(friendship);
@@ -121,9 +125,15 @@ public class ProfileCVController {
 		
 		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
 		String messe = String.format(
-				"You and <a>%s</a> become a friend",user2.getName());
+				"You and <a>%s</a> become a friend",user1.getName());
 		noti.setMessages(messe);
 		notificationsSystemServices.update(noti);
+		
+		NotificationSystem notiNew = new NotificationSystem();
+		notiNew.setToUser(user1);
+		notiNew.setDate(time);
+		notiNew.setMessages(user2.getName() + " already invited friend");
+		notificationsSystemServices.create(notiNew);
 		return "redirect:/home";
 
 	}
