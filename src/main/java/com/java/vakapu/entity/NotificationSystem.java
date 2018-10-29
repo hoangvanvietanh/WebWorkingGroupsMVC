@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class NotificationSystem {
 
 	@Id
+	@GeneratedValue
 	@Column(name="idnotification")
 	private int id;
 	

@@ -88,7 +88,7 @@
 							value="${_csrf.token}" />
 					</form>
 
-					
+
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -229,8 +229,11 @@
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
 																<a class="dropdown-item" href="#" data-toggle="modal"
-																	data-target="#team-manage-modal">Edit</a> <a
-																	class="dropdown-item" href="#">Share</a>
+																	data-target="#team-manage-modal">Edit</a>
+																<div class="dropdown-divider"></div>
+																<a class="dropdown-item text-danger"
+																	href="manage/leaveProject?idProject=${project.id}">Leave
+																	Project</a>
 															</div>
 														</div>
 														<div class="card-title">
@@ -268,7 +271,7 @@
 
 															</div>
 															<c:choose>
-																<c:when test="${project.due == -1}">
+																<c:when test="${project.due == -2}">
 																	<span class="text-small" data-filter-by="text">Click
 																		on the project to start</span>
 																</c:when>
@@ -454,9 +457,9 @@
 
 														<c:forEach var="member" items="${member}">
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="${member.member.email}" checked> <label
-																	class="custom-control-label"
+																<form:checkbox path="email" class="custom-control-input"
+																	id="${member.member.email}" value="${member.member.email}" checked="checked"/>
+																<form:label path="email" class="custom-control-label"
 																	for="${member.member.email}">
 																	<div class="d-flex align-items-center">
 																		<img alt="${member.member.name}"
@@ -464,7 +467,7 @@
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.member.name}</span>
 																	</div>
-																</label>
+																	</form:label>
 															</div>
 														</c:forEach>
 

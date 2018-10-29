@@ -35,7 +35,7 @@ public class ProfileCVController {
 
 	@Autowired
 	private FriendshipServices friendshipServices;
-	
+
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices;
 
@@ -81,31 +81,36 @@ public class ProfileCVController {
 		addFriend.setEmailFriend(userFriend);
 		addFriend.setStatus(0);
 		friendshipServices.create(addFriend);
-		
+
 		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
-		
+
 		NotificationSystem mess = new NotificationSystem();
 		mess.setToUser(userFriend);
 		mess.setUserFrom(user);
-		String messa = "Hello " + userFriend.getEmail() + ",You have invite to add friend form "
-				+ user.getName() + "<br>Do you agree?<br>";
-		String messe = String.format(
-				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/agree?emailFriend=%s&emailUser=%s\">Agree</a>", emailFriend,emailUser);
-		mess.setMessages(messa + messe);
 		mess.setStatus(0);
 		mess.setDate(time);
-		notificationsSystemServices.create(mess);
+		NotificationSystem mess2 = notificationsSystemServices.create(mess);
+		String messa = "Hello " + userFriend.getName() + ",You have invite to add friend form " + user.getName()
+				+ "<br>Do you agree?<br>";
+		String messe = String.format(
+				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/agree?emailFriend=%s&emailUser=%s&idNotifications=%s\">Agree</a>",
+				emailFriend, emailUser, mess2.getId());
+		mess2.setMessages(messa + messe);
+		notificationsSystemServices.update(mess2);
 
 		return "redirect:/home";
 	}
+
 	@RequestMapping(value = "/agree", method = RequestMethod.GET)
-	public String agress(Model model, @RequestParam("emailFriend") String emailFriend,@RequestParam("emailUser") String emailUser) {
+	public String agress(Model model, @RequestParam("emailFriend") String emailFriend,
+			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
+		
 		Friendship friendship = friendshipServices.findFriendAndUser(emailUser, emailFriend);
 		friendship.setStatus(1);
 		friendshipServices.update(friendship);
-		
+
 		User user1 = userServices.findByEmail(emailUser);
 		User user2 = userServices.findByEmail(emailFriend);
 		Friendship friendAgree = new Friendship();
@@ -114,8 +119,12 @@ public class ProfileCVController {
 		friendAgree.setStatus(1);
 		friendshipServices.create(friendAgree);
 		
-		
+		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
+		String messe = String.format(
+				"You and <a>%s</a> become a friend",user2.getName());
+		noti.setMessages(messe);
+		notificationsSystemServices.update(noti);
 		return "redirect:/home";
-		
+
 	}
 }
