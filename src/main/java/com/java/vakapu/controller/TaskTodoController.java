@@ -12,12 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.java.vakapu.entity.Notes;
@@ -176,19 +174,6 @@ public class TaskTodoController {
 		
 	}
 	
-//	@RequestMapping(value="edit-note",method=RequestMethod.GET)
-//	public String editNoteGet(@RequestParam(name="idnote") int idNote, @ModelAttribute("idtask") int idTask, Model model)
-//	{
-//		Notes note= noteServices.findByID(idNote);
-//		
-//		NoteModel noteE= new NoteModel();
-//		noteE.fromNote(note);
-//		
-//		model.addAttribute("editNote", noteE);
-//		
-//		return "redirect:/task-todo?idTask="+idTask;
-//	}
-	
 	@RequestMapping(value="edit-note",method=RequestMethod.POST)
 	public String editNote(@ModelAttribute("note") NoteModel editNote, @ModelAttribute("idtask") int idtask,
 			BindingResult result,Model model) throws ParseException
@@ -201,5 +186,14 @@ public class TaskTodoController {
 		noteServices.updateNote(editNote);
 		
 		return "redirect:/task-todo?idTask="+idtask;	
+	}
+	
+	@RequestMapping(value="delete",method=RequestMethod.GET)
+	public String deleteNote(@RequestParam(name="idnote") int idnote, @ModelAttribute("idtask") int idtask,Model model)
+	{
+		Notes note=noteServices.findByID(idnote);
+		noteServices.deleteNote(note);
+		
+		return "redirect:/task-todo?idTask="+idtask;
 	}
 }

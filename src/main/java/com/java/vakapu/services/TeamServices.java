@@ -8,11 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.vakapu.dao.TeamDAO;
 import com.java.vakapu.entity.Team;
+import com.java.vakapu.model.TeamModel;
 
 @Service
 @Transactional
 public class TeamServices {
 
+	@Autowired
+	private TeamServices teamServices;
 	@Autowired
 	private TeamDAO TeamDAO;
 	
@@ -25,10 +28,20 @@ public class TeamServices {
 	{
 		return TeamDAO.findByEmail(email);
 	}
-	
-	public Team updateTeam(Team Team)
+	public Team updateTeam(Team team)
 	{
-		return TeamDAO.update(Team);
+		return TeamDAO.update(team);
+	}
+	
+	public void updateTeamModel(TeamModel teamModel)
+	{
+		Team team=teamServices.findById(teamModel.getIdTeam());
+		
+		team.setName(teamModel.getName());
+		team.setDescription(teamModel.getDescription());
+		
+		TeamDAO.update(team);
+		
 	}
 	
 	public Team createTeam(Team Team)
