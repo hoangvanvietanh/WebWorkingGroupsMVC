@@ -35,6 +35,35 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<style type="text/css">
+.done {
+	background-image: url('resources/img/completed2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20%;
+}
+
+.failed {
+	background-image: url('resources/img/failed2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20%;
+}
+
+.warming {
+	background-image: url('resources/img/warming2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10%;
+}
+
+.nothing {
+	background-image: url('resources/img/nothing.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10%;
+}
+</style>
 </head>
 
 <body>
@@ -70,28 +99,20 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
+					<form action="profile-cv" method="post"
+						class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
 								</span>
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
+							<input type="search" name="email"
+								class="form-control form-control-dark" placeholder="Search"
+								aria-label="Search app" aria-describedby="search-app">
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
-
-					<div class="nav-item">
-
-						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
-
 				</div>
 				<div class="d-lg-flex align-items-center">
 
@@ -104,9 +125,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="team">Team</a> <a
-								class="dropdown-item" href="team-project">Project</a> <a
-								class="dropdown-item" href="#">Task</a>
+							<a class="dropdown-item" href="manage">Manage</a> <a
+								class="dropdown-item" href="profile-cv">Profile CV</a>
 						</div>
 					</div>
 					<div class="d-none2 d-lg-block">
@@ -259,7 +279,8 @@
 																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 															</c:when>
-															<c:when test="${project.teamProject.due le 7 and project.teamProject.due ge 5 }">
+															<c:when
+																test="${project.teamProject.due le 7 and project.teamProject.due ge 5 }">
 																<div class="progress-bar bg-warning" role="progressbar"
 																	style="width: ${project.teamProject.taskDone/project.teamProject.totalTask*100}%"
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
@@ -270,7 +291,7 @@
 																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 															</c:otherwise>
 														</c:choose>
-													
+
 													</div>
 													<div class="card-body">
 														<div class="dropdown card-options">
@@ -310,11 +331,32 @@
 														</ul>
 														<div class="card-meta d-flex justify-content-between">
 															<div class="d-flex align-items-center">
-																<i class="material-icons mr-1">playlist_add_check</i> <span
-																	class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
+																<i class="material-icons mr-1">playlist_add_check</i>
+																<c:choose>
+																	<c:when
+																		test="${project.teamProject.taskDone == 0 and project.teamProject.totalTask == 0}">
+																		<span class="text-small">-/-</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span class="text-small">${project.teamProject.taskDone}/${project.teamProject.totalTask}</span>
+																	</c:otherwise>
+																</c:choose>
+
 															</div>
-															<span class="text-small" data-filter-by="text">due
-																${project.teamProject.due} days</span>
+															<c:choose>
+																<c:when test="${project.teamProject.due == 0}">
+																	<span class="text-small" data-filter-by="text">Today</span>
+																</c:when>
+																<c:when test="${project.teamProject.due == -2}">
+																	<span class="text-small" data-filter-by="text">Click
+																		on the project to start</span>
+																</c:when>
+																<c:otherwise>
+																	<span class="text-small" data-filter-by="text">due
+																		${project.teamProject.due} days</span>
+																</c:otherwise>
+															</c:choose>
+
 														</div>
 													</div>
 												</div>
@@ -346,75 +388,456 @@
 								</div>
 								<!--end of content list head-->
 								<div class="content-list-body row">
-									<div class="col-12">
-										<c:forEach var="task" items="${task}">
-											<div class="card card-task">
-												<div class="progress">
-														<c:choose>
-															<c:when test="${task.taskTeamProject.due lt 5}">
-																<div class="progress-bar bg-danger" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:when test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:otherwise>
-																<div class="progress-bar bg-success" role="progressbar"
-																	style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:otherwise>
-														</c:choose>	
-												</div>
-												<div class="card-body">
-													<div class="card-title">
-														<a
-															href="task-todo?idTask=${task.taskTeamProject.id}&idTeam=0">
-															<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
-														</a> <span class="text-small">due
-															${task.taskTeamProject.due} days</span>
-													</div>
-													<div class="card-meta">
-														<ul class="avatars">
-															<c:forEach var="userTask" items="${userTask}">
-																<c:if
-																	test="${userTask.taskTeamProject.id ==task.taskTeamProject.id}">
-																	<li><a href="#" data-toggle="tooltip"
-																		title="${userTask.teamMemberTeamProject.teamMember.member.name}">
-																			<img
-																			alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
-																			class="avatar"
-																			src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
-																	</a></li>
-																</c:if>
-															</c:forEach>
-														</ul>
-														<div class="d-flex align-items-center">
-															<i class="material-icons">playlist_add_check</i> <span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
-														</div>
 
-														<div class="dropdown card-options">
-															<button class="btn-options" type="button"
-																id="task-dropdown-button-7" data-toggle="dropdown"
-																aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item"
-																	href="manage/makeDoneTask?idTask=${task.taskTeamProject.id}">Mark
-																	as done</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger" href="#">Archive</a>
+									<c:forEach var="task" items="${task}">
+										<div class="col-12">
+											<c:choose>
+												<c:when
+													test="${task.taskTeamProject.due > -1 and task.taskTeamProject.totalTask == 0}">
+													<div class="card card-task nothing">
+														<div class="progress">
+															<c:choose>
+																<c:when test="${task.taskTeamProject.due lt 5}">
+																	<div class="progress-bar bg-danger" role="progressbar"
+																		style="width:${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:when
+																	test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																	<div class="progress-bar bg-warning" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:otherwise>
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:otherwise>
+															</c:choose>
+
+
+														</div>
+														<div class="card-body">
+															<div class="card-title">
+																<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																	<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+																</a>
+																<c:choose>
+																	<c:when test="${task.taskTeamProject.due == 0}">
+																		<span class="text-small">Today</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span class="text-small">due
+																			${task.taskTeamProject.due} days</span>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-meta">
+																<ul class="avatars">
+																	<c:forEach var="userTask" items="${userTask}">
+																		<c:if
+																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																					<img
+																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					class="avatar"
+																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="d-flex align-items-center">
+																	<i class="material-icons">playlist_add_check</i>
+
+																	<c:choose>
+																		<c:when
+																			test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask ==0}">
+																			<span>-/-</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="task-dropdown-button-7" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-											</div>
+												</c:when>
+												<c:when
+													test="${(task.taskTeamProject.due > 0 and task.taskTeamProject.due le 7) and (task.taskTeamProject.completedAmount ne task.taskTeamProject.totalTask or task.taskTeamProject.totalTask == 0)}">
 
-										</c:forEach>
-									</div>
+													<div class="card card-task warming">
+														<div class="progress">
+															<c:choose>
+																<c:when test="${task.taskTeamProject.due lt 5}">
+																	<div class="progress-bar bg-danger" role="progressbar"
+																		style="width:${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:when
+																	test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																	<div class="progress-bar bg-warning" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:otherwise>
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:otherwise>
+															</c:choose>
+
+
+														</div>
+														<div class="card-body">
+															<div class="card-title">
+																<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																	<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+																</a>
+																<c:choose>
+																	<c:when test="${task.taskTeamProject.due == 0}">
+																		<span class="text-small">Today</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span class="text-small">due
+																			${task.taskTeamProject.due} days</span>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-meta">
+																<ul class="avatars">
+																	<c:forEach var="userTask" items="${userTask}">
+																		<c:if
+																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																					<img
+																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					class="avatar"
+																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="d-flex align-items-center">
+																	<i class="material-icons">playlist_add_check</i>
+
+																	<c:choose>
+																		<c:when
+																			test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask ==0}">
+																			<span>-/-</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="task-dropdown-button-7" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</c:when>
+												<c:when
+													test="${((task.taskTeamProject.due == -1) and (task.taskTeamProject.completedAmount ne task.taskTeamProject.totalTask)) or (task.taskTeamProject.due == -1 and task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask == 0)}">
+
+													<div class="card card-task failed">
+														<div class="progress">
+															<c:choose>
+																<c:when test="${task.taskTeamProject.due lt 5}">
+																	<div class="progress-bar bg-danger" role="progressbar"
+																		style="width:${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:when
+																	test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																	<div class="progress-bar bg-warning" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:otherwise>
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:otherwise>
+															</c:choose>
+
+
+														</div>
+														<div class="card-body">
+															<div class="card-title">
+																<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																	<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+																</a> <span class="text-danger">Task failed</span>
+
+															</div>
+															<div class="card-meta">
+																<ul class="avatars">
+																	<c:forEach var="userTask" items="${userTask}">
+																		<c:if
+																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																					<img
+																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					class="avatar"
+																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="d-flex align-items-center">
+																	<i class="material-icons">playlist_add_check</i>
+
+																	<c:choose>
+																		<c:when
+																			test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask ==0}">
+																			<span>-/-</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="task-dropdown-button-7" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</c:when>
+												<c:when
+													test="${task.taskTeamProject.completedAmount eq task.taskTeamProject.totalTask and task.taskTeamProject.due != -2 and task.taskTeamProject.totalTask ne 0}">
+
+													<div class="card card-task done">
+														<div class="progress">
+															<c:choose>
+																<c:when test="${task.taskTeamProject.due lt 5}">
+																	<div class="progress-bar bg-danger" role="progressbar"
+																		style="width:${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:when
+																	test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																	<div class="progress-bar bg-warning" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:otherwise>
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:otherwise>
+															</c:choose>
+
+
+														</div>
+														<div class="card-body">
+															<div class="card-title">
+																<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																	<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+																</a> <span class="text-danger">Done</span>
+
+															</div>
+															<div class="card-meta">
+																<ul class="avatars">
+																	<c:forEach var="userTask" items="${userTask}">
+																		<c:if
+																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																					<img
+																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					class="avatar"
+																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="d-flex align-items-center">
+																	<i class="material-icons">playlist_add_check</i>
+
+																	<c:choose>
+																		<c:when
+																			test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask ==0}">
+																			<span>-/-</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="task-dropdown-button-7" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</c:when>
+												<c:otherwise>
+
+													<div class="card card-task">
+														<div class="progress">
+															<c:choose>
+																<c:when test="${task.taskTeamProject.due lt 5}">
+																	<div class="progress-bar bg-danger" role="progressbar"
+																		style="width:${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:when
+																	test="${task.taskTeamProject.due le 7 and task.taskTeamProject.due ge 5 }">
+																	<div class="progress-bar bg-warning" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:when>
+																<c:otherwise>
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${task.taskTeamProject.completedAmount/task.taskTeamProject.totalTask*100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</c:otherwise>
+															</c:choose>
+
+
+														</div>
+														<div class="card-body">
+															<div class="card-title">
+																<a href="task-todo?idTask=${task.taskTeamProject.id}">
+																	<h6 data-filter-by="text">${task.taskTeamProject.name}</h6>
+																</a>
+																<c:choose>
+																	<c:when test="${task.taskTeamProject.due == -2}">
+																		<span class="text-small">Click on task to start</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span class="text-small">due
+																			${task.taskTeamProject.due} days</span>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-meta">
+																<ul class="avatars">
+																	<c:forEach var="userTask" items="${userTask}">
+																		<c:if
+																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																					<img
+																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					class="avatar"
+																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="d-flex align-items-center">
+																	<i class="material-icons">playlist_add_check</i>
+
+																	<c:choose>
+																		<c:when
+																			test="${task.taskTeamProject.completedAmount == 0 and task.taskTeamProject.totalTask ==0}">
+																			<span>-/-</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span>${task.taskTeamProject.completedAmount}/${task.taskTeamProject.totalTask}</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="task-dropdown-button-7" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
+																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</c:otherwise>
+											</c:choose>
+
+
+
+										</div>
+									</c:forEach>
+
 
 
 								</div>
@@ -456,12 +879,12 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Team name" path="name" />
+														placeholder="Team name" path="name" required="required"/>
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" path="description" />
+														placeholder="Team description" path="description" required="required"/>
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-add-members"

@@ -86,6 +86,9 @@ public class TeamController {
 
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices;
+	
+	@Autowired
+	private TeamMemberTeamProjectServices teamMemberTeamProjectServices;
 
 	@GetMapping
 	public String getInfoProject(@RequestParam("idTeam") int idTeam, Model model, ModelMap modelMap) {
@@ -99,8 +102,7 @@ public class TeamController {
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
 		List<Integer> teamProject = proServices.findByIdTeam2(idTeam);
 		List<TeamProject> teamProjects = new ArrayList<>();
-		for(int t:teamProject)
-		{
+		for (int t : teamProject) {
 			teamProjects.add(proServices.find(t));
 		}
 		List<TeamMemberTeamProject> userProjectStore = proServices.findAll();
@@ -140,6 +142,7 @@ public class TeamController {
 
 		if (emailStore.length != 0) {
 			TeamProject a = newProject.toProject();
+			a.setDue(-2);
 			TeamProject b = proServices.createProject(a);
 			ProjectHistory proHis = new ProjectHistory();
 			proHis.setUser(user.getName());
@@ -165,6 +168,27 @@ public class TeamController {
 			Model model) {
 		Team team = teamModel.toTeam();
 		teamServices.updateTeam(team);
+		String[] email = teamModel.getEmail();
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for(String e:email)
+		{
+			for(TeamMember t:member)
+			{
+				if(!e.equals(t.getMember().getEmail()))
+				{
+					TeamMember t2 = teamMemberServices.getUserTeam(idTeam, t.getMember().getEmail());
+					List<TeamMemberTeamProject> t1 = teamMemberTeamProjectServices.findByIdTeamMember(t2.getId());
+					for (TeamMemberTeamProject team3 : t1) {
+						List<TeamMemberTaskTeamProject> t3 = taskServices.findByIdMemberProject(team3.getId());
+						for (TeamMemberTaskTeamProject team2 : t3) {
+							taskServices.deleteTaskTeamPro(team2);
+						}
+						teamMemberTeamProjectServices.delete(team3);
+					}
+					teamMemberServices.delete(t2);
+				}
+			}
+		}
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 
@@ -189,24 +213,27 @@ public class TeamController {
 			@ModelAttribute("messages") String messages, Model model) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime local=LocalDateTime.now();
-		String time=date.format(local);
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
 		List<Account> accountStore = accountServices.findAll();
 		for (Account a : accountStore) {
 			if (email.equals(a.getEmail())) {
 				User user2 = userServices.findByEmail(email);
-				System.out.println("email User2:" + user2.getEmail());
 				NotificationSystem mess = new NotificationSystem();
 				mess.setToUser(user2);
 				mess.setUserFrom(user);
-				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
-						+ user.getName() + "\nThis is your link: "
-						+ "http://localhost:8080/time-is-gold/team/joinTeam?idTeam=" + idTeam;
-				mess.setMessages(messa + "\nAnd your message: " + messages);
 				mess.setStatus(0);
 				mess.setDate(time);
-				notificationsSystemServices.create(mess);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>", idTeamString, mess2.getId());
+				mess2.setMessages(messa + messe + "<br>Your message: " + messages);
+				notificationsSystemServices.update(mess2);
+				
 			}
 		}
 
@@ -214,7 +241,8 @@ public class TeamController {
 	}
 
 	@RequestMapping(value = "/joinTeam", method = RequestMethod.GET)
-	public String joinTeam(@RequestParam("idTeam") int idTeam, Model model) {
+	public String joinTeam(@RequestParam("idTeam") int idTeam,@RequestParam("idNotifications") int idNotifications, Model model) {
+		
 		String emailUser = accountServices.getEmailUser();
 		Team team = teamServices.findById(idTeam);
 		User adduser = userServices.findByEmail(emailUser);
@@ -226,6 +254,11 @@ public class TeamController {
 		team.setMemberAmount(team.getMemberAmount() + 1);
 		teamServices.updateTeam(team);
 
+		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+		String messe = String.format("You already agree join to team <a href=\"team?idTeam=%s\">%s</a>",idTeam,team.getName());
+		mess2.setMessages(messe);
+		notificationsSystemServices.update(mess2);
+		
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 }

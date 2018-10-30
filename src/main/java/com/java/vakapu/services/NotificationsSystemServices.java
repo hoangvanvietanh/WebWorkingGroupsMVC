@@ -22,7 +22,15 @@ public class NotificationsSystemServices {
 		return notificationsSystemDAO.create(messagesSystem);
 	}
 	
+	public NotificationSystem update(NotificationSystem MessagesSystem) {
+		return notificationsSystemDAO.update(MessagesSystem);
+	}
+	
 	public List<NotificationSystem> findByEmail(String email){
 		return notificationsSystemDAO.findByEmail(email);
+	}
+	
+	public NotificationSystem find(int id) {
+		return notificationsSystemDAO.find(id);
 	}
 }

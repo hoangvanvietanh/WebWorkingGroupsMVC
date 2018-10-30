@@ -34,7 +34,7 @@ public class NotificationsSystemDAO {
 		
 
 	public NotificationSystem create(NotificationSystem messagesSystem) {
-		getSession().save(messagesSystem);
+		getSession().persist(messagesSystem);
 		return messagesSystem;
 	}
 

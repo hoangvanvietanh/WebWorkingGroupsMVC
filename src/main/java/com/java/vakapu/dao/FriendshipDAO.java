@@ -28,4 +28,24 @@ public class FriendshipDAO {
 		query.setParameter("status", status);
 		return query.getResultList();
 	}
+	
+	public Friendship findFriendAndUser(String emailUser, String emailFriend)
+	{
+		TypedQuery<Friendship> query = getSession().createQuery("select a from Friendship a where a.emailUser.email =:emailUser and a.emailFriend.email =:emailFriend",Friendship.class);
+		query.setParameter("emailUser", emailUser);
+		query.setParameter("emailFriend", emailFriend);
+		return query.getSingleResult();
+	}
+	
+	public Friendship create(Friendship friend)
+	{
+		getSession().save(friend);
+		return friend;
+	}
+	
+	public Friendship update(Friendship friend)
+	{
+		getSession().update(friend);
+		return friend;
+	}
 }

@@ -35,6 +35,9 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 
 <body>
@@ -60,9 +63,9 @@
 							class="avatar" />
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
-							</div>
+							<a href="profile" class="dropdown-item">Accounts </a> <a
+								href="logout" class="dropdown-item">Log Out</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -70,27 +73,22 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
+					<form action="profile-cv" method="post"
+						class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
 								</span>
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
+							<input type="search" name="email"
+								class="form-control form-control-dark" placeholder="Search"
+								aria-label="Search app" aria-describedby="search-app">
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
 
-					<div class="nav-item">
 
-						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -104,9 +102,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="team">Team</a> <a
-								class="dropdown-item" href="team-project">Project</a> <a
-								class="dropdown-item" href="#">Task</a>
+							<a class="dropdown-item" href="manage">Manage</a> <a
+								class="dropdown-item" href="profile-cv">Profile CV</a>
 						</div>
 					</div>
 					<div class="d-none2 d-lg-block">
@@ -117,8 +114,8 @@
 								class="avatar" />
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="profile" class="dropdown-item">Accounts
-								</a> <a href="logout" class="dropdown-item">Log Out</a>
+								<a href="profile" class="dropdown-item">Accounts </a> <a
+									href="logout" class="dropdown-item">Log Out</a>
 							</div>
 						</div>
 					</div>
@@ -232,8 +229,11 @@
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
 																<a class="dropdown-item" href="#" data-toggle="modal"
-																	data-target="#team-manage-modal">Edit</a> <a
-																	class="dropdown-item" href="#">Share</a>
+																	data-target="#team-manage-modal">Edit</a>
+																<div class="dropdown-divider"></div>
+																<a class="dropdown-item text-danger"
+																	href="manage/leaveProject?idProject=${project.id}">Leave
+																	Project</a>
 															</div>
 														</div>
 														<div class="card-title">
@@ -256,19 +256,34 @@
 														</ul>
 														<div class="card-meta d-flex justify-content-between">
 															<div class="d-flex align-items-center">
-																<i class="material-icons mr-1">playlist_add_check</i> <span
-																	class="text-small">${project.taskDone}/${project.totalTask}</span>
+																<i class="material-icons mr-1">playlist_add_check</i>
+
+																<c:choose>
+																	<c:when
+																		test="${project.taskDone == 0 and project.totalTask ==0}">
+																		<span>-/-</span>
+																	</c:when>
+																	<c:otherwise>
+																		<span>${project.taskDone}/${project.totalTask}</span>
+																	</c:otherwise>
+																</c:choose>
+
+
 															</div>
 															<c:choose>
-															<c:when test="${project.due == 0}">
-																<span class="text-small" data-filter-by="text">Click on the project to start</span>
-															</c:when>
-															<c:otherwise>
-																<span class="text-small" data-filter-by="text">Due
-																${project.due} days</span>
-															</c:otherwise>
+																<c:when test="${project.due == -2}">
+																	<span class="text-small" data-filter-by="text">Click
+																		on the project to start</span>
+																</c:when>
+																<c:when test="${project.due == 0}">
+																	<span class="text-small" data-filter-by="text">Today</span>
+																</c:when>
+																<c:otherwise>
+																	<span class="text-small" data-filter-by="text">Due
+																		${project.due} days</span>
+																</c:otherwise>
 															</c:choose>
-															
+
 														</div>
 													</div>
 												</div>
@@ -442,9 +457,9 @@
 
 														<c:forEach var="member" items="${member}">
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="${member.member.email}" checked> <label
-																	class="custom-control-label"
+																<form:checkbox path="email" class="custom-control-input"
+																	id="${member.member.email}" value="${member.member.email}" checked="checked"/>
+																<form:label path="email" class="custom-control-label"
 																	for="${member.member.email}">
 																	<div class="d-flex align-items-center">
 																		<img alt="${member.member.name}"
@@ -452,10 +467,10 @@
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.member.name}</span>
 																	</div>
-																</label>
+																	</form:label>
 															</div>
 														</c:forEach>
-												
+
 													</div>
 												</div>
 											</div>
@@ -509,24 +524,27 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Project name" path="name" />
+														placeholder="Project name" path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Project description" path="description"></form:textarea>
+														placeholder="Project description" path="description"
+														required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Project start" path="startDate" />
+													<form:input class="form-control col" id="StartDate"
+														type="date" placeholder="Project start" path="startDate"
+														required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Project due" path="endDate" />
+													<form:input class="form-control col" id="EndDate"
+														type="date" placeholder="Project due" path="endDate"
+														required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -540,7 +558,7 @@
 														<div class="custom-control custom-radio">
 															<form:radiobutton id="visibility-everyone"
 																path="visibility" class="custom-control-input"
-																value="Everyone" />
+																value="Everyone" checked="checked" />
 															<label class="custom-control-label"
 																for="visibility-everyone">Everyone</label>
 														</div>
@@ -587,8 +605,7 @@
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>
-																<c:when
-																	test="${member.member.email eq emailUser}">
+																<c:when test="${member.member.email eq emailUser}">
 																	<form:input type="hidden" path="email"
 																		value="${member.member.email}" />
 																</c:when>
@@ -687,8 +704,19 @@
 
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#EndDate").change(function() {
+				var startDate = document.getElementById("StartDate").value;
+				var endDate = document.getElementById("EndDate").value;
 
-
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate").value = "";
+				}
+			});
+		});
+	</script>
 
 </body>
 

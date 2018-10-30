@@ -2951,7 +2951,9 @@ input[type="button"].btn-block {
     flex-flow: row nowrap;
     justify-content: flex-start; }
     .navbar-expand-lg .navbar-nav {
-      flex-direction: row; }
+      flex-direction: row; 
+      padding-left: 35%;
+    padding-right: 25%;}
       .navbar-expand-lg .navbar-nav .dropdown-menu {
         position: absolute; }
       .navbar-expand-lg .navbar-nav .nav-link {

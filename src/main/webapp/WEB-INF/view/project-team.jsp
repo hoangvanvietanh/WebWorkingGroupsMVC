@@ -35,6 +35,38 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+	type="text/javascript"></script>
+<style type="text/css">
+.done {
+	background-image: url('resources/img/completed2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20%;
+}
+
+.failed {
+	background-image: url('resources/img/failed2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20%;
+}
+
+.warming {
+	background-image: url('resources/img/warming2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10%;
+}
+
+.nothing {
+	background-image: url('resources/img/nothing.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10%;
+}
+</style>
 </head>
 
 <body>
@@ -70,27 +102,22 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form class="form-inline my-lg-0 my-2">
+					<form action="profile-cv" method="post"
+						class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
 								</span>
 							</div>
-							<input type="search" class="form-control form-control-dark"
-								placeholder="Search" aria-label="Search app"
-								aria-describedby="search-app">
+							<input type="search" name="email"
+								class="form-control form-control-dark" placeholder="Search"
+								aria-label="Search app" aria-describedby="search-app">
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</form>
 
-					<div class="nav-item">
-
-						<div style="float: left;">
-							<a class="nav-link" href="index.html">Overview</a>
-						</div>
-						<div style="float: left; padding-left: 5px;">
-							<a class="nav-link" href="manage">Manage</a>
-						</div>
-					</div>
+					
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -104,9 +131,8 @@
 							id="nav-dropdown-2">add</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="nav-dropdown-2">
-							<a class="dropdown-item" href="team">Team</a> <a
-								class="dropdown-item" href="team-project">Project</a> <a
-								class="dropdown-item" href="#">Task</a>
+							<a class="dropdown-item" href="manage">Manage</a> <a
+								class="dropdown-item" href="profile-cv">Profile CV</a>
 						</div>
 					</div>
 					<div class="d-none2 d-lg-block">
@@ -202,7 +228,17 @@
 								</div>
 								<div class="d-flex justify-content-between text-small">
 									<div class="d-flex align-items-center">
-										<i class="material-icons">playlist_add_check</i> <span>${project.taskDone}/${project.totalTask}</span>
+										<i class="material-icons">playlist_add_check</i>
+										<c:choose>
+											<c:when
+												test="${project.taskDone == 0 and project.totalTask ==0}">
+												<span>-/-</span>
+											</c:when>
+											<c:otherwise>
+												<span>${project.taskDone}/${project.totalTask}</span>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 									<span>Due ${project.due} days</span>
 								</div>
@@ -246,76 +282,448 @@
 									<div class="card-list">
 										<div class="card-list-body">
 											<c:forEach var="task" items="${task}">
-												<div class="card card-task">
-													<div class="progress">
-														<c:choose>
-															<c:when test="${task.due lt 5}">
-																<div class="progress-bar bg-danger" role="progressbar"
-																	style="width:${task.completedAmount/task.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:when test="${task.due le 7 and task.due ge 5 }">
-																<div class="progress-bar bg-warning" role="progressbar"
-																	style="width: ${task.completedAmount/task.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:when>
-															<c:otherwise>
-																<div class="progress-bar bg-success" role="progressbar"
-																	style="width: ${task.completedAmount/task.totalTask*100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-															</c:otherwise>
-														</c:choose>
+												<c:choose>
+													<c:when
+														test="${task.due > -1 and task.totalTask == 0}">
+														<div class="card card-task nothing">
+															<div class="progress">
+																<c:choose>
+																	<c:when test="${task.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width:${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when test="${task.due le 7 and task.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
 
 
-													</div>
-													<div class="card-body">
-														<div class="card-title">
-															<a href="task-todo?idTask=${task.id}">
-																<h6 data-filter-by="text">${task.name}</h6>
-															</a>
-															<c:choose>
-																<c:when test="${task.due == 0}">
-																	<span class="text-small">Click on the task to
-																		start</span>
-																</c:when>
-																<c:otherwise>
-																	<span class="text-small">due ${task.due} days</span>
-																</c:otherwise>
-															</c:choose>
-
-														</div>
-														<div class="card-meta">
-															<ul class="avatars">
-																<c:forEach var="userTask" items="${userTask}">
-																	<c:if test="${userTask.taskTeamProject.id ==task.id}">
-																		<li><a href="#" data-toggle="tooltip"
-																			title="${userTask.teamMemberTeamProject.teamMember.member.name}">
-																				<img
-																				alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
-																				class="avatar"
-																				src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
-																		</a></li>
-																	</c:if>
-																</c:forEach>
-															</ul>
-															<div class="d-flex align-items-center">
-																<i class="material-icons">playlist_add_check</i> <span>${task.completedAmount}/${task.totalTask}</span>
 															</div>
-															<div class="dropdown card-options">
-																<button class="btn-options" type="button"
-																	id="task-dropdown-button-7" data-toggle="dropdown"
-																	aria-haspopup="true" aria-expanded="false">
-																	<i class="material-icons">more_vert</i>
-																</button>
-																<div class="dropdown-menu dropdown-menu-right">
-																	<a class="dropdown-item" href="#">Mark as done</a>
-																	<div class="dropdown-divider"></div>
-																	<a class="dropdown-item text-danger" href="#">Archive</a>
+															<div class="card-body">
+																<div class="card-title">
+																	<a href="task-todo?idTask=${task.id}">
+																		<h6 data-filter-by="text">${task.name}</h6>
+																	</a>
+																	<c:choose>
+																		<c:when test="${task.due == 0}">
+																			<span class="text-small">Today</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span class="text-small">due ${task.due} days</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="card-meta">
+																	<ul class="avatars">
+																		<c:forEach var="userTask" items="${userTask}">
+																			<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																						<img
+																						alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons">playlist_add_check</i>
+
+																		<c:choose>
+																			<c:when
+																				test="${task.completedAmount == 0 and task.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${task.completedAmount}/${task.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="task-dropdown-button-7" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="material-icons">more_vert</i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<div class="dropdown-divider"></div>
+																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-												</div>
+													</c:when>
+													<c:when
+														test="${(task.due > 0 and task.due le 7) and (task.completedAmount ne task.totalTask or task.totalTask == 0)}">
+
+														<div class="card card-task warming">
+															<div class="progress">
+																<c:choose>
+																	<c:when test="${task.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width:${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when test="${task.due le 7 and task.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-body">
+																<div class="card-title">
+																	<a href="task-todo?idTask=${task.id}">
+																		<h6 data-filter-by="text">${task.name}</h6>
+																	</a>
+																	<c:choose>
+																		<c:when test="${task.due == 0}">
+																			<span class="text-small">Today</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span class="text-small">due ${task.due} days</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="card-meta">
+																	<ul class="avatars">
+																		<c:forEach var="userTask" items="${userTask}">
+																			<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																						<img
+																						alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons">playlist_add_check</i>
+
+																		<c:choose>
+																			<c:when
+																				test="${task.completedAmount == 0 and task.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${task.completedAmount}/${task.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="task-dropdown-button-7" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="material-icons">more_vert</i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<div class="dropdown-divider"></div>
+																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:when>
+													<c:when
+														test="${((task.due == -1) and (task.completedAmount ne task.totalTask)) or (task.due == -1 and task.completedAmount == 0 and task.totalTask == 0)}">
+
+														<div class="card card-task failed">
+															<div class="progress">
+																<c:choose>
+																	<c:when test="${task.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width:${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when test="${task.due le 7 and task.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-body">
+																<div class="card-title">
+																	<a href="task-todo?idTask=${task.id}">
+																		<h6 data-filter-by="text">${task.name}</h6>
+																	</a> <span class="text-danger">Task failed</span>
+
+																</div>
+																<div class="card-meta">
+																	<ul class="avatars">
+																		<c:forEach var="userTask" items="${userTask}">
+																			<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																						<img
+																						alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons">playlist_add_check</i>
+
+																		<c:choose>
+																			<c:when
+																				test="${task.completedAmount == 0 and task.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${task.completedAmount}/${task.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="task-dropdown-button-7" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="material-icons">more_vert</i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<div class="dropdown-divider"></div>
+																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:when>
+													<c:when
+														test="${task.completedAmount eq task.totalTask and task.due != -2 and task.totalTask ne 0}">
+
+														<div class="card card-task done">
+															<div class="progress">
+																<c:choose>
+																	<c:when test="${task.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width:${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when test="${task.due le 7 and task.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-body">
+																<div class="card-title">
+																	<a href="task-todo?idTask=${task.id}">
+																		<h6 data-filter-by="text">${task.name}</h6>
+																	</a> <span class="text-danger">Done</span>
+
+																</div>
+																<div class="card-meta">
+																	<ul class="avatars">
+																		<c:forEach var="userTask" items="${userTask}">
+																			<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																						<img
+																						alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons">playlist_add_check</i>
+
+																		<c:choose>
+																			<c:when
+																				test="${task.completedAmount == 0 and task.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${task.completedAmount}/${task.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="task-dropdown-button-7" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="material-icons">more_vert</i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<div class="dropdown-divider"></div>
+																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</c:when>
+													<c:otherwise>
+
+														<div class="card card-task">
+															<div class="progress">
+																<c:choose>
+																	<c:when test="${task.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width:${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when test="${task.due le 7 and task.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${task.completedAmount/task.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
+
+
+															</div>
+															<div class="card-body">
+																<div class="card-title">
+																	<a href="task-todo?idTask=${task.id}">
+																		<h6 data-filter-by="text">${task.name}</h6>
+																	</a>
+																	<c:choose>
+																		<c:when test="${task.due == -2}">
+																			<span class="text-small">Click on task to
+																				start</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span class="text-small">due ${task.due} days</span>
+																		</c:otherwise>
+																	</c:choose>
+
+
+																</div>
+																<div class="card-meta">
+																	<ul class="avatars">
+																		<c:forEach var="userTask" items="${userTask}">
+																			<c:if test="${userTask.taskTeamProject.id ==task.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${userTask.teamMemberTeamProject.teamMember.member.name}">
+																						<img
+																						alt="${userTask.teamMemberTeamProject.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${userTask.teamMemberTeamProject.teamMember.member.email}'/>" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons">playlist_add_check</i>
+
+																		<c:choose>
+																			<c:when
+																				test="${task.completedAmount == 0 and task.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${task.completedAmount}/${task.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="task-dropdown-button-7" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<i class="material-icons">more_vert</i>
+																		</button>
+																		<div class="dropdown-menu dropdown-menu-right">
+																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<div class="dropdown-divider"></div>
+																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:otherwise>
+												</c:choose>
+
+
+
 
 											</c:forEach>
 										</div>
@@ -487,24 +895,24 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														path="name" name="project-name" />
+														path="name" name="project-name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														path="description"></form:textarea>
+														path="description" required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
-													<form:input path="startDate" class="form-control col"
-														type="date" />
+													<form:input path="startDate" id="StartDate"
+														class="form-control col" type="date" required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														path="endDate" />
+													<form:input class="form-control col" id="EndDate"
+														type="date" path="endDate" required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -623,24 +1031,27 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Task name" path="name" />
+														placeholder="Task name" path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Task description" path="description"></form:textarea>
+														placeholder="Task description" path="description"
+														required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task start" path="startDate" />
+														placeholder="Task start" path="startDate" id="StartDate2"
+														required="required" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
-													<form:input class="form-control col" type="date"
-														placeholder="Task due" path="endDate" />
+													<form:input class="form-control col" id="EndDate2"
+														type="date" placeholder="Task due" path="endDate"
+														required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -772,7 +1183,28 @@
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#EndDate").change(function() {
+				var startDate = document.getElementById("StartDate").value;
+				var endDate = document.getElementById("EndDate").value;
 
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate").value = "";
+				}
+			});
+			$("#EndDate2").change(function() {
+				var startDate = document.getElementById("StartDate2").value;
+				var endDate = document.getElementById("EndDate2").value;
+
+				if ((Date.parse(endDate) <= Date.parse(startDate))) {
+					alert("End date should be greater than Start date");
+					document.getElementById("EndDate2").value = "";
+				}
+			});
+		});
+	</script>
 
 
 </body>
