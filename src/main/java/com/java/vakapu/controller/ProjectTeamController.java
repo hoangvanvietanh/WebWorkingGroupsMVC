@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.TaskTeamProject;
+import com.java.vakapu.entity.TeamMember;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
@@ -35,6 +36,7 @@ import com.java.vakapu.services.HistoryServices;
 import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
+import com.java.vakapu.services.TeamMemberServices;
 import com.java.vakapu.services.TeamMemberTeamProjectServices;
 import com.java.vakapu.services.UserServices;
 
@@ -48,6 +50,9 @@ public class ProjectTeamController {
 	@Autowired
 	private AccountServices accountServices;
 
+	@Autowired
+	private TeamMemberServices teamMemberServices;
+	
 	@Autowired
 	private ProjectServices proServices;
 
@@ -84,6 +89,23 @@ public class ProjectTeamController {
 		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
 
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		List<TeamMember> remove = new ArrayList<TeamMember>();
+		for(TeamMemberTeamProject u:userStore)
+		{
+			for(TeamMember t:member)
+			{
+				if(t.getMember().getEmail().equals(u.getTeamMember().getMember().getEmail()))
+				{
+					remove.add(t);
+				}
+			}
+		}
+		if(!remove.isEmpty())
+		{
+			member.removeAll(remove);
+		}
+		
 		List<Integer> task = taskServices.findTaskByIdProjectAll2(idProject);
 		List<TaskTeamProject> taskTeam = new ArrayList<>();
 		for(Integer p:task)
@@ -98,15 +120,18 @@ public class ProjectTeamController {
 		teamProject.setTotalTask(taskTeam.size());
 		proServices.updateProject(teamProject);
 		TeamProjectModel edit=new TeamProjectModel();
+		TeamProjectModel edit2=new TeamProjectModel();
 		TaskModel taskModel = new TaskModel();
 		edit.fromProject(teamProject);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("editProject", edit);
+		model.addAttribute("editProject2", edit2);
 		model.addAttribute("history", proHis);
 		model.addAttribute("taskModel", taskModel);
 		model.addAttribute("userTask", userTaskStore);
 		model.addAttribute("task", taskTeam);
+		model.addAttribute("member", member);
 		model.addAttribute("user", userStore);
 		model.addAttribute("project", teamProject);
 		model.addAttribute("emailUser", emailUser);
@@ -159,7 +184,7 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/edit-project",method=RequestMethod.POST)
-	public String editProject(@ModelAttribute("editProject") TeamProjectModel editProject,
+	public String editProject(@ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,@ModelAttribute("editProject") TeamProjectModel editProject,
 			Model model, BindingResult result) throws ParseException
 	{
 		if(result.hasErrors())
@@ -169,6 +194,44 @@ public class ProjectTeamController {
 		
 		TeamProject a=editProject.toProject();	
 		proServices.updateProject(a);
+		String[] email = editProject.getEmail();
+		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
+		List<TeamMemberTeamProject> userRemove = new ArrayList<TeamMemberTeamProject>();
+		for(String e:email)
+		{
+			for(TeamMemberTeamProject t:userStore)
+			{
+				if(e.equals(t.getTeamMember().getMember().getEmail()))
+				{
+					userRemove.add(t);
+					
+				}
+			}
+		}
+		userStore.removeAll(userRemove);
+		for(TeamMemberTeamProject u:userStore)
+		{
+			TeamMemberTeamProject memPro = teamMemberTeamProjectDAO.findByEmailUser(u.getTeamMember().getMember().getEmail(), idProject);
+			List<TeamMemberTaskTeamProject> memTask = taskServices.findByIdMemberProject(memPro.getId());
+			for(TeamMemberTaskTeamProject taskteam:memTask)
+			{
+				taskServices.deleteTaskTeamPro(taskteam);
+			}
+			teamMemberTeamProjectDAO.delete(memPro);
+		}
+		
+		String[] email2 = editProject.getEmail2();
+		if(email2.length != 0)
+		{
+			TeamProject b = proServices.find(idProject);
+			for(String e:email2)
+			{
+				TeamMemberTeamProject c = new TeamMemberTeamProject();
+				c.setTeamMember(teamMemberServices.getUserTeam(idTeam, e));
+				c.setTeamProject(b);
+				teamMemberTeamProjectDAO.create(c);
+			}
+		}
 		return "redirect:/team-project?idProject="+a.getId();
 	}
 	

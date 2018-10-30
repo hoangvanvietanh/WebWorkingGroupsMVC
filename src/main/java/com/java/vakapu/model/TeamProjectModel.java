@@ -24,6 +24,8 @@ public class TeamProjectModel {
 
 	private String[] email;
 
+	private String[] email2;
+
 	private int idtask;
 
 	public void fromProject(TeamProject teamProject) {
@@ -62,6 +64,14 @@ public class TeamProjectModel {
 
 	public void setEmail(String[] email) {
 		this.email = email;
+	}
+
+	public String[] getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String[] email2) {
+		this.email2 = email2;
 	}
 
 	public int getId() {

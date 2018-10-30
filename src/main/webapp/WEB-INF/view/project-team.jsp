@@ -117,7 +117,7 @@
 							value="${_csrf.token}" />
 					</form>
 
-					
+
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -283,8 +283,7 @@
 										<div class="card-list-body">
 											<c:forEach var="task" items="${task}">
 												<c:choose>
-													<c:when
-														test="${task.due > -1 and task.totalTask == 0}">
+													<c:when test="${task.due > -1 and task.totalTask == 0}">
 														<div class="card card-task nothing">
 															<div class="progress">
 																<c:choose>
@@ -843,6 +842,22 @@
 														</div>
 													</div>
 												</c:forEach>
+												<c:set var="i" value="0" />
+												<c:forEach var="member" items="${member}">
+													<input type="hidden" value="${i=i+1}">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="${i}" value="${member.member.email}" /> <label
+															class="custom-control-label" for="${i}">
+															<div class="d-flex align-items-center">
+																<img alt="${member.member.name}"
+																	src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																	class="avatar mr-2" /> <span class="h6 mb-0"
+																	data-filter-by="text">${member.member.name}</span>
+															</div>
+														</label>
+													</div>
+												</c:forEach>
 
 											</div>
 										</div>
@@ -968,19 +983,37 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														<c:set var="i" value="0" />
+														
 														<c:forEach var="user" items="${user}">
 															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="${i}" checked> <label
-																	class="custom-control-label" for="${i}"> </label>
+																<form:checkbox path="email" class="custom-control-input"
+																	id="${i}" value="${user.teamMember.member.email}"
+																	checked="checked" />
+																<form:label path="email" class="custom-control-label"
+																	for="${i}">
+																</form:label>
 																<div class="d-flex align-items-center">
 																	<img alt="${user.teamMember.member.name}"
 																		src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
 																		class="avatar mr-2" /> <span class="h6 mb-0"
 																		data-filter-by="text">${user.teamMember.member.name}</span>
 																</div>
+															</div>
+														</c:forEach>
+														<c:forEach var="member" items="${member}">
+															<input type="hidden" value="${i=i+1}">
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email2" class="custom-control-input"
+																	id="${i}" value="${member.member.email}" /> <form:label path="email2"
+																	class="custom-control-label" for="${i}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${member.member.name}"
+																			src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${member.member.name}</span>
+																	</div>
+																</form:label>
 															</div>
 														</c:forEach>
 													</div>
