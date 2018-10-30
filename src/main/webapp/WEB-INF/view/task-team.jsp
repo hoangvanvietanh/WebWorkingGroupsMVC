@@ -73,8 +73,7 @@
 				id="navbar-collapse">
 
 				<div class="navbar-nav">
-					<form action="profile-cv" method="post"
-						class="form-inline my-lg-0 my-2">
+					<form class="form-inline my-lg-0 my-2">
 						<div class="input-group input-group-dark input-group-round">
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i class="material-icons">search</i>
@@ -366,10 +365,11 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item"
-																	href="task-todo/edit-note?idnote=${note.id }"
-																	method="post" data-target="note-edit-modal">Edit</a> <a
-																	class="dropdown-item text-danger" href="#">Delete</a>
+																<a data-note-id="${note.id }" data-note-content="${note.notes}" data-note-title="${note.titleNotes}" 
+																	class="dropdown-item edit-note-btn" data-toggle="modal"
+																	href="#"
+																	data-target="#note-edit-modal">Edit</a> 
+																	<a class="dropdown-item text-danger" href="#" data-target="#note-edit-modal">Edit Test</a>
 															</div>
 														</div>
 													</div>
@@ -548,7 +548,7 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Start Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task start" id="StartDate" path="startDate" required="required" />
+														placeholder="Task start" path="startDate" />
 												</div>
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
@@ -636,6 +636,7 @@
 									<!--end of modal head-->
 
 									<div class="modal-body">
+										<form:input type="hidden" path="id"/>
 										<div class="form-group row align-items-center">
 											<label class="col-3">Title</label>
 											<form:input class="form-control col" type="text"
@@ -657,8 +658,8 @@
 							</div>
 						</form:form>
 
-						<form:form modelAttribute="editNote" action="task-todo/edit-note"
-							method="post" class="modal fade" id="note-edit-modal"
+						<form:form modelAttribute="note" action="task-todo/edit-note" method="post" 
+						class="modal fade" id="note-edit-modal"
 							tabindex="-1" role="dialog" aria-labelledby="note-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -674,13 +675,14 @@
 
 									<div class="modal-body">
 										<div class="form-group row align-items-center">
+											<form:input id="note-id" type="hidden" path="id"/>
 											<label class="col-3">Title</label>
-											<form:input class="form-control col" type="text"
+											<form:input id="note-title" class="form-control col" type="text"
 												placeholder="Note title" path="titleNotes" />
 										</div>
 										<div class="form-group row align-items-center">
 											<label class="col-3">Note</label>
-											<form:textarea class="form-control col" rows="6" path="notes"></form:textarea>
+											<form:textarea id="note-content" class="form-control col" rows="6" path="notes"></form:textarea>
 										</div>
 
 
@@ -783,17 +785,20 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
-	<script type="text/javascript">
+		
+	<script>
 		$(document).ready(function() {
-			$("#EndDate").change(function() {
-				var startDate = document.getElementById("StartDate").value;
-				var endDate = document.getElementById("EndDate").value;
-
-				if ((Date.parse(endDate) <= Date.parse(startDate))) {
-					alert("End date should be greater than Start date");
-					document.getElementById("EndDate").value = "";
-				}
+			$('.edit-note-btn').click(function(event) {
+				var id= $(this).attr("data-note-id");
+				var title= $(this).attr("data-note-title");
+				var content = $(this).attr("data-note-content");
+				$('#note-id').val(id);
+				$('#note-title').val(title);
+				$('#note-content').val(content);
+				
+				
 			});
+			
 		});
 	</script>
 </body>
