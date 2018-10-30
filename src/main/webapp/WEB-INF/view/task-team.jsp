@@ -369,7 +369,7 @@
 																	class="dropdown-item edit-note-btn" data-toggle="modal"
 																	href="#"
 																	data-target="#note-edit-modal">Edit</a> 
-																	<a class="dropdown-item text-danger" href="#" data-target="#note-edit-modal">Edit Test</a>
+																	<a class="dropdown-item text-danger" href="task-todo/delete?idnote=${note.id }" >Delete</a>
 															</div>
 														</div>
 													</div>

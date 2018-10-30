@@ -30,7 +30,7 @@ public class Team {
 	
 	@Column(name="project_amount")
 	private int projectAmount;
-	
+	 
 	public int getIdTeam() {
 		return idTeam;
 	}

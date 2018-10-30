@@ -10,6 +10,7 @@ import org.springframework.expression.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -206,4 +207,18 @@ public class ManageController {
 		taskServices.update(task);
 		return "redirect:/manage";
 	}
+	
+	@RequestMapping(value="editTeam",method=RequestMethod.POST)
+	public String editTeam(@ModelAttribute("teamAdd") TeamModel team,Model model, BindingResult result) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/manage";
+		}
+		
+		teamServices.updateTeamModel(team);
+		
+		return "redirect:/manage";
+	}
+	
 }
