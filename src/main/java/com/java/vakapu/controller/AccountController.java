@@ -2,6 +2,7 @@ package com.java.vakapu.controller;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Random;
 
 import javax.sound.midi.Soundbank;
 
@@ -26,6 +27,7 @@ import com.java.vakapu.model.AccountModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.EmailServices;
 
+import utils.RandomCode;
 import utils.RandomPassword;
 
 @Controller
@@ -57,7 +59,7 @@ public class AccountController {
 		List<Account> accountAll = accountServices.findAll();
 		for (Account u : accountAll) {
 			if (u.getEmail().equals(emailSignUp)) {
-				RandomPassword random = new RandomPassword();
+				RandomCode random = new RandomCode();
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				String code = random.getCode();
 				model.addAttribute("code", code);
@@ -118,8 +120,6 @@ public class AccountController {
 			}
 		}
 	
-		
-		
 		return "redirect:/sign-in";
 	}
 

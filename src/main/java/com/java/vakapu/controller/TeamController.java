@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -42,6 +43,7 @@ import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.UserServices;
 
 import utils.Activity;
+import utils.RandomPassword;
 
 import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
@@ -86,7 +88,7 @@ public class TeamController {
 
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices;
-	
+
 	@Autowired
 	private TeamMemberTeamProjectServices teamMemberTeamProjectServices;
 
@@ -170,24 +172,26 @@ public class TeamController {
 		teamServices.updateTeam(team);
 		String[] email = teamModel.getEmail();
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
-		for(String e:email)
-		{
-			for(TeamMember t:member)
-			{
-				if(!e.equals(t.getMember().getEmail()))
-				{
-					TeamMember t2 = teamMemberServices.getUserTeam(idTeam, t.getMember().getEmail());
-					List<TeamMemberTeamProject> t1 = teamMemberTeamProjectServices.findByIdTeamMember(t2.getId());
-					for (TeamMemberTeamProject team3 : t1) {
-						List<TeamMemberTaskTeamProject> t3 = taskServices.findByIdMemberProject(team3.getId());
-						for (TeamMemberTaskTeamProject team2 : t3) {
-							taskServices.deleteTaskTeamPro(team2);
-						}
-						teamMemberTeamProjectServices.delete(team3);
-					}
-					teamMemberServices.delete(t2);
+		List<TeamMember> memberRemove = new ArrayList<TeamMember>();
+		for (String e : email) {
+			for (TeamMember t : member) {
+				if (e.equals(t.getMember().getEmail())) {
+					memberRemove.add(t);
 				}
 			}
+		}
+		member.removeAll(memberRemove);
+		for (TeamMember t : member) {
+			TeamMember t2 = teamMemberServices.getUserTeam(idTeam, t.getMember().getEmail());
+			List<TeamMemberTeamProject> t1 = teamMemberTeamProjectServices.findByIdTeamMember(t2.getId());
+			for (TeamMemberTeamProject team3 : t1) {
+				List<TeamMemberTaskTeamProject> t3 = taskServices.findByIdMemberProject(team3.getId());
+				for (TeamMemberTaskTeamProject team2 : t3) {
+					taskServices.deleteTaskTeamPro(team2);
+				}
+				teamMemberTeamProjectServices.delete(team3);
+			}
+			teamMemberServices.delete(t2);
 		}
 		return "redirect:/team?idTeam=" + idTeam;
 	}
@@ -230,19 +234,54 @@ public class TeamController {
 				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
 						+ user.getName() + "<br>Do you agree?<br>";
 				String messe = String.format(
-						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>", idTeamString, mess2.getId());
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>",
+						idTeamString, mess2.getId());
 				mess2.setMessages(messa + messe + "<br>Your message: " + messages);
 				notificationsSystemServices.update(mess2);
-				
+				return "redirect:/team?idTeam=" + idTeam;
 			}
 		}
+		
+		
+		RandomPassword passNew = new RandomPassword();
+		String pass = passNew.getCode();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		Account account = new Account();
+		account.setEmail(email);
+		account.setPassword(passwordEncoder.encode(pass));
+		accountServices.createAccount(account);
+		
+		User userNew = new User();
+		userNew.setEmail(email);
+		userServices.createProfile(userNew);
+		
+		User user2 = userServices.findByEmail(email);
+		NotificationSystem mess = new NotificationSystem();
+		mess.setToUser(user2);
+		mess.setUserFrom(user);
+		mess.setStatus(0);
+		mess.setDate(time);
+		NotificationSystem mess2 = notificationsSystemServices.create(mess);
+		String messa = "Hello " + user2.getName() + ",You have invitation to join the team from " + user.getName()
+				+ "<br>Do you agree?<br>";
+		String messe = String.format(
+				"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>",
+				idTeamString, mess2.getId());
+		mess2.setMessages(messa + messe + "<br>Your message: " + messages);
+		notificationsSystemServices.update(mess2);
+		String text = "Hello my friend ,\n You have invitation to join the team from " + user.getName()
+		+ "but we check from system you don't have account in our Web, so we created new account for you."
+		+"\n"+"Your email:" + email +"\n" +"Your password:" + pass +"\n" +"May be this password very hard to remember but you can change it in account settings when you login"
+		+"\n" +"Form: vakapuWeb" +"\n"+"Thanks";
+		emailServices.sendInviteMessage(user2.getEmail(),text);
 
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 
 	@RequestMapping(value = "/joinTeam", method = RequestMethod.GET)
-	public String joinTeam(@RequestParam("idTeam") int idTeam,@RequestParam("idNotifications") int idNotifications, Model model) {
-		
+	public String joinTeam(@RequestParam("idTeam") int idTeam, @RequestParam("idNotifications") int idNotifications,
+			Model model) {
+
 		String emailUser = accountServices.getEmailUser();
 		Team team = teamServices.findById(idTeam);
 		User adduser = userServices.findByEmail(emailUser);
@@ -255,10 +294,11 @@ public class TeamController {
 		teamServices.updateTeam(team);
 
 		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
-		String messe = String.format("You already agree join to team <a href=\"team?idTeam=%s\">%s</a>",idTeam,team.getName());
+		String messe = String.format("You already agree join to team <a href=\"team?idTeam=%s\">%s</a>", idTeam,
+				team.getName());
 		mess2.setMessages(messe);
 		notificationsSystemServices.update(mess2);
-		
+
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 }
