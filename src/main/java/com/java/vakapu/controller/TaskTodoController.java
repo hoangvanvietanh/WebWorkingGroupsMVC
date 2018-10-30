@@ -1,6 +1,5 @@
 package com.java.vakapu.controller;
 
-import java.io.InputStream;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,10 +12,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.java.vakapu.entity.Notes;
@@ -52,23 +53,28 @@ public class TaskTodoController {
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices ;
 	
+//	@GetMapping(path="getNote/{idnote}")
+//	public @ResponseBody Notes getNoteInfor(@PathVariable(name="idnote") int idNote)
+//	{
+//		Notes note= noteServices.findByID(idNote);
+//		return note;
+//	}
 
+	
 	@GetMapping
-	public String teamProject(@RequestParam("idTask") int idTask,@ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,
+	public String teamProject(@RequestParam("idTask") int idTask, @ModelAttribute("idteam") int idTeam,@ModelAttribute("idproject") int idProject,
 			Model model, ModelMap modelMap) throws ParseException {
 		modelMap.put("idtask", idTask);
 		String emailUser = accountServices.getEmailUser();
 		
 		TaskTeamProject task = taskServices.findById(idTask);
-		Notes note=new Notes();
-		//Notes noteEdit= noteServices.findByID(idNote);
+		Notes note= new Notes();
+		
 		
 		TaskModel editTask=new TaskModel();
 		NoteModel noteM=new NoteModel();
-		NoteModel noteE=new NoteModel();
 		
 		noteM.fromNote(note);
-		//noteE.fromNote(noteEdit);
 		editTask.fromTask(task);
 		
 		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);
@@ -91,7 +97,6 @@ public class TaskTodoController {
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("note",noteM);
-		model.addAttribute("editNote", noteE);
 		model.addAttribute("todo", listTodo);
 		model.addAttribute("member", listMember);
 		model.addAttribute("notes", listNotes);
@@ -171,8 +176,21 @@ public class TaskTodoController {
 		
 	}
 	
+//	@RequestMapping(value="edit-note",method=RequestMethod.GET)
+//	public String editNoteGet(@RequestParam(name="idnote") int idNote, @ModelAttribute("idtask") int idTask, Model model)
+//	{
+//		Notes note= noteServices.findByID(idNote);
+//		
+//		NoteModel noteE= new NoteModel();
+//		noteE.fromNote(note);
+//		
+//		model.addAttribute("editNote", noteE);
+//		
+//		return "redirect:/task-todo?idTask="+idTask;
+//	}
+	
 	@RequestMapping(value="edit-note",method=RequestMethod.POST)
-	public String editNote(@ModelAttribute("editNote") NoteModel editNote,@ModelAttribute("idtask") int idtask ,
+	public String editNote(@ModelAttribute("note") NoteModel editNote, @ModelAttribute("idtask") int idtask,
 			BindingResult result,Model model) throws ParseException
 	{
 		if(result.hasErrors())
@@ -180,14 +198,8 @@ public class TaskTodoController {
 			return "redirect:/task-todo?idTask="+idtask;
 		}
 		
+		noteServices.updateNote(editNote);
 		
-		Notes note= editNote.toNote();
-		noteServices.updateNote(note);
-		
-		return "redirect:/task-todo?idTask="+idtask;
-		
-		
+		return "redirect:/task-todo?idTask="+idtask;	
 	}
-	
-
 }

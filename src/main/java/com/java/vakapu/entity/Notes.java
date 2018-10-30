@@ -26,7 +26,7 @@ public class Notes {
 	@Column(name="date")
 	private String date;
 	
-	@Column(name="emailUser")
+	@Column(name="emailUser")	
 	private String emailUser;
 	
 	@ManyToOne

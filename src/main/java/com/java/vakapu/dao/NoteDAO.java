@@ -36,6 +36,7 @@ public class NoteDAO {
 	public Notes findByID(int id)
 	{
 		TypedQuery<Notes> query=getSession().createQuery("select a from Notes a where a.id=:id", Notes.class);
+		query.setParameter("id", id);
 		Notes result=query.getSingleResult();
 		return result;
 	}
@@ -48,7 +49,7 @@ public class NoteDAO {
 	
 	public Notes updateNote(Notes note)
 	{
-		getSession().save(note);
+		getSession().update(note);
 		return note;
 	}
 	
