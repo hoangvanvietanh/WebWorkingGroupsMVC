@@ -173,11 +173,12 @@
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
 
-
-						<a class="dropdown-item" href="" data-toggle="modal"
-							data-target="#project-edit-modal">Edit Project</a> <a
-							class="dropdown-item" href="#">Share</a> <a class="dropdown-item"
-							href="#">Mark as Complete</a>
+						<c:if test="${checkAdmin eq 'yes'}">
+							<a class="dropdown-item" href="" data-toggle="modal"
+								data-target="#project-edit-modal">Edit Project</a>
+						</c:if>
+						<a class="dropdown-item" href="#">Share</a> <a
+							class="dropdown-item" href="#">Mark as Complete</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Archive</a>
 
@@ -201,10 +202,12 @@
 										</a></li>
 									</c:forEach>
 								</ul>
-								<button class="btn btn-round" data-toggle="modal"
-									data-target="#user-manage-modal">
-									<i class="material-icons">add</i>
-								</button>
+								<c:if test="${checkAdmin eq 'yes'}">
+									<button class="btn btn-round" data-toggle="modal"
+										data-target="#user-manage-modal">
+										<i class="material-icons">add</i>
+									</button>
+								</c:if>
 							</div>
 							<div>
 								<div class="progress">

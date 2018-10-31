@@ -43,7 +43,7 @@ import com.java.vakapu.services.UserServices;
 import utils.Activity;
 
 @Controller
-@SessionAttributes({ "idproject", "idteam" })
+@SessionAttributes({ "idproject", "idteam"})
 @RequestMapping("/team-project")
 public class ProjectTeamController {
 
@@ -91,6 +91,13 @@ public class ProjectTeamController {
 
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for(TeamMember t:member)
+		{
+			if(emailUser.equals(t.getMember().getEmail()) && t.getRole().equals("Admin"))
+			{
+				model.addAttribute("checkAdmin", "yes");
+			}
+		}
 		List<TeamMember> remove = new ArrayList<TeamMember>();
 		for (TeamMemberTeamProject u : userStore) {
 			for (TeamMember t : member) {
@@ -120,6 +127,7 @@ public class ProjectTeamController {
 		TaskModel taskModel = new TaskModel();
 		edit.fromProject(teamProject);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		
 		model.addAttribute("messages", listMes);
 		model.addAttribute("editProject", edit);
 		model.addAttribute("manageUser", manageUser);
@@ -256,7 +264,26 @@ public class ProjectTeamController {
 				teamMemberTeamProjectDAO.create(c);
 			}
 		}
-		
+
+		return "redirect:/team-project?idProject=" + idProject;
+	}
+
+	@RequestMapping(value = "/join-to-project", method = RequestMethod.GET)
+	public String joinToProject(@ModelAttribute("idteam") int idTeam, @RequestParam("idProject") int idProject,
+			Model model, BindingResult result) {
+		String email = accountServices.getEmailUser();
+		List<TeamMemberTeamProject> tmp = teamProServices.findByIdProject(idProject);
+		for(TeamMemberTeamProject t:tmp)
+		{
+			if(email.equals(t.getTeamMember().getMember().getEmail()))
+			{
+				return "redirect:/team-project?idProject=" + idProject;
+			}
+		}
+		TeamMemberTeamProject c = new TeamMemberTeamProject();
+		c.setTeamMember(teamMemberServices.getUserTeam(idTeam, email));
+		c.setTeamProject(proServices.find(idProject));
+		teamMemberTeamProjectDAO.create(c);
 		return "redirect:/team-project?idProject=" + idProject;
 	}
 

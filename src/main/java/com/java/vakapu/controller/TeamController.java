@@ -91,7 +91,7 @@ public class TeamController {
 
 	@Autowired
 	private TeamMemberTeamProjectServices teamMemberTeamProjectServices;
-	
+
 	@Autowired
 	private FriendshipServices friendServices;
 
@@ -105,6 +105,11 @@ public class TeamController {
 		TeamProjectModel newProject = new TeamProjectModel();
 		modelMap.put("idteam", idTeam);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for (TeamMember t : member) {
+			if (emailUser.equals(t.getMember().getEmail()) && t.getRole().equals("Admin")) {
+				model.addAttribute("checkAdmin", "yes");
+			}
+		}
 		List<Integer> teamProject = proServices.findByIdTeam2(idTeam);
 		List<TeamProject> teamProjects = new ArrayList<>();
 		for (int t : teamProject) {
@@ -117,12 +122,9 @@ public class TeamController {
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
 		List<Friendship> friend = friendServices.findFriend(emailUser, 1);
 		List<Friendship> remove = new ArrayList<Friendship>();
-		for(TeamMember t:member)
-		{
-			for(Friendship f:friend)
-			{
-				if(f.getEmailFriend().getEmail().equals(t.getMember().getEmail()))
-				{
+		for (TeamMember t : member) {
+			for (Friendship f : friend) {
+				if (f.getEmailFriend().getEmail().equals(t.getMember().getEmail())) {
 					remove.add(f);
 				}
 			}
@@ -211,8 +213,7 @@ public class TeamController {
 			teamMemberServices.delete(t2);
 		}
 		String[] email2 = teamModel.getEmail2();
-		if(email2 != null)
-		{
+		if (email2 != null) {
 			Team team2 = teamServices.findById(idTeam);
 			for (String e : email2) {
 				TeamMember tn = new TeamMember();
@@ -270,8 +271,7 @@ public class TeamController {
 				return "redirect:/team?idTeam=" + idTeam;
 			}
 		}
-		
-		
+
 		RandomPassword passNew = new RandomPassword();
 		String pass = passNew.getCode();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -279,11 +279,11 @@ public class TeamController {
 		account.setEmail(email);
 		account.setPassword(passwordEncoder.encode(pass));
 		accountServices.createAccount(account);
-		
+
 		User userNew = new User();
 		userNew.setEmail(email);
 		userServices.createProfile(userNew);
-		
+
 		User user2 = userServices.findByEmail(email);
 		NotificationSystem mess = new NotificationSystem();
 		mess.setToUser(user2);
@@ -299,10 +299,11 @@ public class TeamController {
 		mess2.setMessages(messa + messe + "<br>Your message: " + messages);
 		notificationsSystemServices.update(mess2);
 		String text = "Hello my friend ,\n You have invitation to join the team from " + user.getName()
-		+ "but we check from system you don't have account in our Web, so we created new account for you."
-		+"\n"+"Your email:" + email +"\n" +"Your password:" + pass +"\n" +"May be this password very hard to remember but you can change it in account settings when you login"
-		+"\n" +"Form: vakapuWeb" +"\n"+"Thanks";
-		emailServices.sendInviteMessage(user2.getEmail(),text);
+				+ "but we check from system you don't have account in our Web, so we created new account for you."
+				+ "\n" + "Your email:" + email + "\n" + "Your password:" + pass + "\n"
+				+ "May be this password very hard to remember but you can change it in account settings when you login"
+				+ "\n" + "Form: vakapuWeb" + "\n" + "Thanks";
+		emailServices.sendInviteMessage(user2.getEmail(), text);
 
 		return "redirect:/team?idTeam=" + idTeam;
 	}
@@ -328,6 +329,15 @@ public class TeamController {
 		mess2.setMessages(messe);
 		notificationsSystemServices.update(mess2);
 
+		return "redirect:/team?idTeam=" + idTeam;
+	}
+
+	@RequestMapping(value = "/setAdmin", method = RequestMethod.GET)
+	public String setRoleAdmin(@ModelAttribute("idteam") int idTeam, @RequestParam("idMember") int idMember, Model model) {
+		TeamMember t = teamMemberServices.findMemberById(idMember);
+		t.setRole("Admin");
+		teamMemberServices.updateTeamMember(t);
+		
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 }

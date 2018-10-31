@@ -27,6 +27,11 @@ public class TeamMemberDAO {
 		return user;
 	}
 	
+	public TeamMember findMemberById(int id)
+	{
+		return getSession().find(TeamMember.class, id);
+	}
+	
 	public List<TeamMember> findByEmail(String email) {
 		TypedQuery<TeamMember> query=getSession().createQuery("from TeamMember a where a.member.email=:email", TeamMember.class);
 		query.setParameter("email", email);
@@ -44,6 +49,12 @@ public class TeamMemberDAO {
 	public TeamMember createTeamMember(TeamMember teamMember)
 	{
 		getSession().persist(teamMember);
+		return teamMember;
+	}
+	
+	public TeamMember updateTeamMember(TeamMember teamMember)
+	{
+		getSession().update(teamMember);
 		return teamMember;
 	}
 	
