@@ -789,7 +789,9 @@
 								<!--end of content list-->
 							</div>
 						</div>
-						<form class="modal fade" id="user-manage-modal" tabindex="-1"
+						<form:form modelAttribute="manageUser"
+							action="team-project/manage-user-project" method="POST"
+							class="modal fade" id="user-manage-modal" tabindex="-1"
 							role="dialog" aria-labelledby="user-manage-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -826,14 +828,18 @@
 													placeholder="Filter members" aria-label="Filter Members"
 													aria-describedby="filter-members">
 											</div>
-											<div class="form-group-users">
 
+											<div class="form-group-users">
+												<c:set var="i" value="0" />
 												<c:forEach var="user" items="${user}">
+													<input type="hidden" value="${i=i+1}">
 													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input"
-															id="${user.teamMember.member.email}" checked> <label
-															class="custom-control-label"
-															for="${user.teamMember.member.email}"> </label>
+														<form:checkbox path="email" class="custom-control-input"
+															id="${i}" value="${user.teamMember.member.email}"
+															checked="checked" />
+														<form:label path="email" class="custom-control-label"
+															for="${i}">
+														</form:label>
 														<div class="d-flex align-items-center">
 															<img alt="${user.teamMember.member.name}"
 																src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
@@ -842,23 +848,22 @@
 														</div>
 													</div>
 												</c:forEach>
-												<c:set var="i" value="0" />
 												<c:forEach var="member" items="${member}">
 													<input type="hidden" value="${i=i+1}">
 													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input"
-															id="${i}" value="${member.member.email}" /> <label
-															class="custom-control-label" for="${i}">
+														<form:checkbox path="email2" class="custom-control-input"
+															id="${i}" value="${member.member.email}" />
+														<form:label path="email2" class="custom-control-label"
+															for="${i}">
 															<div class="d-flex align-items-center">
 																<img alt="${member.member.name}"
 																	src="<spring:url value='/profile/avatar/${member.member.email}'/>"
 																	class="avatar mr-2" /> <span class="h6 mb-0"
 																	data-filter-by="text">${member.member.name}</span>
 															</div>
-														</label>
+														</form:label>
 													</div>
 												</c:forEach>
-
 											</div>
 										</div>
 									</div>
@@ -869,7 +874,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 
 						<!----------------------------- Edit Project ------------------------------------->
 						<form:form modelAttribute="editProject"
@@ -983,7 +988,7 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														
+
 														<c:forEach var="user" items="${user}">
 															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
@@ -1004,9 +1009,11 @@
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
-																<form:checkbox path="email2" class="custom-control-input"
-																	id="${i}" value="${member.member.email}" /> <form:label path="email2"
-																	class="custom-control-label" for="${i}">
+																<form:checkbox path="email2"
+																	class="custom-control-input" id="${i}"
+																	value="${member.member.email}" />
+																<form:label path="email2" class="custom-control-label"
+																	for="${i}">
 																	<div class="d-flex align-items-center">
 																		<img alt="${member.member.name}"
 																			src="<spring:url value='/profile/avatar/${member.member.email}'/>"
