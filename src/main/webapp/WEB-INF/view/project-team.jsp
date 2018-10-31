@@ -366,7 +366,7 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -457,7 +457,7 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -539,7 +539,7 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -621,7 +621,7 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -713,7 +713,7 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="#">Mark as done</a>
+																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
