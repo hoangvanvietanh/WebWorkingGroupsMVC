@@ -180,7 +180,7 @@
 						<a class="dropdown-item" href="#">Share</a> <a
 							class="dropdown-item" href="#">Mark as Complete</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="#">Archive</a>
+						<a class="dropdown-item text-danger" href="#">Leave project</a>
 
 					</div>
 				</div>
