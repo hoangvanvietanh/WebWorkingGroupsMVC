@@ -91,6 +91,9 @@ public class TeamController {
 
 	@Autowired
 	private TeamMemberTeamProjectServices teamMemberTeamProjectServices;
+	
+	@Autowired
+	private FriendshipServices friendServices;
 
 	@GetMapping
 	public String getInfoProject(@RequestParam("idTeam") int idTeam, Model model, ModelMap modelMap) {
@@ -112,6 +115,20 @@ public class TeamController {
 		team.setMemberAmount(member.size());
 		teamServices.updateTeam(team);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		List<Friendship> friend = friendServices.findFriend(emailUser, 1);
+		List<Friendship> remove = new ArrayList<Friendship>();
+		for(TeamMember t:member)
+		{
+			for(Friendship f:friend)
+			{
+				if(f.getEmailFriend().getEmail().equals(t.getMember().getEmail()))
+				{
+					remove.add(f);
+				}
+			}
+		}
+		friend.removeAll(remove);
+		model.addAttribute("friend", friend);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("teamModel", teamModel);
 		model.addAttribute("newProject", newProject);
@@ -192,6 +209,18 @@ public class TeamController {
 				teamMemberTeamProjectServices.delete(team3);
 			}
 			teamMemberServices.delete(t2);
+		}
+		String[] email2 = teamModel.getEmail2();
+		if(email2 != null)
+		{
+			Team team2 = teamServices.findById(idTeam);
+			for (String e : email2) {
+				TeamMember tn = new TeamMember();
+				tn.setMember(userServices.findByEmail(e));
+				tn.setRole("Member");
+				tn.setTeam(team2);
+				teamMemberServices.create(tn);
+			}
 		}
 		return "redirect:/team?idTeam=" + idTeam;
 	}

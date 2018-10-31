@@ -458,7 +458,8 @@
 														<c:forEach var="member" items="${member}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email" class="custom-control-input"
-																	id="${member.member.email}" value="${member.member.email}" checked="checked"/>
+																	id="${member.member.email}"
+																	value="${member.member.email}" checked="checked" />
 																<form:label path="email" class="custom-control-label"
 																	for="${member.member.email}">
 																	<div class="d-flex align-items-center">
@@ -467,7 +468,23 @@
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.member.name}</span>
 																	</div>
-																	</form:label>
+																</form:label>
+															</div>
+														</c:forEach>
+														<c:forEach var="friend" items="${friend}">
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email2" class="custom-control-input"
+																	id="${friend.emailFriend.email}"
+																	value="${friend.emailFriend.email}" />
+																<form:label path="email2" class="custom-control-label"
+																	for="${friend.emailFriend.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${friend.emailFriend.name}"
+																			src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${friend.emailFriend.name}</span>
+																	</div>
+																</form:label>
 															</div>
 														</c:forEach>
 
