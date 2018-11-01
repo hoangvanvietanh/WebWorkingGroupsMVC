@@ -25,6 +25,8 @@ public class TaskModel {
 
 	private String[] email;
 	
+	private String[] email2;
+	
 	public void fromTask(TaskTeamProject taskTeamProject) {
 		this.setIdtask(taskTeamProject.getId());
 		this.setName(taskTeamProject.getName());
@@ -53,6 +55,14 @@ public class TaskModel {
 
 	public void setEmail(String[] email) {
 		this.email = email;
+	}
+
+	public String[] getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String[] email2) {
+		this.email2 = email2;
 	}
 
 	public int getIdtask() {

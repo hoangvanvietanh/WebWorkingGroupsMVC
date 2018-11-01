@@ -87,7 +87,7 @@
 							value="${_csrf.token}" />
 					</form>
 
-					
+
 
 				</div>
 				<div class="d-lg-flex align-items-center">
@@ -153,7 +153,7 @@
 							data-target="#task-edit-modal">Edit</a> <a class="dropdown-item"
 							href="#">Mark as Complete</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="#">Archive</a>
+						<a class="dropdown-item text-danger" href="#">Leave task</a>
 
 
 
@@ -365,11 +365,13 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a data-note-id="${note.id }" data-note-content="${note.notes}" data-note-title="${note.titleNotes}" 
+																<a data-note-id="${note.id }"
+																	data-note-content="${note.notes}"
+																	data-note-title="${note.titleNotes}"
 																	class="dropdown-item edit-note-btn" data-toggle="modal"
-																	href="#"
-																	data-target="#note-edit-modal">Edit</a> 
-																	<a class="dropdown-item text-danger" href="task-todo/delete?idnote=${note.id }" >Delete</a>
+																	href="#" data-target="#note-edit-modal">Edit</a> <a
+																	class="dropdown-item text-danger"
+																	href="task-todo/delete?idnote=${note.id }">Delete</a>
 															</div>
 														</div>
 													</div>
@@ -441,7 +443,9 @@
 								<!--end of content list-->
 							</div>
 						</div>
-						<form class="modal fade" id="user-manage-modal" tabindex="-1"
+						<form:form modelAttribute="editTask"
+							action="task-todo/manage-user-task" method="post"
+							class="modal fade" id="user-manage-modal" tabindex="-1"
 							role="dialog" aria-labelledby="user-manage-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -459,9 +463,17 @@
 											<div class="mb-3">
 												<ul class="avatars text-center">
 
-													<li><img alt="Claire Connors"
-														src="assets/img/avatar-female-1.jpg" class="avatar"
-														data-toggle="tooltip" data-title="Claire Connors" /></li>
+
+													<c:forEach var="member" items="${member}">
+														<li><a href="#" data-toggle="tooltip"
+															data-placement="top"
+															title="${member.teamMemberTeamProject.teamMember.member.name}">
+																<img
+																alt="${member.teamMemberTeamProject.teamMember.member.name}"
+																class="avatar"
+																src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>" />
+														</a></li>
+													</c:forEach>
 
 												</ul>
 											</div>
@@ -476,20 +488,42 @@
 													aria-describedby="filter-members">
 											</div>
 											<div class="form-group-users">
-
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input"
-														id="user-manage-1" checked> <label
-														class="custom-control-label" for="user-manage-1">
-														<div class="d-flex align-items-center">
-															<img alt="Claire Connors"
-																src="assets/img/avatar-female-1.jpg" class="avatar mr-2" />
-															<span class="h6 mb-0" data-filter-by="text">Claire
-																Connors</span>
-														</div>
-													</label>
-												</div>
-
+												<c:set var="i" value="0" />
+												<c:forEach var="member" items="${member}">
+													<input type="hidden" value="${i=i+1}">
+													<div class="custom-control custom-checkbox">
+														<form:checkbox path="email"
+															value="${member.teamMemberTeamProject.teamMember.member.email}"
+															class="custom-control-input" id="${i}" checked="checked" />
+														<form:label path="email" class="custom-control-label"
+															for="${i}">
+															<div class="d-flex align-items-center">
+																<img
+																	alt="${member.teamMemberTeamProject.teamMember.member.name}"
+																	src="<spring:url value='/profile/avatar/${member.teamMemberTeamProject.teamMember.member.email}'/>"
+																	class="avatar mr-2" /> <span class="h6 mb-0"
+																	data-filter-by="text">${member.teamMemberTeamProject.teamMember.member.name}</span>
+															</div>
+														</form:label>
+													</div>
+												</c:forEach>
+												<c:forEach var="memberProject" items="${memberProject}">
+													<input type="hidden" value="${i=i+1}">
+													<div class="custom-control custom-checkbox">
+														<form:checkbox path="email2"
+															value="${memberProject.teamMember.member.email}"
+															class="custom-control-input" id="${i}" />
+														<form:label path="email2" class="custom-control-label"
+															for="${i}">
+															<div class="d-flex align-items-center">
+																<img alt="${memberProject.teamMember.member.name}"
+																	src="<spring:url value='/profile/avatar/${memberProject.teamMember.member.email}'/>"
+																	class="avatar mr-2" /> <span class="h6 mb-0"
+																	data-filter-by="text">${memberProject.teamMember.member.name}</span>
+															</div>
+														</form:label>
+													</div>
+												</c:forEach>
 											</div>
 										</div>
 									</div>
@@ -500,7 +534,7 @@
 									</div>
 								</div>
 							</div>
-						</form>
+						</form:form>
 						<form:form modelAttribute="editTask" action="task-todo/edit-task"
 							method="post" class="modal fade" id="task-edit-modal"
 							tabindex="-1" role="dialog" aria-labelledby="task-edit-modal"
@@ -536,12 +570,14 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Task name" path="name" name="task-name" required="required"/>
+														placeholder="Task name" path="name" name="task-name"
+														required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Task description" path="description" required="required"></form:textarea>
+														placeholder="Task description" path="description"
+														required="required"></form:textarea>
 												</div>
 												<hr>
 												<h6>Timeline</h6>
@@ -553,7 +589,8 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Due Date</label>
 													<form:input class="form-control col" type="date"
-														placeholder="Task due" id="EndDate" path="endDate" required="required"/>
+														placeholder="Task due" id="EndDate" path="endDate"
+														required="required" />
 												</div>
 												<div class="alert alert-warning text-small" role="alert">
 													<span>You can change due dates at any time.</span>
@@ -592,11 +629,14 @@
 													</div>
 													<div class="form-group-users">
 														<c:forEach var="member" items="${member}">
+															<input type="hidden" value="${i=i+1}">
 															<div class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input"
-																	id="${member.teamMemberTeamProject.teamMember.member.email}"
-																	checked> <label class="custom-control-label"
-																	for="${member.teamMemberTeamProject.teamMember.member.email}">
+																<form:checkbox path="email"
+																	value="${member.teamMemberTeamProject.teamMember.member.email}"
+																	class="custom-control-input" id="${i}"
+																	checked="checked" />
+																<form:label path="email" class="custom-control-label"
+																	for="${i}">
 																	<div class="d-flex align-items-center">
 																		<img
 																			alt="${member.teamMemberTeamProject.teamMember.member.name}"
@@ -604,7 +644,24 @@
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.teamMemberTeamProject.teamMember.member.name}</span>
 																	</div>
-																</label>
+																</form:label>
+															</div>
+														</c:forEach>
+														<c:forEach var="memberProject" items="${memberProject}">
+															<input type="hidden" value="${i=i+1}">
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email2"
+																	value="${memberProject.teamMember.member.email}"
+																	class="custom-control-input" id="${i}" />
+																<form:label path="email2" class="custom-control-label"
+																	for="${i}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${memberProject.teamMember.member.name}"
+																			src="<spring:url value='/profile/avatar/${memberProject.teamMember.member.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${memberProject.teamMember.member.name}</span>
+																	</div>
+																</form:label>
 															</div>
 														</c:forEach>
 													</div>
@@ -636,7 +693,7 @@
 									<!--end of modal head-->
 
 									<div class="modal-body">
-										<form:input type="hidden" path="id"/>
+										<form:input type="hidden" path="id" />
 										<div class="form-group row align-items-center">
 											<label class="col-3">Title</label>
 											<form:input class="form-control col" type="text"
@@ -658,8 +715,8 @@
 							</div>
 						</form:form>
 
-						<form:form modelAttribute="note" action="task-todo/edit-note" method="post" 
-						class="modal fade" id="note-edit-modal"
+						<form:form modelAttribute="note" action="task-todo/edit-note"
+							method="post" class="modal fade" id="note-edit-modal"
 							tabindex="-1" role="dialog" aria-labelledby="note-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -675,14 +732,15 @@
 
 									<div class="modal-body">
 										<div class="form-group row align-items-center">
-											<form:input id="note-id" type="hidden" path="id"/>
+											<form:input id="note-id" type="hidden" path="id" />
 											<label class="col-3">Title</label>
-											<form:input id="note-title" class="form-control col" type="text"
-												placeholder="Note title" path="titleNotes" />
+											<form:input id="note-title" class="form-control col"
+												type="text" placeholder="Note title" path="titleNotes" />
 										</div>
 										<div class="form-group row align-items-center">
 											<label class="col-3">Note</label>
-											<form:textarea id="note-content" class="form-control col" rows="6" path="notes"></form:textarea>
+											<form:textarea id="note-content" class="form-control col"
+												rows="6" path="notes"></form:textarea>
 										</div>
 
 
@@ -785,20 +843,19 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
-		
+
 	<script>
 		$(document).ready(function() {
 			$('.edit-note-btn').click(function(event) {
-				var id= $(this).attr("data-note-id");
-				var title= $(this).attr("data-note-title");
+				var id = $(this).attr("data-note-id");
+				var title = $(this).attr("data-note-title");
 				var content = $(this).attr("data-note-content");
 				$('#note-id').val(id);
 				$('#note-title').val(title);
 				$('#note-content').val(content);
-				
-				
+
 			});
-			
+
 		});
 	</script>
 </body>

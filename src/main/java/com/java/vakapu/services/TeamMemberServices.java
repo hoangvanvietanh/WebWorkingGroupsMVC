@@ -50,4 +50,14 @@ public class TeamMemberServices {
 	{
 		return teamMemberDAO.getUserTeam(idTeam, email);
 	}
+	
+	public TeamMember findMemberById(int id)
+	{
+		return teamMemberDAO.findMemberById(id);
+	}
+	
+	public TeamMember updateTeamMember(TeamMember teamMember)
+	{
+		return teamMemberDAO.updateTeamMember(teamMember);
+	}
 }

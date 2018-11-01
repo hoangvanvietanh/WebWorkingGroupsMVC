@@ -219,7 +219,7 @@
 															<a data-team-idTeam="${team.team.idTeam}" data-team-name="${team.team.name}" data-team-description="${team.team.description}"
 															data-team-owner="${team.team.owner}" data-team-memberAmount="${team.team.memberAmount}" data-team-projectAmount="${team.team.projectAmount}"
 															 class="dropdown-item text-danger edit-team-btn" href=""
-															data-toggle="modal" data-target="#team-edit-modal">Edit</a> 
+															data-toggle="modal" data-target="#team-edit-modal">More Information</a> 
 															<a class="dropdown-item text-danger"
 																href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
@@ -983,20 +983,25 @@
 												<div class="form-group row align-items-center">
 													<form:input id="team-idTeam" type="hidden" path="idTeam"/>
 													<label class="col-3">Name</label>
-													<form:input class="form-control col" type="text"
+													<form:input class="form-control col" type="text" readonly="true"
 														placeholder="Team name" id="team-name" path="name" required="required"/>
-													<form:input type="hidden" path="memberAmount"	id="team-memberAmount" />
-													<form:input type="hidden" path="projectAmount"	id="team-projectAmount" />	
+												</div>
+												<div class="form-group row">
+													<label class="col-3">Member Amount</label>
+													<form:input class="form-control col" type="text" readonly="true" path="memberAmount"	id="team-memberAmount" />
+												</div>
+												<div class="form-group row">
+													<label class="col-3">Project Amount</label>
+													<form:input class="form-control col" type="text" readonly="true" path="projectAmount"	id="team-projectAmount" />	
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Owner</label>
-													<form:input class="form-control col" id="team-owner" path="owner" />
+													<form:input type="text" readonly="true" class="form-control col" id="team-owner" path="owner" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" id="team-description" path="description" required="required"/>
-													<form:input class="form-control col" type="text" id="team-owner" path="owner"/>	
+														placeholder="Team description" readonly="true" id="team-description" path="description" required="required"/>
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-edit-members"

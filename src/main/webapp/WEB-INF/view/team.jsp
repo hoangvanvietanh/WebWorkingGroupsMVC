@@ -142,9 +142,11 @@
 						<i class="material-icons">settings</i>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="#" data-toggle="modal"
-							data-target="#team-manage-modal">Edit Team</a> <a
-							class="dropdown-item" href="#">Share</a>
+						<c:if test="${checkAdmin eq 'yes'}">
+							<a class="dropdown-item" href="#" data-toggle="modal"
+								data-target="#team-manage-modal">Edit Team</a>
+						</c:if>
+						<a class="dropdown-item" href="#">Share</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="team/leaveTeam">Leave</a>
 					</div>
@@ -167,10 +169,12 @@
 										</a></li>
 									</c:forEach>
 								</ul>
-								<button class="btn btn-round" data-toggle="modal"
-									data-target="#user-invite-modal">
-									<i class="material-icons">add</i>
-								</button>
+								<c:if test="${checkAdmin eq 'yes'}">
+									<button class="btn btn-round" data-toggle="modal"
+										data-target="#user-invite-modal">
+										<i class="material-icons">add</i>
+									</button>
+								</c:if>
 							</div>
 						</div>
 						<hr>
@@ -190,10 +194,12 @@
 									<div class="row content-list-head">
 										<div class="col-auto">
 											<h3>Projects</h3>
-											<button class="btn btn-round" data-toggle="modal"
-												data-target="#project-add-modal">
-												<i class="material-icons">add</i>
-											</button>
+											<c:if test="${checkAdmin eq 'yes'}">
+												<button class="btn btn-round" data-toggle="modal"
+													data-target="#project-add-modal">
+													<i class="material-icons">add</i>
+												</button>
+											</c:if>
 										</div>
 										<form class="col-md-auto">
 											<div class="input-group input-group-round">
@@ -228,8 +234,11 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#" data-toggle="modal"
-																	data-target="#team-manage-modal">Edit</a>
+
+																<a class="dropdown-item"
+																	href="team-project/join-to-project?idProject=${project.id}">Join
+																	to project</a>
+
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger"
 																	href="manage/leaveProject?idProject=${project.id}">Leave
@@ -302,10 +311,12 @@
 									<div class="row content-list-head">
 										<div class="col-auto">
 											<h3>Members</h3>
-											<button class="btn btn-round" data-toggle="modal"
-												data-target="#user-invite-modal">
-												<i class="material-icons">add</i>
-											</button>
+											<c:if test="${checkAdmin eq 'yes'}">
+												<button class="btn btn-round" data-toggle="modal"
+													data-target="#user-invite-modal">
+													<i class="material-icons">add</i>
+												</button>
+											</c:if>
 										</div>
 										<form class="col-md-auto">
 											<div class="input-group input-group-round">
@@ -324,15 +335,23 @@
 									<div class="content-list-body row">
 										<c:forEach var="member" items="${member}">
 											<div class="col-6">
-												<a class="media media-member" href="#"> <img
-													alt="${member.member.name}"
-													src="<spring:url value='/profile/avatar/${member.member.email}'/>"
-													class="avatar avatar-lg" />
-													<div class="media-body">
-														<h6 class="mb-0" data-filter-by="text">${member.member.name}</h6>
-														<span data-filter-by="text" class="text-body">${member.role}</span>
+												<div class="dropdown">
+													<a class="media media-member" href="#" role="button"
+														data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false"> <img alt="Image"
+														src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+														class="avatar avatar-lg" />
+														<div class="media-body">
+															<h6 class="mb-0" data-filter-by="text">${member.member.name}</h6>
+															<span data-filter-by="text" class="text-body">${member.role}</span>
+														</div>
+													</a>
+													<div class="dropdown-menu">
+														<a href="" class="dropdown-item">CV Profile </a> <a
+															href="team/setAdmin?idMember=${member.id}" class="dropdown-item">Set Admin</a>
 													</div>
-												</a>
+												</div>
+
 											</div>
 										</c:forEach>
 									</div>
@@ -458,7 +477,8 @@
 														<c:forEach var="member" items="${member}">
 															<div class="custom-control custom-checkbox">
 																<form:checkbox path="email" class="custom-control-input"
-																	id="${member.member.email}" value="${member.member.email}" checked="checked"/>
+																	id="${member.member.email}"
+																	value="${member.member.email}" checked="checked" />
 																<form:label path="email" class="custom-control-label"
 																	for="${member.member.email}">
 																	<div class="d-flex align-items-center">
@@ -467,7 +487,24 @@
 																			class="avatar mr-2" /> <span class="h6 mb-0"
 																			data-filter-by="text">${member.member.name}</span>
 																	</div>
-																	</form:label>
+																</form:label>
+															</div>
+														</c:forEach>
+														<c:forEach var="friend" items="${friend}">
+															<div class="custom-control custom-checkbox">
+																<form:checkbox path="email2"
+																	class="custom-control-input"
+																	id="${friend.emailFriend.email}"
+																	value="${friend.emailFriend.email}" />
+																<form:label path="email2" class="custom-control-label"
+																	for="${friend.emailFriend.email}">
+																	<div class="d-flex align-items-center">
+																		<img alt="${friend.emailFriend.name}"
+																			src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
+																			class="avatar mr-2" /> <span class="h6 mb-0"
+																			data-filter-by="text">${friend.emailFriend.name}</span>
+																	</div>
+																</form:label>
 															</div>
 														</c:forEach>
 

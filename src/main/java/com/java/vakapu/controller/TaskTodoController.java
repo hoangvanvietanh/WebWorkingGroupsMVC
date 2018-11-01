@@ -3,6 +3,7 @@ package com.java.vakapu.controller;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.java.vakapu.entity.Notes;
 import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
+import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.Todo;
 import com.java.vakapu.model.NoteModel;
 import com.java.vakapu.model.TaskModel;
@@ -30,6 +32,7 @@ import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.NoteService;
 import com.java.vakapu.services.TaskServices;
+import com.java.vakapu.services.TeamMemberTeamProjectServices;
 
 @Controller
 @SessionAttributes({ "idteam","idproject", "idtask" })
@@ -51,6 +54,12 @@ public class TaskTodoController {
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices ;
 	
+	@Autowired
+	private TeamMemberTeamProjectServices teamProServices;
+	
+	@Autowired
+	private TeamMemberTeamProjectServices teamMemberTeamProjectDAO;
+	
 //	@GetMapping(path="getNote/{idnote}")
 //	public @ResponseBody Notes getNoteInfor(@PathVariable(name="idnote") int idNote)
 //	{
@@ -70,6 +79,7 @@ public class TaskTodoController {
 		
 		
 		TaskModel editTask=new TaskModel();
+		TaskModel editTask2=new TaskModel();
 		NoteModel noteM=new NoteModel();
 		
 		noteM.fromNote(note);
@@ -93,9 +103,27 @@ public class TaskTodoController {
 		}
 		taskServices.update(task);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
+		List<TeamMemberTeamProject> remove = new ArrayList<TeamMemberTeamProject>();
+		for(TeamMemberTaskTeamProject t: listMember)
+		{
+			for(TeamMemberTeamProject u: userStore)
+			{
+				if(u.getTeamMember().getMember().getEmail().equals(t.getTeamMemberTeamProject().getTeamMember().getMember().getEmail()))
+				{
+					remove.add(u);
+				}
+			}
+		}
+		userStore.removeAll(remove);
+		for(TeamMemberTeamProject t: userStore)
+		{
+			System.out.println("vietanh:" +t.getTeamMember().getMember().getName());
+		}
 		model.addAttribute("messages", listMes);
 		model.addAttribute("note",noteM);
 		model.addAttribute("todo", listTodo);
+		model.addAttribute("memberProject", userStore);
 		model.addAttribute("member", listMember);
 		model.addAttribute("notes", listNotes);
 		model.addAttribute("task", task);
@@ -103,6 +131,7 @@ public class TaskTodoController {
 		model.addAttribute("idProject", idProject);
 		model.addAttribute("idTeam", idTeam);
 		model.addAttribute("editTask", editTask);
+		model.addAttribute("editTask2", editTask2);
 		return "task-team";
 	}
 
@@ -136,7 +165,7 @@ public class TaskTodoController {
 	}
 	
 	@RequestMapping(value="edit-task",method=RequestMethod.POST)
-	public String updateTask(@ModelAttribute("editTask") TaskModel editTask, BindingResult result, Model model)
+	public String updateTask(@ModelAttribute("idproject") int idProject,@ModelAttribute("idtask") int idTask,@ModelAttribute("editTask") TaskModel editTask, BindingResult result, Model model)
 	{
 		if(result.hasErrors())
 		{
@@ -144,8 +173,74 @@ public class TaskTodoController {
 		}
 		TaskTeamProject task= editTask.toTask();
 		taskServices.update(task);
+		String[] email = editTask.getEmail();
+		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);
+		List<TeamMemberTaskTeamProject> removeMem = new ArrayList<TeamMemberTaskTeamProject>();
+		for(String e:email)
+		{
+			for(TeamMemberTaskTeamProject t:listMember)
+			{
+				if(e.equals(t.getTeamMemberTeamProject().getTeamMember().getMember().getEmail()))
+				{
+					removeMem.add(t);
+				}
+			}
+		}
+		listMember.removeAll(removeMem);
+		for(TeamMemberTaskTeamProject t:listMember)
+		{
+			taskServices.deleteTaskTeamPro(t);
+		}
+		String[] email2 = editTask.getEmail2();
+		if(email2 != null)
+		{
+			for(String e:email2)
+			{
+				TeamMemberTaskTeamProject taskMemNew = new TeamMemberTaskTeamProject();
+				taskMemNew.setTeamMemberTeamProject(teamMemberTeamProjectDAO.findByEmailUser(e, idProject));
+				taskMemNew.setTaskTeamProject(taskServices.findById(idTask));
+				taskServices.createMemberTask(taskMemNew);
+				
+			}
+		}
 		return "redirect:/task-todo?idTask="+task.getId();
 		
+	}
+	
+	@RequestMapping(value="manage-user-task",method=RequestMethod.POST)
+	public String editUser(@ModelAttribute("idproject") int idProject,@ModelAttribute("idtask") int idTask,@ModelAttribute("editTask") TaskModel editTask, BindingResult result, Model model)
+	{
+		String[] email = editTask.getEmail();
+		List<TeamMemberTaskTeamProject> listMember = taskServices.findTaskByIdProject(idProject, idTask);
+		List<TeamMemberTaskTeamProject> removeMem = new ArrayList<TeamMemberTaskTeamProject>();
+		for(String e:email)
+		{
+			for(TeamMemberTaskTeamProject t:listMember)
+			{
+				if(e.equals(t.getTeamMemberTeamProject().getTeamMember().getMember().getEmail()))
+				{
+					removeMem.add(t);
+				}
+			}
+		}
+		listMember.removeAll(removeMem);
+		for(TeamMemberTaskTeamProject t:listMember)
+		{
+			taskServices.deleteTaskTeamPro(t);
+		}
+		String[] email2 = editTask.getEmail2();
+		if(email2 != null)
+		{
+			for(String e:email2)
+			{
+				TeamMemberTaskTeamProject taskMemNew = new TeamMemberTaskTeamProject();
+				taskMemNew.setTeamMemberTeamProject(teamMemberTeamProjectDAO.findByEmailUser(e, idProject));
+				taskMemNew.setTaskTeamProject(taskServices.findById(idTask));
+				taskServices.createMemberTask(taskMemNew);
+				
+			}
+		}
+		return "redirect:/task-todo?idTask="+idTask;
 	}
 	
 	@RequestMapping(value="/create-note",method=RequestMethod.POST)

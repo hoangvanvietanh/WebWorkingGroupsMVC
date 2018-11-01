@@ -18,6 +18,8 @@ public class TeamModel {
 	private int projectAmount;
 	
 	private String[] email;
+	
+	private String[] email2;
 
 	public void fromTeam(Team team)
 	{
@@ -41,6 +43,16 @@ public class TeamModel {
 		return team;
 	}
 	
+	
+	
+	public String[] getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String[] email2) {
+		this.email2 = email2;
+	}
+
 	public int getIdTeam() {
 		return idTeam;
 	}
