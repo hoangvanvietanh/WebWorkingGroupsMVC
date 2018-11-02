@@ -129,6 +129,16 @@ public class ProjectTeamController {
 		TaskModel taskModel = new TaskModel();
 		edit.fromProject(teamProject);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		
 		model.addAttribute("messages", listMes);
 		model.addAttribute("editProject", edit);

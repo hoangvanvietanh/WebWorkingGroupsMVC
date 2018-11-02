@@ -33,4 +33,8 @@ public class NotificationsSystemServices {
 	public NotificationSystem find(int id) {
 		return notificationsSystemDAO.find(id);
 	}
+	
+	public NotificationSystem delete(NotificationSystem MessagesSystem) {
+		return notificationsSystemDAO.delete(MessagesSystem);
+	}
 }

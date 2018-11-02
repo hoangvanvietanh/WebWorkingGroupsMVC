@@ -103,6 +103,16 @@ public class TaskTodoController {
 		}
 		taskServices.update(task);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		List<TeamMemberTeamProject> userStore = teamProServices.findByIdProject(idProject);
 		List<TeamMemberTeamProject> remove = new ArrayList<TeamMemberTeamProject>();
 		for(TeamMemberTaskTeamProject t: listMember)

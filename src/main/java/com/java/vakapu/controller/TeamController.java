@@ -120,6 +120,16 @@ public class TeamController {
 		team.setMemberAmount(member.size());
 		teamServices.updateTeam(team);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		List<Friendship> friend = friendServices.findFriend(emailUser, 1);
 		List<Friendship> remove = new ArrayList<Friendship>();
 		for (TeamMember t : member) {
@@ -305,8 +315,9 @@ public class TeamController {
 				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
 						+ user.getName() + "<br>Do you agree?<br>";
 				String messe = String.format(
-						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>",
-						idTeamString, mess2.getId());
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"+
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DissAgree</a>",
+						idTeamString, mess2.getId(),idTeamString, mess2.getId());
 				mess2.setMessages(messa + messe + "<br>Your message: " + messages);
 				notificationsSystemServices.update(mess2);
 				return "redirect:/team?idTeam=" + idTeam;
@@ -368,9 +379,25 @@ public class TeamController {
 		String messe = String.format("You already agree join to team <a href=\"team?idTeam=%s\">%s</a>", idTeam,
 				team.getName());
 		mess2.setMessages(messe);
+		mess2.setStatus(1);
 		notificationsSystemServices.update(mess2);
 
 		return "redirect:/team?idTeam=" + idTeam;
+	}
+	
+	@RequestMapping(value = "/disJoinTeam", method = RequestMethod.GET)
+	public String disJoinTeam(@RequestParam("idTeam") int idTeam, @RequestParam("idNotifications") int idNotifications,
+			Model model) {
+		Team team = teamServices.findById(idTeam);
+		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+		String messe = String.format("You dissagree join to team <a href=\"team?idTeam=%s\">%s</a>", idTeam,
+				team.getName());
+		mess2.setMessages(messe);
+		mess2.setStatus(1);
+		notificationsSystemServices.update(mess2);
+
+		return "redirect:/home";
+		
 	}
 
 	@RequestMapping(value = "/setAdmin", method = RequestMethod.GET)

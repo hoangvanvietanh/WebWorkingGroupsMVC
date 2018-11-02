@@ -123,9 +123,17 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons"
-							data-toggle="modal" href="#msgModal">notifications</a> <a
-							style="color: white;"
+						<c:choose>
+							<c:when test="${checkNotification eq 'yes' }">
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications_active</a>
+							</c:when>
+							<c:otherwise>
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications</a>
+							</c:otherwise>
+						</c:choose>
+						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -366,7 +374,9 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
+																			<a class="dropdown-item"
+																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -457,7 +467,9 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
+																			<a class="dropdown-item"
+																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -539,7 +551,9 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
+																			<a class="dropdown-item"
+																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -621,7 +635,9 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
+																			<a class="dropdown-item"
+																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>
@@ -713,7 +729,9 @@
 																			<i class="material-icons">more_vert</i>
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
-																			<a class="dropdown-item" href="team-project/MaskAsDone?idTask=${task.id }">Mark as done</a>
+																			<a class="dropdown-item"
+																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				as done</a>
 																			<div class="dropdown-divider"></div>
 																			<a class="dropdown-item text-danger" href="#">Archive</a>
 																		</div>

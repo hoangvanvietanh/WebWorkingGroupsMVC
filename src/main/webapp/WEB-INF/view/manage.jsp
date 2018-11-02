@@ -117,9 +117,17 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons"
-							data-toggle="modal" href="#msgModal">notifications</a> <a
-							style="color: white;"
+						<c:choose>
+							<c:when test="${checkNotification eq 'yes' }">
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications_active</a>
+							</c:when>
+							<c:otherwise>
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications</a>
+							</c:otherwise>
+						</c:choose>
+						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -216,11 +224,15 @@
 															<i class="material-icons">more_vert</i>
 														</button>
 														<div class="dropdown-menu dropdown-menu-right">
-															<a data-team-idTeam="${team.team.idTeam}" data-team-name="${team.team.name}" data-team-description="${team.team.description}"
-															data-team-owner="${team.team.owner}" data-team-memberAmount="${team.team.memberAmount}" data-team-projectAmount="${team.team.projectAmount}"
-															 class="dropdown-item text-danger edit-team-btn" href=""
-															data-toggle="modal" data-target="#team-edit-modal">More Information</a> 
-															<a class="dropdown-item text-danger"
+															<a data-team-idTeam="${team.team.idTeam}"
+																data-team-name="${team.team.name}"
+																data-team-description="${team.team.description}"
+																data-team-owner="${team.team.owner}"
+																data-team-memberAmount="${team.team.memberAmount}"
+																data-team-projectAmount="${team.team.projectAmount}"
+																class="dropdown-item text-danger edit-team-btn" href=""
+																data-toggle="modal" data-target="#team-edit-modal">More
+																Information</a> <a class="dropdown-item text-danger"
 																href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
 														</div>
@@ -883,12 +895,13 @@
 												<div class="form-group row align-items-center">
 													<label class="col-3">Name</label>
 													<form:input class="form-control col" type="text"
-														placeholder="Team name" path="name" required="required"/>
+														placeholder="Team name" path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" path="description" required="required"/>
+														placeholder="Team description" path="description"
+														required="required" />
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-add-members"
@@ -948,7 +961,7 @@
 								</div>
 							</div>
 						</form:form>
-						
+
 						<form:form action="manage/editTeam" modelAttribute="teamAdd"
 							method="POST" class="modal fade" id="team-edit-modal"
 							tabindex="-1" role="dialog" aria-labelledby="team-edit-modal"
@@ -981,27 +994,34 @@
 												role="tabpanel" aria-labelledby="team-edit-details-tab">
 												<h6>Team Details</h6>
 												<div class="form-group row align-items-center">
-													<form:input id="team-idTeam" type="hidden" path="idTeam"/>
+													<form:input id="team-idTeam" type="hidden" path="idTeam" />
 													<label class="col-3">Name</label>
-													<form:input class="form-control col" type="text" readonly="true"
-														placeholder="Team name" id="team-name" path="name" required="required"/>
+													<form:input class="form-control col" type="text"
+														readonly="true" placeholder="Team name" id="team-name"
+														path="name" required="required" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Member Amount</label>
-													<form:input class="form-control col" type="text" readonly="true" path="memberAmount"	id="team-memberAmount" />
+													<form:input class="form-control col" type="text"
+														readonly="true" path="memberAmount" id="team-memberAmount" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Project Amount</label>
-													<form:input class="form-control col" type="text" readonly="true" path="projectAmount"	id="team-projectAmount" />	
+													<form:input class="form-control col" type="text"
+														readonly="true" path="projectAmount"
+														id="team-projectAmount" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Owner</label>
-													<form:input type="text" readonly="true" class="form-control col" id="team-owner" path="owner" />
+													<form:input type="text" readonly="true"
+														class="form-control col" id="team-owner" path="owner" />
 												</div>
 												<div class="form-group row">
 													<label class="col-3">Description</label>
 													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" readonly="true" id="team-description" path="description" required="required"/>
+														placeholder="Team description" readonly="true"
+														id="team-description" path="description"
+														required="required" />
 												</div>
 											</div>
 											<div class="tab-pane fade" id="team-edit-members"
@@ -1118,27 +1138,26 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="<spring:url value='/resources/js/theme.js'/>"
 		type="text/javascript"></script>
-		
-		<script>
-			$(document).ready(function() 
-			{
-				$('.edit-team-btn').click(function(event) {
-					var id= $(this).attr("data-team-idTeam");
-					var name= $(this).attr("data-team-name");
-					var owner= $(this).attr("data-team-owner");
-					var description=$(this).attr("data-team-description");
-					var memberAmount=$(this).attr("data-team-memberAmount");
-					var projectAmount=$(this).attr("data-team-projectAmount");
-					
-					$('#team-idTeam').val(id);
-					$('#team-name').val(name);
-					$('#team-owner').val(owner);
-					$('#team-projectAmount').val(projectAmount);
-					$('#team-memberAmount').val(memberAmount);
-					$('#team-description').val(description);
-				}) ;
+
+	<script>
+		$(document).ready(function() {
+			$('.edit-team-btn').click(function(event) {
+				var id = $(this).attr("data-team-idTeam");
+				var name = $(this).attr("data-team-name");
+				var owner = $(this).attr("data-team-owner");
+				var description = $(this).attr("data-team-description");
+				var memberAmount = $(this).attr("data-team-memberAmount");
+				var projectAmount = $(this).attr("data-team-projectAmount");
+
+				$('#team-idTeam').val(id);
+				$('#team-name').val(name);
+				$('#team-owner').val(owner);
+				$('#team-projectAmount').val(projectAmount);
+				$('#team-memberAmount').val(memberAmount);
+				$('#team-description').val(description);
 			});
-		</script>
+		});
+	</script>
 </body>
 
 </html>

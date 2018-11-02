@@ -94,8 +94,17 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons"
-							data-toggle="modal" href="#msgModal">notifications</a> <a
+						<c:choose>
+							<c:when test="${checkNotification eq 'yes' }">
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications_active</a>
+							</c:when>
+							<c:otherwise>
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications</a>
+							</c:otherwise>
+						</c:choose>
+						<a
 							style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"

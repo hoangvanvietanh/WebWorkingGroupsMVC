@@ -104,6 +104,16 @@ public class ManageController {
 		List<TeamMemberTaskTeamProject> userTaskStore = taskServices.findAll();
 
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		TeamModel teamModel = new TeamModel();
 		model.addAttribute("messages", listMes);
 		model.addAttribute("teamAdd", teamModel);

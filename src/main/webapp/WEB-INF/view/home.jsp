@@ -98,9 +98,17 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons"
-							data-toggle="modal" href="#msgModal">notifications</a> <a
-							style="color: white;"
+						<c:choose>
+							<c:when test="${checkNotification eq 'yes' }">
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications_active</a>
+							</c:when>
+							<c:otherwise>
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications</a>
+							</c:otherwise>
+						</c:choose>
+						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -160,7 +168,8 @@
 										</form>
 										<div class="list-group list-group-flush">
 											<c:forEach var="friend" items="${friend}">
-												<a class="list-group-item list-group-item-action" href="profile-cv/cv?email=${friend.emailFriend.email}">
+												<a class="list-group-item list-group-item-action"
+													href="profile-cv/cv?email=${friend.emailFriend.email}">
 													<div class="media media-member mb-0">
 														<img alt="${friend.emailFriend.name}"
 															src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
@@ -260,9 +269,10 @@
 														<ul class="avatars">
 															<c:forEach var="member" items="${member}">
 																<c:if test="${member.team.idTeam ==  team.team.idTeam}">
-																	<li><a href="profile-cv/cv?email=${member.member.email}" data-toggle="tooltip"
-																		title="${member.member.name}"> <img
-																			alt="${member.member.name}" class="avatar"
+																	<li><a
+																		href="profile-cv/cv?email=${member.member.email}"
+																		data-toggle="tooltip" title="${member.member.name}">
+																			<img alt="${member.member.name}" class="avatar"
 																			src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
 																	</a></li>
 																</c:if>
@@ -294,7 +304,8 @@
 							<!--end of modal head-->
 							<div class="modal-body">
 								<div class="tab-content">
-									<div class="tab-pane fade show active" aria-labelledby="team-edit-details-tab">
+									<div class="tab-pane fade show active"
+										aria-labelledby="team-edit-details-tab">
 										<div class="form-group row align-items-center">
 											<label class="col-3">Name</label> <input
 												class="form-control col" type="text" id="team-name" readonly />
@@ -315,10 +326,11 @@
 											<label class="col-3">Number of members</label> <input
 												class="form-control col" id="team-memberAmount" readonly />
 										</div>
-										
+
 										<div class="form-group row">
 											<label class="col-3">Description</label>
-											<textarea class="form-control col" rows="3"id="team-description" readonly></textarea>
+											<textarea class="form-control col" rows="3"
+												id="team-description" readonly></textarea>
 										</div>
 									</div>
 								</div>

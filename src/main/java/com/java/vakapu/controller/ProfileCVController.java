@@ -118,8 +118,9 @@ public class ProfileCVController {
 		String messa = "Hello " + userFriend.getName() + ",You have invite to add friend form " + user.getName()
 				+ "<br>Do you agree?<br>";
 		String messe = String.format(
-				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/agree?emailFriend=%s&emailUser=%s&idNotifications=%s\">Agree</a>",
-				emailFriend, emailUser, mess2.getId());
+				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/agree?emailFriend=%s&emailUser=%s&idNotifications=%s\">Agree</a>"+
+				"<a class=\"btn btn-primary btn-sm\" href=\"profile-cv/disagree?emailFriend=%s&emailUser=%s&idNotifications=%s\">DisAgree</a>",
+				emailFriend, emailUser, mess2.getId(),emailFriend, emailUser, mess2.getId());
 		mess2.setMessages(messa + messe);
 		notificationsSystemServices.update(mess2);
 
@@ -159,6 +160,14 @@ public class ProfileCVController {
 		notificationsSystemServices.create(notiNew);
 		return "redirect:/home";
 
+	}
+	
+	@RequestMapping(value = "/disagree", method = RequestMethod.GET)
+	public String disagress(Model model, @RequestParam("emailFriend") String emailFriend,
+			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
+		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
+		notificationsSystemServices.delete(noti);
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)

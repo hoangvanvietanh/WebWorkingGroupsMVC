@@ -43,6 +43,16 @@ public class HomeController {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<TeamMember> team = teamMemberServices.findByEmai(emailUser);
 		List<TeamMember> memberStore = teamMemberServices.findAll();
