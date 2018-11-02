@@ -2,12 +2,9 @@ package com.java.vakapu.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,6 +24,7 @@ import com.java.vakapu.entity.TeamMember;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.TeamProject;
+import com.java.vakapu.entity.Todo;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.TaskModel;
 import com.java.vakapu.model.TeamProjectModel;
@@ -38,6 +36,7 @@ import com.java.vakapu.services.ProjectServices;
 import com.java.vakapu.services.TaskServices;
 import com.java.vakapu.services.TeamMemberServices;
 import com.java.vakapu.services.TeamMemberTeamProjectServices;
+import com.java.vakapu.services.TodoServices;
 import com.java.vakapu.services.UserServices;
 
 import utils.Activity;
@@ -76,6 +75,9 @@ public class ProjectTeamController {
 
 	@Autowired
 	private DateServices dateServices;
+	
+	@Autowired
+	private TodoServices todoServices;
 
 	@GetMapping
 	public String teamProject(@ModelAttribute("idteam") int idTeam, @RequestParam("idProject") int idProject,
@@ -285,6 +287,44 @@ public class ProjectTeamController {
 		c.setTeamProject(proServices.find(idProject));
 		teamMemberTeamProjectDAO.create(c);
 		return "redirect:/team-project?idProject=" + idProject;
+	}
+	
+	@RequestMapping(value="MaskAsDone",method=RequestMethod.GET)
+	public String MarkAsDone(@RequestParam(name="idTask") int idtask, @ModelAttribute("idproject") int idProject, @ModelAttribute("idteam") int idTeam, BindingResult result, Model model) throws ParseException
+	{
+		if(result.hasErrors())
+		{
+			return "redirect:/team-project?idProject=" + idProject;
+		}
+		
+		List<Todo> todo= todoServices.findByIdTask(idtask);
+		for(Todo a : todo)
+		{
+			a.setCompleted(1);
+			taskServices.update(a);
+		}
+		TaskTeamProject task=taskServices.findById(idtask);
+		taskServices.update(task);
+		
+		List<Todo> listTodo = taskServices.findTodoByIdTask(idtask);
+		int completedAmount = taskServices.findTodoDoneByIdTask(idtask);
+		int due = dateServices.caculatorDue(task.getEndDate());
+		task.setCompletedAmount(completedAmount);
+		task.setTotalTask(listTodo.size());
+		task.setDue(due);
+		if(task.getCompletedAmount() == task.getTotalTask() && task.getTotalTask()!=0)
+		{
+			task.setCompleted(1);
+		}
+		else
+		{
+			task.setCompleted(0);
+		}
+		taskServices.update(task);
+		
+		
+		return "redirect:/team-project?idProject="+idProject;
+		
 	}
 
 }
