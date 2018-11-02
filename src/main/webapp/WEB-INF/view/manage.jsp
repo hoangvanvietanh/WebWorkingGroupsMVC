@@ -969,13 +969,13 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title">New Team</h5>
+										<h5 class="modal-title">Team Information</h5>
 										<button type="button" class="close btn btn-round"
 											data-dismiss="modal" aria-label="Close">
 											<i class="material-icons">close</i>
 										</button>
 									</div>
-									<!--end of modal head-->
+									<!--end of modal head
 									<ul class="nav nav-tabs nav-fill">
 										<li class="nav-item"><a class="nav-link active"
 											id="team-edit-details-tab" data-toggle="tab"
@@ -987,7 +987,7 @@
 											href="#team-edit-members" role="tab"
 											aria-controls="team-edit-members" aria-selected="false">Members</a>
 										</li>
-									</ul>
+									</ul> -->
 									<div class="modal-body">
 										<div class="tab-content">
 											<div class="tab-pane fade show active" id="team-edit-details"
@@ -1074,10 +1074,7 @@
 										</div>
 									</div>
 									<!--end of modal body-->
-									<div class="modal-footer">
-										<button role="button" class="btn btn-primary" type="submit">
-											Done</button>
-									</div>
+									
 								</div>
 							</div>
 						</form:form>

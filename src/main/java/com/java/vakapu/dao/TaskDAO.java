@@ -33,12 +33,18 @@ public class TaskDAO {
 		query.setParameter("email", email);
 		return query.getResultList();
 	}
-	
-	public List<TaskTeamProject> findByIdProject(int id) {
-		TypedQuery<TaskTeamProject> query = getSession().createQuery("select a from TaskTeamProject a where a.project.idproject=:id",TaskTeamProject.class);
+	public List<TeamMemberTaskTeamProject> findByIdProject(int id)
+	{
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:id", TeamMemberTaskTeamProject.class);
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
+	
+//	public List<TaskTeamProject> findByIdProject(int id) {
+//		TypedQuery<TaskTeamProject> query = getSession().createQuery("select a from TaskTeamProject a where a.project.idproject=:id",TaskTeamProject.class);
+//		query.setParameter("id", id);
+//		return query.getResultList();
+//	}
 	public TaskTeamProject find(int id) {
 		return getSession().find(TaskTeamProject.class, id);
 	}
@@ -57,4 +63,6 @@ public class TaskDAO {
 		getSession().update(taskTeamProject);
 		return taskTeamProject;
 	}
+	
+	
 }
