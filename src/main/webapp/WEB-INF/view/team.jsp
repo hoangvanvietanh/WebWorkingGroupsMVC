@@ -172,7 +172,11 @@
 								<c:if test="${checkAdmin eq 'yes'}">
 									<button class="btn btn-round" data-toggle="modal"
 										data-target="#user-invite-modal">
-										<i class="material-icons">add</i>
+										<i class="material-icons">email</i>
+									</button>
+									<button class="btn btn-round" data-toggle="modal"
+													data-target="#userteam-manage-modal">
+										<i class="material-icons">person_add</i>
 									</button>
 								</c:if>
 							</div>
@@ -348,7 +352,8 @@
 													</a>
 													<div class="dropdown-menu">
 														<a href="" class="dropdown-item">CV Profile </a> <a
-															href="team/setAdmin?idMember=${member.id}" class="dropdown-item">Set Admin</a>
+															href="team/setAdmin?idMember=${member.id}"
+															class="dropdown-item">Set Admin</a>
 													</div>
 												</div>
 
@@ -392,6 +397,7 @@
 												<textarea name="messages" class="form-control col" rows="3"
 													placeholder="Team description"></textarea>
 											</div>
+
 										</div>
 									</div>
 									<input type="hidden" name="${_csrf.parameterName}"
@@ -518,6 +524,94 @@
 									<form:input type="hidden" path="memberAmount" />
 									<form:input type="hidden" path="projectAmount" />
 									<form:input type="hidden" path="idTeam" />
+									<form:input type="hidden" path="dateCreate" />
+									<div class="modal-footer">
+										<button role="button" class="btn btn-primary" type="submit">
+											Done</button>
+									</div>
+								</div>
+							</div>
+						</form:form>
+						<form:form modelAttribute="teamModel" action="team/manageUser"
+							method="POST" class="modal fade" id="userteam-manage-modal"
+							tabindex="-1" role="dialog" aria-labelledby="user-manage-modal"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Manage Users</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+									<div class="modal-body">
+										<div class="users-manage" data-filter-list="form-group-users">
+											<div class="mb-3">
+												<ul class="avatars text-center">
+
+													<c:forEach var="member" items="${member}">
+														<li><img alt="${member.member.name}"
+															src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+															class="avatar" data-toggle="tooltip"
+															data-title="${member.member.name}" /></li>
+													</c:forEach>
+
+												</ul>
+											</div>
+											<div class="input-group input-group-round">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i
+														class="material-icons">filter_list</i>
+													</span>
+												</div>
+												<input type="search" class="form-control filter-list-input"
+													placeholder="Filter members" aria-label="Filter Members"
+													aria-describedby="filter-members">
+											</div>
+
+											<div class="form-group-users">
+												<c:set var="i" value="0" />
+												<c:forEach var="member" items="${member}">
+												<input type="hidden" value="${i=i+1}">
+													<div class="custom-control custom-checkbox">
+														<form:checkbox path="email" class="custom-control-input"
+															id="${i}"
+															value="${member.member.email}" checked="checked" />
+														<form:label path="email" class="custom-control-label"
+															for="${i}">
+															<div class="d-flex align-items-center">
+																<img alt="${member.member.name}"
+																	src="<spring:url value='/profile/avatar/${member.member.email}'/>"
+																	class="avatar mr-2" /> <span class="h6 mb-0"
+																	data-filter-by="text">${member.member.name}</span>
+															</div>
+														</form:label>
+													</div>
+												</c:forEach>
+												<c:forEach var="friend" items="${friend}">
+												<input type="hidden" value="${i=i+1}">
+													<div class="custom-control custom-checkbox">
+														<form:checkbox path="email2" class="custom-control-input"
+															id="${i}"
+															value="${friend.emailFriend.email}" />
+														<form:label path="email2" class="custom-control-label"
+															for="${i}">
+															<div class="d-flex align-items-center">
+																<img alt="${friend.emailFriend.name}"
+																	src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
+																	class="avatar mr-2" /> <span class="h6 mb-0"
+																	data-filter-by="text">${friend.emailFriend.name}</span>
+															</div>
+														</form:label>
+													</div>
+												</c:forEach>
+
+											</div>
+										</div>
+									</div>
+									<!--end of modal body-->
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
 											Done</button>
@@ -638,7 +732,7 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														<c:set var="i" value="0" />
+														
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>

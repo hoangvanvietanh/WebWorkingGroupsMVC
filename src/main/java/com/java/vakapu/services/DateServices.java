@@ -3,6 +3,7 @@ package com.java.vakapu.services;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -12,6 +13,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class DateServices {
 
+	public String getDateNow()
+	{
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		return time;
+	}
+	
 	public int caculatorDue(String date) throws ParseException 
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

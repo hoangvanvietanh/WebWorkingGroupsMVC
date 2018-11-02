@@ -43,12 +43,13 @@
 	max-height: 500px;
 	overflow: auto;
 }
+.
 </style>
 </head>
 
 <body>
 
-	<div class="layout layout-nav-top">
+	<div class="layout layout-nav-top layout-sidebar">
 		<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
 			<a class="navbar-brand" href="home"> <img
 				style="width: 45px; height: 45px" alt="Vakapu"
@@ -126,54 +127,233 @@
 			</div>
 		</div>
 		<div class="main-container">
+			<div class="sidebar-container">
+				<button
+					class="btn btn-primary btn-round btn-floating btn-lg d-lg-none"
+					type="button" data-toggle="collapse"
+					data-target="#sidebar-collapse" aria-expanded="false"
+					aria-controls="sidebar-floating-chat">
+					<i class="material-icons">more_horiz</i> <i class="material-icons">close</i>
+				</button>
+				<div class="sidebar collapse" id="sidebar-collapse">
+					<div class="sidebar-content">
+						<p style="padding-left: 35%; padding-top: 5%;">
+							<strong>My Friends</strong>
+						</p>
+						<div class="chat-team-sidebar text-small">
+							<div class="chat-team-sidebar-bottom">
+								<div class="tab-content">
+									<div class="tab-pane fade show active" style="padding-top: 0%;"
+										id="members" role="tabpanel" aria-labelledby="members-tab"
+										data-filter-list="list-group">
+										<form class="px-3 mb-3">
+											<div class="input-group input-group-round">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i
+														class="material-icons">filter_list</i>
+													</span>
+												</div>
+												<input type="search" class="form-control filter-list-input"
+													placeholder="Filter members" aria-label="Filter Members"
+													aria-describedby="filter-members">
+											</div>
+										</form>
+										<div class="list-group list-group-flush">
+											<c:forEach var="friend" items="${friend}">
+												<a class="list-group-item list-group-item-action" href="profile-cv/cv?email=${friend.emailFriend.email}">
+													<div class="media media-member mb-0">
+														<img alt="${friend.emailFriend.name}"
+															src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
+															class="avatar" />
+														<div class="media-body">
+															<h6 class="mb-0" data-filter-by="text">${friend.emailFriend.name}</h6>
+														</div>
+													</div>
+												</a>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-9">
-						<div
-							class="text-center d-flex align-items-center justify-content-center pt-5">
-							<div>
-								<img alt="Empty State" src="resources/img/logo1.png"
-									class="w-50" style="opacity: .8" /> <span
-									class="h3 d-block mt-3">Hello</span>
-								<iframe scrolling="no" frameborder="no" clocktype="html5"
-									style="overflow: hidden; border: 0; margin: 0; padding: 0; width: 450px; height: 165px;"
-									src="https://www.clocklink.com/html5embed.php?clock=044&timezone=ICT&color=white&size=450&Title=&Message=&Target=&From=2018,1,1,0,0,0&Color=white"></iframe>
-								<p>How are you?</p>
-								<a class="btn btn-primary btn-sm" href="team/joinTeam?idTeam=">Agree</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="content-container">
+
+				<div
+					class="text-center d-flex align-items-center justify-content-center pt-5">
+					<div>
+						<img alt="Empty State" src="resources/img/boymax.gif" class="w-50"
+							style="opacity: .8" /> <span class="h3 d-block mt-3">Hello
+							my friend </span>
+						<p>How can I help you ?</p>
+					</div>
+				</div>
+
+			</div>
+			<div class="sidebar-container">
+				<button
+					class="btn btn-primary btn-round btn-floating btn-lg d-lg-none"
+					type="button" data-toggle="collapse"
+					data-target="#sidebar-collapse" aria-expanded="false"
+					aria-controls="sidebar-floating-chat">
+					<i class="material-icons">more_horiz</i> <i class="material-icons">close</i>
+				</button>
+				<div class="sidebar collapse" id="sidebar-collapse">
+					<div class="sidebar-content">
+						<p style="padding-left: 35%; padding-top: 5%;">
+							<strong>My Team</strong>
+						</p>
+						<div class="chat-team-sidebar text-small">
+							<div class="chat-team-sidebar-bottom">
+								<div class="tab-content">
+									<div class="tab-pane fade show active" style="padding-top: 0%;"
+										id="members" role="tabpanel" aria-labelledby="members-tab"
+										data-filter-list="list-group">
+										<form class="px-3 mb-3">
+											<div class="input-group input-group-round">
+												<div class="input-group-prepend">
+													<span class="input-group-text"> <i
+														class="material-icons">filter_list</i>
+													</span>
+												</div>
+												<input type="search" class="form-control filter-list-input"
+													placeholder="Filter members" aria-label="Filter Members"
+													aria-describedby="filter-members">
+											</div>
+										</form>
+										<div class="list-group list-group-flush">
+											<c:forEach var="team" items="${team}">
+												<div class="card card-team">
+													<div class="card-body">
+														<div class="dropdown card-options">
+															<button class="btn-options" type="button"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+															</button>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a data-team-idTeam="${team.team.idTeam}"
+																	data-team-name="${team.team.name}"
+																	data-team-description="${team.team.description}"
+																	data-team-owner="${team.team.owner}"
+																	data-team-memberAmount="${team.team.memberAmount}"
+																	data-team-projectAmount="${team.team.projectAmount}"
+																	date-team-dateCreate="${team.team.dateCreate}"
+																	class="dropdown-item edit-team-btn" href=""
+																	data-toggle="modal" data-target="#team-edit-modal">More
+																	information</a> <a class="dropdown-item text-danger"
+																	href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
+																	Team</a>
+															</div>
+														</div>
+														<div class="card-title">
+															<a href="team?idTeam=${team.team.idTeam}">
+																<h5 data-filter-by="text">${team.team.name}</h5>
+															</a> <span>${team.team.projectAmount} Projects,
+																${team.team.memberAmount} Members</span>
+														</div>
+
+														<ul class="avatars">
+															<c:forEach var="member" items="${member}">
+																<c:if test="${member.team.idTeam ==  team.team.idTeam}">
+																	<li><a href="profile-cv/cv?email=${member.member.email}" data-toggle="tooltip"
+																		title="${member.member.name}"> <img
+																			alt="${member.member.name}" class="avatar"
+																			src="<spring:url value='/profile/avatar/${member.member.email}'/>" />
+																	</a></li>
+																</c:if>
+															</c:forEach>
+														</ul>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<form class="modal fade" id="team-edit-modal" tabindex="-1"
+					role="dialog" aria-labelledby="team-edit-modal" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Team Details</h5>
+								<button type="button" class="close btn btn-round"
+									data-dismiss="modal" aria-label="Close">
+									<i class="material-icons">close</i>
+								</button>
+							</div>
+							<!--end of modal head-->
+							<div class="modal-body">
+								<div class="tab-content">
+									<div class="tab-pane fade show active" aria-labelledby="team-edit-details-tab">
+										<div class="form-group row align-items-center">
+											<label class="col-3">Name</label> <input
+												class="form-control col" type="text" id="team-name" readonly />
+										</div>
+										<div class="form-group row">
+											<label class="col-3">Owner</label> <input
+												class="form-control col" id="team-owner" readonly />
+										</div>
+										<div class="form-group row">
+											<label class="col-3">Created At</label> <input
+												class="form-control col" id="team-dateCreate" readonly />
+										</div>
+										<div class="form-group row">
+											<label class="col-3">Number of projects</label> <input
+												class="form-control col" id="team-projectAmount" readonly />
+										</div>
+										<div class="form-group row">
+											<label class="col-3">Number of members</label> <input
+												class="form-control col" id="team-memberAmount" readonly />
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-3">Description</label>
+											<textarea class="form-control col" rows="3"id="team-description" readonly></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
-
 		</div>
-		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
-			aria-labelledby="bpq" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="d">
-						<h5 class="modal-title">Notifications</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body afx js-modalBody">
-						<div class="axw">
-							<div class="afc js-conversation">
-								<ul class="bow bpc">
-									<c:forEach var="mess" items="${messages}">
-										<li class="rv bpf afo">
-											<div class="rw">
-												<div class="bpd">${mess.messages}</div>
-												<div class="bpe">
-													<small class="axc">at ${mess.date} </small>
-												</div>
-											</div> <img class="us bos vb yb afi"
-											src="resources/img/anonymous.png">
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
+	</div>
+	<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+		aria-labelledby="bpq" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="d">
+					<h5 class="modal-title">Notifications</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body afx js-modalBody">
+					<div class="axw">
+						<div class="afc js-conversation">
+							<ul class="bow bpc">
+								<c:forEach var="mess" items="${messages}">
+									<li class="rv bpf afo">
+										<div class="rw">
+											<div class="bpd">${mess.messages}</div>
+											<div class="bpe">
+												<small class="axc">at ${mess.date} </small>
+											</div>
+										</div> <img class="us bos vb yb afi"
+										src="resources/img/anonymous.png">
+									</li>
+								</c:forEach>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -204,6 +384,28 @@
 		type="text/javascript"></script>
 	<script src="<spring:url value='/resources/js/application.js'/>"
 		type="text/javascript"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('.edit-team-btn').click(function(event) {
+				var id = $(this).attr("data-team-idTeam");
+				var name = $(this).attr("data-team-name");
+				var owner = $(this).attr("data-team-owner");
+				var description = $(this).attr("data-team-description");
+				var memberAmount = $(this).attr("data-team-memberAmount");
+				var projectAmount = $(this).attr("data-team-projectAmount");
+				var dateCreate = $(this).attr("date-team-dateCreate");
+
+				$('#team-idTeam').val(id);
+				$('#team-dateCreate').val(dateCreate);
+				$('#team-name').val(name);
+				$('#team-owner').val(owner);
+				$('#team-projectAmount').val(projectAmount);
+				$('#team-memberAmount').val(memberAmount);
+				$('#team-description').val(description);
+			});
+		});
+	</script>
 </body>
 
 </html>

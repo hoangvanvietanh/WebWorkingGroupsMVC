@@ -3662,7 +3662,10 @@ input[type="button"].btn-block {
 .list-group-flush .list-group-item {
   border-right: 0;
   border-left: 0;
-  border-radius: 0; }
+  border-radius: 0; 
+  border-top: 0;
+  padding-top: 0px;
+  }
 
 .list-group-flush:first-child .list-group-item:first-child {
   border-top: 0; }
@@ -7659,7 +7662,7 @@ label[class*='col'] {
   .sidebar {
     height: 100%;
     overflow: hidden;
-    width: 384px;
+    width: 250px;
     border-left: 1px solid #E9EEF2;
     display: flex !important;
     flex-direction: column;
@@ -7669,7 +7672,7 @@ label[class*='col'] {
 
 @media (min-width: 1200px) {
   .sidebar {
-    width: 384px; } }
+    width: 250px; } }
 
 .sidebar-content {
   max-height: 100%;

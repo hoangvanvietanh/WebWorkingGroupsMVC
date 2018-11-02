@@ -1,5 +1,7 @@
 package com.java.vakapu.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -127,9 +129,14 @@ public class ManageController {
 	@RequestMapping(value = "/createTeam", method = RequestMethod.POST)
 	public String createTeam(@ModelAttribute("addMember") TeamModel teamModel, @ModelAttribute("teamAdd") Team team,
 			Model model) throws ParseException {
-		System.out.println("test leng:" +teamModel.getEmail().length);
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
 		String[] email = teamModel.getEmail();
 		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
+		team.setOwner(user.getName()+"("+emailUser+")");
+		team.setDateCreate(time);
 		Team team2 = teamServices.createTeam(team);
 		int i = 0;
 		for (String e : email) {

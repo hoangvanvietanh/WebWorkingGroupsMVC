@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,28 @@ public class ProfileCVController {
 
 	@PostMapping
 	public String searchVC(Model model, @ModelAttribute("email") String email) {
+		String emailUser = accountServices.getEmailUser();
+		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
+		List<Account> account = accountServices.findAll();
+		model.addAttribute("checkFriend", 0);
+		for (Account a : account) {
+			if (email.equals(a.getEmail())) {
+				User user = userServices.findByEmail(email);
+				for (Friendship f : myFriend) {
+					if (email.equals(f.getEmailFriend().getEmail()) && f.getStatus() == 1) {
+						model.addAttribute("checkFriend", 1);
+					}
+				}
+				model.addAttribute("emailUser", emailUser);
+				model.addAttribute("user", user);
+				return "profile-cv";
+			}
+		}
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/cv", method = RequestMethod.GET)
+	public String searchCV(Model model, @RequestParam("email") String email) {
 		String emailUser = accountServices.getEmailUser();
 		List<Friendship> myFriend = friendshipServices.findFriend(emailUser, 1);
 		List<Account> account = accountServices.findAll();
@@ -136,5 +159,10 @@ public class ProfileCVController {
 		notificationsSystemServices.create(notiNew);
 		return "redirect:/home";
 
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String accessDeniedPage(ModelMap model) {
+		return "redirect:/home";
 	}
 }
