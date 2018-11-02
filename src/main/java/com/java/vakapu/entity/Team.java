@@ -25,6 +25,9 @@ public class Team {
 	@Column(name="owner")
 	private String owner;
 
+	@Column(name="date_create")
+	private String dateCreate;
+	
 	@Column(name="member_amount")
 	private int memberAmount;
 	
@@ -37,6 +40,15 @@ public class Team {
 
 	public void setIdTeam(int idTeam) {
 		this.idTeam = idTeam;
+	}
+
+	
+	public String getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(String dateCreate) {
+		this.dateCreate = dateCreate;
 	}
 
 	public String getName() {
