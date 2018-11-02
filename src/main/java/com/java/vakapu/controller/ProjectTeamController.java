@@ -296,8 +296,7 @@ public class ProjectTeamController {
 		{
 			return "redirect:/team-project?idProject=" + idProject;
 		}
-		
-		List<Todo> todo= todoServices.findByIdTask(idtask);
+		List<Todo> todo= taskServices.findTodoByIdTask(idtask);
 		for(Todo a : todo)
 		{
 			a.setCompleted(1);
@@ -325,6 +324,40 @@ public class ProjectTeamController {
 		
 		return "redirect:/team-project?idProject="+idProject;
 		
+	}
+	
+	@RequestMapping(value="MarkAsComplete",method=RequestMethod.GET)
+	public String MarkAsComplete(@ModelAttribute("idteam") int idteam, @ModelAttribute("idproject") int idproject ,BindingResult result) throws ParseException
+	{
+		List<TeamMemberTaskTeamProject> listTeam= taskServices.findAllTaskByID(idproject);
+		for(TeamMemberTaskTeamProject a: listTeam)
+		{
+//			System.out.println("..........................................");
+//			System.out.println(a.getTaskTeamProject().getName());
+			TaskTeamProject task=a.getTaskTeamProject();
+			List<Todo> listTodo=taskServices.findTodoByIdTask(a.getTaskTeamProject().getId());
+			for(Todo b :listTodo)
+			{
+				b.setCompleted(1);
+				taskServices.update(b);
+			}
+//			List<Todo> listTodo = taskServices.findTodoByIdTask(idtask);
+			int completedAmount = taskServices.findTodoDoneByIdTask(a.getTaskTeamProject().getId());
+			int due = dateServices.caculatorDue(task.getEndDate());
+			task.setCompletedAmount(completedAmount);
+			task.setTotalTask(listTodo.size());
+			task.setDue(due);
+			if(task.getCompletedAmount() == task.getTotalTask() && task.getTotalTask()!=0)
+			{
+				task.setCompleted(1);
+			}
+			else
+			{
+				task.setCompleted(0);
+			}
+			taskServices.update(task);
+		}
+		return "redirect:/team-project?idProject="+idproject;
 	}
 
 }

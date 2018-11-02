@@ -2,8 +2,6 @@ package com.java.vakapu.services;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +42,10 @@ public class TaskServices {
 	{
 		return taskTeamProDAO.findAll();
 	}
+	public List<TeamMemberTaskTeamProject> findAllTaskByID(int idproject)
+	{
+		return taskDao.findByIdProject(idproject);
+	}
 	
 	public List<TeamMemberTaskTeamProject> findTaskByIdProject(int idProject, int idTask)
 	{
@@ -78,10 +80,10 @@ public class TaskServices {
 		return taskTeamProDAO.delete(t);
 	}
 	
-	public List<TaskTeamProject> findByIdProject(int id)
-	{
-		return taskDao.findByIdProject(id);
-	}
+//	public List<TaskTeamProject> findByIdProject(int id)
+//	{
+//		return taskDao.findByIdProject(id);
+//	}
 	
 	public TaskTeamProject findByIdTask(int id)
 	{

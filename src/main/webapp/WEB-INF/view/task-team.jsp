@@ -288,7 +288,7 @@
 																	class="material-icons">reorder</i>
 																</span>
 																<div class="custom-control custom-checkbox col">
-																	<input type="hidden" name="${_csrf.parameterName}"
+																	<input type="text" name="${_csrf.parameterName}"
 																		value="${_csrf.token}" /> <input
 																		onclick="this.form.submit();" type="checkbox"
 																		class="custom-control-input" id="${todo.id}">
