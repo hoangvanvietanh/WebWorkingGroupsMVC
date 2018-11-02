@@ -226,6 +226,47 @@ public class TeamController {
 		return "redirect:/team?idTeam=" + idTeam;
 	}
 
+	@RequestMapping(value = "/manageUser", method = RequestMethod.POST)
+	public String manageUser(@ModelAttribute("idteam") int idTeam, @ModelAttribute("editTeam") TeamModel teamModel,
+			Model model) {
+		String[] email = teamModel.getEmail();
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		List<TeamMember> memberRemove = new ArrayList<TeamMember>();
+		for (String e : email) {
+			for (TeamMember t : member) {
+				if (e.equals(t.getMember().getEmail())) {
+					memberRemove.add(t);
+				}
+			}
+		}
+		member.removeAll(memberRemove);
+		for (TeamMember t : member) {
+			TeamMember t2 = teamMemberServices.getUserTeam(idTeam, t.getMember().getEmail());
+			List<TeamMemberTeamProject> t1 = teamMemberTeamProjectServices.findByIdTeamMember(t2.getId());
+			for (TeamMemberTeamProject team3 : t1) {
+				List<TeamMemberTaskTeamProject> t3 = taskServices.findByIdMemberProject(team3.getId());
+				for (TeamMemberTaskTeamProject team2 : t3) {
+					taskServices.deleteTaskTeamPro(team2);
+				}
+				teamMemberTeamProjectServices.delete(team3);
+			}
+			teamMemberServices.delete(t2);
+		}
+		String[] email2 = teamModel.getEmail2();
+		if (email2 != null) {
+			Team team2 = teamServices.findById(idTeam);
+			for (String e : email2) {
+				TeamMember tn = new TeamMember();
+				tn.setMember(userServices.findByEmail(e));
+				tn.setRole("Member");
+				tn.setTeam(team2);
+				teamMemberServices.create(tn);
+			}
+		}
+		return "redirect:/team?idTeam=" + idTeam;
+	}
+	
+	
 	@RequestMapping(value = "/leaveTeam", method = RequestMethod.GET)
 	public String leaveTeam(@ModelAttribute("idteam") int idTeam, Model model) throws ParseException {
 		String emailUser = accountServices.getEmailUser();

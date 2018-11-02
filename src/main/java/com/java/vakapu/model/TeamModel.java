@@ -17,6 +17,8 @@ public class TeamModel {
 
 	private int projectAmount;
 	
+	private String dateCreate;
+	
 	private String[] email;
 	
 	private String[] email2;
@@ -29,6 +31,7 @@ public class TeamModel {
 		this.setOwner(team.getOwner());
 		this.setMemberAmount(team.getMemberAmount());
 		this.setProjectAmount(team.getProjectAmount());
+		this.setDateCreate(team.getDateCreate());
 	}
 	
 	public Team toTeam()
@@ -40,11 +43,20 @@ public class TeamModel {
 		team.setMemberAmount(this.getMemberAmount());
 		team.setProjectAmount(this.getProjectAmount());
 		team.setOwner(this.getOwner());
+		team.setDateCreate(this.getDateCreate());
 		return team;
 	}
 	
 	
 	
+	public String getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(String dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
 	public String[] getEmail2() {
 		return email2;
 	}
