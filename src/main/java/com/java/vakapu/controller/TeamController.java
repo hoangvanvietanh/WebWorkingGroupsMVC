@@ -316,7 +316,7 @@ public class TeamController {
 						+ user.getName() + "<br>Do you agree?<br>";
 				String messe = String.format(
 						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"+
-						"<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DissAgree</a>",
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
 						idTeamString, mess2.getId(),idTeamString, mess2.getId());
 				mess2.setMessages(messa + messe + "<br>Your message: " + messages);
 				notificationsSystemServices.update(mess2);
@@ -396,6 +396,23 @@ public class TeamController {
 		mess2.setStatus(1);
 		notificationsSystemServices.update(mess2);
 
+		
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String emailUser = accountServices.getEmailUser();
+		User user1 = userServices.findByEmail(mess2.getUserFrom().getEmail());
+		User user2 = userServices.findByEmail(emailUser);
+		
+		NotificationSystem mess = new NotificationSystem();
+		mess.setToUser(user1);
+		mess.setUserFrom(user2);
+		String messee = String.format("%s disagree join to team %s", user2.getName(),team.getName());
+		mess.setMessages(messee);
+		mess.setStatus(1);
+		mess.setDate(time);
+		notificationsSystemServices.create(mess);
+		
 		return "redirect:/home";
 		
 	}

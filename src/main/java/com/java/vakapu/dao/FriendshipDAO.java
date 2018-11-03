@@ -43,6 +43,12 @@ public class FriendshipDAO {
 		return friend;
 	}
 	
+	public Friendship delete(Friendship friend)
+	{
+		getSession().delete(friend);
+		return friend;
+	}
+	
 	public Friendship update(Friendship friend)
 	{
 		getSession().update(friend);

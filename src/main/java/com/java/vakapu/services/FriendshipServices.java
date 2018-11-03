@@ -35,4 +35,9 @@ public class FriendshipServices {
 	{
 		return friendshipDAO.update(friend);
 	}
+	
+	public Friendship delete(Friendship friend)
+	{
+		return friendshipDAO.delete(friend);
+	}
 }
