@@ -345,7 +345,7 @@ public class TeamController {
 		String messe = String.format(
 				"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
 						+ "<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
-				idTeamString, mess2.getId());
+				idTeamString, mess2.getId(),idTeamString, mess2.getId());
 		mess2.setMessages(messa + messe + "<br>Your message: " + messages);
 		notificationsSystemServices.update(mess2);
 		String text = "Hello my friend ,\n You have invitation to join the team from " + user.getName()

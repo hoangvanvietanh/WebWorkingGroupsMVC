@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,10 +45,13 @@ public class HomeController {
 	private UserServices userServices;
 	
 	@GetMapping
-	public String home(Model model) {
+	public String home(Model model,ModelMap modelMap) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+		modelMap.put("idteam", 0);
+		modelMap.put("idproject", 0);
+		modelMap.put("idtask", 0);
 		int i=0;
 		for(NotificationSystem l:listMes)
 		{

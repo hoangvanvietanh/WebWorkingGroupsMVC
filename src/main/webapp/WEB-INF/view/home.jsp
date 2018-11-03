@@ -360,6 +360,14 @@
 											<div class="bpd">${mess.messages}</div>
 											<div class="bpe">
 												<small class="axc">at ${mess.date} </small>
+												<c:choose>
+												<c:when test="${mess.status == 0}">
+													<small class="axc">not seen</small>
+												</c:when>
+												<c:otherwise>
+													<small class="axc">seen</small>
+												</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
 										<div class="dropdown">
