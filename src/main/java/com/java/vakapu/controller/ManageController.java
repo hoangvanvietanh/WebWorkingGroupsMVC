@@ -126,7 +126,7 @@ public class ManageController {
 		model.addAttribute("profile", user);
 		model.addAttribute("userTask", userTaskStore);
 		model.addAttribute("task", task);
-
+		model.addAttribute("path", "manage");
 		return "manage";
 	}
 

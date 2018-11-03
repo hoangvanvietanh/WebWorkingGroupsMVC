@@ -145,18 +145,18 @@ public class ProfileCVController {
 		friendAgree.setEmailUser(user2);
 		friendAgree.setEmailFriend(user1);
 		friendAgree.setStatus(1);
+		friendshipServices.create(friendAgree);
 		
 		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
 		String messe = String.format(
 				"You and <a>%s</a> become a friend",user1.getName());
 		noti.setMessages(messe);
-		noti.setStatus(1);
 		notificationsSystemServices.update(noti);
 		
 		NotificationSystem notiNew = new NotificationSystem();
 		notiNew.setToUser(user1);
 		notiNew.setDate(time);
-		notiNew.setStatus(1);
+		notiNew.setStatus(0);
 		notiNew.setMessages(user2.getName() + " already invited friend");
 		notificationsSystemServices.create(notiNew);
 		return "redirect:/home";
@@ -166,8 +166,6 @@ public class ProfileCVController {
 	@RequestMapping(value = "/disagree", method = RequestMethod.GET)
 	public String disagress(Model model, @RequestParam("emailFriend") String emailFriend,
 			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
-		Friendship friendship = friendshipServices.findFriendAndUser(emailUser, emailFriend);
-		friendshipServices.delete(friendship);
 		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
 		notificationsSystemServices.delete(noti);
 		return "redirect:/home";

@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.java.vakapu.entity.Friendship;
 import com.java.vakapu.entity.NotificationSystem;
@@ -21,6 +25,7 @@ import com.java.vakapu.services.TeamMemberServices;
 import com.java.vakapu.services.UserServices;
 
 @Controller
+@SessionAttributes({ "idteam","idproject", "idtask" })
 @RequestMapping("/home")
 public class HomeController {
 	@Autowired
@@ -68,6 +73,7 @@ public class HomeController {
 		model.addAttribute("friend", myFriend);
 		model.addAttribute("member", memberStore);
 		model.addAttribute("user", user);
+		model.addAttribute("path", "home");
 		return "home";
 	}
 
@@ -75,5 +81,46 @@ public class HomeController {
 	public String handelHome(Model model)  {
 
 		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/seen", method = RequestMethod.GET)
+	public String seenNoti(@RequestParam("idNotifications") int idNotification,@RequestParam("path") String path,@ModelAttribute("idteam") int idTeam, @ModelAttribute("idproject") int idProject, @ModelAttribute("idtask") int idTask,Model model) {
+		NotificationSystem noti = notificationsSystemServices.find(idNotification);
+		noti.setStatus(1);
+		notificationsSystemServices.update(noti);
+		
+		if(path.equals("team"))
+		{
+			return "redirect:/"+path+"?idTeam="+idTeam;
+		}
+		else if(path.equals("team-project"))
+		{
+			return "redirect:/"+path+"?idProject="+idProject;
+		}
+		else if(path.equals("task-todo"))
+		{
+			return "redirect:/"+path+"?idTask="+idTask;
+		}
+		return "redirect:/"+path;
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String deleteNoti(@RequestParam("idNotifications") int idNotification,@RequestParam("path") String path,@ModelAttribute("idteam") int idTeam, @ModelAttribute("idproject") int idProject, @ModelAttribute("idtask") int idTask,Model model) {
+		NotificationSystem noti = notificationsSystemServices.find(idNotification);
+		notificationsSystemServices.delete(noti);
+		
+		if(path.equals("team"))
+		{
+			return "redirect:/"+path+"?idTeam="+idTeam;
+		}
+		else if(path.equals("team-project"))
+		{
+			return "redirect:/"+path+"?idProject="+idProject;
+		}
+		else if(path.equals("task-todo"))
+		{
+			return "redirect:/"+path+"?idTask="+idTask;
+		}
+		return "redirect:/"+path;
 	}
 }

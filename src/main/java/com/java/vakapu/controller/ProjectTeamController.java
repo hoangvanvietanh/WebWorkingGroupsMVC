@@ -153,6 +153,7 @@ public class ProjectTeamController {
 		model.addAttribute("emailUser", emailUser);
 		model.addAttribute("idTeam", idTeam);
 		model.addAttribute("userLogin", user);
+		model.addAttribute("path", "team-project");
 		return "project-team";
 	}
 

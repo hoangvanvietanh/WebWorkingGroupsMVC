@@ -142,6 +142,7 @@ public class TaskTodoController {
 		model.addAttribute("idTeam", idTeam);
 		model.addAttribute("editTask", editTask);
 		model.addAttribute("editTask2", editTask2);
+		model.addAttribute("path", "task-todo");
 		return "task-team";
 	}
 

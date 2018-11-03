@@ -104,8 +104,7 @@
 									data-toggle="modal" href="#msgModal">notifications</a>
 							</c:otherwise>
 						</c:choose>
-						<a
-							style="color: white;"
+						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -184,7 +183,7 @@
 										<i class="material-icons">email</i>
 									</button>
 									<button class="btn btn-round" data-toggle="modal"
-													data-target="#userteam-manage-modal">
+										data-target="#userteam-manage-modal">
 										<i class="material-icons">person_add</i>
 									</button>
 								</c:if>
@@ -583,11 +582,11 @@
 											<div class="form-group-users">
 												<c:set var="i" value="0" />
 												<c:forEach var="member" items="${member}">
-												<input type="hidden" value="${i=i+1}">
+													<input type="hidden" value="${i=i+1}">
 													<div class="custom-control custom-checkbox">
 														<form:checkbox path="email" class="custom-control-input"
-															id="${i}"
-															value="${member.member.email}" checked="checked" />
+															id="${i}" value="${member.member.email}"
+															checked="checked" />
 														<form:label path="email" class="custom-control-label"
 															for="${i}">
 															<div class="d-flex align-items-center">
@@ -600,11 +599,10 @@
 													</div>
 												</c:forEach>
 												<c:forEach var="friend" items="${friend}">
-												<input type="hidden" value="${i=i+1}">
+													<input type="hidden" value="${i=i+1}">
 													<div class="custom-control custom-checkbox">
 														<form:checkbox path="email2" class="custom-control-input"
-															id="${i}"
-															value="${friend.emailFriend.email}" />
+															id="${i}" value="${friend.emailFriend.email}" />
 														<form:label path="email2" class="custom-control-label"
 															for="${i}">
 															<div class="d-flex align-items-center">
@@ -741,7 +739,7 @@
 															aria-describedby="filter-members">
 													</div>
 													<div class="form-group-users">
-														
+
 														<c:forEach var="member" items="${member}">
 															<input type="hidden" value="${i=i+1}">
 															<c:choose>
@@ -807,8 +805,20 @@
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
 												</div>
-											</div> <img class="us bos vb yb afi"
-											src="resources/img/anonymous.png">
+											</div>
+											<div class="dropdown">
+												<a class="media media-member" href="#" role="button"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false"> <img class="us bos vb yb afi"
+													src="resources/img/anonymous.png">
+												</a>
+												<div class="dropdown-menu">
+													<a href="home/seen?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Seen</a> <a
+														href="home/delete?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Delete</a>
+												</div>
+											</div>
 										</li>
 									</c:forEach>
 								</ul>

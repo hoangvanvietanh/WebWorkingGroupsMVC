@@ -818,8 +818,20 @@
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
 												</div>
-											</div> <img class="us bos vb yb afi"
-											src="resources/img/anonymous.png">
+											</div>
+											<div class="dropdown">
+												<a class="media media-member" href="#" role="button"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false"> <img class="us bos vb yb afi"
+													src="resources/img/anonymous.png">
+												</a>
+												<div class="dropdown-menu">
+													<a href="home/seen?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Seen</a> <a
+														href="home/delete?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Delete</a>
+												</div>
+											</div>
 										</li>
 									</c:forEach>
 								</ul>

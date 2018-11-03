@@ -186,7 +186,8 @@
 								data-target="#project-edit-modal">Edit Project</a>
 						</c:if>
 						<a class="dropdown-item" href="#">Share</a> <a
-							class="dropdown-item" href="team-project/MarkAsComplete">Mark as Complete</a>
+							class="dropdown-item" href="team-project/MarkAsComplete">Mark
+							as Complete</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Leave project</a>
 
@@ -1210,8 +1211,20 @@
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
 												</div>
-											</div> <img class="us bos vb yb afi"
-											src="resources/img/anonymous.png">
+											</div>
+											<div class="dropdown">
+												<a class="media media-member" href="#" role="button"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false"> <img class="us bos vb yb afi"
+													src="resources/img/anonymous.png">
+												</a>
+												<div class="dropdown-menu">
+													<a href="home/seen?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Seen</a> <a
+														href="home/delete?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Delete</a>
+												</div>
+											</div>
 										</li>
 									</c:forEach>
 								</ul>
