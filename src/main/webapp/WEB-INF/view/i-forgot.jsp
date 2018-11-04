@@ -30,15 +30,15 @@
 		<div class="login-form-1">
 		
 		 
-			<form id="register-form" class="text-left" action="forgot-password/i-forgot"  
-				method="post">
+			<form id="register-form" class="text-left" action="i-forgot"  
+				method="GET">
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 				
 					<div class="login-group">
 						<div class="form-group">
 							<label for="email" class="sr-only">Email</label><br> <input
-								type="text" name="email" class="form-control" value="${email}" readonly="readonly"/>
+								type="text" name="email" class="form-control" value="${Email}" readonly="readonly"/>
 						</div>
 					</div>
 					<div class="login-group">
