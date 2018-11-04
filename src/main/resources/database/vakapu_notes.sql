@@ -32,7 +32,7 @@ CREATE TABLE `notes` (
   PRIMARY KEY (`idnotes`),
   KEY `fk_notes_1_idx` (`taskteamproject`),
   CONSTRAINT `fk_notes_1` FOREIGN KEY (`taskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `notes` (
 
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
-INSERT INTO `notes` VALUES (1,'123','nothing',31,'2018-10-27 00:00:00',NULL),(2,'1','nothinge 1',32,'2018-10-28 06:59:16','hoangvanvietanh@gmail.com'),(3,'hihi','note 1',22,'2018-10-28 07:07:06','hoangvanvietanh@gmail.com'),(4,'','nothing',26,'2018-10-28 09:24:10','hoangvanvietanh@gmail.com');
+INSERT INTO `notes` VALUES (1,'123456','nothing',30,'2018-10-31 16:13:48','hoangvanvietanh@gmail.com'),(2,'nothing','helo',32,'2018-10-31 16:19:04','hoangvanvietanh@gmail.com'),(3,'hello','nothingasd',37,'2018-11-04 19:15:05','hoangvanvietanh@gmail.com');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28  9:36:11
+-- Dump completed on 2018-11-04 23:00:17

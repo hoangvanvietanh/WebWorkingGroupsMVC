@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.java.vakapu.entity.Notes;
 import com.java.vakapu.entity.NotificationSystem;
+import com.java.vakapu.entity.ProjectHistory;
 import com.java.vakapu.entity.TaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTaskTeamProject;
 import com.java.vakapu.entity.TeamMemberTeamProject;
@@ -29,6 +30,7 @@ import com.java.vakapu.model.NoteModel;
 import com.java.vakapu.model.TaskModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.DateServices;
+import com.java.vakapu.services.HistoryServices;
 import com.java.vakapu.services.NotificationsSystemServices;
 import com.java.vakapu.services.NoteService;
 import com.java.vakapu.services.TaskServices;
@@ -60,6 +62,8 @@ public class TaskTodoController {
 	@Autowired
 	private TeamMemberTeamProjectServices teamMemberTeamProjectDAO;
 	
+	@Autowired
+	private HistoryServices historyServices;
 //	@GetMapping(path="getNote/{idnote}")
 //	public @ResponseBody Notes getNoteInfor(@PathVariable(name="idnote") int idNote)
 //	{
@@ -130,6 +134,8 @@ public class TaskTodoController {
 		{
 			System.out.println("vietanh:" +t.getTeamMember().getMember().getName());
 		}
+		List<ProjectHistory> proHis = historyServices.findByIdProject(idProject);
+		model.addAttribute("history", proHis);
 		model.addAttribute("messages", listMes);
 		model.addAttribute("note",noteM);
 		model.addAttribute("todo", listTodo);

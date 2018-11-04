@@ -243,6 +243,14 @@
 															<button class="btn-options" type="button"
 																id="project-dropdown-button-5" data-toggle="dropdown"
 																aria-haspopup="true" aria-expanded="false">
+																<c:choose>
+																	<c:when test="${project.visibility == 'Member'}">
+																		<i class="material-icons" style="color: black;">group</i>
+																	</c:when>
+																	<c:otherwise>
+																		<i class="material-icons" style="color: black;">public</i>
+																	</c:otherwise>
+																</c:choose>
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
@@ -261,7 +269,7 @@
 															<a
 																href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
 																<h5 data-filter-by="text">${project.name}</h5>
-															</a>
+															</a> <span class="text-small">${project.description}</span>
 														</div>
 														<ul class="avatars">
 															<c:forEach var="user" items="${user}">
@@ -293,15 +301,16 @@
 															</div>
 															<c:choose>
 																<c:when test="${project.due == -2}">
-																	<span class="text-small" data-filter-by="text">Click
-																		on the project to start</span>
+																	<span class="text-small"><a
+																		href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
+																			<strong>Click to start</strong>
+																	</a></span>
 																</c:when>
 																<c:when test="${project.due == 0}">
-																	<span class="text-small" data-filter-by="text">Today</span>
+																	<span class="text-small">Today</span>
 																</c:when>
 																<c:otherwise>
-																	<span class="text-small" data-filter-by="text">Due
-																		${project.due} days</span>
+																	<span class="text-small">Due ${project.due} days</span>
 																</c:otherwise>
 															</c:choose>
 
@@ -325,8 +334,8 @@
 											<h3>Members</h3>
 											<c:if test="${checkAdmin eq 'yes'}">
 												<button class="btn btn-round" data-toggle="modal"
-													data-target="#user-invite-modal">
-													<i class="material-icons">add</i>
+													data-target="#userteam-manage-modal">
+													<i class="material-icons">person_add</i>
 												</button>
 											</c:if>
 										</div>

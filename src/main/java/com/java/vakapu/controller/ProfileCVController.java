@@ -41,12 +41,16 @@ public class ProfileCVController {
 	private NotificationsSystemServices notificationsSystemServices;
 
 	@GetMapping
-	public String create(Model model) {
+	public String show(Model model) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
 		model.addAttribute("emailUser", emailUser);
 		model.addAttribute("user", user);
 		model.addAttribute("checkFriend", 1);
+		if(user.getTheme()==2)
+		{
+			return "cv2";
+		}
 		return "profile-cv";
 	}
 
@@ -66,6 +70,10 @@ public class ProfileCVController {
 				}
 				model.addAttribute("emailUser", emailUser);
 				model.addAttribute("user", user);
+				if(user.getTheme()==2)
+				{
+					return "cv2";
+				}
 				return "profile-cv";
 			}
 		}
@@ -88,6 +96,10 @@ public class ProfileCVController {
 				}
 				model.addAttribute("emailUser", emailUser);
 				model.addAttribute("user", user);
+				if(user.getTheme()==2)
+				{
+					return "cv2";
+				}
 				return "profile-cv";
 			}
 		}

@@ -35,6 +35,8 @@
 	href="<spring:url value='/resources/css/app.css'/>">
 <link rel="stylesheet"
 	href="<spring:url value='/resources/css/notifications.css'/>">
+<script src="<spring:url value='/resources/ckeditor5/ckeditor.js'/>"
+	type="text/javascript"></script>
 </head>
 
 <body>
@@ -88,9 +90,18 @@
 				<div class="d-lg-flex align-items-center">
 
 					<div class="dropdown">
-						<a style="color: white;" class="material-icons"
-							data-toggle="modal" href="#msgModal">notifications</a> <a
-							style="color: white;"
+						<c:choose>
+							<c:when test="${checkNotification eq 'yes' }">
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications_active</a>
+							</c:when>
+							<c:otherwise>
+								<a style="color: white;" class="material-icons"
+									data-toggle="modal" href="#msgModal">notifications</a>
+							</c:otherwise>
+						</c:choose>
+
+						<a style="color: white;"
 							class="nav-link material-icons dropdown-toggle" href="#"
 							data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
 							id="nav-dropdown-2">add</a>
@@ -221,11 +232,36 @@
 											<div class="form-group row">
 												<label class="col-3">Bio</label>
 												<div class="col">
-													<form:textarea class="form-control" path="about" rows="7"></form:textarea>
+													<form:textarea class="form-control" path="about"
+														name="content" id="editor5"></form:textarea>
 													<small>This will be displayed on your public
 														profile</small>
 												</div>
 											</div>
+
+											<div class="form-group row align-items-center">
+												<label class="col-3">Theme</label>
+												<div class="col">
+													<div class="custom-control custom-radio">
+														<form:radiobutton id="theme1" path="theme"
+															class="custom-control-input" value="1" />
+														<label class="custom-control-label" for="theme1">theme
+															1</label>
+													</div>
+												</div>
+												<div class="col">
+													<div class="custom-control custom-radio">
+														<form:radiobutton id="theme2" path="theme"
+															class="custom-control-input" value="2" />
+														<label class="custom-control-label" for="theme2">theme
+															2</label>
+													</div>
+												</div>
+											</div>
+											<form:input type="hidden" path="summary" />
+											<form:input type="hidden" path="skill" />
+											<form:input type="hidden" path="experience" />
+											<form:input type="hidden" path="education" />
 											<div class="row justify-content-end">
 												<button type="submit" class="btn btn-primary">Save</button>
 											</div>
@@ -277,35 +313,36 @@
 											<div class="form-group">
 												<label class="col-3">Summary</label>
 												<div class="col">
-													<form:textarea type="text"
+													<form:textarea type="text" name="content" id="editor"
 														placeholder="Tell us a little about yourself"
-														path="summary" class="form-control" rows="4"></form:textarea>
+														path="summary" class="form-control"></form:textarea>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-3">Experience</label>
 												<div class="col">
-													<form:textarea type="text"
+													<form:textarea type="text" name="content" id="editor2"
 														placeholder="Tell us a little about yourself"
-														path="experience" class="form-control" rows="4"></form:textarea>
+														path="experience" class="form-control"></form:textarea>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-3">Skill</label>
 												<div class="col">
-													<form:textarea type="text"
+													<form:textarea type="text" name="content" id="editor3"
 														placeholder="Tell us a little about yourself" path="skill"
-														class="form-control" rows="4"></form:textarea>
+														class="form-control"></form:textarea>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-3">Education</label>
 												<div class="col">
-													<form:textarea type="text"
+													<form:textarea type="text" name="content" id="editor4"
 														placeholder="Tell us a little about yourself"
-														path="education" class="form-control" rows="4"></form:textarea>
+														path="education" class="form-control"></form:textarea>
 												</div>
 											</div>
+											<form:input type="hidden" path="theme" />
 											<form:input type="hidden" path="name" />
 											<form:input type="hidden" path="birthdate" />
 											<form:input type="hidden" path="gender" />
@@ -331,7 +368,49 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="cd fade" id="msgModal" tabindex="-1" role="dialog"
+			aria-labelledby="bpq" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="d">
+						<h5 class="modal-title">Notifications</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body afx js-modalBody">
+						<div class="axw">
+							<div class="afc js-conversation">
+								<ul class="bow bpc">
+									<c:forEach var="mess" items="${messages}">
+										<li class="rv bpf afo">
+											<div class="rw">
+												<div class="bpd">${mess.messages}</div>
+												<div class="bpe">
+													<small class="axc">at ${mess.date} </small>
+												</div>
+											</div>
+											<div class="dropdown">
+												<a class="media media-member" href="#" role="button"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false"> <img class="us bos vb yb afi"
+													src="resources/img/anonymous.png">
+												</a>
+												<div class="dropdown-menu">
+													<a href="home/seen?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Seen</a> <a
+														href="home/delete?idNotifications=${mess.id}&path=${path}"
+														class="dropdown-item">Delete</a>
+												</div>
+											</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script type="text/javascript"
@@ -359,6 +438,91 @@
 			document.getElementById("form").submit();
 		};
 	</script>
+	<script type="text/javascript">
+               ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+            ]
+        }
+    } )
+     .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.log( error );
+    } );
+            </script>
+	<script type="text/javascript">
+               ClassicEditor
+    .create( document.querySelector( '#editor2' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+            ]
+        }
+    } )
+     .create( document.querySelector( '#editor2' ) )
+    .catch( error => {
+        console.log( error );
+    } );
+            </script>
+	<script type="text/javascript">
+               ClassicEditor
+    .create( document.querySelector( '#editor3' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+            ]
+        }
+    } )
+     .create( document.querySelector( '#editor3' ) )
+    .catch( error => {
+        console.log( error );
+    } );
+            </script>
+	<script type="text/javascript">
+               ClassicEditor
+    .create( document.querySelector( '#editor4' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+            ]
+        }
+    } )
+     .create( document.querySelector( '#editor4' ) )
+    .catch( error => {
+        console.log( error );
+    } );
+            </script>
+	<script type="text/javascript">
+               ClassicEditor
+    .create( document.querySelector( '#editor5' ), {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+            ]
+        }
+    } )
+     .create( document.querySelector( '#editor5' ) )
+    .catch( error => {
+        console.log( error );
+    } );
+            </script>
 </body>
 
 </html>

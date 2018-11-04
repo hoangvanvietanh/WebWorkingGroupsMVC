@@ -301,7 +301,7 @@ template {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0rem;
   font-family: inherit;
   font-weight: 500;
   line-height: 1.2;
@@ -6617,18 +6617,18 @@ h3 + .btn-round, h5 + .btn-round {
     margin-bottom: 1.5rem; } }
 
 .card-project .card-title, .card-kanban .card-title {
-  margin-bottom: 0.75rem; }
+  margin-bottom: 0rem; }
   .card-project .card-title:last-child, .card-kanban .card-title:last-child {
     margin-bottom: 0; }
 
 .card-project .avatars {
-  margin-bottom: 2.25rem; }
+  margin-bottom: 0.25rem; }
 
 .card-team h5 {
   margin-bottom: 0.375rem; }
 
 .card-team .card-title {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 0.5rem; }
 
 .card-kanban .card-body {
   padding: 1rem; }

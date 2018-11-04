@@ -159,7 +159,8 @@
 
 						<a class="dropdown-item" href="#" data-toggle="modal"
 							data-target="#task-edit-modal">Edit</a> <a class="dropdown-item"
-							href="#">Mark as Complete</a>
+							href="team-project/MaskAsDone?idTask=${task.id}">Mark as
+							complete</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="#">Leave task</a>
 
@@ -239,7 +240,7 @@
 											<h3>Checklist</h3>
 											<button class="btn btn-round" data-toggle="modal"
 												data-target="#todo-add-modal">
-												<i class="material-icons">add</i>
+												<i class="material-icons">playlist_add</i>
 											</button>
 										</div>
 										<form class="col-md-auto">
@@ -333,7 +334,7 @@
 											<h3>Notes</h3>
 											<button class="btn btn-round" data-toggle="modal"
 												data-target="#note-add-modal">
-												<i class="material-icons">add</i>
+												<i class="material-icons">note_add</i>
 											</button>
 										</div>
 										<form class="col-md-auto">
@@ -421,28 +422,31 @@
 									<div class="content-list-body">
 
 										<ol class="list-group list-group-activity">
-											<li class="list-group-item">
-												<div class="media align-items-center">
-													<ul class="avatars">
-														<li>
-															<div class="avatar bg-primary">
-																<i class="material-icons">add</i>
+											<c:forEach var="history" items="${history}">
+												<li class="list-group-item">
+													<div class="media align-items-center">
+														<ul class="avatars">
+															<li>
+																<div class="avatar bg-primary">
+																	<i class="material-icons">playlist_add_check</i>
+																</div>
+															</li>
+															<li><img alt="${history.user}"
+																src="<spring:url value='/profile/avatar/${history.id_user}'/>"
+																class="avatar" data-filter-by="alt" /></li>
+														</ul>
+														<div class="media-body">
+															<div>
+																<span class="h6" data-filter-by="text">${history.user}</span>
+																<span data-filter-by="text">${history.activity}</span><a
+																	href="#" data-filter-by="text">${history.last}</a>
 															</div>
-														</li>
-														<li><img alt="David"
-															src="assets/img/avatar-male-4.jpg" class="avatar"
-															data-filter-by="alt" /></li>
-													</ul>
-													<div class="media-body">
-														<div>
-															<span class="h6" data-filter-by="text">David</span> <span
-																data-filter-by="text">started the task</span>
+															<span class="text-small" data-filter-by="text">Just
+																now</span>
 														</div>
-														<span class="text-small" data-filter-by="text">6
-															days ago</span>
 													</div>
-												</div>
-											</li>
+												</li>
+											</c:forEach>
 
 
 										</ol>

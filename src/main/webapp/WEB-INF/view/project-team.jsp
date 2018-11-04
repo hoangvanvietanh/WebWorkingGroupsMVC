@@ -328,6 +328,7 @@
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
 																	</a>
+																	<span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == 0}">
 																			<span class="text-small">Today</span>
@@ -421,6 +422,7 @@
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
 																	</a>
+																	<span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == 0}">
 																			<span class="text-small">Today</span>
@@ -513,7 +515,9 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a> <span class="text-danger">Task failed</span>
+																	</a> 
+																	<span class="text-small">${task.description}</span><br>
+																	<span class="text-danger">Task failed</span>
 
 																</div>
 																<div class="card-meta">
@@ -597,7 +601,9 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a> <span class="text-danger">Done</span>
+																	</a> 
+																	<span class="text-small">${task.description}</span><br>
+																	<span class="text-danger">Done</span>
 
 																</div>
 																<div class="card-meta">
@@ -682,10 +688,11 @@
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
 																	</a>
+																	<span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == -2}">
-																			<span class="text-small">Click on task to
-																				start</span>
+																			<span class="text-small"><a 
+																				href="task-todo?idTask=${task.id}"><strong>Click to start</strong></a></span>
 																		</c:when>
 																		<c:otherwise>
 																			<span class="text-small">due ${task.due} days</span>

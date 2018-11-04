@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.java.vakapu.entity.Account;
+import com.java.vakapu.entity.NotificationSystem;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.model.AccountModel;
 import com.java.vakapu.model.ProfileModel;
@@ -62,8 +64,23 @@ public class UserController {
 		profileModel.fromProfile(user);
 //		editProfile.fromProfile(user);
 		Account acc = accountServices.findByEmail(emailUser);
+		List<NotificationSystem> listMes = notificationsSystemServices.findByEmail(emailUser);
+//		modelMap.put("idteam", 0);
+//		modelMap.put("idproject", 0);
+//		modelMap.put("idtask", 0);
+		int i=0;
+		for(NotificationSystem l:listMes)
+		{
+			i++;
+			if(i<3 && l.getStatus() == 0)
+			{
+				model.addAttribute("checkNotification", "yes");
+				break;
+			}
+		}
 		AccountModel account = new AccountModel();
 		account.fromAccount(acc);
+		model.addAttribute("messages", listMes);
 		model.addAttribute("change", account);
 		model.addAttribute("profile", profileModel);
 		model.addAttribute("emailProfile", user.getEmail());

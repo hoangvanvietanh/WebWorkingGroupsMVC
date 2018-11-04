@@ -28,6 +28,8 @@ public class ProfileModel {
 	
 	private String about;
 	
+	private int theme;
+	
 	public void fromProfile(User user)
 	{
 		this.setEmail(user.getEmail());
@@ -42,6 +44,7 @@ public class ProfileModel {
 		this.setSummary(user.getSummary());
 		this.setExperience(user.getExperience());
 		this.setAbout(user.getAbout());
+		this.setTheme(user.getTheme());
 	}
 	
 	public User toProfile()
@@ -59,10 +62,19 @@ public class ProfileModel {
 		user.setSkill(this.getSkill());
 		user.setSummary(this.getSummary());
 		user.setAbout(this.getAbout());
+		user.setTheme(this.getTheme());
 		
 		return user;
 	}
 	
+	public int getTheme() {
+		return theme;
+	}
+
+	public void setTheme(int theme) {
+		this.theme = theme;
+	}
+
 	public String getEmail() {
 		return email;
 	}

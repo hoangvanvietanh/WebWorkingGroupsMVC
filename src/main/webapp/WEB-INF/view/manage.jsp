@@ -230,9 +230,12 @@
 																data-team-owner="${team.team.owner}"
 																data-team-memberAmount="${team.team.memberAmount}"
 																data-team-projectAmount="${team.team.projectAmount}"
-																class="dropdown-item text-danger edit-team-btn" href=""
+																date-team-dateCreate="${team.team.dateCreate}"
+																class="dropdown-item edit-team-btn" href=""
 																data-toggle="modal" data-target="#team-edit-modal">More
-																Information</a> <a class="dropdown-item text-danger"
+																Information</a>
+															<div class="dropdown-divider"></div>
+															<a class="dropdown-item text-danger"
 																href="manage/leaveTeam?idTeam=${team.team.idTeam}">Leave
 																Team</a>
 														</div>
@@ -314,6 +317,15 @@
 															<button class="btn-options" type="button"
 																id="project-dropdown-button-6" data-toggle="dropdown"
 																aria-haspopup="true" aria-expanded="false">
+																<c:choose>
+																	<c:when
+																		test="${project.teamProject.visibility == 'Member'}">
+																		<i class="material-icons" style="color: black;">group</i>
+																	</c:when>
+																	<c:otherwise>
+																		<i class="material-icons" style="color: black;">public</i>
+																	</c:otherwise>
+																</c:choose>
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
@@ -361,14 +373,16 @@
 															</div>
 															<c:choose>
 																<c:when test="${project.teamProject.due == 0}">
-																	<span class="text-small" data-filter-by="text">Today</span>
+																	<span class="text-small">Today</span>
 																</c:when>
 																<c:when test="${project.teamProject.due == -2}">
-																	<span class="text-small" data-filter-by="text">Click
-																		on the project to start</span>
+																	<span class="text-small"><a
+																		href="team-project?idProject=${project.teamProject.id}">
+																			<strong>Click to start</strong>
+																	</a></span>
 																</c:when>
 																<c:otherwise>
-																	<span class="text-small" data-filter-by="text">due
+																	<span class="text-small">due
 																		${project.teamProject.due} days</span>
 																</c:otherwise>
 															</c:choose>
@@ -455,15 +469,15 @@
 															</div>
 															<div class="card-meta">
 																<ul class="avatars">
-																	<c:forEach var="userTask" items="${userTask}">
+																	<c:forEach var="usertask" items="${userTask}">
 																		<c:if
-																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			test="${usertask.taskTeamProject.id ==task.taskTeamProject.id}">
 																			<li><a href="#" data-toggle="tooltip"
-																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																				title="${usertask.teamMemberTeamProject.teamMember.member.name}">
 																					<img
-																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					alt="${usertask.teamMemberTeamProject.teamMember.member.name}"
 																					class="avatar"
-																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																					src="<spring:url value='/profile/avatar/${usertask.teamMemberTeamProject.teamMember.member.email}'/>" />
 																			</a></li>
 																		</c:if>
 																	</c:forEach>
@@ -791,7 +805,9 @@
 																</a>
 																<c:choose>
 																	<c:when test="${task.taskTeamProject.due == -2}">
-																		<span class="text-small">Click on task to start</span>
+																		<span class="text-small"><a
+																			href="task-todo?idTask=${task.taskTeamProject.id}"><strong>Click
+																					to start</strong></a></span>
 																	</c:when>
 																	<c:otherwise>
 																		<span class="text-small">due
@@ -962,122 +978,56 @@
 							</div>
 						</form:form>
 
-						<form:form action="manage/editTeam" modelAttribute="teamAdd"
-							method="POST" class="modal fade" id="team-edit-modal"
-							tabindex="-1" role="dialog" aria-labelledby="team-edit-modal"
+						<form class="modal fade" id="team-edit-modal" tabindex="-1"
+							role="dialog" aria-labelledby="team-edit-modal"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title">Team Information</h5>
+										<h5 class="modal-title">Team Details</h5>
 										<button type="button" class="close btn btn-round"
 											data-dismiss="modal" aria-label="Close">
 											<i class="material-icons">close</i>
 										</button>
 									</div>
-									<!--end of modal head
-									<ul class="nav nav-tabs nav-fill">
-										<li class="nav-item"><a class="nav-link active"
-											id="team-edit-details-tab" data-toggle="tab"
-											href="#team-edit-details" role="tab"
-											aria-controls="team-edit-details" aria-selected="true">Details</a>
-										</li>
-										<li class="nav-item"><a class="nav-link"
-											id="team-edit-members-tab" data-toggle="tab"
-											href="#team-edit-members" role="tab"
-											aria-controls="team-edit-members" aria-selected="false">Members</a>
-										</li>
-									</ul> -->
+									<!--end of modal head-->
 									<div class="modal-body">
 										<div class="tab-content">
-											<div class="tab-pane fade show active" id="team-edit-details"
-												role="tabpanel" aria-labelledby="team-edit-details-tab">
-												<h6>Team Details</h6>
+											<div class="tab-pane fade show active"
+												aria-labelledby="team-edit-details-tab">
 												<div class="form-group row align-items-center">
-													<form:input id="team-idTeam" type="hidden" path="idTeam" />
-													<label class="col-3">Name</label>
-													<form:input class="form-control col" type="text"
-														readonly="true" placeholder="Team name" id="team-name"
-														path="name" required="required" />
+													<label class="col-3">Name</label> <input
+														class="form-control col" type="text" id="team-name"
+														readonly />
 												</div>
 												<div class="form-group row">
-													<label class="col-3">Member Amount</label>
-													<form:input class="form-control col" type="text"
-														readonly="true" path="memberAmount" id="team-memberAmount" />
+													<label class="col-3">Owner</label> <input
+														class="form-control col" id="team-owner" readonly />
 												</div>
 												<div class="form-group row">
-													<label class="col-3">Project Amount</label>
-													<form:input class="form-control col" type="text"
-														readonly="true" path="projectAmount"
-														id="team-projectAmount" />
+													<label class="col-3">Created At</label> <input
+														class="form-control col" id="team-dateCreate" readonly />
 												</div>
 												<div class="form-group row">
-													<label class="col-3">Owner</label>
-													<form:input type="text" readonly="true"
-														class="form-control col" id="team-owner" path="owner" />
+													<label class="col-3">Number of projects</label> <input
+														class="form-control col" id="team-projectAmount" readonly />
 												</div>
+												<div class="form-group row">
+													<label class="col-3">Number of members</label> <input
+														class="form-control col" id="team-memberAmount" readonly />
+												</div>
+
 												<div class="form-group row">
 													<label class="col-3">Description</label>
-													<form:textarea class="form-control col" rows="3"
-														placeholder="Team description" readonly="true"
-														id="team-description" path="description"
-														required="required" />
-												</div>
-											</div>
-											<div class="tab-pane fade" id="team-edit-members"
-												role="tabpanel" aria-labelledby="team-add-members-tab">
-												<div class="users-manage"
-													data-filter-list="form-group-users">
-													<div class="mb-3">
-														<ul class="avatars text-center">
-															<li><img alt="${profile.name}"
-																src="<spring:url value='/profile/avatar/${emailUser}'/>"
-																class="avatar" data-toggle="tooltip"
-																data-title="${profile.name}" /></li>
-
-														</ul>
-													</div>
-													<div class="input-group input-group-round">
-														<div class="input-group-prepend">
-															<span class="input-group-text"> <i
-																class="material-icons">filter_list</i>
-															</span>
-														</div>
-														<input type="search"
-															class="form-control filter-list-input"
-															placeholder="Filter members" aria-label="Filter Members"
-															aria-describedby="filter-members">
-													</div>
-													<div class="form-group-users">
-														<form:input type="hidden" path="email"
-															value="${emailUser}" />
-														<c:forEach var="friend" items="${friend}">
-															<div class="custom-control custom-checkbox">
-																<form:checkbox path="email"
-																	value="${friend.emailFriend.email}"
-																	class="custom-control-input"
-																	id="${friend.emailFriend.email}" />
-																<form:label path="email" class="custom-control-label"
-																	for="${friend.emailFriend.email}">
-																	<div class="d-flex align-items-center">
-																		<img alt="${friend.emailFriend.name}"
-																			src="<spring:url value='/profile/avatar/${friend.emailFriend.email}'/>"
-																			class="avatar mr-2" /> <span class="h6 mb-0"
-																			data-filter-by="text">${friend.emailFriend.name}</span>
-																	</div>
-																</form:label>
-															</div>
-														</c:forEach>
-													</div>
+													<textarea class="form-control col" rows="3"
+														id="team-description" readonly></textarea>
 												</div>
 											</div>
 										</div>
 									</div>
-									<!--end of modal body-->
-
 								</div>
 							</div>
-						</form:form>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -1102,6 +1052,14 @@
 												<div class="bpd">${mess.messages}</div>
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
+													<c:choose>
+														<c:when test="${mess.status == 0}">
+															<small class="axc">not seen</small>
+														</c:when>
+														<c:otherwise>
+															<small class="axc">seen</small>
+														</c:otherwise>
+													</c:choose>
 												</div>
 											</div>
 											<div class="dropdown">
@@ -1157,7 +1115,9 @@
 				var description = $(this).attr("data-team-description");
 				var memberAmount = $(this).attr("data-team-memberAmount");
 				var projectAmount = $(this).attr("data-team-projectAmount");
+				var dateCreate = $(this).attr("date-team-dateCreate");
 
+				$('#team-dateCreate').val(dateCreate);
 				$('#team-idTeam').val(id);
 				$('#team-name').val(name);
 				$('#team-owner').val(owner);

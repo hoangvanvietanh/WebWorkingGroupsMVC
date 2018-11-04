@@ -48,7 +48,7 @@ public class TaskModel {
 		taskTeamProject.setEndDate(this.endDate);
 		return taskTeamProject;
 	}
-	
+
 	public String[] getEmail() {
 		return email;
 	}

@@ -120,12 +120,13 @@
 					href="#skills">Skills</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#education">Education</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="home">Home</a></li>
-				<c:if test="${checkFriend == 0 and user.email ne emailUser}">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="profile-cv/addFriend?emailFriend=${user.email}">Add Friend</a></li>
-				</c:if>
+				<li class="nav-item"><a
+					class="js-scroll-trigger material-icons" href="home">home</a> <c:if
+						test="${checkFriend == 0 and user.email ne emailUser}">
+						<a class="js-scroll-trigger material-icons"
+							href="profile-cv/addFriend?emailFriend=${user.email}">person_add</a>
+					</c:if></li>
+
 
 
 			</ul>

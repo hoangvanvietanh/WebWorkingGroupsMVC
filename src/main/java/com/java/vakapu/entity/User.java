@@ -36,6 +36,9 @@ public class User {
 	@Column(name="skill")
 	private String skill;
 	
+	@Column(name="theme")
+	private int theme;
+	
 	@Column(name="experience")
 	private String experience;
 	
@@ -62,6 +65,14 @@ public class User {
 
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public int getTheme() {
+		return theme;
+	}
+
+	public void setTheme(int theme) {
+		this.theme = theme;
 	}
 
 	public String getAvartar() {

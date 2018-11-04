@@ -199,6 +199,9 @@
 							style="opacity: .8" /> <span class="h3 d-block mt-3">Hello
 							my friend </span>
 						<p>How can I help you ?</p>
+						<a class="dropdown-item" href="manage">Manage</a> <a
+							class="dropdown-item" href="profile-cv">Profile CV</a> <a
+							href="profile" class="dropdown-item">Accounts </a>
 					</div>
 				</div>
 
@@ -361,12 +364,12 @@
 											<div class="bpe">
 												<small class="axc">at ${mess.date} </small>
 												<c:choose>
-												<c:when test="${mess.status == 0}">
-													<small class="axc">not seen</small>
-												</c:when>
-												<c:otherwise>
-													<small class="axc">seen</small>
-												</c:otherwise>
+													<c:when test="${mess.status == 0}">
+														<small class="axc">not seen</small>
+													</c:when>
+													<c:otherwise>
+														<small class="axc">seen</small>
+													</c:otherwise>
 												</c:choose>
 											</div>
 										</div>
@@ -377,10 +380,12 @@
 												src="resources/img/anonymous.png">
 											</a>
 											<div class="dropdown-menu">
-												<a href="home/seen?idNotifications=${mess.id}&path=${path}" class="dropdown-item">Seen</a>
-												<a href="home/delete?idNotifications=${mess.id}&path=${path}" class="dropdown-item">Delete</a>
+												<a href="home/seen?idNotifications=${mess.id}&path=${path}"
+													class="dropdown-item">Seen</a> <a
+													href="home/delete?idNotifications=${mess.id}&path=${path}"
+													class="dropdown-item">Delete</a>
 											</div>
-										</div> 
+										</div>
 									</li>
 								</c:forEach>
 							</ul>
