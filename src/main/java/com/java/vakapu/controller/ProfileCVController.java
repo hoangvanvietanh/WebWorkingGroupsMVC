@@ -131,7 +131,7 @@ public class ProfileCVController {
 		addFriend.setStatus(0);
 		friendshipServices.create(addFriend);
 
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
 
@@ -157,7 +157,7 @@ public class ProfileCVController {
 	public String agress(Model model, @RequestParam("emailFriend") String emailFriend,
 			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
 		
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
 		

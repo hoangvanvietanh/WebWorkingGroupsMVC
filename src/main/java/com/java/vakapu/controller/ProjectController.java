@@ -100,7 +100,7 @@ public class ProjectController {
 	public String updatePost(@RequestParam(name="idProject") int idproject,@ModelAttribute("project") TeamProjectModel proM,
 			BindingResult result,Model model) throws ParseException
 	{
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
@@ -121,7 +121,7 @@ public class ProjectController {
 		{
 			return "redirect:/project";
 		}
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
@@ -153,7 +153,7 @@ public class ProjectController {
 		{
 			return "redirect:/project";
 		}
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		

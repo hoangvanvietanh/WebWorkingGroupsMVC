@@ -268,7 +268,7 @@ public class TaskTodoController {
 		{
 			return "redirect:/task-todo";
 		}
-		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local=LocalDateTime.now();
 		String time=date.format(local);
 		
