@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	8.0.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `account` (
   `email` varchar(150) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('anh@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('dat@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('giang@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('hieu@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('khanh@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('khoa@gmail.com','$2a$10$LaiL3aWu5bsxRJmfYGA.SOWckA7TI906d2qpQteerzwCh95YXuev6',NULL),('phuong@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('quy@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('thao@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq',NULL),('thu@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL);
+INSERT INTO `account` VALUES ('anh@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('dat@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('giang@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('hieu@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('khanh@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('nga@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('phuong@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('thao@gmail.com','$2a$10$4khigFjWIPcYDVDWqL59OOx3yR64P3X8WmV5QMXH4t/cYbY17gYCq',NULL),('thu@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL),('tram@gmail.com','$2a$10$zW35nwKxCyPsnh0NuJz3meuGf6PDS0Rrna14Rg/tIEwosQsWrZXhC',NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 14:59:07
+-- Dump completed on 2018-11-06 16:30:13
