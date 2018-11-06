@@ -329,7 +329,17 @@
 																<i class="material-icons">more_vert</i>
 															</button>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="#">Share</a>
+																<a data-project-id="${project.teamProject.id}"
+																	data-project-owner="${project.teamProject.owner}"
+																	data-project-name="${project.teamProject.name}"
+																	data-project-description="${project.teamProject.description}"
+																	data-project-startDate="${project.teamProject.startDate}"
+																	data-project-endDate="${project.teamProject.endDate}"
+																	data-project-createAt="${project.teamProject.createAt}"
+																	data-project-visibility="${project.teamProject.visibility}"
+																	class="dropdown-item project-btn" href=""
+																	data-toggle="modal" data-target="#project-modal">More
+																	Information</a>
 																<div class="dropdown-divider"></div>
 																<a class="dropdown-item text-danger"
 																	href="manage/leaveProject?idProject=${project.teamProject.id}">Leave
@@ -504,9 +514,13 @@
 																		<i class="material-icons">more_vert</i>
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<a class="dropdown-item"
+																			href="team-project/MaskAsDone?idTask=${task.taskTeamProject.id}">Mark
+																			as done</a>
 																		<div class="dropdown-divider"></div>
-																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																		<a class="dropdown-item text-danger"
+																			href="team-project/leaveTask?idTask=${task.taskTeamProject.id}">Leave
+																			Task</a>
 																	</div>
 																</div>
 															</div>
@@ -561,15 +575,15 @@
 															</div>
 															<div class="card-meta">
 																<ul class="avatars">
-																	<c:forEach var="userTask" items="${userTask}">
+																	<c:forEach var="usertask" items="${userTask}">
 																		<c:if
-																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			test="${usertask.taskTeamProject.id ==task.taskTeamProject.id}">
 																			<li><a href="#" data-toggle="tooltip"
-																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																				title="${usertask.teamMemberTeamProject.teamMember.member.name}">
 																					<img
-																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					alt="${usertask.teamMemberTeamProject.teamMember.member.name}"
 																					class="avatar"
-																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																					src="<spring:url value='/profile/avatar/${usertask.teamMemberTeamProject.teamMember.member.email}'/>" />
 																			</a></li>
 																		</c:if>
 																	</c:forEach>
@@ -596,9 +610,13 @@
 																		<i class="material-icons">more_vert</i>
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<a class="dropdown-item"
+																			href="team-project/MaskAsDone?idTask=${task.taskTeamProject.id}">Mark
+																			as done</a>
 																		<div class="dropdown-divider"></div>
-																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																		<a class="dropdown-item text-danger"
+																			href="team-project/leaveTask?idTask=${task.taskTeamProject.id}">Leave
+																			Task</a>
 																	</div>
 																</div>
 															</div>
@@ -643,15 +661,15 @@
 															</div>
 															<div class="card-meta">
 																<ul class="avatars">
-																	<c:forEach var="userTask" items="${userTask}">
+																	<c:forEach var="usertask" items="${userTask}">
 																		<c:if
-																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			test="${usertask.taskTeamProject.id ==task.taskTeamProject.id}">
 																			<li><a href="#" data-toggle="tooltip"
-																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																				title="${usertask.teamMemberTeamProject.teamMember.member.name}">
 																					<img
-																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					alt="${usertask.teamMemberTeamProject.teamMember.member.name}"
 																					class="avatar"
-																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																					src="<spring:url value='/profile/avatar/${usertask.teamMemberTeamProject.teamMember.member.email}'/>" />
 																			</a></li>
 																		</c:if>
 																	</c:forEach>
@@ -678,9 +696,13 @@
 																		<i class="material-icons">more_vert</i>
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<a class="dropdown-item"
+																			href="team-project/MaskAsDone?idTask=${task.taskTeamProject.id}">Mark
+																			as done</a>
 																		<div class="dropdown-divider"></div>
-																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																		<a class="dropdown-item text-danger"
+																			href="team-project/leaveTask?idTask=${task.taskTeamProject.id}">Leave
+																			Task</a>
 																	</div>
 																</div>
 															</div>
@@ -725,15 +747,15 @@
 															</div>
 															<div class="card-meta">
 																<ul class="avatars">
-																	<c:forEach var="userTask" items="${userTask}">
+																	<c:forEach var="usertask" items="${userTask}">
 																		<c:if
-																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			test="${usertask.taskTeamProject.id ==task.taskTeamProject.id}">
 																			<li><a href="#" data-toggle="tooltip"
-																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																				title="${usertask.teamMemberTeamProject.teamMember.member.name}">
 																					<img
-																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					alt="${usertask.teamMemberTeamProject.teamMember.member.name}"
 																					class="avatar"
-																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																					src="<spring:url value='/profile/avatar/${usertask.teamMemberTeamProject.teamMember.member.email}'/>" />
 																			</a></li>
 																		</c:if>
 																	</c:forEach>
@@ -760,9 +782,13 @@
 																		<i class="material-icons">more_vert</i>
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<a class="dropdown-item"
+																			href="team-project/MaskAsDone?idTask=${task.taskTeamProject.id}">Mark
+																			as done</a>
 																		<div class="dropdown-divider"></div>
-																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																		<a class="dropdown-item text-danger"
+																			href="team-project/leaveTask?idTask=${task.taskTeamProject.id}">Leave
+																			Task</a>
 																	</div>
 																</div>
 															</div>
@@ -819,15 +845,15 @@
 															</div>
 															<div class="card-meta">
 																<ul class="avatars">
-																	<c:forEach var="userTask" items="${userTask}">
+																	<c:forEach var="usertask" items="${userTask}">
 																		<c:if
-																			test="${usertask.taskTeamProject.taskTeamProject.id ==task.taskTeamProject.id}">
+																			test="${usertask.taskTeamProject.id ==task.taskTeamProject.id}">
 																			<li><a href="#" data-toggle="tooltip"
-																				title="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}">
+																				title="${usertask.teamMemberTeamProject.teamMember.member.name}">
 																					<img
-																					alt="${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.name}"
+																					alt="${usertask.teamMemberTeamProject.teamMember.member.name}"
 																					class="avatar"
-																					src="<spring:url value='/profile/avatar/${usertask.taskTeamProject.teamMemberTeamProject.teamMember.member.email}'/>" />
+																					src="<spring:url value='/profile/avatar/${usertask.teamMemberTeamProject.teamMember.member.email}'/>" />
 																			</a></li>
 																		</c:if>
 																	</c:forEach>
@@ -854,9 +880,13 @@
 																		<i class="material-icons">more_vert</i>
 																	</button>
 																	<div class="dropdown-menu dropdown-menu-right">
-																		<a class="dropdown-item" href="#">Mark as done</a>
+																		<a class="dropdown-item"
+																			href="team-project/MaskAsDone?idTask=${task.taskTeamProject.id}">Mark
+																			as done</a>
 																		<div class="dropdown-divider"></div>
-																		<a class="dropdown-item text-danger" href="#">Archive</a>
+																		<a class="dropdown-item text-danger"
+																			href="team-project/leaveTask?idTask=${task.taskTeamProject.id}">Leave
+																			Task</a>
 																	</div>
 																</div>
 															</div>
@@ -1028,6 +1058,69 @@
 								</div>
 							</div>
 						</form>
+						<form class="modal fade" id="project-modal" tabindex="-1"
+							role="dialog" aria-labelledby="project-modal" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Details Project</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+									<div class="modal-body">
+										<div class="tab-content">
+											<div class="tab-pane fade show active"
+												id="project-edit-details" role="tabpanel"
+												aria-labelledby="project-edit-details-tab">
+												<div class="form-group row align-items-center">
+													<label class="col-3">Name</label> <input
+														class="form-control col" type="text" id="project-name"
+														readonly />
+												</div>
+												<div class="form-group row">
+													<label class="col-3">Description</label>
+													<textarea id="project-description" class="form-control col"
+														rows="3" readonly></textarea>
+												</div>
+												<div class="form-group row align-items-center">
+													<label class="col-3">Owner</label> <input
+														class="form-control col" type="text" id="project-owner"
+														readonly />
+												</div>
+												<div class="form-group row align-items-center">
+													<label class="col-3">Create At</label> <input
+														class="form-control col" type="text" id="project-createAt"
+														readonly />
+												</div>
+												<hr>
+												<h6>Timeline</h6>
+												<div class="form-group row align-items-center">
+													<label class="col-3">Start Date</label> <input
+														id="project-startDate" class="form-control col"
+														type="text" readonly />
+												</div>
+												<div class="form-group row align-items-center">
+													<label class="col-3">Due Date</label> <input
+														class="form-control col" id="project-endDate" type="text"
+														readonly />
+												</div>
+												<hr>
+												<div class="form-group row align-items-center">
+													<label class="col-3">Visibility</label> <input
+														class="form-control col" type="text"
+														id="project-visibility" readonly />
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -1124,6 +1217,29 @@
 				$('#team-projectAmount').val(projectAmount);
 				$('#team-memberAmount').val(memberAmount);
 				$('#team-description').val(description);
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.project-btn').click(function(event) {
+				var id = $(this).attr("data-project-id");
+				var name = $(this).attr("data-project-name");
+				var owner = $(this).attr("data-project-owner");
+				var description = $(this).attr("data-project-description");
+				var startDate = $(this).attr("data-project-startDate");
+				var endDate = $(this).attr("data-project-endDate");
+				var createAt = $(this).attr("data-project-createAt");
+				var visibility = $(this).attr("data-project-visibility");
+
+				$('#project-id').val(id);
+				$('#project-name').val(name);
+				$('#project-owner').val(owner);
+				$('#project-description').val(description);
+				$('#project-startDate').val(startDate);
+				$('#project-endDate').val(endDate);
+				$('#project-createAt').val(createAt);
+				$('#project-visibility').val(visibility);
 			});
 		});
 	</script>

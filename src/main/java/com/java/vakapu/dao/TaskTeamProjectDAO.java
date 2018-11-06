@@ -40,6 +40,13 @@ public class TaskTeamProjectDAO {
 		return query.getResultList();
 	}
 	
+	public TeamMemberTaskTeamProject findByIdTaskEmail(String email, int idTask) {
+		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamMember.member.email=:email and a.taskTeamProject.id=:idTask",TeamMemberTaskTeamProject.class);
+		query.setParameter("email", email);
+		query.setParameter("idTask", idTask);
+		return query.getSingleResult();
+	}
+	
 	public List<TeamMemberTaskTeamProject> findByIdProjectAll(int idProject) {
 		TypedQuery<TeamMemberTaskTeamProject> query = getSession().createQuery("select a from TeamMemberTaskTeamProject a where a.teamMemberTeamProject.teamProject.id=:idProject",TeamMemberTaskTeamProject.class);
 		query.setParameter("idProject", idProject);

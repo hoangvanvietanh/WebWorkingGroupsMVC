@@ -36,6 +36,13 @@ public class TeamDAO {
 		return query.getResultList();
 	}
 	
+	public List<Team> findByName(String name)
+	{
+		TypedQuery<Team> query = getSession().createQuery("select a from Team a where a.name=: name",Team.class);
+		query.setParameter("name", name);
+		return query.getResultList();
+	}
+	
 	
 	
 	public Team findById(int id) {

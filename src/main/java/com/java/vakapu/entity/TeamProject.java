@@ -37,8 +37,8 @@ public class TeamProject {
 	@Column(name="visibility")
 	private String visibility;
 
-	@Column(name="action")
-	private String action;
+	@Column(name="createAt")
+	private String createAt;
 
 	@Column(name="total_task")
 	private int totalTask;
@@ -137,13 +137,15 @@ public class TeamProject {
 		this.visibility = visibility;
 	}
 
-	public String getAction() {
-		return action;
+	public String getCreateAt() {
+		return createAt;
 	}
 
-	public void setAction(String action) {
-		this.action = action;
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
 	}
+
+	
 	
 	
 }

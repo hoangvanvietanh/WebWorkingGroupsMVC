@@ -44,6 +44,15 @@ public class TeamServices {
 		
 	}
 	
+	public List<Team> findAll(){
+		return TeamDAO.findAll();
+	}
+	
+	public List<Team> findByName(String name)
+	{
+		return TeamDAO.findByName(name);
+	}
+	
 	public Team createTeam(Team Team)
 	{
 		return TeamDAO.create(Team);

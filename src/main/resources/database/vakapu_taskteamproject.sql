@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `taskteamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `taskteamproject` (
   `idtaskteamproject` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(145) DEFAULT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `taskteamproject` (
   `completedAmount` int(4) DEFAULT NULL,
   `due` int(4) DEFAULT NULL,
   PRIMARY KEY (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,6 @@ CREATE TABLE `taskteamproject` (
 
 LOCK TABLES `taskteamproject` WRITE;
 /*!40000 ALTER TABLE `taskteamproject` DISABLE KEYS */;
-INSERT INTO `taskteamproject` VALUES (11,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',7,7,8),(12,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,2,8),(13,'test',0,'123','hoangvanvietanh@gmail.com','2018-10-21','2018-10-31',2,1,0),(14,'hehehe',0,'Viet Anh','hoangvanvietanh@gmail.com','2018-10-22','2018-10-22',2,2,0),(15,'hihihihi',0,'hehe','hoangvanvietanh@gmail.com','2018-10-22','2018-10-24',0,0,0),(16,'Hoang Van Viet Anh',0,'Hoang Van Viet Anh','hoangvanvietanh@gmail.com','2018-10-23','2018-10-30',3,1,7),(17,'hihihihi',0,'haha','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',0,0,8),(18,'hihihihi',1,'hahs','hoangvanvietanh@gmail.com','2018-10-23','2018-10-31',3,3,8),(19,'test',0,'nothing','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',2,0,8),(20,'hihi',0,'haha','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',2,1,8),(21,'hello',0,'asd','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',4,2,8),(22,'task 1',1,'hi','hoangvanvietanh@gmail.com','2018-10-23','2018-10-25',2,2,1),(23,'task 2',1,'hi','hoangvanvietanh@gmail.com','2018-10-25','2018-11-01',2,2,8),(24,'task 1',1,'hihi','hoangvanvietanh@gmail.com','2018-10-22','2018-10-29',3,3,6),(25,'test',1,'hihi','hoangvanvietanh@gmail.com','2018-10-31','2018-11-03',3,3,11),(26,'task 1',0,'nothing','hoangvanvietanh@gmail.com','2018-10-22','2018-10-31',3,2,8),(27,'task 2',1,'nothing','hoangvanvietanh@gmail.com','2018-11-13','2018-11-30',2,2,37),(28,'task 3',0,'nothing','hoangvanvietanh@gmail.com','2018-11-03','2018-11-30',0,0,0),(29,'1',0,'asd','hoangvanvietanh@gmail.com','2018-10-31','2018-11-03',0,0,2),(30,'1',0,'12',NULL,'2018-10-31','2018-11-03',2,0,2),(31,'1',0,'2',NULL,'2018-10-31','2018-11-03',0,0,2),(32,'task 1',1,'nothing','hoangvanvietanh@gmail.com','2018-10-31','2018-11-03',3,3,0),(33,'task 1',0,'nothing impossible',NULL,'2018-11-04','2018-11-13',0,0,8),(34,'task 2',0,'nothing','hoangvanvietanh@gmail.com','2018-11-04','2018-11-28',0,0,23),(35,'task 1',1,'nothing','hoangvanvietanh@gmail.com','2018-11-04','2018-11-21',3,3,16),(36,'task 2',1,'asd','hoangvanvietanh@gmail.com','2018-11-04','2018-11-14',2,2,9),(37,'task 3',1,'asd','hoangvanvietanh@gmail.com','2018-11-04','2018-11-20',6,6,15);
 /*!40000 ALTER TABLE `taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 23:00:17
+-- Dump completed on 2018-11-06 14:59:08

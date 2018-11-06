@@ -105,10 +105,20 @@ public class TeamController {
 		TeamProjectModel newProject = new TeamProjectModel();
 		modelMap.put("idteam", idTeam);
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		boolean checkGuest = true;
 		for (TeamMember t : member) {
 			if (emailUser.equals(t.getMember().getEmail()) && t.getRole().equals("Admin")) {
 				model.addAttribute("checkAdmin", "yes");
 			}
+			if(emailUser.equals(t.getMember().getEmail()))
+			{
+				model.addAttribute("checkGuest", "no");
+				checkGuest = false;
+			}
+		}
+		if(checkGuest == true)
+		{
+			model.addAttribute("guest", "yes");
 		}
 		List<Integer> teamProject = proServices.findByIdTeam2(idTeam);
 		List<TeamProject> teamProjects = new ArrayList<>();
@@ -168,10 +178,16 @@ public class TeamController {
 		String email = accountServices.getEmailUser();
 		User user = userServices.findByEmail(email);
 		String[] emailStore = newProject.getEmail();
-
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
+		
 		if (emailStore.length != 0) {
 			TeamProject a = newProject.toProject();
 			a.setDue(-2);
+			a.setCreateAt(time);
+			a.setOwner(user.getName()+"("+user.getEmail()+")");
 			TeamProject b = proServices.createProject(a);
 			ProjectHistory proHis = new ProjectHistory();
 			proHis.setUser(user.getName());
@@ -237,6 +253,7 @@ public class TeamController {
 	@RequestMapping(value = "/manageUser", method = RequestMethod.POST)
 	public String manageUser(@ModelAttribute("idteam") int idTeam, @ModelAttribute("editTeam") TeamModel teamModel,
 			Model model) {
+		String emailUser = accountServices.getEmailUser();
 		String[] email = teamModel.getEmail();
 		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
 		List<TeamMember> memberRemove = new ArrayList<TeamMember>();
@@ -260,15 +277,29 @@ public class TeamController {
 			}
 			teamMemberServices.delete(t2);
 		}
+		User user = userServices.findByEmail(emailUser);
 		String[] email2 = teamModel.getEmail2();
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
 		if (email2 != null) {
-			Team team2 = teamServices.findById(idTeam);
 			for (String e : email2) {
-				TeamMember tn = new TeamMember();
-				tn.setMember(userServices.findByEmail(e));
-				tn.setRole("Member");
-				tn.setTeam(team2);
-				teamMemberServices.create(tn);
+				User user2 = userServices.findByEmail(e);
+				NotificationSystem mess = new NotificationSystem();
+				mess.setToUser(user2);
+				mess.setUserFrom(user);
+				mess.setStatus(0);
+				mess.setDate(time);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
+								+ "<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
+						idTeamString, mess2.getId(), idTeamString, mess2.getId());
+				mess2.setMessages(messa + messe + "<br>Your message: " + "Wellcome ^^");
+				notificationsSystemServices.update(mess2);
 			}
 		}
 		return "redirect:/team?idTeam=" + idTeam;
@@ -295,7 +326,7 @@ public class TeamController {
 			@ModelAttribute("messages") String messages, Model model) {
 		String emailUser = accountServices.getEmailUser();
 		User user = userServices.findByEmail(emailUser);
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
 		String idTeamString = Integer.toString(idTeam);
@@ -340,7 +371,7 @@ public class TeamController {
 		mess.setStatus(0);
 		mess.setDate(time);
 		NotificationSystem mess2 = notificationsSystemServices.create(mess);
-		String messa = "Hello " + user2.getName() + ",You have invitation to join the team from " + user.getName()
+		String messa = "Hello my friend,you have invitation to join the team from " + user.getName()
 				+ "<br>Do you agree?<br>";
 		String messe = String.format(
 				"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
@@ -382,7 +413,7 @@ public class TeamController {
 		
 		User user1 = userServices.findByEmail(mess2.getUserFrom().getEmail());
 		User user2 = userServices.findByEmail(emailUser);
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
 		NotificationSystem mess = new NotificationSystem();
@@ -408,7 +439,7 @@ public class TeamController {
 		mess2.setStatus(1);
 		notificationsSystemServices.update(mess2);
 
-		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
 		String emailUser = accountServices.getEmailUser();
@@ -437,4 +468,113 @@ public class TeamController {
 
 		return "redirect:/team?idTeam=" + idTeam;
 	}
+	
+	@RequestMapping(value = "/messageToAdmin", method = RequestMethod.POST)
+	public String messagesToAdmin(@ModelAttribute("idTeam") int idTeam,
+			@ModelAttribute("messages") String messages, Model model) {
+		
+		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
+		
+		Team team = teamServices.findById(idTeam);
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for(TeamMember t:member)
+		{
+			if(t.getRole().equals("Admin"))
+			{
+				User user2 = userServices.findByEmail(t.getMember().getEmail());
+				NotificationSystem mess = new NotificationSystem();
+				mess.setToUser(user2);
+				mess.setUserFrom(user);
+				mess.setStatus(0);
+				mess.setDate(time);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messe2 = String.format("<a href=\"team?idTeam=%s\">%s</a>",idTeam,team.getName());
+				String messa = "Hello " + user2.getName() + ","+user.getName()+" want to join the team "
+						+ messe2 + "<br>Do you agree?<br>";
+				
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/agreeUserJoinTeam?idTeam=%s&idNotifications=%s&email=%s\">Agree</a>"
+								+ "<a class=\"btn btn-primary btn-sm\" href=\"team/adminDisAgreeJoinTeam?idTeam=%s&idNotifications=%s&email=%s\">DisAgree</a>",
+						idTeamString, mess2.getId(),emailUser, idTeamString, mess2.getId(),emailUser);
+				mess2.setMessages(messa + messe + "<br>Your message: " + messages);
+				notificationsSystemServices.update(mess2);
+			}
+		}
+		return "redirect:/team?idTeam=" + idTeam;
+	}
+	
+	@RequestMapping(value = "/agreeUserJoinTeam", method = RequestMethod.GET)
+	public String agreeUserJoinTeam(@RequestParam("idTeam") int idTeam, @RequestParam("idNotifications") int idNotifications,@RequestParam("email") String email,
+			Model model) {
+		String emailUser = accountServices.getEmailUser();
+		Team team = teamServices.findById(idTeam);
+		User adduser = userServices.findByEmail(email);
+		TeamMember teamMember = new TeamMember();
+		teamMember.setMember(adduser);
+		teamMember.setTeam(team);
+		teamMember.setRole("Member");
+		teamMemberServices.create(teamMember);
+		team.setMemberAmount(team.getMemberAmount() + 1);
+		teamServices.updateTeam(team);
+		
+		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+		String messe = "Successfully added "+ adduser.getName() + "to team " + team.getName();
+		mess2.setMessages(messe);
+		mess2.setStatus(1);
+		notificationsSystemServices.update(mess2);
+		
+		User user1 = userServices.findByEmail(mess2.getUserFrom().getEmail());
+		User user2 = userServices.findByEmail(emailUser);
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		NotificationSystem mess = new NotificationSystem();
+		mess.setToUser(user1);
+		String messee = String.format("%s has agreed to let you into team %s", user2.getName(), team.getName());
+		mess.setMessages(messee);
+		mess.setStatus(0);
+		mess.setDate(time);
+		notificationsSystemServices.create(mess);
+		
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/adminDisAgreeJoinTeam", method = RequestMethod.GET)
+	public String adminDisJoinTeam(@RequestParam("idTeam") int idTeam, @RequestParam("idNotifications") int idNotifications,@RequestParam("email") String email,
+			Model model) {
+		Team team = teamServices.findById(idTeam);
+		User user1 = userServices.findByEmail(email);
+		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+		String messe = String.format("You dissagree %s join to team <a href=\"team?idTeam=%s\">%s</a>", user1.getName() ,idTeam,
+				team.getName());
+		mess2.setMessages(messe);
+		mess2.setStatus(1);
+		notificationsSystemServices.update(mess2);
+
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String emailUser = accountServices.getEmailUser();
+		
+		User user2 = userServices.findByEmail(emailUser);
+
+		NotificationSystem mess = new NotificationSystem();
+		mess.setToUser(user1);
+		mess.setUserFrom(user2);
+		String messee = String.format("%s disagree you join to team %s", user2.getName(), team.getName());
+		mess.setMessages(messee);
+		mess.setStatus(0);
+		mess.setDate(time);
+		notificationsSystemServices.create(mess);
+
+		return "redirect:/home";
+
+	}
+
+	
 }

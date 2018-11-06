@@ -153,9 +153,8 @@
 						<c:if test="${checkAdmin eq 'yes'}">
 							<a class="dropdown-item" href="#" data-toggle="modal"
 								data-target="#team-manage-modal">Edit Team</a>
+							<div class="dropdown-divider"></div>
 						</c:if>
-						<a class="dropdown-item" href="#">Share</a>
-						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="team/leaveTeam">Leave</a>
 					</div>
 				</div>
@@ -185,6 +184,12 @@
 									<button class="btn btn-round" data-toggle="modal"
 										data-target="#userteam-manage-modal">
 										<i class="material-icons">person_add</i>
+									</button>
+								</c:if>
+								<c:if test="${guest eq 'yes'}">
+									<button class="btn btn-round" data-toggle="modal"
+										data-target="#guest-modal">
+										<i class="material-icons">send</i>
 									</button>
 								</c:if>
 							</div>
@@ -228,97 +233,193 @@
 									</div>
 									<!--end of content list head-->
 									<div class="content-list-body row">
-										<c:forEach var="project" items="${project}">
-											<div class="col-lg-6">
-												<div class="card card-project">
+										<c:choose>
+											<c:when test="${checkGuest eq 'no'}">
+												<c:forEach var="project" items="${project}">
+													<div class="col-lg-6">
+														<div class="card card-project">
 
-													<div class="progress">
-														<div class="progress-bar bg-success" role="progressbar"
-															style="width: ${project.taskDone div project.totalTask * 100}%"
-															aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-
-													<div class="card-body">
-														<div class="dropdown card-options">
-															<button class="btn-options" type="button"
-																id="project-dropdown-button-5" data-toggle="dropdown"
-																aria-haspopup="true" aria-expanded="false">
-																<c:choose>
-																	<c:when test="${project.visibility == 'Member'}">
-																		<i class="material-icons" style="color: black;">group</i>
-																	</c:when>
-																	<c:otherwise>
-																		<i class="material-icons" style="color: black;">public</i>
-																	</c:otherwise>
-																</c:choose>
-																<i class="material-icons">more_vert</i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right">
-
-																<a class="dropdown-item"
-																	href="team-project/join-to-project?idProject=${project.id}">Join
-																	to project</a>
-
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item text-danger"
-																	href="manage/leaveProject?idProject=${project.id}">Leave
-																	Project</a>
+															<div class="progress">
+																<div class="progress-bar bg-success" role="progressbar"
+																	style="width: ${project.taskDone div project.totalTask * 100}%"
+																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
-														</div>
-														<div class="card-title">
-															<a
-																href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
-																<h5 data-filter-by="text">${project.name}</h5>
-															</a> <span class="text-small">${project.description}</span>
-														</div>
-														<ul class="avatars">
-															<c:forEach var="user" items="${user}">
-																<c:if test="${user.teamProject.id == project.id}">
-																	<li><a href="#" data-toggle="tooltip"
-																		title="${user.teamMember.member.name}"> <img
-																			alt="${user.teamMember.member.name}" class="avatar"
-																			src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
-																			data-filter-by="alt" />
-																	</a></li>
-																</c:if>
-															</c:forEach>
-														</ul>
-														<div class="card-meta d-flex justify-content-between">
-															<div class="d-flex align-items-center">
-																<i class="material-icons mr-1">playlist_add_check</i>
 
-																<c:choose>
-																	<c:when
-																		test="${project.taskDone == 0 and project.totalTask ==0}">
-																		<span>-/-</span>
-																	</c:when>
-																	<c:otherwise>
-																		<span>${project.taskDone}/${project.totalTask}</span>
-																	</c:otherwise>
-																</c:choose>
+															<div class="card-body">
+																<div class="dropdown card-options">
+																	<button class="btn-options" type="button"
+																		id="project-dropdown-button-5" data-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<c:choose>
+																			<c:when test="${project.visibility == 'Member'}">
+																				<i class="material-icons" style="color: black;">group</i>
+																			</c:when>
+																			<c:otherwise>
+																				<i class="material-icons" style="color: black;">public</i>
+																			</c:otherwise>
+																		</c:choose>
+																		<i class="material-icons">more_vert</i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-right">
 
+																		<a class="dropdown-item"
+																			href="team-project/join-to-project?idProject=${project.id}">Join
+																			to project</a>
 
-															</div>
-															<c:choose>
-																<c:when test="${project.due == -2}">
-																	<span class="text-small"><a
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item text-danger"
+																			href="manage/leaveProject?idProject=${project.id}">Leave
+																			Project</a>
+																	</div>
+																</div>
+																<div class="card-title">
+																	<a
 																		href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
-																			<strong>Click to start</strong>
-																	</a></span>
-																</c:when>
-																<c:when test="${project.due == 0}">
-																	<span class="text-small">Today</span>
-																</c:when>
-																<c:otherwise>
-																	<span class="text-small">Due ${project.due} days</span>
-																</c:otherwise>
-															</c:choose>
+																		<h5 data-filter-by="text">${project.name}</h5>
+																	</a> <span class="text-small">${project.description}</span>
+																</div>
+																<ul class="avatars">
+																	<c:forEach var="user" items="${user}">
+																		<c:if test="${user.teamProject.id == project.id}">
+																			<li><a href="#" data-toggle="tooltip"
+																				title="${user.teamMember.member.name}"> <img
+																					alt="${user.teamMember.member.name}" class="avatar"
+																					src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																					data-filter-by="alt" />
+																			</a></li>
+																		</c:if>
+																	</c:forEach>
+																</ul>
+																<div class="card-meta d-flex justify-content-between">
+																	<div class="d-flex align-items-center">
+																		<i class="material-icons mr-1">playlist_add_check</i>
 
+																		<c:choose>
+																			<c:when
+																				test="${project.taskDone == 0 and project.totalTask ==0}">
+																				<span>-/-</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span>${project.taskDone}/${project.totalTask}</span>
+																			</c:otherwise>
+																		</c:choose>
+
+
+																	</div>
+																	<c:choose>
+																		<c:when test="${project.due == -2}">
+																			<span class="text-small"><a
+																				href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
+																					<strong>Click to start</strong>
+																			</a></span>
+																		</c:when>
+																		<c:when test="${project.due == 0}">
+																			<span class="text-small">Today</span>
+																		</c:when>
+																		<c:otherwise>
+																			<span class="text-small">Due ${project.due}
+																				days</span>
+																		</c:otherwise>
+																	</c:choose>
+
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
-											</div>
-										</c:forEach>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<c:forEach var="project" items="${project}">
+													<c:if test="${project.visibility eq 'Everyone'}">
+														<div class="col-lg-6">
+															<div class="card card-project">
+
+																<div class="progress">
+																	<div class="progress-bar bg-success" role="progressbar"
+																		style="width: ${project.taskDone div project.totalTask * 100}%"
+																		aria-valuenow="8" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+
+																<div class="card-body">
+																	<div class="dropdown card-options">
+																		<button class="btn-options" type="button"
+																			id="project-dropdown-button-5" data-toggle="dropdown"
+																			aria-haspopup="true" aria-expanded="false">
+																			<c:choose>
+																				<c:when test="${project.visibility == 'Member'}">
+																					<i class="material-icons" style="color: black;">group</i>
+																				</c:when>
+																				<c:otherwise>
+																					<i class="material-icons" style="color: black;">public</i>
+																				</c:otherwise>
+																			</c:choose>
+																		</button>
+																		
+																	</div>
+																	<div class="card-title">
+																		<a
+																			href="#">
+																			<h5 data-filter-by="text">${project.name}</h5>
+																		</a> <span class="text-small">${project.description}</span>
+																	</div>
+																	<ul class="avatars">
+																		<c:forEach var="user" items="${user}">
+																			<c:if test="${user.teamProject.id == project.id}">
+																				<li><a href="#" data-toggle="tooltip"
+																					title="${user.teamMember.member.name}"> <img
+																						alt="${user.teamMember.member.name}"
+																						class="avatar"
+																						src="<spring:url value='/profile/avatar/${user.teamMember.member.email}'/>"
+																						data-filter-by="alt" />
+																				</a></li>
+																			</c:if>
+																		</c:forEach>
+																	</ul>
+																	<div class="card-meta d-flex justify-content-between">
+																		<div class="d-flex align-items-center">
+																			<i class="material-icons mr-1">playlist_add_check</i>
+
+																			<c:choose>
+																				<c:when
+																					test="${project.taskDone == 0 and project.totalTask ==0}">
+																					<span>-/-</span>
+																				</c:when>
+																				<c:otherwise>
+																					<span>${project.taskDone}/${project.totalTask}</span>
+																				</c:otherwise>
+																			</c:choose>
+
+
+																		</div>
+																		<c:choose>
+																			<c:when test="${project.due == -2}">
+																				<span class="text-small"><a
+																					href="team-project?idTeam=${team.idTeam}&idProject=${project.id}">
+																						<strong>Click to start</strong>
+																				</a></span>
+																			</c:when>
+																			<c:when test="${project.due == 0}">
+																				<span class="text-small">Today</span>
+																			</c:when>
+																			<c:otherwise>
+																				<span class="text-small">Due ${project.due}
+																					days</span>
+																			</c:otherwise>
+																		</c:choose>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:if>
+
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+
+
+
 									</div>
 									<!--end of content list body-->
 								</div>
@@ -357,8 +458,9 @@
 										<c:forEach var="member" items="${member}">
 											<div class="col-6">
 												<div class="dropdown">
-													<a class="media media-member" href="#" role="button"
-														data-toggle="dropdown" aria-haspopup="true"
+													<a class="media media-member"
+														href="profile-cv/cv?email=${member.member.email}"
+														role="button" data-toggle="dropdown" aria-haspopup="true"
 														aria-expanded="false"> <img alt="Image"
 														src="<spring:url value='/profile/avatar/${member.member.email}'/>"
 														class="avatar avatar-lg" />
@@ -368,9 +470,11 @@
 														</div>
 													</a>
 													<div class="dropdown-menu">
-														<a href="" class="dropdown-item">CV Profile </a> <a
-															href="team/setAdmin?idMember=${member.id}"
-															class="dropdown-item">Set Admin</a>
+														<a href="" class="dropdown-item">CV Profile </a>
+														<c:if test="${checkAdmin eq 'yes'}">
+															<a href="team/setAdmin?idMember=${member.id}"
+																class="dropdown-item">Set Admin</a>
+														</c:if>
 													</div>
 												</div>
 
@@ -423,6 +527,41 @@
 									<div class="modal-footer">
 										<button role="button" class="btn btn-primary" type="submit">
 											Invite users</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<form action="team/messageToAdmin" method="post" class="modal fade"
+							id="guest-modal" tabindex="-1" role="dialog"
+							aria-labelledby="guest-modal" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Invite Users</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+									<div class="modal-body">
+										<p>Send a message to admin if you want to join the team.</p>
+										<div>
+											<div class="input-group">
+												<label class="col-12">Your Messages</label>
+												<textarea name="messages" class="form-control col" rows="3"
+													placeholder="Team description"></textarea>
+											</div>
+
+										</div>
+									</div>
+									<input type="hidden" name="idTeam" value="${team.idTeam}">
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+									<!--end of modal body-->
+									<div class="modal-footer">
+										<button role="button" class="btn btn-primary" type="submit">
+											Send</button>
 									</div>
 								</div>
 							</div>
@@ -813,6 +952,14 @@
 												<div class="bpd">${mess.messages}</div>
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
+													<c:choose>
+														<c:when test="${mess.status == 0}">
+															<small class="axc">not seen</small>
+														</c:when>
+														<c:otherwise>
+															<small class="axc">seen</small>
+														</c:otherwise>
+													</c:choose>
 												</div>
 											</div>
 											<div class="dropdown">

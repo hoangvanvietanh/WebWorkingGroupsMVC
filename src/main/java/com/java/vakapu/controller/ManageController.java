@@ -148,24 +148,38 @@ public class ManageController {
 		team.setOwner(user.getName()+"("+emailUser+")");
 		team.setDateCreate(time);
 		Team team2 = teamServices.createTeam(team);
-		int i = 0;
+		String idTeamString = Integer.toString(team2.getIdTeam());
 		for (String e : email) {
-			i++;
-			User adduser = userServices.findByEmail(e);
-			TeamMember teamMember = new TeamMember();
-			teamMember.setMember(adduser);
-			teamMember.setTeam(team2);
 			if(emailUser.equals(e))
 			{
+				User adduser = userServices.findByEmail(e);
+				TeamMember teamMember = new TeamMember();
+				teamMember.setMember(adduser);
+				teamMember.setTeam(team2);
 				teamMember.setRole("Admin");
+				teamMemberServices.create(teamMember);
 			}
 			else
 			{
-				teamMember.setRole("Member");
+				User user2 = userServices.findByEmail(e);
+				NotificationSystem mess = new NotificationSystem();
+				mess.setToUser(user2);
+				mess.setUserFrom(user);
+				mess.setStatus(0);
+				mess.setDate(time);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
+								+ "<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
+						idTeamString, mess2.getId(), idTeamString, mess2.getId());
+				mess2.setMessages(messa + messe + "<br>Your message: " + "Wellcome ^^");
+				notificationsSystemServices.update(mess2);
 			}
-			teamMemberServices.create(teamMember);
+			
 		}
-		team2.setMemberAmount(i);
+		team2.setMemberAmount(1);
 		teamServices.updateTeam(team2);
 
 		return "redirect:/manage";
@@ -237,5 +251,13 @@ public class ManageController {
 		
 		return "redirect:/manage";
 	}
-	
+	@RequestMapping(value = "/leaveTask", method = RequestMethod.GET)
+	public String leaveTask(@RequestParam("idTask") int idTask,
+			Model model, BindingResult result) {
+		String email = accountServices.getEmailUser();
+		TeamMemberTaskTeamProject task = taskServices.findByIdTaskEmail(email, idTask);
+		taskServices.deleteTaskTeamPro(task);
+//		System.out.println("Viet Anhhh:" +task.getTaskTeamProject().getName());
+		return "redirect:/manage";
+	}
 }

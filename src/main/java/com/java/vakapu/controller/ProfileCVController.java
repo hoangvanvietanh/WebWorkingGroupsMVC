@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.java.vakapu.entity.Account;
 import com.java.vakapu.entity.Friendship;
 import com.java.vakapu.entity.NotificationSystem;
+import com.java.vakapu.entity.Team;
 import com.java.vakapu.entity.User;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.FriendshipServices;
 import com.java.vakapu.services.NotificationsSystemServices;
+import com.java.vakapu.services.TeamServices;
 import com.java.vakapu.services.UserServices;
 
 @Controller
@@ -40,6 +42,9 @@ public class ProfileCVController {
 	@Autowired
 	private NotificationsSystemServices notificationsSystemServices;
 
+	@Autowired
+	private TeamServices team;
+	
 	@GetMapping
 	public String show(Model model) {
 		String emailUser = accountServices.getEmailUser();
@@ -77,6 +82,15 @@ public class ProfileCVController {
 				return "profile-cv";
 			}
 		}
+		List<Team> listTeam = team.findAll();
+		for(Team t: listTeam)
+		{
+			if(email.equals(t.getName()))
+			{
+				return "redirect:/team?idTeam="+t.getIdTeam();
+			}
+		}
+		
 		return "redirect:/home";
 	}
 	
@@ -180,6 +194,7 @@ public class ProfileCVController {
 			@RequestParam("emailUser") String emailUser, @RequestParam("idNotifications") int idNotifications) {
 		NotificationSystem noti = notificationsSystemServices.find(idNotifications);
 		notificationsSystemServices.delete(noti);
+		friendshipServices.delete(friendshipServices.findFriendAndUser(emailUser, emailFriend));
 		return "redirect:/home";
 	}
 	

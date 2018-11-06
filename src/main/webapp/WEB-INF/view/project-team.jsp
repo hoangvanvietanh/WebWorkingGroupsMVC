@@ -185,11 +185,12 @@
 							<a class="dropdown-item" href="" data-toggle="modal"
 								data-target="#project-edit-modal">Edit Project</a>
 						</c:if>
-						<a class="dropdown-item" href="#">Share</a> <a
-							class="dropdown-item" href="team-project/MarkAsComplete">Mark
+						<a class="dropdown-item" href="team-project/MarkAsComplete">Mark
 							as Complete</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="#">Leave project</a>
+						<a class="dropdown-item text-danger"
+							href="manage/leaveProject?idProject=${project.id}">Leave
+							Project</a>
 
 					</div>
 				</div>
@@ -327,8 +328,7 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a>
-																	<span class="text-small">${task.description}</span><br>
+																	</a> <span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == 0}">
 																			<span class="text-small">Today</span>
@@ -377,10 +377,12 @@
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right">
 																			<a class="dropdown-item"
-																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
+																				href="team-project/MaskAsDone?idTask=${task.id}">Mark
 																				as done</a>
 																			<div class="dropdown-divider"></div>
-																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																			<a class="dropdown-item text-danger"
+																				href="team-project/leaveTask?idTask=${task.id}">Leave
+																				Task</a>
 																		</div>
 																	</div>
 																</div>
@@ -421,8 +423,7 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a>
-																	<span class="text-small">${task.description}</span><br>
+																	</a> <span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == 0}">
 																			<span class="text-small">Today</span>
@@ -474,7 +475,9 @@
 																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
 																				as done</a>
 																			<div class="dropdown-divider"></div>
-																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																			<a class="dropdown-item text-danger"
+																				href="team-project/leaveTask?idTask=${task.id}">Leave
+																				task</a>
 																		</div>
 																	</div>
 																</div>
@@ -515,8 +518,7 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a> 
-																	<span class="text-small">${task.description}</span><br>
+																	</a> <span class="text-small">${task.description}</span><br>
 																	<span class="text-danger">Task failed</span>
 
 																</div>
@@ -560,7 +562,9 @@
 																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
 																				as done</a>
 																			<div class="dropdown-divider"></div>
-																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																			<a class="dropdown-item text-danger"
+																				href="team-project/leaveTask?idTask=${task.id}">Leave
+																				task</a>
 																		</div>
 																	</div>
 																</div>
@@ -601,8 +605,7 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a> 
-																	<span class="text-small">${task.description}</span><br>
+																	</a> <span class="text-small">${task.description}</span><br>
 																	<span class="text-danger">Done</span>
 
 																</div>
@@ -646,7 +649,9 @@
 																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
 																				as done</a>
 																			<div class="dropdown-divider"></div>
-																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																			<a class="dropdown-item text-danger"
+																				href="team-project/leaveTask?idTask=${task.id}">Leave
+																				task</a>
 																		</div>
 																	</div>
 																</div>
@@ -687,12 +692,12 @@
 																<div class="card-title">
 																	<a href="task-todo?idTask=${task.id}">
 																		<h6 data-filter-by="text">${task.name}</h6>
-																	</a>
-																	<span class="text-small">${task.description}</span><br>
+																	</a> <span class="text-small">${task.description}</span><br>
 																	<c:choose>
 																		<c:when test="${task.due == -2}">
-																			<span class="text-small"><a 
-																				href="task-todo?idTask=${task.id}"><strong>Click to start</strong></a></span>
+																			<span class="text-small"><a
+																				href="task-todo?idTask=${task.id}"><strong>Click
+																						to start</strong></a></span>
 																		</c:when>
 																		<c:otherwise>
 																			<span class="text-small">due ${task.due} days</span>
@@ -741,7 +746,9 @@
 																				href="team-project/MaskAsDone?idTask=${task.id }">Mark
 																				as done</a>
 																			<div class="dropdown-divider"></div>
-																			<a class="dropdown-item text-danger" href="#">Archive</a>
+																			<a class="dropdown-item text-danger"
+																				href="team-project/leaveTask?idTask=${task.id}">Leave
+																				task</a>
 																		</div>
 																	</div>
 																</div>
@@ -1217,6 +1224,14 @@
 												<div class="bpd">${mess.messages}</div>
 												<div class="bpe">
 													<small class="axc">at ${mess.date} </small>
+													<c:choose>
+														<c:when test="${mess.status == 0}">
+															<small class="axc">not seen</small>
+														</c:when>
+														<c:otherwise>
+															<small class="axc">seen</small>
+														</c:otherwise>
+													</c:choose>
 												</div>
 											</div>
 											<div class="dropdown">

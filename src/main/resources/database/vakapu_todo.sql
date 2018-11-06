@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `todo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `todo` (
   `idtodo` int(11) NOT NULL AUTO_INCREMENT,
   `todo` varchar(245) DEFAULT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `todo` (
   PRIMARY KEY (`idtodo`),
   KEY `FKl3kd2hun1wexy9dl36viy5vlf` (`taskTeamProject`),
   CONSTRAINT `FKl3kd2hun1wexy9dl36viy5vlf` FOREIGN KEY (`taskTeamProject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `todo` (
 
 LOCK TABLES `todo` WRITE;
 /*!40000 ALTER TABLE `todo` DISABLE KEYS */;
-INSERT INTO `todo` VALUES (4,'null',1,11),(5,'testt2',1,11),(6,'testt3',1,11),(7,'testt',0,13),(8,'testt2',0,13),(9,'testt3',0,13),(10,'t1',1,11),(11,'2',1,11),(12,'3',1,11),(13,'hihihi',1,11),(14,'test 1',1,14),(15,'test 2',1,14),(16,'Viet Anh 1',0,16),(17,'Viet Anh 2',1,16),(18,'Viet Anh 3',0,16),(19,'2',1,12),(20,'testt2',1,12),(21,'1',1,18),(22,'2',1,18),(23,'3',1,18),(24,'hihi',0,19),(25,'hehe',0,19),(26,'1',1,20),(27,'2',0,20),(28,'2',0,21),(29,'testt3',1,21),(30,'2',0,21),(31,'testt2',1,21),(32,'1',1,24),(33,'2',1,24),(34,'3',1,24),(35,'1',1,25),(36,'2',1,25),(37,'3',1,25),(38,'1',1,23),(39,'2',1,23),(40,'1',1,22),(41,'2',1,22),(42,'todo 1',1,26),(43,'todo 2',1,26),(44,'todo 3',0,26),(45,'1',1,27),(46,'2',1,27),(47,'1',0,30),(48,'2',0,30),(49,'1',1,32),(50,'2',1,32),(51,'3',1,32),(52,'1',1,35),(53,'2',1,35),(54,'3',1,35),(55,'1',1,36),(56,'2',1,36),(57,'1',1,37),(58,'2',1,37),(59,'3',1,37),(60,'4',1,37),(61,'5',1,37),(62,'6',1,37);
 /*!40000 ALTER TABLE `todo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 23:00:18
+-- Dump completed on 2018-11-06 14:59:08

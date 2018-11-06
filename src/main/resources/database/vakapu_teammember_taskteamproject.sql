@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: vakapu
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `teammember_taskteamproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teammember_taskteamproject` (
   `idteammember_taskteamproject` int(11) NOT NULL AUTO_INCREMENT,
   `idteammember_teamproject` int(11) DEFAULT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `teammember_taskteamproject` (
   KEY `fk_teammember_taskteamproject_2_idx` (`idtaskteamproject`),
   CONSTRAINT `fk_teammember_taskteamproject_1` FOREIGN KEY (`idteammember_teamproject`) REFERENCES `teammember_teamproject` (`idteammember_teamproject`),
   CONSTRAINT `fk_teammember_taskteamproject_2` FOREIGN KEY (`idtaskteamproject`) REFERENCES `taskteamproject` (`idtaskteamproject`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,6 @@ CREATE TABLE `teammember_taskteamproject` (
 
 LOCK TABLES `teammember_taskteamproject` WRITE;
 /*!40000 ALTER TABLE `teammember_taskteamproject` DISABLE KEYS */;
-INSERT INTO `teammember_taskteamproject` VALUES (9,17,18),(10,18,18),(12,18,19),(14,23,20),(15,25,20),(17,21,21),(19,56,30),(21,70,30),(25,56,31),(27,70,31),(28,71,31),(33,71,30),(34,72,30),(35,73,30),(37,75,32),(39,76,32),(43,81,35),(44,85,35),(45,81,36),(46,81,37);
 /*!40000 ALTER TABLE `teammember_taskteamproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 23:00:18
+-- Dump completed on 2018-11-06 14:59:08

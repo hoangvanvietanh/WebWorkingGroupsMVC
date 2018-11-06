@@ -1,6 +1,8 @@
 package com.java.vakapu.controller;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -204,7 +206,8 @@ public class ProjectTeamController {
 		if (result.hasErrors()) {
 			return "redirect:/team-project";
 		}
-
+		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
 		TeamProject a = editProject.toProject();
 		proServices.updateProject(a);
 		String[] email = editProject.getEmail();
@@ -230,13 +233,27 @@ public class ProjectTeamController {
 		}
 
 		String[] email2 = editProject.getEmail2();
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
 		if (email2 != null) {
-			TeamProject b = proServices.find(idProject);
 			for (String e : email2) {
-				TeamMemberTeamProject c = new TeamMemberTeamProject();
-				c.setTeamMember(teamMemberServices.getUserTeam(idTeam, e));
-				c.setTeamProject(b);
-				teamMemberTeamProjectDAO.create(c);
+				User user2 = userServices.findByEmail(e);
+				NotificationSystem mess = new NotificationSystem();
+				mess.setToUser(user2);
+				mess.setUserFrom(user);
+				mess.setStatus(0);
+				mess.setDate(time);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
+								+ "<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
+						idTeamString, mess2.getId(), idTeamString, mess2.getId());
+				mess2.setMessages(messa + messe + "<br>Your message: " + "Wellcome ^^");
+				notificationsSystemServices.update(mess2);
 			}
 		}
 		return "redirect:/team-project?idProject=" + a.getId();
@@ -332,7 +349,10 @@ public class ProjectTeamController {
 		}
 		taskServices.update(task);
 		
-		
+		if(idTeam == 0 || idProject == 0)
+		{
+			return "redirect:/manage";
+		}
 		return "redirect:/team-project?idProject="+idProject;
 		
 	}
@@ -368,7 +388,24 @@ public class ProjectTeamController {
 			}
 			taskServices.update(task);
 		}
+		if(idproject == 0 || idteam == 0)
+		{
+			return "redirect:/manage";
+		}
 		return "redirect:/team-project?idProject="+idproject;
 	}
 
+	@RequestMapping(value = "/leaveTask", method = RequestMethod.GET)
+	public String leaveTask(@ModelAttribute("idproject") int idProject, @RequestParam("idTask") int idTask,
+			Model model, BindingResult result) {
+		String email = accountServices.getEmailUser();
+		TeamMemberTaskTeamProject task = taskServices.findByIdTaskEmail(email, idTask);
+		taskServices.deleteTaskTeamPro(task);
+		if(idProject == 0)
+		{
+			return "redirect:/manage";
+		}
+//		System.out.println("Viet Anhhh:" +task.getTaskTeamProject().getName());
+		return "redirect:/team-project?idProject="+idProject;
+	}
 }
