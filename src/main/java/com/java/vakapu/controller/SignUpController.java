@@ -101,8 +101,8 @@ public class SignUpController {
 			
 			User user = new User();
 			user.setEmail(email);
+			user.setAvartar("notexist.png");
 			userServices.createProfile(user);
-			
 			model.remove("email");
 			return "redirect:/";
 		}
