@@ -459,7 +459,7 @@
 											<div class="col-6">
 												<div class="dropdown">
 													<a class="media media-member"
-														href="profile-cv/cv?email=${member.member.email}"
+														href=""
 														role="button" data-toggle="dropdown" aria-haspopup="true"
 														aria-expanded="false"> <img alt="Image"
 														src="<spring:url value='/profile/avatar/${member.member.email}'/>"
@@ -470,7 +470,7 @@
 														</div>
 													</a>
 													<div class="dropdown-menu">
-														<a href="" class="dropdown-item">CV Profile </a>
+														<a href="profile-cv/cv?email=${member.member.email}" class="dropdown-item">CV Profile </a>
 														<c:if test="${checkAdmin eq 'yes'}">
 															<a href="team/setAdmin?idMember=${member.id}"
 																class="dropdown-item">Set Admin</a>
