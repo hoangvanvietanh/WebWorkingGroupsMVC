@@ -211,6 +211,8 @@ public class TeamController {
 	@RequestMapping(value = "/editTeam", method = RequestMethod.POST)
 	public String editTeam(@ModelAttribute("idteam") int idTeam, @ModelAttribute("editTeam") TeamModel teamModel,
 			Model model) {
+		String emailUser = accountServices.getEmailUser();
+		User user = userServices.findByEmail(emailUser);
 		Team team = teamModel.toTeam();
 		teamServices.updateTeam(team);
 		String[] email = teamModel.getEmail();
@@ -237,14 +239,27 @@ public class TeamController {
 			teamMemberServices.delete(t2);
 		}
 		String[] email2 = teamModel.getEmail2();
+		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		LocalDateTime local = LocalDateTime.now();
+		String time = date.format(local);
+		String idTeamString = Integer.toString(idTeam);
 		if (email2 != null) {
-			Team team2 = teamServices.findById(idTeam);
 			for (String e : email2) {
-				TeamMember tn = new TeamMember();
-				tn.setMember(userServices.findByEmail(e));
-				tn.setRole("Member");
-				tn.setTeam(team2);
-				teamMemberServices.create(tn);
+				User user2 = userServices.findByEmail(e);
+				NotificationSystem mess = new NotificationSystem();
+				mess.setToUser(user2);
+				mess.setUserFrom(user);
+				mess.setStatus(0);
+				mess.setDate(time);
+				NotificationSystem mess2 = notificationsSystemServices.create(mess);
+				String messa = "Hello " + user2.getName() + ",You have invitation to join the team from "
+						+ user.getName() + "<br>Do you agree?<br>";
+				String messe = String.format(
+						"<a class=\"btn btn-primary btn-sm\" href=\"team/joinTeam?idTeam=%s&idNotifications=%s\">Agree</a>"
+								+ "<a class=\"btn btn-primary btn-sm\" href=\"team/disJoinTeam?idTeam=%s&idNotifications=%s\">DisAgree</a>",
+						idTeamString, mess2.getId(), idTeamString, mess2.getId());
+				mess2.setMessages(messa + messe + "<br>Your message: " + "Wellcome ^^");
+				notificationsSystemServices.update(mess2);
 			}
 		}
 		return "redirect:/team?idTeam=" + idTeam;
