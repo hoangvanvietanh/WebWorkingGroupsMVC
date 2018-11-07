@@ -356,10 +356,30 @@
 															<div class="card card-project">
 
 																<div class="progress">
-																	<div class="progress-bar bg-success" role="progressbar"
-																		style="width: ${project.taskDone div project.totalTask * 100}%"
-																		aria-valuenow="8" aria-valuemin="0"
-																		aria-valuemax="100"></div>
+																	<c:choose>
+																		<c:when test="${project.due lt 5}">
+																			<div class="progress-bar bg-danger"
+																				role="progressbar"
+																				style="width: ${project.taskDone/project.totalTask*100}%"
+																				aria-valuenow="8" aria-valuemin="0"
+																				aria-valuemax="100"></div>
+																		</c:when>
+																		<c:when
+																			test="${project.due le 7 and project.due ge 5 }">
+																			<div class="progress-bar bg-warning"
+																				role="progressbar"
+																				style="width: ${project.taskDone/project.totalTask*100}%"
+																				aria-valuenow="8" aria-valuemin="0"
+																				aria-valuemax="100"></div>
+																		</c:when>
+																		<c:otherwise>
+																			<div class="progress-bar bg-success"
+																				role="progressbar"
+																				style="width: ${project.taskDone/project.totalTask*100}%"
+																				aria-valuenow="8" aria-valuemin="0"
+																				aria-valuemax="100"></div>
+																		</c:otherwise>
+																	</c:choose>
 																</div>
 
 																<div class="card-body">
