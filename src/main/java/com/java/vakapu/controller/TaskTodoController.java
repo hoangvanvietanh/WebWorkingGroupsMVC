@@ -28,6 +28,7 @@ import com.java.vakapu.entity.TeamMemberTeamProject;
 import com.java.vakapu.entity.Todo;
 import com.java.vakapu.model.NoteModel;
 import com.java.vakapu.model.TaskModel;
+import com.java.vakapu.model.TodoModel;
 import com.java.vakapu.services.AccountServices;
 import com.java.vakapu.services.DateServices;
 import com.java.vakapu.services.HistoryServices;
@@ -85,7 +86,7 @@ public class TaskTodoController {
 		TaskModel editTask=new TaskModel();
 		TaskModel editTask2=new TaskModel();
 		NoteModel noteM=new NoteModel();
-		
+		TodoModel todoModel = new TodoModel();
 		noteM.fromNote(note);
 		editTask.fromTask(task);
 		
@@ -149,6 +150,7 @@ public class TaskTodoController {
 		model.addAttribute("editTask", editTask);
 		model.addAttribute("editTask2", editTask2);
 		model.addAttribute("path", "task-todo");
+		model.addAttribute("todoModel", todoModel);
 		return "task-team";
 	}
 
@@ -306,6 +308,26 @@ public class TaskTodoController {
 		Notes note=noteServices.findByID(idnote);
 		noteServices.deleteNote(note);
 		
+		return "redirect:/task-todo?idTask="+idtask;
+	}
+	
+	@RequestMapping(value="edit-todo",method=RequestMethod.POST)
+	public String editTodo(@ModelAttribute("todoModel") TodoModel todoModel, @ModelAttribute("idtask") int idtask,
+			BindingResult result,Model model) throws ParseException
+	{
+		Todo todoF = taskServices.find(todoModel.getId());
+		Todo todo = todoModel.toTodo();
+		todo.setTaskTeamProject(todoF.getTaskTeamProject());
+		taskServices.update(todo);
+		return "redirect:/task-todo?idTask="+idtask;
+	}
+	
+	@RequestMapping(value="/delete-todo",method=RequestMethod.GET)
+	public String deleteTodo(@RequestParam(name="idtodo") int idTodo, @ModelAttribute("idtask") int idtask,
+			BindingResult result,Model model) throws ParseException
+	{
+		Todo todoF = taskServices.find(idTodo);
+		taskServices.delete(todoF);
 		return "redirect:/task-todo?idTask="+idtask;
 	}
 }

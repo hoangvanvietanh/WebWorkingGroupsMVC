@@ -28,13 +28,14 @@ public class TodoModel {
 		this.setTaskTeamProject(todo.getTaskTeamProject());
 	}
 	
-	public void toTodo()
+	public Todo toTodo()
 	{
 		Todo todo = new Todo();
 		todo.setId(this.getId());
 		todo.setCompleted(this.getCompleted());
 		todo.setTodo(this.getTodo());
 		todo.setTaskTeamProject(this.getTaskTeamProject());
+		return todo;
 	}
 	
 	

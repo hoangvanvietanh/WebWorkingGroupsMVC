@@ -162,7 +162,8 @@
 							href="team-project/MaskAsDone?idTask=${task.id}">Mark as
 							complete</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="team-project/leaveTask?idTask=${task.id}">Leave task</a>
+						<a class="dropdown-item text-danger"
+							href="team-project/leaveTask?idTask=${task.id}">Leave task</a>
 
 
 
@@ -265,10 +266,23 @@
 													<form action="task-todo/update-todo" method="post"
 														class="checklist">
 														<div class="row">
+															<div class="dropdown">
+																<button class="btn btn-round" role="button"
+																	data-toggle="dropdown" aria-expanded="false">
+																	<i class="material-icons">edit</i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right">
+																	<a data-todo-id="${todo.id}"
+																		data-todo-content="${todo.todo}"
+																		data-todo-completed="${todo.completed}"
+																		class="dropdown-item edit-todo-btn"
+																		data-toggle="modal" href="#"
+																		data-target="#todo-edit-modal">Edit</a> <a
+																		class="dropdown-item text-danger"
+																		href="task-todo/delete-todo?idtodo=${todo.id }">Delete</a>
+																</div>
+															</div>
 															<div class="form-group col">
-																<span class="checklist-reorder"> <i
-																	class="material-icons">reorder</i>
-																</span>
 																<div class="custom-control custom-checkbox col">
 																	<input type="hidden" name="${_csrf.parameterName}"
 																		value="${_csrf.token}" /> <input
@@ -292,10 +306,23 @@
 													<form action="task-todo/update-todo" method="post"
 														class="checklist">
 														<div class="row">
+															<div class="dropdown">
+																<button class="btn btn-round" role="button"
+																	data-toggle="dropdown" aria-expanded="false">
+																	<i class="material-icons">edit</i>
+																</button>
+																<div class="dropdown-menu dropdown-menu-right">
+																	<a data-todo-id="${todo.id}"
+																		data-todo-content="${todo.todo}"
+																		data-todo-completed="${todo.completed}"
+																		class="dropdown-item edit-todo-btn"
+																		data-toggle="modal" href="#"
+																		data-target="#todo-edit-modal">Edit</a> <a
+																		class="dropdown-item text-danger"
+																		href="task-todo/delete-todo?idtodo=${todo.id }">Delete</a>
+																</div>
+															</div>
 															<div class="form-group col">
-																<span class="checklist-reorder"> <i
-																	class="material-icons">reorder</i>
-																</span>
 																<div class="custom-control custom-checkbox col">
 																	<input type="hidden" name="${_csrf.parameterName}"
 																		value="${_csrf.token}" /> <input
@@ -318,12 +345,6 @@
 											</c:choose>
 
 										</c:forEach>
-
-										<div class="drop-to-delete">
-											<div class="drag-to-delete-title">
-												<i class="material-icons">delete</i>
-											</div>
-										</div>
 									</div>
 									<!--end of content list body-->
 								</div>
@@ -766,6 +787,39 @@
 							</div>
 						</form:form>
 
+						<form:form modelAttribute="todoModel" action="task-todo/edit-todo"
+							method="post" class="modal fade" id="todo-edit-modal"
+							tabindex="-1" role="dialog" aria-labelledby="note-edit-modal"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Edit Todo</h5>
+										<button type="button" class="close btn btn-round"
+											data-dismiss="modal" aria-label="Close">
+											<i class="material-icons">close</i>
+										</button>
+									</div>
+									<!--end of modal head-->
+
+									<div class="modal-body">
+										<div class="form-group row align-items-center">
+											<label class="col-3">Todo</label>
+											<form:input id="todo-content" class="form-control col"
+												type="text" placeholder="Note title" path="todo" />
+										</div>
+									</div>
+									<!--end of modal body-->
+									<form:input type="hidden" id="todo-id" path="id" />
+									<form:input type="hidden" id="todo-completed" path="completed" />
+									<div class="modal-footer">
+										<button role="button" class="btn btn-primary" type="submit">
+											Save</button>
+									</div>
+								</div>
+							</div>
+						</form:form>
+
 						<form action="task-todo/create-todo" method="post"
 							class="modal fade" id="todo-add-modal" tabindex="-1"
 							role="dialog" aria-labelledby="note-add-modal" aria-hidden="true">
@@ -885,6 +939,21 @@
 				$('#note-id').val(id);
 				$('#note-title').val(title);
 				$('#note-content').val(content);
+
+			});
+
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.edit-todo-btn').click(function(event) {
+				var id = $(this).attr("data-todo-id");
+				var content = $(this).attr("data-todo-content");
+				var completed = $(this).attr("data-todo-completed");
+
+				$('#todo-id').val(id);
+				$('#todo-content').val(content);
+				$('#todo-completed').val(completed);
 
 			});
 

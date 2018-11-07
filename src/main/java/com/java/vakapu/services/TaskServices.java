@@ -121,4 +121,8 @@ public class TaskServices {
 	public Todo find(int id) {
 		return todoDAO.find(id);
 	}
+	
+	public Todo delete(Todo Todo) {
+		return todoDAO.delete(Todo);
+	}
 }
