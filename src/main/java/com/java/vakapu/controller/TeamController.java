@@ -409,6 +409,16 @@ public class TeamController {
 			Model model) {
 
 		String emailUser = accountServices.getEmailUser();
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for(TeamMember m:member)
+		{
+			if(m.getMember().getEmail().equals(emailUser))
+			{
+				NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+				notificationsSystemServices.delete(mess2);
+				return "redirect:/team?idTeam=" + idTeam;
+			}
+		}
 		Team team = teamServices.findById(idTeam);
 		User adduser = userServices.findByEmail(emailUser);
 		TeamMember teamMember = new TeamMember();
