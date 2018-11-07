@@ -456,6 +456,17 @@ public class TeamController {
 	@RequestMapping(value = "/disJoinTeam", method = RequestMethod.GET)
 	public String disJoinTeam(@RequestParam("idTeam") int idTeam, @RequestParam("idNotifications") int idNotifications,
 			Model model) {
+		String emailUser = accountServices.getEmailUser();
+		List<TeamMember> member = teamMemberServices.findByIdTeam(idTeam);
+		for(TeamMember m:member)
+		{
+			if(m.getMember().getEmail().equals(emailUser))
+			{
+				NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
+				notificationsSystemServices.delete(mess2);
+				return "redirect:/team?idTeam=" + idTeam;
+			}
+		}
 		Team team = teamServices.findById(idTeam);
 		NotificationSystem mess2 = notificationsSystemServices.find(idNotifications);
 		String messe = String.format("You dissagree join to team <a href=\"team?idTeam=%s\">%s</a>", idTeam,
@@ -467,7 +478,6 @@ public class TeamController {
 		DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		LocalDateTime local = LocalDateTime.now();
 		String time = date.format(local);
-		String emailUser = accountServices.getEmailUser();
 		User user1 = userServices.findByEmail(mess2.getUserFrom().getEmail());
 		User user2 = userServices.findByEmail(emailUser);
 
