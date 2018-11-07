@@ -240,9 +240,30 @@
 														<div class="card card-project">
 
 															<div class="progress">
-																<div class="progress-bar bg-success" role="progressbar"
-																	style="width: ${project.taskDone div project.totalTask * 100}%"
-																	aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+																<c:choose>
+																	<c:when test="${project.due lt 5}">
+																		<div class="progress-bar bg-danger" role="progressbar"
+																			style="width: ${project.taskDone/project.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:when
+																		test="${project.due le 7 and project.due ge 5 }">
+																		<div class="progress-bar bg-warning"
+																			role="progressbar"
+																			style="width: ${project.taskDone/project.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="progress-bar bg-success"
+																			role="progressbar"
+																			style="width: ${project.taskDone/project.totalTask*100}%"
+																			aria-valuenow="8" aria-valuemin="0"
+																			aria-valuemax="100"></div>
+																	</c:otherwise>
+																</c:choose>
+
 															</div>
 
 															<div class="card-body">
@@ -355,11 +376,10 @@
 																				</c:otherwise>
 																			</c:choose>
 																		</button>
-																		
+
 																	</div>
 																	<div class="card-title">
-																		<a
-																			href="#">
+																		<a href="#">
 																			<h5 data-filter-by="text">${project.name}</h5>
 																		</a> <span class="text-small">${project.description}</span>
 																	</div>
@@ -458,9 +478,8 @@
 										<c:forEach var="member" items="${member}">
 											<div class="col-6">
 												<div class="dropdown">
-													<a class="media media-member"
-														href=""
-														role="button" data-toggle="dropdown" aria-haspopup="true"
+													<a class="media media-member" href="" role="button"
+														data-toggle="dropdown" aria-haspopup="true"
 														aria-expanded="false"> <img alt="Image"
 														src="<spring:url value='/profile/avatar/${member.member.email}'/>"
 														class="avatar avatar-lg" />
@@ -470,7 +489,8 @@
 														</div>
 													</a>
 													<div class="dropdown-menu">
-														<a href="profile-cv/cv?email=${member.member.email}" class="dropdown-item">CV Profile </a>
+														<a href="profile-cv/cv?email=${member.member.email}"
+															class="dropdown-item">CV Profile </a>
 														<c:if test="${checkAdmin eq 'yes'}">
 															<a href="team/setAdmin?idMember=${member.id}"
 																class="dropdown-item">Set Admin</a>
@@ -531,8 +551,8 @@
 								</div>
 							</div>
 						</form>
-						<form action="team/messageToAdmin" method="post" class="modal fade"
-							id="guest-modal" tabindex="-1" role="dialog"
+						<form action="team/messageToAdmin" method="post"
+							class="modal fade" id="guest-modal" tabindex="-1" role="dialog"
 							aria-labelledby="guest-modal" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
